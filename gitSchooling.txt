@@ -1,2 +1,1 @@
-I'm learning git stuffs!
-Yup yup.
+Haha I replaced everything with this one line!

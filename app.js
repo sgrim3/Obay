@@ -27,6 +27,7 @@ app.set('view engine', 'handlebars');
 app.get('/', index.loginPage);
 app.get('/home', index.home);
 app.post('/olinAppsAuth', index.olinAppsAuth);
+app.post('/logout', index.logout);
 
 
 app.listen(PORT, function(){

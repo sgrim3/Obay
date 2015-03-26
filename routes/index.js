@@ -5,8 +5,6 @@ var User = require('../models/user_model.js').user;
 
 var ensureAuthenticated = function(req,res,callback){
     //calls callback function if user is authenticated and olinApps sessionId is still valid, redirects to login page otherwise.
-    console.dir('session id!');
-    console.dir(req.session.olinAppsSessionId);
     request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
         function(olin_apps_server_error, response, body) {
             var error = JSON.parse(body).error;
@@ -22,19 +20,32 @@ var ensureAuthenticated = function(req,res,callback){
 }
 
 var loginPage = function(req,res){
-    console.log('login session');
-    console.dir(req.cookies);
-    console.log(req.session);
-    res.render('login');
+    //redirect to /home if user is logged in and OlinApps session is authenticated.
+    request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
+        function(olin_apps_server_error, response, body) {
+            var error = JSON.parse(body).error;
+            if (olin_apps_server_error || error) {
+                req.session.user = null;
+                req.session.olinAppsSessionId = null;
+                res.render('login');
+            } else {
+                res.redirect('/home');
+            }
+        }
+    );
 };
+
+var logout = function(req,res){
+    req.session.user = null;
+    req.session.olinAppsSessionId = null;
+    res.end();
+}
 
 var home = function(req,res){
     var callback = function(){
-        res.render('home');
+        var image_url = 'http://www.olinapps.com'+req.session.user.olinAppsInfo.thumbnail;
+        res.render('home', {image_url:image_url});
     };
-    console.dir('home session');
-    console.dir(req.cookies);
-    console.dir(req.session);
     ensureAuthenticated(req,res,callback);
 };
 
@@ -48,6 +59,7 @@ var olinAppsAuth = function(req,res){
                 res.redirect('/');
             } else {
                 var userId = JSON.parse(body).user.id;
+                var olinAppsInfo = JSON.parse(body).user;
                 User.findOne({userId:userId}, function(err, user){
                     if (err) {
                         console.log('Error! Obay server could not search user models!');
@@ -59,7 +71,7 @@ var olinAppsAuth = function(req,res){
                             res.redirect('/home');
                         } else {
                             //user does not exist in database yet, create the user
-                            var user_info = {userId:userId,listings:[]};
+                            var user_info = {userId:userId,olinAppsInfo:olinAppsInfo,listings:[]};
                             var new_user = new User(user_info);
                             new_user.save(function (err) {
                                 if (err){
@@ -81,3 +93,4 @@ var olinAppsAuth = function(req,res){
 module.exports.home = home;
 module.exports.loginPage = loginPage;
 module.exports.olinAppsAuth = olinAppsAuth;
+module.exports.logout = logout;

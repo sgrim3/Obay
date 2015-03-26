@@ -68,7 +68,25 @@ var home = function(req,res){
 
 var venmoPay = function(req,res){
     var callback = function(){
-        console.log('venmoPay authenticated!')
+        var post_data = {form:{
+            access_token: req.session.venmo_access_token,
+            //user_id: "1638591696470016712",
+            email: req.body.email,
+            note: 'Automated payment using obay!',
+            amount: 0.01
+        }};
+        request.post('https://api.venmo.com/v1/payments', post_data, function(venmo_server_error, response, body){
+            var error = JSON.parse(response.body).error;
+            if (venmo_server_error || error) {
+                if (venmo_server_error) {
+                    res.send({message:'Venmo had an internal server error!'});
+                } else {
+                    res.send({message:error.message});
+                }
+            } else {
+                res.send({message:'Transaction made!'});
+            }
+        });
     };
     ensureVenmoAuthenticated(req,res,callback);
 };

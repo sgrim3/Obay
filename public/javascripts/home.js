@@ -14,17 +14,18 @@ $logout_button.click(function(event){
 var $venmo_pay_button = $('#venmo_pay_button');
 
 var on_pay_attempt = function(data, status){
-    console.log(data);
     if (data.not_authenticated) {
         window.location.replace('https://api.venmo.com/v1/oauth/authorize?client_id=2473&scope=make_payments%20access_profile');
+    }
+    if (data.message) {
+        $('#pay_submit_message').html(data.message);
     }
 };
 
 $venmo_pay_button.click(function(event){
     event.preventDefault();
     console.log('pay button clicked!');
-    var venmo_id = $('#venmo_id').val();
-    var payment_amount = $('#payment_amount').val();
-    $.post('venmoPay', {venmo_id:venmo_id, payment_amount:payment_amount})
+    var email = $('#venmo_email').val();
+    $.post('venmoPay', {email:email})
         .done(on_pay_attempt);
 });

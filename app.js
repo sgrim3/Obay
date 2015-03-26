@@ -26,6 +26,8 @@ app.set('view engine', 'handlebars');
 
 app.get('/', index.loginPage);
 app.get('/home', index.home);
+app.get('/venmoAuth', index.venmoAuth);
+app.post('/venmoPay', index.venmoPay);
 app.post('/olinAppsAuth', index.olinAppsAuth);
 app.post('/logout', index.logout);
 

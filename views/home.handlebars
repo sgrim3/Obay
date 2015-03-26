@@ -2,6 +2,17 @@
 
 <img src="{{image_url}}" alt="profile picture">
 
+<a href="https://api.venmo.com/v1/oauth/authorize?client_id=2473&scope=make_payments%20access_profile">Login to venmo</a>
+
+<form>
+    User to pay:<br>
+    <input type="text" id="venmo_id" name="venmo_id">
+    <br>
+    Amount to pay:<br>
+    <input type="number" min="0" id="payment_amount" name="payment_amount">
+    <button id="venmo_pay_button">Pay on venmo!</button>
+</form>
+
 <button id="logout_button">Log out!</button>
 
 <script type="text/javascript" src="javascripts/home.js"></script>

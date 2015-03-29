@@ -1,14 +1,7 @@
-/*
-Set up routes here. 
+var path = require('path');
 
-In the wines app, here is where they set up the database
-including a mongo server, a mongo BSON and a mongo db. 
-They put winedb and wines collection.
+function home (req, res) {
+	res.sendFile(path.join(__dirname, '../', 'index.html'));
+}
 
-put and remove things using mongo methods makes sense! 
-
-
-
-OK- seems like we can set up mongoose as usual, and we 
-just save things differently than they do. 
-*/
+module.exports.home = home;

@@ -1,49 +1,102 @@
-var express = require("express");
-var session = require('express-session');
-var path = require("path");
-var http = require('http');
-var logger = require("morgan");
-var cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser");
-var exphbs  = require("express-handlebars");
-var mongoose = require("mongoose");
-var methodOverride = require("method-override");
+// NPM Modules
 
-var wine = require('./routes/wines');
+var express = require('express');
+var path = require('path');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+// Custom Modules
+
+var index = require('./routes/index');
+
+// Mongoose, Express
 
 var app = express();
+var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
+mongoose.connect(mongoURI);
 
+var PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGOURI || 'mongodb://localhost/test');
-
-//Middleware
-// app.engine("handlebars", exphbs({defaultLayout: "main"}));
-// app.set("view engine", "handlebars");
-
-
-app.configure(function () {
-    app.set('port', process.env.PORT || 3000);
-    app.use(logger("dev"));
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: false}));
-    app.use(cookieParser());
-    app.use(methodOverride());
-    app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true
-    }));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(express.static(path.join(__dirname, "public")));
+var page_schema = new mongoose.Schema({
+	title: String,
+	content: String
 });
 
-// app.get('/wines', wine.findAll);
-// app.get('/wines/:id', wine.findById);
-// app.post('/wines', wine.addWine);
-// app.put('/wines/:id', wine.updateWine);
-// app.delete('/wines/:id', wine.deleteWine);
+var Page = mongoose.model("Page", page_schema);
 
-http.createServer(app).listen(app.get('port'), function () {
-    console.log("Express server listening on port " + app.get('port'));
+app.set('views', __dirname + '/');
+
+// Middleware
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Routes
+
+app.get('/', index.home);
+
+// Insert a new page
+app.post( '/page/:id', function (req, res) {
+    var page = new Page({
+        title: req.body.title,
+        content: req.body.content,
+    });
+    
+    return page.save(function (err) {
+        if(!err) {
+            console.log('Page Created');
+            return res.send(page);
+        } 
+        else
+            console.log(err);
+    });
+});
+
+app.get('/pages', function (req, res) {
+	Page.find({}, function (err, pages) {
+		if (err)
+			res.sendStatus(500);
+		res.send(pages);
+	});
+});
+
+app.get('/page/:id', function (req, res) {
+    Page.findById(req.params.id, function (err, page) {
+        if (err)
+            res.sendStatus(500);
+        res.send(page);
+    })
+});
+
+app.delete('/page/:id/:id', function (req, res) {
+    return Page.findById(req.params.id, function (err, page) {
+        return page.remove (function (err) {
+            if (!err) {
+                return res.send('');
+            }
+            else {
+                console.log(err);
+            }
+        });
+    });
+});
+
+app.put('/page/:id/:id', function (req, res) {
+    return Page.findById( req.params.id, function( err, page ) {
+        page.title = req.body.title;
+        page.content = req.body.content;
+
+        return page.save( function (err) {
+            return res.send (page);
+        });
+    });
+});
+
+app.listen(PORT, function() {
+	console.log('Application running on port: ', PORT);
 });

@@ -1,0 +1,235 @@
+/*provides styling for better presentation for all */
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: auto;
+}
+
+
+body {
+    background-image: url("fabric_of_squares_gray.png");
+    background-size: auto;  /*makes sure you can scroll down */
+    background-repeat: repeat;
+}
+
+h1 {
+    color: #404040;
+    margin-left: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+h2 {
+    color: #383838  ;
+    margin-left: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#listtitles {
+  color: #00248F;
+  margin-left: 350px;
+  font-size: 20px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+  color: #FFFFFF ;
+  background-color: #B6C4F0;
+  text-decoration: none;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+#buttons {
+  padding: 20px;
+}
+
+#Homebutton{
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+#Homebutton:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
+#Createbutton {
+  margin-right: 200px;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+#Createbutton:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
+/*css for creating page */
+
+#submit{
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  float: left;
+
+}
+
+#submit:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+#addtitle {
+    color: #404040;
+    font-size: 30px;
+    margin-left: 20px;
+    float: left;
+}
+
+#addcontent {
+    color: #404040;
+    font-size: 30px;
+    margin-left: 20px;
+    float: left;
+}
+
+#contentArea {
+  padding: 20px;
+  font-size: 20px;
+}
+
+h3 {
+    color: #00248F;
+    margin-left: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+textarea {
+  width: 650px;
+  height: 280px;
+  padding: 10px;
+  border: solid 5px #c9c9c9;
+  margin-left: 60px;
+}
+
+textarea:focus,
+textarea.focus {
+  border: solid 5px #969696;
+  width: 650px;
+  height: 280px;  
+  margin-left: 60px;
+}
+
+input {
+  margin-left: 60px;
+  padding: 10px;
+  border: solid 5px #c9c9c9;
+  width: 250px;
+  height:10px;
+}
+
+input:focus,
+input.focus {
+  border: solid 5px #969696;
+  width: 250px;
+  height:10px;
+  margin-left: 60px;
+}
+
+/*css for delete and edit buttons*/
+.delete, .edit {
+  background-image: -webkit-linear-gradient(top, #f73c2e, #f73c2e);
+  background-image: -moz-linear-gradient(top, #f73c2e, #f73c2e);
+  background-image: -ms-linear-gradient(top, #f73c2e, #f73c2e);
+  background-image: -o-linear-gradient(top, #f73c2e, #f73c2e);
+  background-image: linear-gradient(to bottom, #f73c2e, #f73c2e);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  float: left;
+  margin-right: 5px;
+}
+
+.delete:hover, .edit:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #ff887f, #ff887f);
+  background-image: -moz-linear-gradient(top, #ff887f, #ff887f);
+  background-image: -ms-linear-gradient(top, #ff887f, #ff887f);
+  background-image: -o-linear-gradient(top, #ff887f, #ff887f);
+  background-image: linear-gradient(to bottom, #ff887f, #ff887f);
+  text-decoration: none;
+}
+
+
+#editPage {
+  font-size: 20px;
+  padding: 20px;
+}

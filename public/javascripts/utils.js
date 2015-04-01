@@ -1,4 +1,5 @@
 // parts taken from winecellar node app: https://github.com/ccoenraets/nodecellar/blob/master/public/js/utils.js
+// this is black magic we need not touch that helps us load templates.
 window.utils = {
 
     // Asynchronously load templates located in separate .html files

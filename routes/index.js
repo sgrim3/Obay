@@ -3,59 +3,78 @@ var request = require("request");
 var Listing = require('../models/listing_model.js').listing;
 var User = require('../models/user_model.js').user;
 
-var ensureOlinAuthenticatedServer = function(req,res,callback){
+var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_callback){
     //NOT RESTFUL, meant for on server authentication
-    //calls callback function if user is authenticated and olinApps sessionId is still valid, redirects to login page otherwise.
     request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
         function(olin_apps_server_error, response, body) {
             var error = JSON.parse(body).error;
             if (olin_apps_server_error || error) {
-                req.session.destroy();
-                res.redirect('/');
+                error_callback();
             } else {
-                callback();
+                success_callback();
             }
         }
     );
 }
 
-var ensureVenmoAuthenticatedServer = function(req,res,callback){
-    //NOT RESTFUL, meant for on server authentication
-    //calls callback function if venmo says access token is still valid, redirects you to sign into venmo otherwise.
-    var olinAppsAuthCallback = function(){
-        console.log(req.session.venmo_access_token);
+var ensureVenmoAuthenticatedServer = function(req,res,success_callback,error_callback){
+    //NOT RESTFUL, meant for on server authentication. Does OlinApps auth before doing Venmo auth.
+    var onOlinAppSuccess = function(){
         request('https://api.venmo.com/v1/me?access_token='+req.session.venmo_access_token,
             function(venmo_server_error, response, body) {
                 var error = JSON.parse(response.body).error;
-                if (error) {
-                    res.send({not_authenticated:true});
+                if (venmo_server_error || error) {
+                    error_callback();
+                //    res.redirect('https://api.venmo.com/v1/oauth/authorize?client_id=2473&scope=make_payments%20access_profile');
                 } else {
-                    callback();
+                    success_callback();
                 }
             }
         );
     };
+    var onOlinAppError = function(){
+        error_callback();
+    }
     //check for olinApps authentication before doing venmo authentication
-    ensureOlinAuthenticatedServer(req,res,olinAppsAuthCallback);
+    ensureOlinAuthenticatedServer(req,res,onOlinAppSuccess,onOlinAppError);
+}
+
+//ALL ROUTES BELOW ARE RESTFUL API ROUTES
+
+var isOlinAuthenticated = function(req,res){
+    //returns status of olinApps Auth
+    var onOlinAuth = function(){
+        res.send({olinAuth:true});
+    };
+    var onOlinErr = function(){
+        res.send({olinAuth:false});
+    };
+    ensureOlinAuthenticatedServer(req,res,onOlinAuth,onOlinErr)
+}
+
+var isVenmoAuthenticated = function(req,res){
+    //returns status of venmo auth. note that venmo is not authenticated if olinapps is not authenticated.
+    var onVenmoAuth = function(){
+        res.send({venmoAuth:true});
+    };
+    var onVenmoErr = function(){
+        res.send({venmoAuth:false});
+    };
+    ensureVenmoAuthenticatedServer(req,res,onVenmoAuth,onVenmoErr)
+}
+
+var sessionData = function(req,res){
+    //returns the current session info as a JSON. Session stuff is not easily accessed or parsed client side so we do it on the server instead. Maybe change this if we find a way to get cookie info on the client side?
+    res.send(req.session);
 }
 
 var logout = function(req,res){
-    //API call to destroy the session
     req.session.destroy();
     res.end();
 }
 
-var home = function(req,res){
-    var callback = function(){
-        var image_url = 'http://www.olinapps.com'+req.session.user.olinAppsInfo.thumbnail;
-        res.render('home', {image_url:image_url});
-    };
-    ensureOlinAuthenticatedServer(req,res,callback);
-};
-
-
 var venmoPay = function(req,res){
-    var callback = function(){
+    var onVenmoAuth = function(){
         var post_data = {form:{
             access_token: req.session.venmo_access_token,
             email: req.body.email,
@@ -66,31 +85,40 @@ var venmoPay = function(req,res){
             var error = JSON.parse(response.body).error;
             if (venmo_server_error || error) {
                 if (venmo_server_error) {
-                    res.send({message:'Venmo had an internal server error!'});
+                    res.send({success:false, message:'Venmo had an internal server error!'});
                 } else {
-                    res.send({message:error.message});
+                    res.send({success:false, message:error.message});
                 }
             } else {
-                res.send({message:'Transaction made!'});
+                res.send({success:true, message:'Transaction made!'});
             }
         });
     };
-    ensureVenmoAuthenticatedServer(req,res,callback);
+    var onVenmoErr = function(){
+        res.redirect('/#home')
+    };
+    ensureVenmoAuthenticatedServer(req,res,onVenmoAuth,onVenmoErr);
 };
 
 var venmoAuth = function(req,res){
-    //first ensures olinApps authentication and then venmo authentication
-    var callback = function(){
+    //route accessed by venmo API, does initial venmo authentication
+    var onSuccess = function(){
+        //save token and redirect to home if olin authenticated
         var venmo_access_token = req.query.access_token;
         req.session.venmo_access_token = venmo_access_token;
-        res.redirect('/home');
+        res.redirect('/#home');
     };
-    ensureOlinAuthenticatedServer(req,res,callback);
+    var onError = function(){
+        //else destroy session and redirect to login
+        req.session.destroy();
+        res.redirect('/');
+    }
+    ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
 
 var olinAppsAuth = function(req,res){
-    //do initial authentication and saves access token when olinApps POSTS to this url
+    //route accessed by olinApps API, does initial olinApps authentication and saves access token
     request('http://www.olinapps.com/api/me?sessionid='+req.body.sessionid,
         function(olin_apps_server_error, response, body) {
             var error = JSON.parse(body).error;
@@ -131,7 +159,9 @@ var olinAppsAuth = function(req,res){
     );
 };
 
-module.exports.home = home;
+module.exports.sessionData = sessionData;
+module.exports.isOlinAuthenticated = isOlinAuthenticated;
+module.exports.isVenmoAuthenticated = isVenmoAuthenticated;
 module.exports.venmoPay = venmoPay;
 module.exports.venmoAuth = venmoAuth;
 module.exports.olinAppsAuth = olinAppsAuth;

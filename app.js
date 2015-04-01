@@ -24,7 +24,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
+app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/venmoAuth', index.venmoAuth);
+app.get('/sessionData', index.sessionData);
+
 app.post('/venmoPay', index.venmoPay);
 app.post('/olinAppsAuth', index.olinAppsAuth);
 app.post('/logout', index.logout);

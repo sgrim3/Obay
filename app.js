@@ -21,8 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
 
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);

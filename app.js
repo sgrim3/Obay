@@ -15,6 +15,8 @@ var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 mongoose.connect(mongoURI);
 var PORT = process.env.PORT || 3000;
 
+var listings = require ("./routes/listings");
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,18 +24,21 @@ app.use(cookieParser());
 app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes.
+//API Authentication Routes
+app.get('/venmoAuth', index.venmoAuth);
+app.post('/olinAppsAuth', index.olinAppsAuth);
+
+// Our Routes.
 // GET.
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
-app.get('/venmoAuth', index.venmoAuth);
 app.get('/sessionData', index.sessionData);
+app.get('/listings', listings.list);
 
 // POST.
 app.post('/venmoPay', index.venmoPay);
-app.post('/olinAppsAuth', index.olinAppsAuth);
 app.post('/logout', index.logout);
-
+app.post('/listing', listings.add)
 
 app.listen(PORT, function(){
     console.log("Application running on port:", PORT);

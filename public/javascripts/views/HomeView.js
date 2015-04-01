@@ -12,8 +12,7 @@ window.HomeView = Backbone.View.extend({
     },
 
     render:function (template_data) {
-        console.log(template_data);
-        $(this.el).html(this.template());
+        this.$el.html(this.template());
         return this;
     }
 

@@ -1,7 +1,5 @@
 window.AddListingView = Backbone.View.extend({
 
-    model:Listing,
-
 	events: {
 	    'submit': 'onFormSubmit',
 	},
@@ -35,12 +33,15 @@ window.AddListingView = Backbone.View.extend({
 
         new_listing.save({}, {
             success: function(model, response, options) {
-                console.log('success');
-                console.log(response);
+                //associate server save time with the model
+                model.item_timeCreated = response.item_timeCreated;
             },
-            error: function(model, xhr, options) {
-                console.log('error');
-                console.log(xhr);
+            error: function(model, response, options) {
+                console.log(response.responseText);
+                /* redirect on no authentication, commented out for now.
+                if (!response.authenticated){
+                    window.location.replace('/');
+                }*/
             }
         });
 

@@ -1,11 +1,11 @@
-window.LoginView = Backbone.View.extend({
+window.SidebarView = Backbone.View.extend({
 
     initialize:function () {
         this.render();
     },
 
     render:function () {
-        $(this.el).html(this.template());
+        this.$el.html(this.template());
         return this;
     }
 

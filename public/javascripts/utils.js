@@ -10,6 +10,7 @@ window.utils = {
         $.each(views, function(index, view) {
             if (window[view]) {
                 deferreds.push($.get('templates/' + view + '.html', function(data) {
+                    //in this line, views are associated with templates of the same name. so templates and views must have the same name for this automagic association to happen.
                     window[view].prototype.template = _.template(data);
                 }));
             } else {
@@ -19,5 +20,6 @@ window.utils = {
 
         $.when.apply(null, deferreds).done(callback);
     }
-
+    
 }
+

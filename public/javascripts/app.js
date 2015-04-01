@@ -8,53 +8,54 @@ var AppRouter = Backbone.Router.extend({
     initialize: function () {
     },
 
-    ensureOlinAuthenticated: function(onAuth,onErr){
+    ensureOlinAuthenticated: function(onAuth,onErr,router){
+        //router holds what the 'this' keyword would normally in this context. this is required because I couldn't get 'this' to reference what I needed in callback hell.
         $.get('/isOlinAuthenticated')
-            .done(function(data,status){
+            .done(function(data){
                 var isAuth = data.olinAuth;
                 if (isAuth) {
-                    onAuth();
+                    onAuth(router);
                 } else {
-                    onErr();
+                    onErr(router);
                 }
             })
             .error(function(){
-                onErr();
+                onErr(router);
             });
     },
 
     home: function(id){
-        var onOlinAuth = function(){
-            if (!this.homeView){
-                this.homeView = new HomeView();
+        var onOlinAuth = function(router){
+            if (!this.Sidebar) {
+                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
             }
-            $('#PageContainer').html(this.homeView.el);
+            this.Page = new HomeView({el: $('#PageContainer')});
         }
-        var onOlinErr = function(){
+        var onOlinErr = function(router){
             //redirect to login page
             window.location.replace('/');
         }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr,this);
     },
 
     login: function(id){
-        var onOlinAuth = function(){
+        var onOlinAuth = function(router){
             //redirect to home if user is logged in already
             window.location.replace('/#home');
         }
-        var onOlinErr = function(){
-            if (!this.loginView){
-                this.loginView = new LoginView();
+        var onOlinErr = function(router){
+            if (!this.Sidebar) {
+                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
             }
-            $('#PageContainer').html(this.loginView.el);
+            this.Page = new LoginView({el: $('#PageContainer')});
         }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr,this);
     }
 
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView'], function() {
+utils.loadTemplate(['HomeView', 'LoginView', 'SidebarView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

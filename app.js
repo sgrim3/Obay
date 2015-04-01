@@ -1,3 +1,4 @@
+// Dependencies.
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -9,7 +10,7 @@ var session = require('express-session');
 
 var app = express();
 
-//Set up mongolab and PORTS to work locally and on heroku
+//Set up mongolab and PORTS to work locally and on heroku.
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 mongoose.connect(mongoURI);
 var PORT = process.env.PORT || 3000;
@@ -21,11 +22,14 @@ app.use(cookieParser());
 app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes.
+// GET.
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/venmoAuth', index.venmoAuth);
 app.get('/sessionData', index.sessionData);
 
+// POST.
 app.post('/venmoPay', index.venmoPay);
 app.post('/olinAppsAuth', index.olinAppsAuth);
 app.post('/logout', index.logout);

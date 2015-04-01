@@ -14,6 +14,8 @@ var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 mongoose.connect(mongoURI);
 var PORT = process.env.PORT || 3000;
 
+var listings = require ("./routes/listings");
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +31,11 @@ app.get('/sessionData', index.sessionData);
 app.post('/venmoPay', index.venmoPay);
 app.post('/olinAppsAuth', index.olinAppsAuth);
 app.post('/logout', index.logout);
+
+app.get('/listings', listings.list);
+
+
+app.post('/listing', listings.add)
 
 
 app.listen(PORT, function(){

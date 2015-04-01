@@ -2,7 +2,8 @@ var AppRouter = Backbone.Router.extend({
 
     routes: {
         "" : "login",
-        "home" : "home"
+        "home" : "home",
+        "addListing" :"addListing"
     },
 
     initialize: function () {
@@ -37,6 +38,14 @@ var AppRouter = Backbone.Router.extend({
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
+
+    addListing: function (id) {
+        if (!this.addListingView) {
+            this.addListingView = new AddListingView();
+        }
+        $('#PageContainer').html(this.addListingView.el);
+    },
+
     login: function(id){
         var onOlinAuth = function(){
             //redirect to home if user is logged in already
@@ -49,12 +58,14 @@ var AppRouter = Backbone.Router.extend({
             $('#PageContainer').html(this.loginView.el);
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+
     }
 
 });
 
-//asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView'], function() {
+
+//asynchronously load templates to increase speeds
+utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

@@ -1,7 +1,5 @@
 window.AddListingView = Backbone.View.extend({
 
-    model:Listing,
-
 	events: {
 	    'submit': 'onFormSubmit',
 	},
@@ -32,14 +30,18 @@ window.AddListingView = Backbone.View.extend({
                 item_open: true
             }
         );
-    	this.model.save (null, {
-            success: function (model) {
-                self.render();
-                alert ("Listing has been saved!")
-                //app.navigate('listings/' + listing.id, false);
+
+        new_listing.save({}, {
+            success: function(model, response, options) {
+                //associate server save time with the model
+                model.item_timeCreated = response.item_timeCreated;
             },
-            error: function () {
-                utils.showAlert('Error', 'An error occurred while trying to delete this item', 'alert-error');
+            error: function(model, response, options) {
+                console.log(response.responseText);
+                /* redirect on no authentication, commented out for now.
+                if (!response.authenticated){
+                    window.location.replace('/');
+                }*/
             }
         });
 

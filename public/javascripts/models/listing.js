@@ -14,6 +14,6 @@ window.Listing = Backbone.Model.extend({
         return res;
     },
 
-    urlRoot : "127.0.0.1:3000/listing/"
+    urlRoot : "http://127.0.0.1:3000/listing/"
 
 });

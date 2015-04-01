@@ -23,13 +23,16 @@ app.use(cookieParser());
 app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//API Authentication Routes
+app.get('/venmoAuth', index.venmoAuth);
+app.post('/olinAppsAuth', index.olinAppsAuth);
+
+//Our Routes
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
-app.get('/venmoAuth', index.venmoAuth);
 app.get('/sessionData', index.sessionData);
 
 app.post('/venmoPay', index.venmoPay);
-app.post('/olinAppsAuth', index.olinAppsAuth);
 app.post('/logout', index.logout);
 
 app.get('/listings', listings.list);

@@ -132,7 +132,6 @@ var olinAppsAuth = function(req,res){
 };
 
 module.exports.home = home;
-module.exports.loginPage = loginPage;
 module.exports.venmoPay = venmoPay;
 module.exports.venmoAuth = venmoAuth;
 module.exports.olinAppsAuth = olinAppsAuth;

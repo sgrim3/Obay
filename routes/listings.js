@@ -48,7 +48,7 @@ listings.add = function (req, res) {
         }); 
     };
     var onError = function(){
-        res.status(404).send('Log in to OlinApps to access this functionality!');
+        res.status(401).send('Log in to OlinApps to access this functionality!');
     }
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };

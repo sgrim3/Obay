@@ -3,7 +3,8 @@ var request = require("request");
 var Listing = require('../models/listing_model.js').listing;
 var User = require('../models/user_model.js').user;
 
-var ensureAuthenticated = function(req,res,callback){
+var ensureOlinAuthenticatedServer = function(req,res,callback){
+    //NOT RESTFUL, meant for on server authentication
     //calls callback function if user is authenticated and olinApps sessionId is still valid, redirects to login page otherwise.
     request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
         function(olin_apps_server_error, response, body) {
@@ -18,7 +19,8 @@ var ensureAuthenticated = function(req,res,callback){
     );
 }
 
-var ensureVenmoAuthenticated = function(req,res,callback){
+var ensureVenmoAuthenticatedServer = function(req,res,callback){
+    //NOT RESTFUL, meant for on server authentication
     //calls callback function if venmo says access token is still valid, redirects you to sign into venmo otherwise.
     var olinAppsAuthCallback = function(){
         console.log(req.session.venmo_access_token);
@@ -34,25 +36,11 @@ var ensureVenmoAuthenticated = function(req,res,callback){
         );
     };
     //check for olinApps authentication before doing venmo authentication
-    ensureAuthenticated(req,res,olinAppsAuthCallback);
+    ensureOlinAuthenticatedServer(req,res,olinAppsAuthCallback);
 }
 
-var loginPage = function(req,res){
-    //redirect to /home if user is logged in and OlinApps session is authenticated.
-    request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
-        function(olin_apps_server_error, response, body) {
-            var error = JSON.parse(body).error;
-            if (olin_apps_server_error || error) {
-                req.session.destroy();
-                res.render('login');
-            } else {
-                res.redirect('/home');
-            }
-        }
-    );
-};
-
 var logout = function(req,res){
+    //API call to destroy the session
     req.session.destroy();
     res.end();
 }
@@ -62,7 +50,7 @@ var home = function(req,res){
         var image_url = 'http://www.olinapps.com'+req.session.user.olinAppsInfo.thumbnail;
         res.render('home', {image_url:image_url});
     };
-    ensureAuthenticated(req,res,callback);
+    ensureOlinAuthenticatedServer(req,res,callback);
 };
 
 
@@ -70,9 +58,8 @@ var venmoPay = function(req,res){
     var callback = function(){
         var post_data = {form:{
             access_token: req.session.venmo_access_token,
-            //user_id: "1638591696470016712",
             email: req.body.email,
-            note: 'Automated payment using obay!',
+            note: 'Olin Web Club Rox',
             amount: 0.01
         }};
         request.post('https://api.venmo.com/v1/payments', post_data, function(venmo_server_error, response, body){
@@ -88,7 +75,7 @@ var venmoPay = function(req,res){
             }
         });
     };
-    ensureVenmoAuthenticated(req,res,callback);
+    ensureVenmoAuthenticatedServer(req,res,callback);
 };
 
 var venmoAuth = function(req,res){
@@ -98,11 +85,12 @@ var venmoAuth = function(req,res){
         req.session.venmo_access_token = venmo_access_token;
         res.redirect('/home');
     };
-    ensureAuthenticated(req,res,callback);
+    ensureOlinAuthenticatedServer(req,res,callback);
 };
 
 
 var olinAppsAuth = function(req,res){
+    //do initial authentication and saves access token when olinApps POSTS to this url
     request('http://www.olinapps.com/api/me?sessionid='+req.body.sessionid,
         function(olin_apps_server_error, response, body) {
             var error = JSON.parse(body).error;
@@ -121,7 +109,7 @@ var olinAppsAuth = function(req,res){
                         if (user) {
                             req.session.user = user;
                             req.session.olinAppsSessionId = req.body.sessionid;
-                            res.redirect('/home');
+                            res.redirect('/#home');
                         } else {
                             //user does not exist in database yet, create the user
                             var user_info = {userId:userId,olinAppsInfo:olinAppsInfo,listings:[]};
@@ -132,7 +120,7 @@ var olinAppsAuth = function(req,res){
                                 } else {
                                     req.session.user = new_user;
                                     req.session.olinAppsSessionId = req.body.sessionid;
-                                    res.redirect('/home');
+                                    res.redirect('/#home');
                                 }
                             });
                         }

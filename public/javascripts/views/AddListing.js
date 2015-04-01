@@ -32,14 +32,15 @@ window.AddListingView = Backbone.View.extend({
                 item_open: true
             }
         );
-    	this.model.save (null, {
-            success: function (model) {
-                self.render();
-                alert ("Listing has been saved!")
-                //app.navigate('listings/' + listing.id, false);
+
+        new_listing.save({}, {
+            success: function(model, response, options) {
+                console.log('success');
+                console.log(response);
             },
-            error: function () {
-                utils.showAlert('Error', 'An error occurred while trying to delete this item', 'alert-error');
+            error: function(model, xhr, options) {
+                console.log('error');
+                console.log(xhr);
             }
         });
 

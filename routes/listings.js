@@ -24,7 +24,7 @@ listings.list = function(req, res) {
 	})
 };
 
-//adding a twote to list
+//adding a listing to list
 listings.add = function (req, res) {
 
 	var name = req.body.name_listing;
@@ -38,7 +38,7 @@ listings.add = function (req, res) {
 		item_image: image,
 		item_creator: creator,
 		item_timeCreated: Date.now(),
-		item_open: True
+		item_open: true
 	});
 
 	// Save new event to database
@@ -47,7 +47,6 @@ listings.add = function (req, res) {
 			console.error('Cant add topic');
 			res.status(500).send("Couldn't add topic");
 		}
-
 		console.log(newListing)
 		res.send(newListing);
 	}); 

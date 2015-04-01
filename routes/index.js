@@ -2,42 +2,8 @@
 var request = require("request");
 var Listing = require('../models/listing_model.js').listing;
 var User = require('../models/user_model.js').user;
-
-var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_callback){
-    //NOT RESTFUL, meant for on server authentication
-    request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
-        function(olin_apps_server_error, response, body) {
-            var error = JSON.parse(body).error;
-            if (olin_apps_server_error || error) {
-                error_callback();
-            } else {
-                success_callback();
-            }
-        }
-    );
-}
-
-var ensureVenmoAuthenticatedServer = function(req,res,success_callback,error_callback){
-    //NOT RESTFUL, meant for on server authentication. Does OlinApps auth before doing Venmo auth.
-    var onOlinAppSuccess = function(){
-        request('https://api.venmo.com/v1/me?access_token='+req.session.venmo_access_token,
-            function(venmo_server_error, response, body) {
-                var error = JSON.parse(response.body).error;
-                if (venmo_server_error || error) {
-                    error_callback();
-                //    res.redirect('https://api.venmo.com/v1/oauth/authorize?client_id=2473&scope=make_payments%20access_profile');
-                } else {
-                    success_callback();
-                }
-            }
-        );
-    };
-    var onOlinAppError = function(){
-        error_callback();
-    }
-    //check for olinApps authentication before doing venmo authentication
-    ensureOlinAuthenticatedServer(req,res,onOlinAppSuccess,onOlinAppError);
-}
+var ensureOlinAuthenticatedServer = require('./auth.js').ensureOlinAuthenticatedServer
+var ensureVenmoAuthenticatedServer = require('./auth.js').ensureVenmoAuthenticatedServer
 
 //ALL ROUTES BELOW ARE RESTFUL API ROUTES
 
@@ -49,6 +15,7 @@ var isOlinAuthenticated = function(req,res){
     var onOlinErr = function(){
         res.send({olinAuth:false});
     };
+    console.log(ensureOlinAuthenticatedServer);
     ensureOlinAuthenticatedServer(req,res,onOlinAuth,onOlinErr)
 }
 

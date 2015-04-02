@@ -5,7 +5,8 @@ window.Listing = Backbone.Model.extend({
         item_image: '',
         item_creator: '',
         item_timeCreated: 0,
-        item_open: true
+        item_open: true,
+        item_price: 0
     },
 
     parse: function( res ) {

@@ -15,10 +15,11 @@ window.AddListingView = Backbone.View.extend({
 
     onFormSubmit: function(e) {
         e.preventDefault();
-    	var item_name = $("#name").val()
-    	var item_description = $("#description").val()
-    	var item_creator = $("#creator").val()
-    	var item_image = $("#image").val()
+    	var item_name = $("#name").val();
+    	var item_description = $("#description").val();
+    	var item_creator = $("#creator").val();
+    	var item_image = $("#image").val();
+        var item_price= $("#price").val();
 
         var new_listing = new Listing(
             {
@@ -27,7 +28,8 @@ window.AddListingView = Backbone.View.extend({
                 item_description: item_description,
                 item_image: item_image,
                 item_creator: item_creator,
-                item_open: true
+                item_open: true,
+                item_price: item_price
             }
         );
 

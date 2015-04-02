@@ -29,13 +29,16 @@ listings.add = function (req, res) {
         var description= req.body.description_listing;
         var image = req.body.image_listing;
         var creator = req.body.creator_listing;
+        var price = req.body.price_listing;
+
         var newListing = new Listing({
             item_name: name,
             item_description: description,
             item_image: image,
             item_creator: creator,
             item_timeCreated: Date.now(),
-            item_open: true
+            item_open: true,
+            item_price: price
         });
         // Save new event to database
         newListing.save(function(err){

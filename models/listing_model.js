@@ -11,7 +11,8 @@ var listingSchema = mongoose.Schema({
     item_creator: String,
     //item_creator: { type: Number, ref: 'userSchema' },
     item_timeCreated: Number,
-    item_open: Boolean
+    item_open: Boolean,
+    item_price: Number
 });
 
 module.exports.listing = mongoose.model('listing',listingSchema);

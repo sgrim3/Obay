@@ -19,7 +19,7 @@ listings.list = function(req, res) {
                 res.status(500).send("Could not search Listings!");
             }
             else {
-                res.send (listings);	
+                res.send(listings);	
             }
         });
     };

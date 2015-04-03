@@ -10,12 +10,6 @@ window.Listing = Backbone.Model.extend({
         item_price: 0
     },
 
-    parse: function( res ) {
-        console.log(res._id)
-        res.id = res._id;
-        return res;
-    },
-
     urlRoot : "http://127.0.0.1:3000/listing/"
 
 });

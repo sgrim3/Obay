@@ -1,4 +1,4 @@
-window.Listings = Backbone.Collection.extend({
+window.ListingCollection = Backbone.Collection.extend({
 	url: '/listings',
     model: Listing
 });

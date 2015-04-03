@@ -2,18 +2,14 @@ window.HomeView = Backbone.View.extend({
 
     initialize:function () {
         this.render();
-        //var thisView = this;
-        //$.get('/sessionData')
-        //    .done(function(data){
-        //        thisView.render(data);
-        //    })
-        //    .error(function(){
-        //        thisView.render();
-        //    });
     },
 
-    render:function (template_data) {
+    render:function() {
+        //must instantiate template before rendering subviews, since they mount onto the template!
         this.$el.html(this.template());
+        console.log('rendering listingsview');
+        this.ListingsView = new ListingsView({el: $('#listings_view_mount_point')});
+        this.ListingsView.render();
         return this;
     }
 

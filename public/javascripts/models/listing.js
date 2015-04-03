@@ -1,4 +1,5 @@
 window.Listing = Backbone.Model.extend({
+
     defaults: {
         item_name: '',
         item_description: '',

@@ -5,8 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var index = require('./routes/index.js')
 var session = require('express-session');
+
+//Import routes
+var index = require('./routes/index.js')
+var listings = require ("./routes/listings");
 
 var app = express();
 
@@ -14,8 +17,6 @@ var app = express();
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 mongoose.connect(mongoURI);
 var PORT = process.env.PORT || 3000;
-
-var listings = require ("./routes/listings");
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

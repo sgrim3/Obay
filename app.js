@@ -35,10 +35,12 @@ app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', index.sessionData);
 app.get('/listings', listings.list);
 
+app.get('/temporary_email_route', )
+
 // POST.
 app.post('/venmoPay', index.venmoPay);
 app.post('/logout', index.logout);
-app.post('/listing', listings.add)
+app.post('/listing', listings.add);
 
 app.listen(PORT, function(){
     console.log("Application running on port:", PORT);

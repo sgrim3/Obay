@@ -8,8 +8,9 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 
 //Import routes
-var index = require('./routes/index.js')
+var index = require('./routes/index.js');
 var listings = require ("./routes/listings");
+var email = require('./routes/email');
 
 var app = express();
 
@@ -36,10 +37,14 @@ app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', index.sessionData);
 app.get('/listings', listings.list);
 
+// TODO: Integrate email feature with actual app.
+// Temporary route to send email.
+app.get('/temporary_email_route', email.sendEmail);
+
 // POST.
 app.post('/venmoPay', index.venmoPay);
 app.post('/logout', index.logout);
-app.post('/listing', listings.add)
+app.post('/listing', listings.add);
 
 app.listen(PORT, function(){
     console.log("Application running on port:", PORT);

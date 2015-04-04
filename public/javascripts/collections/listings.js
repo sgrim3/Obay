@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.Listings = Backbone.Collection.extend({
+window.ListingCollection = Backbone.Collection.extend({
 	url: '/listings',
-    model: app.Listing
+    model: Listing
 });

@@ -9,8 +9,8 @@ var listings = {};
 //gets list of all twotes and sorts by timestamp
 listings.list = function(req, res) {
 	// var currentUser = req.session.username;
-	//var currentUser = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
-	//console.log(currentUser)
+	// var currentUser = (JSON.stringify (req.user.displayName)).replace(/\"/g, "");
+	// console.log(currentUser)
 
 	Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
 		if (err) {
@@ -44,7 +44,7 @@ listings.add = function (req, res) {
 	// Save new event to database
 	newListing.save(function(err){
 		if(err){
-			console.error('Cant add topic');
+			console.error("Can't add topic");
 			res.status(500).send("Couldn't add topic");
 		}
 
@@ -53,7 +53,5 @@ listings.add = function (req, res) {
 	}); 
 
 };
-
-
 
 module.exports = listings;

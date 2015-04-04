@@ -8,6 +8,9 @@ var mongoose = require('mongoose');
 var index = require('./routes/index.js')
 var session = require('express-session');
 
+// Custom imports.
+var email = require('./email');
+
 var app = express();
 
 //Set up mongolab and PORTS to work locally and on heroku.
@@ -35,7 +38,9 @@ app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', index.sessionData);
 app.get('/listings', listings.list);
 
-app.get('/temporary_email_route', )
+// TODO: Integrate email feature with actual app.
+// Temporary route to send email.
+app.get('/temporary_email_route', email.sendEmail);
 
 // POST.
 app.post('/venmoPay', index.venmoPay);

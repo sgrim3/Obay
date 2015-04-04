@@ -10,7 +10,7 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 //listings is the exported module object
 var listings = {};
 
-//gets list of all listings and sorts by timestamp
+//gets list of all open listings and sorts by timestamp
 listings.list = function(req, res) {
     var onSuccess = function(){
         Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
@@ -19,6 +19,10 @@ listings.list = function(req, res) {
                 res.status(500).send("Could not search Listings!");
             }
             else {
+                //only return open listings
+                listings = listings.filter(function(item){
+                    return item.item_open;
+                });
                 res.send(listings);	
             }
         });

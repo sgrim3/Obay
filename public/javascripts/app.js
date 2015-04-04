@@ -4,6 +4,7 @@ var AppRouter = Backbone.Router.extend({
         "" : "login",
         "home" : "home",
         "addListing" :"addListing",
+        //This route must go last to act as the catchall/404 page
         '*notFound': 'notFound'
     },
 

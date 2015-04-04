@@ -1,0 +1,44 @@
+.round-button {
+    display:block;
+    width:65px;
+    height:65px;
+    line-height:50px;
+    border: 2px solid #464646;
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    box-shadow: 0 0 3px gray;
+    font-size:12px;
+    font-weight:bold;
+}
+.round-button:hover {
+    background: #262626;
+}
+
+#accountButton {
+    background: #FF0000;
+}
+
+#accountButton:hover {
+    background: #660000;
+}
+
+#freeButton {
+    background: #008000;
+}
+
+#freeButton:hover {
+    background: #003300;
+}
+
+
+#logoutButton {
+    background: #0000FF;
+}
+
+#logoutButton:hover {
+    background: #000066;
+}
+
+

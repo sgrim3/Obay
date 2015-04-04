@@ -39,7 +39,7 @@ listings.add = function (req, res) {
                 item_creator: req.session.user.userId,
                 item_timeCreated: Date.now(),
                 item_open: true,
-                item_price: req.body.item_price
+                item_price: parseFloat(req.body.item_price.replace(/,/g, ''))
             });
             // Save new listing to database
             newListing.save(function(err){

@@ -42,11 +42,10 @@ window.AddListingView = Backbone.View.extend({
             },
             error: function(model, response, options) {
                 if (response.status === 401) {
-                    //if not authenticated
-                    /* redirect on no authentication, commented out for now.
+                    //if not authenticated, redirect
                     if (!response.authenticated){
                         window.location.replace('/');
-                    }*/
+                    }
                 } else {
                     $('#error_message').text(response.responseText);
                 }

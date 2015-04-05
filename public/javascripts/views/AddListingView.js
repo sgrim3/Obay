@@ -55,6 +55,9 @@ window.AddListingView = Backbone.View.extend({
                 model.item_timeCreated = response.item_timeCreated;
                 model.item_creator = response.item_creator;
                 console.log(model)
+
+                Backbone.history.navigate('#home');
+                Backbone.history.loadUrl('#home');
             },
             error: function(model, response, options) {
                 if (response.status === 401) {

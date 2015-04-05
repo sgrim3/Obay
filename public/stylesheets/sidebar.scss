@@ -7,10 +7,12 @@
     top: 50px;
 }
 
+$buttonSize: 56px;
+
 .round-button {
     display:block;
-    width:56px;
-    height:56px;
+    width: $buttonSize;
+    height: $buttonSize;
     border: 0px;
     border-radius: 50%;
     color: white;

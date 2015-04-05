@@ -8,7 +8,14 @@ var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_call
             if (olin_apps_server_error || error) {
                 error_callback();
             } else {
-                success_callback();
+                //check that the userid matches the userid associated w/ the session token, to stop authenticated people from editing their cookies to appear to be other users
+                var claimedId = req.session.user.userId;
+                var sessionAssociatedId = JSON.parse(body).user.id;
+                if (claimedId === sessionAssociatedId){
+                    success_callback();
+                } else {
+                    error_callback();
+                }
             }
         }
     );

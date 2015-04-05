@@ -1,24 +1,21 @@
 <div class = 'add'>
 <h1>Add a Listing!</h1>
-<p>Please provide a working link for the image field</p>
-<form name = "addForm" novalidate ng-click = "hideMsg()">
 
-	<input type = "text" id = "name" name = "name" placeholder = "Item Name"> <br>
-<!-- 	<span style="color:red" ng-show="addForm.name.$dirty && addForm.name.$invalid"><span ng-show= "addForm.name.$error.required" ng-hide = "msg">A name is required!<br></span></span> -->
+<div id="image_upload" class="dropzone"></div>
 
+<form id = "addForm" >
 
-	<input type="text" placeholder="Description" id="description" name="Description"><br>
-<!-- 	<span class="error" ng-show="addForm.eventDate.$error.required">Date is Required!</span>
-	<span class="error" ng-show="addForm.eventDate.$error.date">Not a valid date!</span><br> -->
+	<input type = "text" id = "image" placeholder = "Image url" > <br>
 
+	<input type = "text" id = "name" placeholder = "Item Name" name = "name"> <br>
 
-	<input type = "text" id='creator' placeholder = "Creator"><br>
+    <textarea id="description" placeholder="Description" name="Description"></textarea><br>
 
-	<input type = "text" placeholder = "Image Link"><br>
-
-	$<input type = "text" id="price" placeholder = "0"><br>
+	$<input type = "text" id="price" placeholder = "Price"><br>
 
 	<button type = "submit">Add!</button>
+
+    <div id="error_message"></div>
 
 </form><br>
 

@@ -14,6 +14,10 @@
 .sh5 {
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); }
 
+/**
+ * google-material-color v1.1.0
+ * https://github.com/danlevan/google-material-color
+ */
 #sidebar {
   position: absolute;
   left: 50px;
@@ -39,18 +43,18 @@
   cursor: pointer; }
 
 #homeButton {
-  background: #2196F3; }
+  background: #1976D2; }
 
 #accountButton {
-  background: #FF9800; }
+  background: #F57C00; }
 
 #freeButton {
-  background: #4CAF50; }
+  background: #388E3C; }
 
 #notificationsButton {
-  background: #FFEB3B; }
+  background: #D32F2F; }
 
 #logoutButton {
-  background: #3F51B5; }
+  background: #303F9F; }
 
 /*# sourceMappingURL=sidebar.css.map */

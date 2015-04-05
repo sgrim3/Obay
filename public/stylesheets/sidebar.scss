@@ -1,4 +1,5 @@
 @import "shadows.scss";
+@import "palette";
 
 #sidebar {
     position: absolute;
@@ -29,22 +30,24 @@
     @extend .sh2;
 }
 
+$colorIntensity: 700;
+
 #homeButton {
-    background: #2196F3;
+    background: palette(Blue, $colorIntensity);
 }
 
 #accountButton {
-    background: #FF9800;
+    background: palette(Orange, $colorIntensity);
 }
 
 #freeButton {
-    background: #4CAF50;
+    background: palette(Green, $colorIntensity);
 }
 
 #notificationsButton {
-    background: #FFEB3B;    
+    background: palette(Red, $colorIntensity);    
 }
 
 #logoutButton {
-    background: #3F51B5;
+    background: palette(Indigo, $colorIntensity);
 }

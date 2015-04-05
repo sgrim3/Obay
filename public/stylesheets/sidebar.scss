@@ -17,7 +17,6 @@
     text-align:center;
     text-decoration:none;
     font-size:25px;
-    font-weight:bold;
     margin-bottom: 20px;
     transition: 0.1s ease-in-out;
     @extend .sh1;
@@ -45,9 +44,22 @@ $colorIntensity: 700;
 }
 
 #notificationsButton {
-    background: palette(Red, $colorIntensity);    
+    background: palette(Purple, $colorIntensity);    
 }
 
 #logoutButton {
     background: palette(Indigo, $colorIntensity);
+}
+
+#addButton {
+    background: palette(Red, $colorIntensity);
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    margin-bottom: 0px;
+    @extend .sh2;
+
+    &:hover {
+      @extend .sh3;
+    }
 }

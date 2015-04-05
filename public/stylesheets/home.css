@@ -3,6 +3,10 @@
 * {
   font-family: 'Lato', sans-serif; }
 
+body {
+  background-color: #ececec;
+  overflow-y: scroll; }
+
 html, body {
   height: 100%;
   width: 100%;

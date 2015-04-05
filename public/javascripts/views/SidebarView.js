@@ -31,6 +31,11 @@ window.SidebarView = Backbone.View.extend({
         case "logoutButton":
           Backbone.history.loadUrl('#logout');
           break;
+        case "addButton":
+          // FIXME: This is such a messy way of doing things. Find a better way.
+          Backbone.history.navigate('#addListing');
+          Backbone.history.loadUrl('#addListing');
+          break;
         default:
           return;
       }

@@ -1,0 +1,40 @@
+@import "shadows.scss";
+
+.round-button {
+    display:block;
+    width:56px;
+    height:56px;
+    border: 0px;
+    border-radius: 50%;
+    color: white;
+    text-align:center;
+    text-decoration:none;
+    font-size:25px;
+    font-weight:bold;
+    margin-bottom: 20px;
+    transition: 0.1s ease-in-out;
+    @extend .sh1;
+}
+
+.round-button:hover {
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg);
+    cursor: pointer;
+    @extend .sh2;
+}
+
+#accountButton {
+    background: #2196F3;
+}
+
+#freeButton {
+    background: #4CAF50;
+}
+
+#notificationsButton {
+    background: #FFEB3B;    
+}
+
+#logoutButton {
+    background: #3F51B5;
+}

@@ -59,4 +59,24 @@ listings.add = function (req, res) {
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
+listings.item = function(req, res) {
+    var onSuccess = function(){
+        var id=req.params.id;
+        Listing.findOne({_id:id}).exec(function (err, item) {
+            if (err) {
+                console.log ("Could not search Listings!");
+                res.status(500).send("Could not search Listings!");
+            }
+            else {
+                res.send(item); 
+                //console.log('found item' + id);
+            }
+        });
+    };
+    var onError = function(){
+        res.status(401).send('Log in to OlinApps to access this functionality!');
+    };
+    ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
+}
+
 module.exports = listings;

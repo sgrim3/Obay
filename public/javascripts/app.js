@@ -4,6 +4,7 @@ var AppRouter = Backbone.Router.extend({
         "" : "login",
         "home" : "home",
         "addListing" :"addListing",
+        "item/:id" : "item",
         '*notFound': 'notFound'
     },
 
@@ -50,6 +51,13 @@ var AppRouter = Backbone.Router.extend({
             this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
         }
         this.Page = new AddListingView({el: $('#PageContainer')});
+    },
+
+    item: function(id){
+        if (!this.Sidebar){
+            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+        }
+        this.Page = new ItemView({el: $('#PageContainer')});
     },
 
     login: function(id){

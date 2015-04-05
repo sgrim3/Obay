@@ -21,7 +21,6 @@ window.AddListingView = Backbone.View.extend({
                 });
                 this.on("success", function(file, response) {
                     $('#image').val(response);
-                    console.log(response);
                 });
             }
         };

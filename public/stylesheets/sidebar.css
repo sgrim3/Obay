@@ -19,7 +19,7 @@
  * https://github.com/danlevan/google-material-color
  */
 #sidebar {
-  position: absolute;
+  position: fixed;
   left: 50px;
   top: 50px; }
 
@@ -58,7 +58,7 @@
 
 #addButton {
   background: #D32F2F;
-  position: absolute;
+  position: fixed;
   right: 25px;
   bottom: 25px;
   margin-bottom: 0px; }

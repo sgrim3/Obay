@@ -1,58 +1,55 @@
 /*provides styling for better presentation for all */
 @import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700");
+@import "sidebar.scss";
+@import "dropzone.scss";
 
-* {
-  font-family: 'Lato', sans-serif; 
+* {font-family: 'Lato', sans-serif;}
+
+html, body, #PageContainer {
+  margin: auto;
+  margin-top: 0px;
+  height: 100%;
+  width: 100%;
 }
 
 body {
   background-color: #ececec;
   overflow-y: scroll;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: auto;
+  max-width: 900px;
+  display: flex;
 }
 
 h1 {
     color: #404040;
-    margin-left: 20px;
     font-size: 40px;
-    text-align: center;
+    margin-top: 0px;
 }
 
 h2 {
     color: #383838  ;
+    font-size: 30px;
+}
+
+h3 {
+    color: #00248F;
     margin-left: 20px;
     font-size: 30px;
     text-align: center;
+}
+
+a {
+  &:link {text-decoration: none;}
+  &:visited {text-decoration: none;}
+  &:hover {color: #FFFFFF ;
+    background-color: #B6C4F0;
+    text-decoration: none;}
+  &:active {text-decoration: underline;}
 }
 
 #listtitles {
   color: #00248F;
   margin-left: 350px;
   font-size: 20px;
-}
-
-a:link {
-    text-decoration: none;
-}
-
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-  color: #FFFFFF ;
-  background-color: #B6C4F0;
-  text-decoration: none;
-}
-
-a:active {
-    text-decoration: underline;
 }
 
 #buttons {
@@ -113,9 +110,8 @@ a:active {
 }
 
 
-/*css for creating page */
-
-#submit{
+// addListing
+#submit {
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
   background-image: -ms-linear-gradient(top, #3498db, #2980b9);
@@ -130,17 +126,15 @@ a:active {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   float: left;
-
-}
-
-#submit:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
+  &:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+  }
 }
 
 #addtitle {
@@ -160,45 +154,6 @@ a:active {
 #contentArea {
   padding: 20px;
   font-size: 20px;
-}
-
-h3 {
-    color: #00248F;
-    margin-left: 20px;
-    font-size: 30px;
-    text-align: center;
-}
-
-textarea {
-  width: 650px;
-  height: 280px;
-  padding: 10px;
-  border: solid 5px #c9c9c9;
-  margin-left: 60px;
-}
-
-textarea:focus,
-textarea.focus {
-  border: solid 5px #969696;
-  width: 650px;
-  height: 280px;  
-  margin-left: 60px;
-}
-
-input {
-  margin-left: 60px;
-  padding: 10px;
-  border: solid 5px #c9c9c9;
-  width: 250px;
-  height:10px;
-}
-
-input:focus,
-input.focus {
-  border: solid 5px #969696;
-  width: 250px;
-  height:10px;
-  margin-left: 60px;
 }
 
 /*css for delete and edit buttons*/
@@ -233,5 +188,83 @@ input.focus {
 #editPage {
   font-size: 20px;
   padding: 20px;
-  
+}
+
+.add {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+$addContainerPadding: 40px;
+#addContainer {
+  background-color: white;
+  width: 100%;
+  padding: $addContainerPadding;
+  @extend .sh1;
+  display: flex;
+  position: relative;
+}
+
+#exitButton {
+  position: absolute;
+  right: -0px -$buttonSize/2;
+  top: -0px -$buttonSize/2;
+  margin-bottom: 0px; 
+  background: palette(Red, $colorIntensity);
+}
+
+#image_upload {
+  height: 300px;
+  width: 300px;
+  order: 0;
+  padding: 0px;
+}
+
+#addForm {
+  order: 1;
+  margin-left: 20px;
+  position: relative;
+  flex: 1;
+  #image, #name, #description, #price{
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  #name {
+    font-size: 24pt;
+  }
+
+  #description {
+    height: 100px;
+  }
+
+  #price {
+    font-size: 18pt;
+  }
+
+  #postButton {
+    position: absolute;
+    right: -$addContainerPadding - $buttonSize/2;
+    bottom: -$addContainerPadding - $buttonSize/2;
+    margin-bottom: 0px; 
+    background: palette(Green, $colorIntensity);
+  }
+}
+
+// Dropzone.
+// FIXME: This is a hack. It's kinda clunky. Reduce all the redundancies.
+.dropzone {
+  display: flex;
+  align-items: center;
+}
+
+.dz-preview, .dz-processing, .dz-image-preview, .dz-success, .dz-complete, .dz-image {
+  width: 100%;
+  height: 100%;
 }

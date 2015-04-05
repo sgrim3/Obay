@@ -2,15 +2,17 @@
 @import "palette";
 
 #sidebar {
-    position: absolute;
+    position: fixed;
     left: 50px;
     top: 50px;
 }
 
+$buttonSize: 56px;
+
 .round-button {
     display:block;
-    width:56px;
-    height:56px;
+    width: $buttonSize;
+    height: $buttonSize;
     border: 0px;
     border-radius: 50%;
     color: white;
@@ -53,7 +55,7 @@ $colorIntensity: 700;
 
 #addButton {
     background: palette(Red, $colorIntensity);
-    position: absolute;
+    position: fixed;
     right: 25px;
     bottom: 25px;
     margin-bottom: 0px;

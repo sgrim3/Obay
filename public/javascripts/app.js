@@ -5,7 +5,7 @@ var AppRouter = Backbone.Router.extend({
         "home": "home",
         "addListing": "addListing",
         "logout": "logout",
-        '*notFound': 'notFound'
+        '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
     initialize: function () {
@@ -16,7 +16,6 @@ var AppRouter = Backbone.Router.extend({
     },
 
     ensureOlinAuthenticated: function(onAuth,onErr){
-        //router holds what the 'this' keyword would normally in this context. this is required because I couldn't get 'this' to reference what I needed in callback hell.
         $.get('/isOlinAuthenticated')
             .done(function(data){
                 var isAuth = data.olinAuth;
@@ -46,11 +45,18 @@ var AppRouter = Backbone.Router.extend({
     },
 
 
-    addListing: function (id) {
-        if (!this.Sidebar) {
-            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+    addListing: function () {
+        var onOlinAuth = function(){
+            if (!this.Sidebar) {
+                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+            }
+            this.Page = new AddListingView({el: $('#PageContainer')});
         }
-        this.Page = new AddListingView({el: $('#PageContainer')});
+        var onOlinErr = function(){
+            //redirect to login
+            window.location.replace('/');
+        }
+        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     login: function (id){

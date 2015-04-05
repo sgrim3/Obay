@@ -1,6 +1,5 @@
 var request = require("request");
 
-//TODO: check that the server response userid matches the userid on the current cookie so we know that users are really what their cookies say they are
 var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_callback){
     //NOT RESTFUL, meant for on server authentication
     request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
@@ -9,7 +8,14 @@ var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_call
             if (olin_apps_server_error || error) {
                 error_callback();
             } else {
-                success_callback();
+                //check that the userid matches the userid associated w/ the session token, to stop authenticated people from editing their cookies to appear to be other users
+                var claimedId = req.session.user.userId;
+                var sessionAssociatedId = JSON.parse(body).user.id;
+                if (claimedId === sessionAssociatedId){
+                    success_callback();
+                } else {
+                    error_callback();
+                }
             }
         }
     );

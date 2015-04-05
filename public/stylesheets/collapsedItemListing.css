@@ -1,0 +1,38 @@
+#collapsedItemView {
+  background-color: white;
+  position: relative;
+  margin: 3%;
+  margin-left: 10%;
+  height: 300px;  
+}
+
+#text_area {
+  position: relative;
+  margin-left: 350px;
+  margin-top: 40px;
+}
+
+#title {
+	font-size: 50px;
+	margin: 0;
+}
+
+#image_area
+{   width: 300px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    margin-bottom: -300px;
+}
+
+#picture {
+    position:absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto; 
+    min-height: 100%;
+    min-width: 100%;
+}

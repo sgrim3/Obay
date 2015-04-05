@@ -1,7 +1,7 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700");
 @import url(dropzone.css);
 /*provides styling for better presentation for all */
-.sh1, .round-button, .add {
+.sh1, .round-button, #addContainer {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, #addButton {
@@ -69,14 +69,17 @@
 * {
   font-family: 'Lato', sans-serif; }
 
-html, body {
+html, body, #PageContainer {
   margin: auto;
-  margin-top: 0px; }
+  margin-top: 0px;
+  height: 100%;
+  width: 100%; }
 
 body {
   background-color: #ececec;
   overflow-y: scroll;
-  max-width: 900px; }
+  max-width: 900px;
+  display: flex; }
 
 h1 {
   color: #404040;
@@ -232,10 +235,20 @@ a:active {
   padding: 20px; }
 
 .add {
-  background-color: white;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding: 20px; }
+  box-sizing: border-box;
+  align-items: center; }
+
+#addContainer {
+  background-color: white;
+  width: 100%;
+  height: 380px;
+  padding: 20px;
+  display: flex;
+  align-items: center; }
 
 #image_upload {
   height: 300px;
@@ -246,7 +259,7 @@ a:active {
   order: 1;
   margin-left: 20px;
   flex: 1; }
-  #addForm #image {
+  #addForm #image, #addForm #name, #addForm #description {
     width: 100%;
     box-sizing: border-box; }
 

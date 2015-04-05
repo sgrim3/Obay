@@ -5,15 +5,18 @@
 
 * {font-family: 'Lato', sans-serif;}
 
-html, body {
+html, body, #PageContainer {
   margin: auto;
   margin-top: 0px;
+  height: 100%;
+  width: 100%;
 }
 
 body {
   background-color: #ececec;
   overflow-y: scroll;
   max-width: 900px;
+  display: flex;
 }
 
 h1 {
@@ -188,11 +191,23 @@ a {
 }
 
 .add {
-  background-color: white;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+#addContainer {
+  background-color: white;
+  width: 100%;
+  height: 380px;
   padding: 20px;
   @extend .sh1;
+
+  display: flex;
+  align-items: center;
 }
 
 #image_upload {
@@ -205,7 +220,7 @@ a {
   order: 1;
   margin-left: 20px;
   flex: 1;
-  #image {
+  #image, #name, #description {
     width: 100%;
     box-sizing: border-box;
   }

@@ -77,7 +77,7 @@ var AppRouter = Backbone.Router.extend({
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView'], function() {
+utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'ItemView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

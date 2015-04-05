@@ -2,7 +2,7 @@
 @import "palette";
 
 #sidebar {
-    position: absolute;
+    position: fixed;
     left: 50px;
     top: 50px;
 }
@@ -53,7 +53,7 @@ $colorIntensity: 700;
 
 #addButton {
     background: palette(Red, $colorIntensity);
-    position: absolute;
+    position: fixed;
     right: 25px;
     bottom: 25px;
     margin-bottom: 0px;

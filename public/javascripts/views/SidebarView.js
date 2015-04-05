@@ -29,7 +29,7 @@ window.SidebarView = Backbone.View.extend({
           console.log("notificationsButton");
           break;
         case "logoutButton":
-          console.log("logoutButton");
+          Backbone.history.loadUrl('#logout');
           break;
         default:
           return;

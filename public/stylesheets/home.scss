@@ -1,5 +1,7 @@
 /*provides styling for better presentation for all */
 @import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700");
+@import "sidebar.scss";
+@import "dropzone.css";
 
 * {font-family: 'Lato', sans-serif;}
 
@@ -39,34 +41,6 @@ a {
     background-color: #B6C4F0;
     text-decoration: none;}
   &:active {text-decoration: underline;}
-}
-
-textarea {
-  width: 650px;
-  height: 280px;
-  padding: 10px;
-  border: solid 1px #c9c9c9;
-}
-
-textarea:focus,
-textarea.focus {
-  border: solid 2px #969696;
-  width: 650px;
-  height: 280px;  
-}
-
-input {
-  padding: 10px;
-  border: solid 1px #c9c9c9;
-  width: 250px;
-  height:10px;
-}
-
-input:focus,
-input.focus {
-  border: solid 2px #969696;
-  width: 250px;
-  height:10px;
 }
 
 #listtitles {
@@ -211,18 +185,28 @@ input.focus {
 #editPage {
   font-size: 20px;
   padding: 20px;
-  
 }
 
 .add {
   background-color: white;
-  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  @extend .sh1;
 }
 
 #image_upload {
-  float: left;
+  height: 300px;
+  width: 300px;
+  order: 0;
 }
 
 #addForm {
-  float: left;
+  order: 1;
+  margin-left: 20px;
+  flex: 1;
+  #image {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }

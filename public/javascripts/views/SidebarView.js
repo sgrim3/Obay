@@ -17,6 +17,7 @@ window.SidebarView = Backbone.View.extend({
       // console.log(ev.currentTarget.id);
       switch(ev.currentTarget.id) {
         case "homeButton":
+          Backbone.history.navigate('#home');
           Backbone.history.loadUrl('#home');
           break;
         case "accountButton":
@@ -29,6 +30,7 @@ window.SidebarView = Backbone.View.extend({
           console.log("notificationsButton");
           break;
         case "logoutButton":
+          Backbone.history.navigate('#logout');
           Backbone.history.loadUrl('#logout');
           break;
         case "addButton":

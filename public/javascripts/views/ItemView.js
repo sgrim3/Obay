@@ -1,5 +1,9 @@
 window.ItemView = Backbone.View.extend({
 
+	events: {
+	    'click .toggle-feeds-button': 'buyItem',
+	},
+
 	initialize:function (options) {
         this.render(options);
     },
@@ -30,5 +34,9 @@ window.ItemView = Backbone.View.extend({
 	    else{
 	    	console.log('no object to look for');
 	    }
+    },
+
+    buyItem: function(options){
+    	
     }
 });

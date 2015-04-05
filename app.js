@@ -39,6 +39,7 @@ app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', [olinAuthMiddleware, index.sessionData]);
 app.get('/listings', [olinAuthMiddleware, listings.list]);
+app.get('/item/:id', [olinAuthMiddleware, listings.item]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.

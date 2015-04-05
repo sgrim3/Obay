@@ -1,3 +1,15 @@
-THIS IS A LISTING VIEW
-creator: <%= item_creator %>
-Description: <%= item_description %>
+<div id="collapsedItemView" class="sh2">
+
+	<!-- <button type="button" id= "watch">Watch</button> -->
+	<div id="image_area">
+		<img id="picture" src="<%= item_image %>">
+	</div>
+
+	<div id="text_area">
+		<p id="title"> <%= item_name %> </p>
+		<p id="description"> <%= item_description %> </p>
+
+		<p id="price">Price: $<%= item_price %></p>
+	</div>
+	<a href="#item/<%= _id %>">link to indvidual item view</a>
+</div>

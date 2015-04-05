@@ -5,6 +5,7 @@ var AppRouter = Backbone.Router.extend({
         "home": "home",
         "addListing": "addListing",
         "logout": "logout",
+        "item/:id" : "item",
         '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
@@ -53,13 +54,23 @@ var AppRouter = Backbone.Router.extend({
             this.Page = new AddListingView({el: $('#PageContainer')});
         }
         var onOlinErr = function(){
-            //redirect to login
+            //redirect to login + alert user
+            alert("Please log in to add an item")
             window.location.replace('/');
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
-    login: function (id){
+
+    item: function(id){
+        if (!this.Sidebar){
+            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+        }
+        this.Page = new ItemView({el: $('#PageContainer'), id:id});
+    },
+
+    login: function(id){
+
         var onOlinAuth = function(){
             //redirect to home if user is logged in already
             window.location.replace('/#home');
@@ -86,7 +97,7 @@ var AppRouter = Backbone.Router.extend({
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView'], function() {
+utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'ItemView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

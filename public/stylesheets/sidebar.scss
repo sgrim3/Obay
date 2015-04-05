@@ -1,5 +1,11 @@
 @import "shadows.scss";
 
+#sidebar {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+
 .round-button {
     display:block;
     width:56px;
@@ -23,8 +29,12 @@
     @extend .sh2;
 }
 
-#accountButton {
+#homeButton {
     background: #2196F3;
+}
+
+#accountButton {
+    background: #FF9800;
 }
 
 #freeButton {

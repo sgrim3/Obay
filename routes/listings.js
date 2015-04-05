@@ -85,5 +85,31 @@ exports.item = function(req, res) {
 }
 
 
+//gets list of all open listings and sorts by timestamp
+exports.free = function(req, res) {
+    var onSuccess = function(){
+
+
+        Listing.find({item_price: 0}).sort({"item_timeCreated": -1}).exec(function (err, freeListings) {
+            if (err) {
+                console.log ("Could not search Listings!");
+                res.status(500).send("Could not search Listings!");
+            }
+            else {
+                //only return open listings
+                freeListings = freeListings.filter(function(item){
+                    return item.item_open;
+                });
+                res.send(freeListings); 
+            }
+        });
+    };
+    var onError = function(){
+        res.status(401).send('Log in to OlinApps to access this functionality!');
+    };
+    ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
+};
+
+
 module.exports = exports;
 

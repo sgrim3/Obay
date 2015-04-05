@@ -38,6 +38,7 @@ app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', index.sessionData);
 app.get('/listings', listings.list);
 app.get('/item/:id', listings.item);
+app.get('/listings/free',listings.free);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.

@@ -63,10 +63,6 @@ exports.add = function (req, res) {
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
-exports.oneItem = function (req,res){
-    console.log(req.body);
-    res.send("Yay!");
-};
 
 exports.item = function(req, res) {
     var onSuccess = function(){

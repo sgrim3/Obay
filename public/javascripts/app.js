@@ -65,7 +65,7 @@ var AppRouter = Backbone.Router.extend({
         if (!this.Sidebar){
             this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
         }
-        this.Page = new ItemView({el: $('#PageContainer')});
+        this.Page = new ItemView({el: $('#PageContainer'), id:id});
     },
 
     login: function(id){

@@ -1,21 +1,25 @@
 window.ItemView = Backbone.View.extend({
 
-	initialize:function () {
-        this.render();
+	initialize:function (options) {
+        this.render(options);
     },
 
     render: function(options){
-
-    	var itemView = this;
+    	console.log(options.id);
+    	// $el=options.el;
     	if(options.id){
 
-    		this.item = new Listing({_id:options.id});
+    		this.item = new Listing({id:options.id});
     		console.log(this.item);
+
+    		var itemViewScope = this;
+
 	    	this.item.fetch({
+	    		//data: $.param(), 
 	    		success: function(item){
-	    			console.log(item);
-	    			// $(this.el).html(this.template(item.model.attr);
-	       //  		return this;
+	    			console.log(item.attributes);
+	    			itemViewScope.$el.html(itemViewScope.template(item.attributes));
+	         		return itemViewScope;
 	    		},
 	    		error: function(){
 	    			console.log('error!');

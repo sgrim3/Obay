@@ -1,44 +1,36 @@
 .round-button {
     display:block;
-    width:65px;
-    height:65px;
-    line-height:50px;
-    border: 2px solid #464646;
+    width:56px;
+    height:56px;
+    border: 0px;
     border-radius: 50%;
-    color:#f5f5f5;
+    color: white;
     text-align:center;
     text-decoration:none;
-    box-shadow: 0 0 3px gray;
-    font-size:12px;
+    font-size:25px;
     font-weight:bold;
+    margin-bottom: 20px;
+    transition: 0.1s ease-in-out;
 }
+
 .round-button:hover {
-    background: #262626;
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg);
+    cursor: pointer;
 }
 
 #accountButton {
-    background: #FF0000;
-}
-
-#accountButton:hover {
-    background: #660000;
+    background: #2196F3;
 }
 
 #freeButton {
-    background: #008000;
+    background: #4CAF50;
 }
 
-#freeButton:hover {
-    background: #003300;
+#notificationsButton {
+    background: #FFEB3B;    
 }
-
 
 #logoutButton {
-    background: #0000FF;
+    background: #3F51B5;
 }
-
-#logoutButton:hover {
-    background: #000066;
-}
-
-

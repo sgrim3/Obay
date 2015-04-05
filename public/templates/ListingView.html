@@ -1,13 +1,16 @@
-<div id="collapsedItemView">
+<div id="collapsedItemView" class="sh2">
 
 	<!-- <button type="button" id= "watch">Watch</button> -->
+	<div id="image_area">
+		<img id="picture" src="<%= item_image %>">
+	</div>
 
-	<img src="<%= item_image %>">
+	<div id="text_area">
+		<p id="title"> <%= item_name %> </p>
 
-	<h3> <%= item_name %> </h3>
+		<p id="description"> <%= item_description %> </p>
 
-	<p> <%= item_description %> </p>
-
-	<p id="price">Price: $<%= item_price %></p>
+		<p id="price">Price: $<%= item_price %></p>
+	</div>
 
 </div>

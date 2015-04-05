@@ -141,7 +141,7 @@ h3 {
   color: #00248F;
   margin-left: 20px;
   font-size: 30px;
-  text-align: center; }
+  text-align: left; }
 
 textarea {
   width: 650px;
@@ -199,5 +199,6 @@ input:focus, input.focus {
 #editPage {
   font-size: 20px;
   padding: 20px; }
+
 
 /*# sourceMappingURL=home.css.map */

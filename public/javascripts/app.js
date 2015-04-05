@@ -1,11 +1,11 @@
 var AppRouter = Backbone.Router.extend({
 
     routes: {
-        "" : "login",
-        "home" : "home",
-        "addListing" :"addListing",
-        //This route must go last to act as the catchall/404 page
-        '*notFound': 'notFound'
+        "": "login",
+        "home": "home",
+        "addListing": "addListing",
+        "logout": "logout",
+        '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
     initialize: function () {
@@ -59,7 +59,7 @@ var AppRouter = Backbone.Router.extend({
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
-    login: function(id){
+    login: function (id){
         var onOlinAuth = function(){
             //redirect to home if user is logged in already
             window.location.replace('/#home');
@@ -71,8 +71,18 @@ var AppRouter = Backbone.Router.extend({
             this.Page = new LoginView({el: $('#PageContainer')});
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    }
+    },
 
+    logout: function (id){
+        console.log("Logging out.");
+        $.post('/logout')
+            .done(function (){
+                Backbone.history.navigate('', true);
+            })
+            .error(function(){
+                console.log("Failed to log out.");
+            });
+    },
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.

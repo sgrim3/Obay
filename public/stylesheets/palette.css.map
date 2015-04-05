@@ -1,0 +1,10 @@
+{
+	"version": 3,
+	"file": "palette.css",
+	"sources": [
+		"../../palette.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "",
+	"names": []
+}

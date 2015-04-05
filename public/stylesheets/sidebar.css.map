@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "sidebar.css",
+	"sources": [
+		"../../sidebar.scss",
+		"../../shadows.scss",
+		"../../palette.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "ACAA,AAAM;EACL,AAAqC;;AAGtC,AAAM,AAAa;EACjB,AAAqC;;AAGvC;EACE,AAAuC;;AAGzC;EACE,AAAqC;EACrC,AAAuC;;AAGzC;EACE,AAAuC;;;;;;ADfzC;EACI,AAAU;EACV,AAAM;EACN,AAAK;;AAGT;EACI,AAAQ;EACR,AAAM;EACN,AAAO;EACP,AAAQ;EACR,AAAe;EACf,AAAO;EACP,AAAW;EACX,AAAgB;EAChB,AAAU;EACV,AAAY;EACZ,AAAe;EACf,AAAY;;AAIhB,AAAa;EACT,AAAmB;EACnB,AAAW;EACX,AAAQ;;AAMZ;EACI,AAAY;;AAGhB;EACI,AAAY;;AAGhB;EACI,AAAY;;AAGhB;EACI,AAAY;;AAGhB;EACI,AAAY",
+	"names": []
+}

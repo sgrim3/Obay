@@ -7,11 +7,11 @@ var path = require("path");
 var User = require(path.join(__dirname,"../models/user_model")).user;
 var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 
-//listings is the exported module object
-var listings = {};
+//exports is the exported module object
+var exports = {};
 
 //gets list of all open listings and sorts by timestamp
-listings.list = function(req, res) {
+exports.list = function(req, res) {
     var onSuccess = function(){
         Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
             if (err) {
@@ -33,7 +33,7 @@ listings.list = function(req, res) {
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
-listings.add = function (req, res) {
+exports.add = function (req, res) {
     var onSuccess = function(){
         var onValidListing = function(){
             var newListing = new Listing({
@@ -63,4 +63,4 @@ listings.add = function (req, res) {
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
-module.exports = listings;
+module.exports = exports;

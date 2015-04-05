@@ -46,17 +46,17 @@ var AppRouter = Backbone.Router.extend({
 
 
     addListing: function () {
-        var onOlinAuth = function(){
+        //var onOlinAuth = function(){
             if (!this.Sidebar) {
                 this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
             }
             this.Page = new AddListingView({el: $('#PageContainer')});
-        }
-        var onOlinErr = function(){
-            //redirect to login page
-            window.location.replace('/');
-        }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        //}
+        //var onOlinErr = function(){
+          //  //redirect to login page
+           // window.location.replace('/');
+        //}
+        //this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     login: function(id){

@@ -1,13 +1,15 @@
 <div class = 'add'>
 <h1>Add a Listing!</h1>
-<p>Please provide a working link for the image field</p>
-<form name = "addForm" novalidate ng-click = "hideMsg()">
+
+<div id="image_upload" class="dropzone"></div>
+
+<form id = "addForm" >
+
+	<input type = "text" id = "image" placeholder = "Image url" > <br>
 
 	<input type = "text" id = "name" placeholder = "Item Name" name = "name"> <br>
 
     <textarea id="description" placeholder="Description" name="Description"></textarea><br>
-
-	<input type = "text" id="image" placeholder = "Image Link"><br>
 
 	$<input type = "text" id="price" placeholder = "Price"><br>
 

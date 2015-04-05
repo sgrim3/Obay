@@ -1,49 +1,63 @@
-@import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700");
 /*provides styling for better presentation for all */
+@import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700");
+
 * {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Lato', sans-serif; 
+}
 
 html, body {
   height: 100%;
   width: 100%;
   padding: 0;
-  margin: auto; }
+  margin: auto;
+}
+
+body {
+}
 
 h1 {
-  color: #404040;
-  margin-left: 20px;
-  font-size: 40px;
-  text-align: center; }
+    color: #404040;
+    margin-left: 20px;
+    font-size: 40px;
+    text-align: center;
+}
 
 h2 {
-  color: #383838;
-  margin-left: 20px;
-  font-size: 30px;
-  text-align: center; }
+    color: #383838  ;
+    margin-left: 20px;
+    font-size: 30px;
+    text-align: center;
+}
 
 #listtitles {
   color: #00248F;
   margin-left: 350px;
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 a:link {
-  text-decoration: none; }
+    text-decoration: none;
+}
 
 a:visited {
-  text-decoration: none; }
+    text-decoration: none;
+}
 
 a:hover {
-  color: #FFFFFF;
+  color: #FFFFFF ;
   background-color: #B6C4F0;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 a:active {
-  text-decoration: underline; }
+    text-decoration: underline;
+}
 
 #buttons {
-  padding: 20px; }
+  padding: 20px;
+}
 
-#Homebutton {
+#Homebutton{
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
   background-image: -ms-linear-gradient(top, #3498db, #2980b9);
@@ -55,7 +69,8 @@ a:active {
   color: #ffffff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 #Homebutton:hover {
   background: #3cb0fd;
@@ -64,7 +79,9 @@ a:active {
   background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none; }
+  text-decoration: none;
+}
+
 
 #Createbutton {
   margin-right: 200px;
@@ -80,7 +97,8 @@ a:active {
   color: #ffffff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 #Createbutton:hover {
   background: #3cb0fd;
@@ -89,10 +107,13 @@ a:active {
   background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none; }
+  text-decoration: none;
+}
+
 
 /*css for creating page */
-#submit {
+
+#submit{
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
   background-image: -ms-linear-gradient(top, #3498db, #2980b9);
@@ -106,7 +127,9 @@ a:active {
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-  float: left; }
+  float: left;
+
+}
 
 #submit:hover {
   background: #3cb0fd;
@@ -115,55 +138,66 @@ a:active {
   background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 #addtitle {
-  color: #404040;
-  font-size: 30px;
-  margin-left: 20px;
-  float: left; }
+    color: #404040;
+    font-size: 30px;
+    margin-left: 20px;
+    float: left;
+}
 
 #addcontent {
-  color: #404040;
-  font-size: 30px;
-  margin-left: 20px;
-  float: left; }
+    color: #404040;
+    font-size: 30px;
+    margin-left: 20px;
+    float: left;
+}
 
 #contentArea {
   padding: 20px;
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 h3 {
-  color: #00248F;
-  margin-left: 20px;
-  font-size: 30px;
-  text-align: center; }
+    color: #00248F;
+    margin-left: 20px;
+    font-size: 30px;
+    text-align: center;
+}
 
 textarea {
   width: 650px;
   height: 280px;
   padding: 10px;
   border: solid 5px #c9c9c9;
-  margin-left: 60px; }
+  margin-left: 60px;
+}
 
-textarea:focus, textarea.focus {
+textarea:focus,
+textarea.focus {
   border: solid 5px #969696;
   width: 650px;
-  height: 280px;
-  margin-left: 60px; }
+  height: 280px;  
+  margin-left: 60px;
+}
 
 input {
   margin-left: 60px;
   padding: 10px;
   border: solid 5px #c9c9c9;
   width: 250px;
-  height: 10px; }
+  height:10px;
+}
 
-input:focus, input.focus {
+input:focus,
+input.focus {
   border: solid 5px #969696;
   width: 250px;
-  height: 10px;
-  margin-left: 60px; }
+  height:10px;
+  margin-left: 60px;
+}
 
 /*css for delete and edit buttons*/
 .delete, .edit {
@@ -181,7 +215,8 @@ input:focus, input.focus {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   float: left;
-  margin-right: 5px; }
+  margin-right: 5px;
+}
 
 .delete:hover, .edit:hover {
   background: #3cb0fd;
@@ -190,10 +225,10 @@ input:focus, input.focus {
   background-image: -ms-linear-gradient(top, #ff887f, #ff887f);
   background-image: -o-linear-gradient(top, #ff887f, #ff887f);
   background-image: linear-gradient(to bottom, #ff887f, #ff887f);
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 #editPage {
   font-size: 20px;
-  padding: 20px; }
-
-/*# sourceMappingURL=home.css.map */
+  padding: 20px;
+}

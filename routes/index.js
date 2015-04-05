@@ -15,7 +15,6 @@ var isOlinAuthenticated = function(req,res){
     var onOlinErr = function(){
         res.send({olinAuth:false});
     };
-    console.log(ensureOlinAuthenticatedServer);
     ensureOlinAuthenticatedServer(req,res,onOlinAuth,onOlinErr)
 }
 

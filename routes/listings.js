@@ -7,11 +7,11 @@ var path = require("path");
 var User = require(path.join(__dirname,"../models/user_model")).user;
 var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 
-//listings is the exported module object
-var listings = {};
+//exports is the exported module object
+var exports = {};
 
-//gets list of all listings and sorts by timestamp
-listings.list = function(req, res) {
+//gets list of all open listings and sorts by timestamp
+exports.list = function(req, res) {
     var onSuccess = function(){
         Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
             if (err) {
@@ -19,6 +19,10 @@ listings.list = function(req, res) {
                 res.status(500).send("Could not search Listings!");
             }
             else {
+                //only return open listings
+                listings = listings.filter(function(item){
+                    return item.item_open;
+                });
                 res.send(listings);	
             }
         });
@@ -29,7 +33,7 @@ listings.list = function(req, res) {
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
-listings.add = function (req, res) {
+exports.add = function (req, res) {
     var onSuccess = function(){
         var onValidListing = function(){
             var newListing = new Listing({
@@ -39,7 +43,7 @@ listings.add = function (req, res) {
                 item_creator: req.session.user.userId,
                 item_timeCreated: Date.now(),
                 item_open: true,
-                item_price: req.body.item_price
+                item_price: parseFloat(req.body.item_price.replace(/,/g, ''))
             });
             // Save new listing to database
             newListing.save(function(err){
@@ -59,4 +63,4 @@ listings.add = function (req, res) {
     ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
 };
 
-module.exports = listings;
+module.exports = exports;

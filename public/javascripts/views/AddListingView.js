@@ -10,11 +10,27 @@ window.AddListingView = Backbone.View.extend({
 
     render:function () {
         $(this.el).html(this.template());
+        var dropzone_options = {
+            dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',
+            url: "/image",
+            init: function() {
+                this.on("addedfile", function() {
+                    if (this.files[1]!=null){
+                        this.removeFile(this.files[0]);
+                    }
+                });
+                this.on("success", function(file, response) {
+                    $('#image').val(response);
+                });
+            }
+        };
+        this.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
         return this;
     },
 
     onFormSubmit: function(e) {
         e.preventDefault();
+        console.log(this.image_upload);
     	var item_name = $("#name").val();
     	var item_description = $("#description").val();
     	var item_image = $("#image").val();
@@ -42,11 +58,10 @@ window.AddListingView = Backbone.View.extend({
             },
             error: function(model, response, options) {
                 if (response.status === 401) {
-                    //if not authenticated
-                    /* redirect on no authentication, commented out for now.
+                    //if not authenticated, redirect
                     if (!response.authenticated){
                         window.location.replace('/');
-                    }*/
+                    }
                 } else {
                     $('#error_message').text(response.responseText);
                 }

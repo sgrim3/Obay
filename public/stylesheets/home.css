@@ -3,47 +3,67 @@
 * {
   font-family: 'Lato', sans-serif; }
 
+html, body {
+  margin: auto;
+  margin-top: 0px; }
+
 body {
   background-color: #ececec;
   overflow-y: scroll;
   max-width: 900px; }
 
-html, body {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: auto; }
-
 h1 {
   color: #404040;
-  margin-left: 20px;
   font-size: 40px;
-  text-align: center; }
+  margin-top: 0px; }
 
 h2 {
   color: #383838;
+  font-size: 30px; }
+
+h3 {
+  color: #00248F;
   margin-left: 20px;
   font-size: 30px;
   text-align: center; }
+
+a:link {
+  text-decoration: none; }
+a:visited {
+  text-decoration: none; }
+a:hover {
+  color: #FFFFFF;
+  background-color: #B6C4F0;
+  text-decoration: none; }
+a:active {
+  text-decoration: underline; }
+
+textarea {
+  width: 650px;
+  height: 280px;
+  padding: 10px;
+  border: solid 1px #c9c9c9; }
+
+textarea:focus, textarea.focus {
+  border: solid 2px #969696;
+  width: 650px;
+  height: 280px; }
+
+input {
+  padding: 10px;
+  border: solid 1px #c9c9c9;
+  width: 250px;
+  height: 10px; }
+
+input:focus, input.focus {
+  border: solid 2px #969696;
+  width: 250px;
+  height: 10px; }
 
 #listtitles {
   color: #00248F;
   margin-left: 350px;
   font-size: 20px; }
-
-a:link {
-  text-decoration: none; }
-
-a:visited {
-  text-decoration: none; }
-
-a:hover {
-  color: #FFFFFF;
-  background-color: #B6C4F0;
-  text-decoration: none; }
-
-a:active {
-  text-decoration: underline; }
 
 #buttons {
   padding: 20px; }
@@ -96,7 +116,6 @@ a:active {
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none; }
 
-/*css for creating page */
 #submit {
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
@@ -112,15 +131,14 @@ a:active {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   float: left; }
-
-#submit:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none; }
+  #submit:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none; }
 
 #addtitle {
   color: #404040;
@@ -137,38 +155,6 @@ a:active {
 #contentArea {
   padding: 20px;
   font-size: 20px; }
-
-h3 {
-  color: #00248F;
-  margin-left: 20px;
-  font-size: 30px;
-  text-align: center; }
-
-textarea {
-  width: 650px;
-  height: 280px;
-  padding: 10px;
-  border: solid 5px #c9c9c9;
-  margin-left: 60px; }
-
-textarea:focus, textarea.focus {
-  border: solid 5px #969696;
-  width: 650px;
-  height: 280px;
-  margin-left: 60px; }
-
-input {
-  margin-left: 60px;
-  padding: 10px;
-  border: solid 5px #c9c9c9;
-  width: 250px;
-  height: 10px; }
-
-input:focus, input.focus {
-  border: solid 5px #969696;
-  width: 250px;
-  height: 10px;
-  margin-left: 60px; }
 
 /*css for delete and edit buttons*/
 .delete, .edit {
@@ -200,5 +186,15 @@ input:focus, input.focus {
 #editPage {
   font-size: 20px;
   padding: 20px; }
+
+.add {
+  background-color: white;
+  height: 100%; }
+
+#image_upload {
+  float: left; }
+
+#addForm {
+  float: left; }
 
 /*# sourceMappingURL=home.css.map */

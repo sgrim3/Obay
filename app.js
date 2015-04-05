@@ -12,6 +12,8 @@ var index = require('./routes/index.js');
 var listings = require ("./routes/listings");
 var email = require('./routes/email');
 var image = require('./routes/image');
+var olinAuth = require('./routes/auth.js');
+var olinAuthMiddleware = olinAuth.olinAuthMiddleware;
 
 var app = express();
 
@@ -35,18 +37,18 @@ app.post('/olinAppsAuth', index.olinAppsAuth);
 // GET.
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
-app.get('/sessionData', index.sessionData);
-app.get('/listings', listings.list);
+app.get('/sessionData', [olinAuthMiddleware, index.sessionData]);
+app.get('/listings', [olinAuthMiddleware, listings.list]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.
 app.get('/temporary_email_route', email.sendEmail);
 
 // POST.
-app.post('/venmoPay', index.venmoPay);
+app.post('/venmoPay', [olinAuthMiddleware, index.venmoPay]);
 app.post('/logout', index.logout);
-app.post('/listing', listings.add);
-app.post('/image', image.uploadImage);
+app.post('/listing', [olinAuthMiddleware, listings.add]);
+app.post('/image', [olinAuthMiddleware, image.uploadMiddleware, image.uploadImage]);
 
 app.listen(PORT, function(){
     console.log("Application running on port:", PORT);

@@ -34,10 +34,17 @@ var uploadImage = function(req, res){
                       if (err) throw err;
                     });
                 } else {
-                    res.send(imgur_res.data.link);
-                    fs.unlink(saved_image_path, function (err) {
-                      if (err) throw err;
-                    });
+                    if (imgur_res.success){
+                        res.send(imgur_res.data.link);
+                        fs.unlink(saved_image_path, function (err) {
+                          if (err) throw err;
+                        });
+                    } else {
+                        res.status(imgur_res.status).send(imgur_res.data.error);
+                        fs.unlink(saved_image_path, function (err) {
+                          if (err) throw err;
+                        });
+                    }
                 }
             });
         });

@@ -53,7 +53,8 @@ var AppRouter = Backbone.Router.extend({
             this.Page = new AddListingView({el: $('#PageContainer')});
         }
         var onOlinErr = function(){
-            //redirect to login
+            //redirect to login + alert user
+            alert("Please log in to add an item")
             window.location.replace('/');
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);

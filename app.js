@@ -11,6 +11,7 @@ var session = require('express-session');
 var index = require('./routes/index.js');
 var listings = require ("./routes/listings");
 var email = require('./routes/email');
+var image = require('./routes/image');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.get('/temporary_email_route', email.sendEmail);
 app.post('/venmoPay', index.venmoPay);
 app.post('/logout', index.logout);
 app.post('/listing', listings.add);
+app.post('/image', image.uploadImage);
 
 app.listen(PORT, function(){
     console.log("Application running on port:", PORT);

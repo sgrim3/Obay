@@ -1,11 +1,12 @@
 var AppRouter = Backbone.Router.extend({
 
     routes: {
-        "" : "login",
-        "home" : "home",
-        "addListing" :"addListing",
+        "": "login",
+        "home": "home",
+        "addListing": "addListing",
+        "logout": "logout",
         "item/:id" : "item",
-        '*notFound': 'notFound'
+        '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
     initialize: function () {
@@ -16,7 +17,6 @@ var AppRouter = Backbone.Router.extend({
     },
 
     ensureOlinAuthenticated: function(onAuth,onErr){
-        //router holds what the 'this' keyword would normally in this context. this is required because I couldn't get 'this' to reference what I needed in callback hell.
         $.get('/isOlinAuthenticated')
             .done(function(data){
                 var isAuth = data.olinAuth;
@@ -46,12 +46,20 @@ var AppRouter = Backbone.Router.extend({
     },
 
 
-    addListing: function (id) {
-        if (!this.Sidebar) {
-            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+    addListing: function () {
+        var onOlinAuth = function(){
+            if (!this.Sidebar) {
+                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+            }
+            this.Page = new AddListingView({el: $('#PageContainer')});
         }
-        this.Page = new AddListingView({el: $('#PageContainer')});
+        var onOlinErr = function(){
+            //redirect to login
+            window.location.replace('/');
+        }
+        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
+
 
     item: function(id){
         if (!this.Sidebar){
@@ -61,6 +69,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
     login: function(id){
+
         var onOlinAuth = function(){
             //redirect to home if user is logged in already
             window.location.replace('/#home');
@@ -72,8 +81,18 @@ var AppRouter = Backbone.Router.extend({
             this.Page = new LoginView({el: $('#PageContainer')});
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    }
+    },
 
+    logout: function (id){
+        console.log("Logging out.");
+        $.post('/logout')
+            .done(function (){
+                Backbone.history.navigate('', true);
+            })
+            .error(function(){
+                console.log("Failed to log out.");
+            });
+    },
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.

@@ -5,14 +5,16 @@
   font-family: 'Lato', sans-serif; 
 }
 
+body {
+  background-color: #ececec;
+  overflow-y: scroll;
+}
+
 html, body {
   height: 100%;
   width: 100%;
   padding: 0;
   margin: auto;
-}
-
-body {
 }
 
 h1 {
@@ -231,4 +233,5 @@ input.focus {
 #editPage {
   font-size: 20px;
   padding: 20px;
+  
 }

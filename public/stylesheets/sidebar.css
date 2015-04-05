@@ -1,36 +1,66 @@
+.sh1, .round-button {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+
+.sh2, .round-button:hover, #addButton {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+.sh3, #addButton:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+
+.sh4 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+
+.sh5 {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); }
+
+/**
+ * google-material-color v1.1.0
+ * https://github.com/danlevan/google-material-color
+ */
+#sidebar {
+  position: absolute;
+  left: 50px;
+  top: 50px; }
+
 .round-button {
-    display:block;
-    width:56px;
-    height:56px;
-    border: 0px;
-    border-radius: 50%;
-    color: white;
-    text-align:center;
-    text-decoration:none;
-    font-size:25px;
-    font-weight:bold;
-    margin-bottom: 20px;
-    transition: 0.1s ease-in-out;
-}
+  display: block;
+  width: 56px;
+  height: 56px;
+  border: 0px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  margin-bottom: 20px;
+  transition: 0.1s ease-in-out; }
 
 .round-button:hover {
-    -webkit-transform: rotate(10deg);
-    transform: rotate(10deg);
-    cursor: pointer;
-}
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+  cursor: pointer; }
+
+#homeButton {
+  background: #1976D2; }
 
 #accountButton {
-    background: #2196F3;
-}
+  background: #F57C00; }
 
 #freeButton {
-    background: #4CAF50;
-}
+  background: #388E3C; }
 
 #notificationsButton {
-    background: #FFEB3B;    
-}
+  background: #7B1FA2; }
 
 #logoutButton {
-    background: #3F51B5;
-}
+  background: #303F9F; }
+
+#addButton {
+  background: #D32F2F;
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  margin-bottom: 0px; }
+
+/*# sourceMappingURL=sidebar.css.map */

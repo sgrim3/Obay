@@ -18,6 +18,13 @@ window.AddListingView = Backbone.View.extend({
                     if (this.files[1]!=null){
                         this.removeFile(this.files[0]);
                     }
+                    $('#image_upload').append("<button class='round-button' id='deleteImageButton'><i class='fa fa-times'></i></button>");
+                    var this_dropzone = this;
+                    $('#deleteImageButton').click(function(event) {
+                        this_dropzone.removeAllFiles(true);
+                        $('#deleteImageButton').remove();
+                        $('#image').val('');
+                    });
                 });
                 this.on("success", function(file, response) {
                     $('#image').val(response);
@@ -25,6 +32,12 @@ window.AddListingView = Backbone.View.extend({
             }
         };
         this.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
+        this_dropzone = this.image_upload;
+        console.log($('.dz-image'));
+        $('.dz-image').click(function(event) {
+            console.log('image clicked');
+            this_dropzone.removeAllFiles(true);
+        });
         return this;
     },
 

@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, #collapsedListingView, #addContainer {
+.sh1, .round-button, #collapsedListingView, #text_area #price, #addContainer {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
-.sh2, .round-button:hover, #addButton {
+.sh2, .round-button:hover, #addButton, #image_area {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, #addButton:hover {
+.sh3, #addButton:hover, #collapsedListingView:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -304,7 +304,8 @@
  * https://github.com/danlevan/google-material-color
  */
 * {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Lato', sans-serif;
+  transition: 0.1s ease-in-out; }
 
 html, body, #PageContainer {
   margin: auto;
@@ -318,6 +319,9 @@ body {
   overflow-y: scroll;
   max-width: 900px;
   display: flex; }
+
+p {
+  margin: 0px; }
 
 h1 {
   color: #404040;
@@ -334,15 +338,17 @@ h3 {
   font-size: 30px;
   text-align: center; }
 
-a:link {
+a {
   text-decoration: none; }
-a:visited {
-  text-decoration: none; }
-a:hover {
-  background-color: #B6C4F0;
-  text-decoration: none; }
-a:active {
-  text-decoration: underline; }
+  a:link {
+    text-decoration: none; }
+  a:visited {
+    text-decoration: none; }
+  a:hover {
+    background-color: none;
+    text-decoration: none; }
+  a:active {
+    text-decoration: none; }
 
 .round-button {
   display: block;
@@ -384,6 +390,18 @@ a:active {
   bottom: 25px;
   margin-bottom: 0px; }
 
+#deleteImageButton {
+  background: #D32F2F;
+  position: absolute;
+  z-index: 99999;
+  left: 50%;
+  top: 50%;
+  margin-left: -28px;
+  margin-top: -28px;
+  margin-bottom: 0px; }
+  #deleteImageButton .fa-times {
+    cursor: pointer; }
+
 .listingHighlight {
   text-decoration: none; }
   .listingHighlight:hover {
@@ -392,33 +410,47 @@ a:active {
 #collapsedListingView {
   background-color: white;
   position: relative;
-  height: 300px;
-  margin-bottom: 20px; }
+  height: 150px;
+  margin-bottom: 10px; }
 
 #text_area {
   position: relative;
-  margin-left: 350px;
-  margin-top: 40px; }
-
-#title {
-  font-size: 50px;
-  margin: 0; }
+  margin-left: 160px;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%;
+  color: black; }
+  #text_area #title {
+    font-size: 24pt;
+    margin: 0; }
+  #text_area #price {
+    position: absolute;
+    background-color: #1976D2;
+    bottom: 0px;
+    right: 0px;
+    color: white;
+    font-size: 18pt;
+    padding: 10px;
+    box-sizing: border-box; }
+  #text_area #description {
+    margin-top: 5px;
+    margin-right: 50px;
+    height: 80px;
+    overflow: hidden;
+    text-overflow-multiline: ellipsis;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12pt; }
 
 #image_area {
-  width: 300px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   position: relative;
-  display: block; }
+  display: block;
+  float: left; }
 
 #picture {
-  position: absolute;
-  left: -100%;
-  right: -100%;
-  top: -100%;
-  bottom: -100%;
-  margin: auto;
-  min-height: 100%;
-  min-width: 100%; }
+  max-height: 100%; }
 
 .add {
   width: 100%;
@@ -446,7 +478,8 @@ a:active {
   height: 300px;
   width: 300px;
   order: 0;
-  padding: 0px; }
+  padding: 0px;
+  position: relative; }
 
 #addForm {
   order: 1;
@@ -483,3 +516,6 @@ a:active {
   position: fixed;
   left: 50px;
   top: 50px; }
+
+#PageContainer {
+  margin-top: 50px; }

@@ -55,3 +55,18 @@ $colorIntensity: 700;
       @extend .sh3;
     }
 }
+
+#deleteImageButton {
+    background: palette(Red, $colorIntensity);
+    position: absolute;
+    z-index: 99999;
+    left: 50%;
+    top: 50%;
+    margin-left: -$buttonSize/2;
+    margin-top: -$buttonSize/2;
+    margin-bottom: 0px;
+
+    .fa-times {
+        cursor: pointer;
+    }
+}

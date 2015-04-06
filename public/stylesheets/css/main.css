@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, #collapsedListingView, #text_area #price, #addContainer {
+.sh1, .round-button, #collapsedListingView, #text_area #price, #watchEye:hover, #loginButton, #addContainer {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, #addButton, #image_area {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, #addButton:hover, #collapsedListingView:hover {
+.sh3, #addButton:hover, #collapsedListingView:hover, #loginBox, #loginButton:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -349,6 +349,13 @@ a {
     text-decoration: none; }
   a:active {
     text-decoration: none; }
+
+button:focus {
+  outline: 0; }
+
+button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner {
+  padding: 0 !important;
+  border: 0 none !important; }
 
 .round-button {
   display: block;
@@ -452,6 +459,64 @@ a {
 #picture {
   max-height: 100%; }
 
+#watchEye {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: transparent;
+  border: 0px;
+  height: 40px;
+  width: 40px;
+  border-radius: 48px;
+  z-index: 9999999;
+  font-size: 14pt;
+  color: #9E9E9E; }
+  #watchEye:hover {
+    background-color: #E0E0E0;
+    cursor: pointer; }
+
+#loginBoxWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 20; }
+
+#loginBox {
+  background-color: white;
+  width: 500px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; }
+
+#loginLogo {
+  width: 100%;
+  font-size: 72pt;
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 40px;
+  color: rgba(0, 0, 0, 0.87); }
+
+#loginButton {
+  background-color: #388E3C;
+  color: #ffffff;
+  border: 0px;
+  border-radius: 3px;
+  width: 100%;
+  display: block;
+  font-size: 14pt;
+  padding: 12px; }
+  #loginButton:hover {
+    cursor: pointer; }
+
 .add {
   width: 100%;
   height: 100%;
@@ -519,3 +584,28 @@ a {
 
 #PageContainer {
   margin-top: 50px; }
+
+video#backgroundLoginVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  background-size: cover;
+  opacity: 1; }
+
+#blackMask {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -99;
+  background-size: cover;
+  background-color: black;
+  opacity: 0.7; }

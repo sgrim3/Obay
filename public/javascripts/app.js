@@ -76,9 +76,6 @@ var AppRouter = Backbone.Router.extend({
             window.location.replace('/#home');
         }
         var onOlinErr = function(){
-            if (!this.Sidebar) {
-                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-            }
             this.Page = new LoginView({el: $('#PageContainer')});
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
@@ -88,7 +85,8 @@ var AppRouter = Backbone.Router.extend({
         console.log("Logging out.");
         $.post('/logout')
             .done(function (){
-                Backbone.history.navigate('', true);
+                Backbone.history.navigate("", true);
+                window.Sidebar.destroyView(); // FIXME: This is a hack.
             })
             .error(function(){
                 console.log("Failed to log out.");

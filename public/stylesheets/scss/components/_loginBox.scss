@@ -1,0 +1,52 @@
+#loginBoxWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed; 
+  right: 0; 
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto; 
+  height: auto; 
+  z-index: 20;
+}
+
+#loginBox {
+  background-color: white;
+  width: 500px;
+  height: 350px;
+  @extend .sh3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+#loginLogo {
+  width: 100%;
+  font-size: 72pt;
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 40px;
+  color: palette(Black, Text);
+}
+
+#loginButton {
+  background-color: palette(Green, $colorIntensity);
+  color: palette(White, Text);
+  border: 0px;
+  border-radius: 3px;
+  width: 100%;
+  display: block;
+  font-size: 14pt;
+  padding: 12px;
+  @extend .sh1;
+
+  &:hover {
+    @extend .sh3;
+    cursor: pointer;
+  } 
+}

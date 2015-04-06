@@ -10,6 +10,8 @@ window.ListingView = Backbone.View.extend({
     		var listingView = this;
 	    	this.model.fetch({
 	    		success: function(listing){
+            console.log("Here are the listings:");
+            console.log(listing.attributes);
 	    			listingView.$el.html(listingView.template(listing.attributes));
 	         		return listingView;
 	    		},

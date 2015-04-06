@@ -1,71 +1,4 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700");
-@import url(collapsedItemListing.css);
-/*provides styling for better presentation for all */
-.sh1, .round-button, #addContainer {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
-
-.sh2, .round-button:hover, #addButton {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
-
-.sh3, #addButton:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
-
-.sh4 {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-
-.sh5 {
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); }
-
-/**
- * google-material-color v1.1.0
- * https://github.com/danlevan/google-material-color
- */
-#sidebar {
-  position: fixed;
-  left: 50px;
-  top: 50px; }
-
-.round-button {
-  display: block;
-  width: 56px;
-  height: 56px;
-  border: 0px;
-  border-radius: 50%;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 25px;
-  margin-bottom: 20px;
-  transition: 0.1s ease-in-out; }
-
-.round-button:hover {
-  -webkit-transform: rotate(10deg);
-  transform: rotate(10deg);
-  cursor: pointer; }
-
-#homeButton {
-  background: #1976D2; }
-
-#accountButton {
-  background: #F57C00; }
-
-#freeButton {
-  background: #388E3C; }
-
-#notificationsButton {
-  background: #7B1FA2; }
-
-#logoutButton {
-  background: #303F9F; }
-
-#addButton {
-  background: #D32F2F;
-  position: fixed;
-  right: 25px;
-  bottom: 25px;
-  margin-bottom: 0px; }
-
 .dropzone .dz-preview .dz-details .dz-size span, .dropzone .dz-preview .dz-details .dz-filename span {
   background-color: rgba(255, 255, 255, 0.4);
   padding: 0 0.4em; }
@@ -350,6 +283,26 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
+.sh1, .round-button, #collapsedItemView, #addContainer {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+
+.sh2, .round-button:hover, #addButton {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+
+.sh3, #addButton:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
+
+.sh4 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+
+.sh5 {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); }
+
+/**
+ * google-material-color v1.1.0
+ * https://github.com/danlevan/google-material-color
+ */
 * {
   font-family: 'Lato', sans-serif; }
 
@@ -357,7 +310,8 @@ html, body, #PageContainer {
   margin: auto;
   margin-top: 0px;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  color: black; }
 
 body {
   background-color: #ececec;
@@ -385,138 +339,86 @@ a:link {
 a:visited {
   text-decoration: none; }
 a:hover {
-  color: #FFFFFF;
   background-color: #B6C4F0;
   text-decoration: none; }
 a:active {
   text-decoration: underline; }
 
-#listtitles {
-  color: #00248F;
-  margin-left: 350px;
-  font-size: 20px; }
-
-#buttons {
-  padding: 20px; }
-
-#Homebutton {
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none; }
-
-#Homebutton:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none; }
-
-#Createbutton {
-  margin-right: 200px;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none; }
-
-#Createbutton:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none; }
-
-#submit {
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
+.round-button {
+  display: block;
+  width: 56px;
+  height: 56px;
+  border: 0px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
   text-decoration: none;
-  float: left; }
-  #submit:hover {
-    background: #3cb0fd;
-    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  font-size: 25px;
+  margin-bottom: 20px;
+  transition: 0.1s ease-in-out; }
+
+.round-button:hover {
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+  cursor: pointer; }
+
+#homeButton {
+  background: #1976D2; }
+
+#accountButton {
+  background: #F57C00; }
+
+#freeButton {
+  background: #388E3C; }
+
+#notificationsButton {
+  background: #7B1FA2; }
+
+#logoutButton {
+  background: #303F9F; }
+
+#addButton {
+  background: #D32F2F;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  margin-bottom: 0px; }
+
+.itemHighlight {
+  text-decoration: none; }
+  .itemHighlight:hover {
     text-decoration: none; }
 
-#addtitle {
-  color: #404040;
-  font-size: 30px;
-  margin-left: 20px;
-  float: left; }
+#collapsedItemView {
+  background-color: white;
+  position: relative;
+  height: 300px;
+  margin-bottom: 20px; }
 
-#addcontent {
-  color: #404040;
-  font-size: 30px;
-  margin-left: 20px;
-  float: left; }
+#text_area {
+  position: relative;
+  margin-left: 350px;
+  margin-top: 40px; }
 
-#contentArea {
-  padding: 20px;
-  font-size: 20px; }
+#title {
+  font-size: 50px;
+  margin: 0; }
 
-/*css for delete and edit buttons*/
-.delete, .edit {
-  background-image: -webkit-linear-gradient(top, #f73c2e, #f73c2e);
-  background-image: -moz-linear-gradient(top, #f73c2e, #f73c2e);
-  background-image: -ms-linear-gradient(top, #f73c2e, #f73c2e);
-  background-image: -o-linear-gradient(top, #f73c2e, #f73c2e);
-  background-image: linear-gradient(to bottom, #f73c2e, #f73c2e);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  float: left;
-  margin-right: 5px; }
+#image_area {
+  width: 300px;
+  overflow: hidden;
+  position: relative;
+  display: block; }
 
-.delete:hover, .edit:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #ff887f, #ff887f);
-  background-image: -moz-linear-gradient(top, #ff887f, #ff887f);
-  background-image: -ms-linear-gradient(top, #ff887f, #ff887f);
-  background-image: -o-linear-gradient(top, #ff887f, #ff887f);
-  background-image: linear-gradient(to bottom, #ff887f, #ff887f);
-  text-decoration: none; }
-
-#editPage {
-  font-size: 20px;
-  padding: 20px; }
+#picture {
+  position: absolute;
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%; }
 
 .add {
   width: 100%;
@@ -577,4 +479,7 @@ a:active {
   width: 100%;
   height: 100%; }
 
-/*# sourceMappingURL=home.css.map */
+#sidebar {
+  position: fixed;
+  left: 50px;
+  top: 50px; }

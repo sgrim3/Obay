@@ -1,0 +1,43 @@
+.itemHighlight {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+#collapsedItemView {
+  background-color: white;
+  position: relative;
+  height: 300px;
+  margin-bottom: 20px;
+  @extend .sh1;
+}
+
+#text_area {
+  position: relative;
+  margin-left: 350px;
+  margin-top: 40px;
+}
+
+#title {
+  font-size: 50px;
+  margin: 0;
+}
+
+#image_area {
+  width: 300px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+#picture {
+  position: absolute;
+  left: -100%;
+  right: -100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  min-height: 100%;
+  min-width: 100%;
+}

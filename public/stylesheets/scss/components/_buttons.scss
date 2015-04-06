@@ -1,13 +1,5 @@
-@import "shadows.scss";
-@import "palette";
-
-#sidebar {
-    position: fixed;
-    left: 50px;
-    top: 50px;
-}
-
 $buttonSize: 56px;
+$colorIntensity: 700;
 
 .round-button {
     display:block;
@@ -30,8 +22,6 @@ $buttonSize: 56px;
     cursor: pointer;
     @extend .sh2;
 }
-
-$colorIntensity: 700;
 
 #homeButton {
     background: palette(Blue, $colorIntensity);

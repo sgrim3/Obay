@@ -7,6 +7,7 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 
 //get feed (which only includes open listings) sorted by time
 exports.getFeed = function(req, res) {
+    console.log('getFeed called!');
     Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
         if (err) {
             console.log ("Could not search Listings!");
@@ -14,8 +15,8 @@ exports.getFeed = function(req, res) {
         }
         else {
             //only return open listings
-            listings = listings.filter(function(item){
-                return item.item_open;
+            listings = listings.filter(function(listing){
+                return listing.listing_open;
             });
             res.send(listings);	
         }

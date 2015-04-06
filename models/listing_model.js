@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var listingSchema = mongoose.Schema({
-	item_name: String,
-    item_description: String, 
-    item_image: String,
-    item_creator: String,
-    item_timeCreated: Number,
-    item_open: Boolean,
-    item_price: Number
+	listing_name: String,
+    listing_description: String, 
+    listing_image: String,
+    listing_creator: String,
+    listing_timeCreated: Number,
+    listing_open: Boolean,
+    listing_price: Number
 });
 
 module.exports.listing = mongoose.model('listing',listingSchema);

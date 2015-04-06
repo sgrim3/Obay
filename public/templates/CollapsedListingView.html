@@ -1,15 +1,16 @@
-THIS IS A COLLAPSED LISTING VIEW!
-<div id="collapsedListingView" class="sh2">
+<a class="listingHighlight" href="#listing/<%= _id %>">
+    <div id="collapsedListingView">
 
-	<div id="image_area">
-		<img id="picture" src="<%= item_image %>">
-	</div>
+        <!-- <button type="button" id= "watch">Watch</button> -->
+        <div id="image_area">
+            <img id="picture" src="<%= listing_image %>">
+        </div>
 
-	<div id="text_area">
-		<p id="title"> <%= item_name %> </p>
-		<p id="description"> <%= item_description %> </p>
+        <div id="text_area">
+            <p id="title"> <%= listing_name %> </p>
+            <p id="description"> <%= listing_description %> </p>
 
-		<p id="price">Price: $<%= item_price %></p>
-	</div>
-	<a href="#item/<%= _id %>">link to individual listing view</a>
-</div>
+            <p id="price">Price: $<%= listing_price %></p>
+        </div>
+    </div>
+</a>

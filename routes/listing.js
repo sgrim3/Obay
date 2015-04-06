@@ -11,13 +11,13 @@ var exports = {};
 exports.postListing = function (req, res) {
     var onValidListing = function(){
         var newListing = new Listing({
-            item_name: req.body.item_name,
-            item_description: req.body.item_description,
-            item_image: req.body.item_image,
-            item_creator: req.session.user.userId,
-            item_timeCreated: Date.now(),
-            item_open: true,
-            item_price: parseFloat(req.body.item_price.replace(/,/g, ''))
+            listing_name: req.body.listing_name,
+            listing_description: req.body.listing_description,
+            listing_image: req.body.listing_image,
+            listing_creator: req.session.user.userId,
+            listing_time_created: Date.now(),
+            listing_open: true,
+            listing_price: parseFloat(req.body.listing_price.replace(/,/g, ''))
         });
         // Save new listing to database
         newListing.save(function(err){
@@ -34,23 +34,17 @@ exports.postListing = function (req, res) {
 
 
 exports.getListing = function(req, res) {
-    var onSuccess = function(){
-        var id=req.params.id;
-        Listing.findOne({_id:id}).exec(function (err, item) {
-            if (err) {
-                console.log ("Could not search Listings!");
-                res.status(500).send("Could not search Listings!");
-            }
-            else {
-                res.send(item); 
-                //console.log('found item' + id);
-            }
-        });
-    };
-    var onError = function(){
-        res.status(401).send('Log in to OlinApps to access this functionality!');
-    };
-    ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
+    var id=req.params.id;
+    Listing.findOne({_id:id}).exec(function (err, item) {
+        if (err) {
+            console.log ("Could not search Listings!");
+            res.status(500).send("Could not search Listings!");
+        }
+        else {
+            res.send(item); 
+            //console.log('found item' + id);
+        }
+    });
 }
 
 

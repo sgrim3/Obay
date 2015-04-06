@@ -1,5 +1,6 @@
 * {
   font-family: 'Lato', sans-serif;
+  transition: 0.1s ease-in-out;
 }
 
 html, body, #PageContainer {
@@ -15,6 +16,10 @@ body {
   overflow-y: scroll;
   max-width: 900px;
   display: flex;
+}
+
+p {
+  margin: 0px;
 }
 
 h1 {
@@ -36,9 +41,10 @@ h3 {
 }
 
 a {
+  text-decoration: none;
   &:link {text-decoration: none;}
   &:visited {text-decoration: none;}
-  &:hover { background-color: #B6C4F0;
+  &:hover { background-color: none;
     text-decoration: none;}
-  &:active {text-decoration: underline;}
+  &:active {text-decoration: none;}
 }

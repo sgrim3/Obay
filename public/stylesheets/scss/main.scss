@@ -5,6 +5,7 @@
 @import "vendors/palette";
 
 // Helpers: Stuff that other stylesheets would find useful.
+@import "helpers/variables";
 
 // Base: The foundation everything should build off of.
 @import "base/base";
@@ -16,5 +17,6 @@
 
 // Layouts: Giant pieces of the website.
 @import "layouts/sidebar";
+@import "layouts/pageBody";
 
 // Pages: Other styles that may apply to specific pages.

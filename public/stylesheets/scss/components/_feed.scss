@@ -62,6 +62,7 @@ $collapsedListingHeight: 150px;
   position: relative;
   display: block;
   float: left;
+  @extend .sh2;
 }
 
 #picture {

@@ -1,43 +1,90 @@
-.itemHighlight {
+.listingHighlight {
   text-decoration: none;
   &:hover {
     text-decoration: none;
   }
 }
 
-#collapsedItemView {
+$collapsedListingHeight: 150px;
+#collapsedListingView {
   background-color: white;
   position: relative;
-  height: 300px;
-  margin-bottom: 20px;
+  height: $collapsedListingHeight;
+  margin-bottom: 10px;
   @extend .sh1;
+
+  &:hover {
+    @extend .sh3;
+  }
 }
 
 #text_area {
   position: relative;
-  margin-left: 350px;
-  margin-top: 40px;
-}
+  margin-left: $collapsedListingHeight + 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%;
+  color: black;
 
-#title {
-  font-size: 50px;
-  margin: 0;
+  #title {
+    font-size: 24pt;
+    margin: 0;
+  }
+
+  #price {
+    position: absolute;
+    background-color: palette(Blue, $colorIntensity);
+    bottom:0px;
+    right: 0px;
+    color: white;
+    font-size: 18pt;
+    padding: 10px;
+    box-sizing: border-box;
+    @extend .sh1;
+  }
+
+  #description {
+    margin-top: 5px;
+    margin-right: 50px;
+    height: 80px;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    text-overflow-multiline:ellipsis;
+    color: palette(Black, Secondary Text);
+    font-size: 12pt;
+  }
 }
 
 #image_area {
-  width: 300px;
+  width: $collapsedListingHeight;
+  height: $collapsedListingHeight;
   overflow: hidden;
   position: relative;
   display: block;
+  float: left;
+  @extend .sh2;
 }
 
 #picture {
+  max-height:100%;
+}
+
+#watchEye {
   position: absolute;
-  left: -100%;
-  right: -100%;
-  top: -100%;
-  bottom: -100%;
-  margin: auto;
-  min-height: 100%;
-  min-width: 100%;
+  right: 5px;
+  top: 5px;
+  background-color: transparent;
+  border: 0px;
+  height: 40px;
+  width: 40px;
+  border-radius: 48px;
+  z-index: 9999999;
+  font-size: 14pt;
+  color: palette(Grey, 500);
+
+  &:hover {
+    background-color: palette(Grey, 300);
+    cursor: pointer;
+    @extend .sh1;
+  }
 }

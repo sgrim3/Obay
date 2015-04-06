@@ -18,6 +18,13 @@ window.AddListingView = Backbone.View.extend({
                     if (this.files[1]!=null){
                         this.removeFile(this.files[0]);
                     }
+                    $('#image_upload').append("<button class='round-button' id='deleteImageButton'><i class='fa fa-times'></i></button>");
+                    var this_dropzone = this;
+                    $('#deleteImageButton').click(function(event) {
+                        this_dropzone.removeAllFiles(true);
+                        $('#deleteImageButton').remove();
+                        $('#image').val('');
+                    });
                 });
                 this.on("success", function(file, response) {
                     $('#image').val(response);
@@ -25,25 +32,31 @@ window.AddListingView = Backbone.View.extend({
             }
         };
         this.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
+        this_dropzone = this.image_upload;
+        console.log($('.dz-image'));
+        $('.dz-image').click(function(event) {
+            console.log('image clicked');
+            this_dropzone.removeAllFiles(true);
+        });
         return this;
     },
 
     onFormSubmit: function(e) {
         e.preventDefault();
         console.log(this.image_upload);
-    	var item_name = $("#name").val();
-    	var item_description = $("#description").val();
-    	var item_image = $("#image").val();
-        var item_price= $("#price").val();
+    	var listing_name = $("#name").val();
+    	var listing_description = $("#description").val();
+    	var listing_image = $("#image").val();
+        var listing_price= $("#price").val();
 
         var new_listing = new Listing(
             {
-                //item_creator and item_timeCreated is set on the server
-                item_name: item_name,
-                item_description: item_description,
-                item_image: item_image,
-                item_open: true,
-                item_price: item_price
+                //listing_creator and listing_time_created is set on the server
+                listing_name: listing_name,
+                listing_description: listing_description,
+                listing_image: listing_image,
+                listing_open: true,
+                listing_price: listing_price
             }
         );
 
@@ -52,10 +65,8 @@ window.AddListingView = Backbone.View.extend({
             success: function(model, response, options) {
                 $('#error_message').text('');
                 //associate server save time and user with the model
-                model.item_timeCreated = response.item_timeCreated;
-                model.item_creator = response.item_creator;
-                console.log(model)
-
+                model.listing_time_created = response.listing_time_created;
+                model.listing_creator = response.listing_creator;
                 Backbone.history.navigate('#home');
                 Backbone.history.loadUrl('#home');
             },

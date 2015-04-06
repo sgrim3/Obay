@@ -5,7 +5,7 @@ var AppRouter = Backbone.Router.extend({
         "home": "home",
         "addListing": "addListing",
         "logout": "logout",
-        "item/:id" : "item",
+        "listing/:id" : "listing",
         '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
@@ -62,11 +62,11 @@ var AppRouter = Backbone.Router.extend({
     },
 
 
-    item: function(id){
+    listing: function(id){
         if (!this.Sidebar){
             this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
         }
-        this.Page = new ItemView({el: $('#PageContainer'), id:id});
+        this.Page = new ListingView({el: $('#PageContainer'), id:id});
     },
 
     login: function(id){
@@ -76,9 +76,6 @@ var AppRouter = Backbone.Router.extend({
             window.location.replace('/#home');
         }
         var onOlinErr = function(){
-            if (!this.Sidebar) {
-                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-            }
             this.Page = new LoginView({el: $('#PageContainer')});
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
@@ -88,7 +85,8 @@ var AppRouter = Backbone.Router.extend({
         console.log("Logging out.");
         $.post('/logout')
             .done(function (){
-                Backbone.history.navigate('', true);
+                Backbone.history.navigate("", true);
+                window.Sidebar.destroyView(); // FIXME: This is a hack.
             })
             .error(function(){
                 console.log("Failed to log out.");
@@ -97,7 +95,7 @@ var AppRouter = Backbone.Router.extend({
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'ItemView'], function() {
+utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'CollapsedListingView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

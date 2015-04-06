@@ -13,6 +13,15 @@ window.SidebarView = Backbone.View.extend({
         return this;
     },
 
+    destroyView: function() {
+        // COMPLETELY UNBIND THE VIEW
+        this.undelegateEvents();
+        this.$el.removeData().unbind(); 
+        // Remove view from DOM
+        this.remove();  
+        Backbone.View.prototype.remove.call(this);
+    },
+
     onClick: function (ev){
       // console.log(ev.currentTarget.id);
       switch(ev.currentTarget.id) {

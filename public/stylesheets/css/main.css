@@ -489,7 +489,7 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   z-index: 20; }
 
 #loginBox {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7);
   width: 500px;
   height: 350px;
   display: flex;

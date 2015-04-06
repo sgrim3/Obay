@@ -42,13 +42,6 @@ window.ItemView = Backbone.View.extend({
 
     		this.item.set({
     			item_open: false
-    			success: function(){
-    				console.log(this.item);
-    			}
-    			error: function(){
-    				console.log('this isnt async breh')
-    			}
-		    	
     		});
 
     		// this.item.save({

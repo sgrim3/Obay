@@ -283,7 +283,7 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, #collapsedItemView, #addContainer {
+.sh1, .round-button, #collapsedListingView, #addContainer {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, #addButton {
@@ -384,12 +384,12 @@ a:active {
   bottom: 25px;
   margin-bottom: 0px; }
 
-.itemHighlight {
+.listingHighlight {
   text-decoration: none; }
-  .itemHighlight:hover {
+  .listingHighlight:hover {
     text-decoration: none; }
 
-#collapsedItemView {
+#collapsedListingView {
   background-color: white;
   position: relative;
   height: 300px;

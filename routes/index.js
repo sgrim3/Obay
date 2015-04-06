@@ -40,30 +40,24 @@ var logout = function(req,res){
 }
 
 var venmoPay = function(req,res){
-    var onVenmoAuth = function(){
-        var post_data = {form:{
-            access_token: req.session.venmo_access_token,
-            email: req.body.email,
-            note: 'Olin Web Club Rox',
-            amount: 0.01
-        }};
-        request.post('https://api.venmo.com/v1/payments', post_data, function(venmo_server_error, response, body){
-            var error = JSON.parse(response.body).error;
-            if (venmo_server_error || error) {
-                if (venmo_server_error) {
-                    res.send({success:false, message:'Venmo had an internal server error!'});
-                } else {
-                    res.send({success:false, message:error.message});
-                }
+    var post_data = {form:{
+        access_token: req.session.venmo_access_token,
+        email: req.body.email,
+        note: 'Olin Web Club Rox',
+        amount: 0.01
+    }};
+    request.post('https://api.venmo.com/v1/payments', post_data, function(venmo_server_error, response, body){
+        var error = JSON.parse(response.body).error;
+        if (venmo_server_error || error) {
+            if (venmo_server_error) {
+                res.send({success:false, message:'Venmo had an internal server error!'});
             } else {
-                res.send({success:true, message:'Transaction made!'});
+                res.send({success:false, message:error.message});
             }
-        });
-    };
-    var onVenmoErr = function(){
-        res.redirect('/#home')
-    };
-    ensureVenmoAuthenticatedServer(req,res,onVenmoAuth,onVenmoErr);
+        } else {
+            res.send({success:true, message:'Transaction made!'});
+        }
+    });
 };
 
 var venmoAuth = function(req,res){

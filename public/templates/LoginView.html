@@ -1,4 +1,21 @@
-<div>LOGIN!</div>
+<!-- <video autoplay loop poster="polina.jpg" id="bgvid"> -->
+<video autoplay loop id="backgroundLoginVideo">
+  <source src="videos/background.mp4" type="video/mp4">
+</video>
 
-<!-- the callback url below should be changed for deployment -->
-<a href="http://www.olinapps.com/external?callback=http://127.0.0.1:3000/olinAppsAuth">Login with Olinapps!</a>
+<div id="blackMask"></div>
+
+<div id="loginBoxWrapper">
+  <div id="loginBox">
+    <!-- Replace with logo. -->
+    <div>
+      <div id="loginLogo">obay</div>
+      <!-- the callback url below should be changed for deployment -->
+      <a href="http://www.olinapps.com/external?callback=http://127.0.0.1:3000/olinAppsAuth">
+        <button id="loginButton">
+          Login with OlinApps!
+        </button>
+      </a>
+    </div>
+  </div>
+</div>

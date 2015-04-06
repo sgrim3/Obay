@@ -1,5 +1,5 @@
 //require my util scripts
-var validate_listings = require('./validateInput.js').validate_listings
+var validate_listing = require('./validateInput.js').validate_listing
 
 var path = require("path");
 var User = require(path.join(__dirname,"../models/user_model")).user;
@@ -8,24 +8,7 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 //exports is the exported module object
 var exports = {};
 
-//gets list of all open listings and sorts by timestamp
-exports.list = function(req, res) {
-    Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
-        if (err) {
-            console.log ("Could not search Listings!");
-            res.status(500).send("Could not search Listings!");
-        }
-        else {
-            //only return open listings
-            listings = listings.filter(function(item){
-                return item.item_open;
-            });
-            res.send(listings);	
-        }
-    });
-};
-
-exports.add = function (req, res) {
+exports.postListing = function (req, res) {
     var onValidListing = function(){
         var newListing = new Listing({
             item_name: req.body.item_name,
@@ -46,11 +29,11 @@ exports.add = function (req, res) {
             res.send(newListing);
         }); 
     };
-    validate_listings(req, res, onValidListing);
+    validate_listing(req, res, onValidListing);
 };
 
 
-exports.item = function(req, res) {
+exports.getListing = function(req, res) {
     var onSuccess = function(){
         var id=req.params.id;
         Listing.findOne({_id:id}).exec(function (err, item) {

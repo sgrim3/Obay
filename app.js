@@ -8,11 +8,12 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 
 //Import routes
-var index = require('./routes/index.js');
-var listings = require ("./routes/listings");
+var index = require('./routes/index');
+var listing = require ("./routes/listing");
+var feed = require ("./routes/feed");
 var email = require('./routes/email');
 var image = require('./routes/image');
-var olinAuth = require('./routes/auth.js');
+var olinAuth = require('./routes/auth');
 var olinAuthMiddleware = olinAuth.olinAuthMiddleware;
 
 var app = express();
@@ -38,8 +39,8 @@ app.post('/olinAppsAuth', index.olinAppsAuth);
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', [olinAuthMiddleware, index.sessionData]);
-app.get('/listings', [olinAuthMiddleware, listings.list]);
-app.get('/item/:id', [olinAuthMiddleware, listings.item]);
+app.get('/feed', [olinAuthMiddleware, feed.getFeed]);
+app.get('/listing/:id', [olinAuthMiddleware, listing.getListing]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.
@@ -48,7 +49,7 @@ app.get('/temporary_email_route', email.sendEmail);
 // POST.
 app.post('/venmoPay', [olinAuthMiddleware, index.venmoPay]);
 app.post('/logout', index.logout);
-app.post('/listing', [olinAuthMiddleware, listings.add]);
+app.post('/listing', [olinAuthMiddleware, listing.postListing]);
 app.post('/image', [olinAuthMiddleware, image.uploadMiddleware, image.uploadImage]);
 
 app.listen(PORT, function(){

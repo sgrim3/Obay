@@ -19,7 +19,7 @@ var is_valid_price = function(val){
     return regex.test(val);
 }
 
-validateInput.validate_listings = function(req, res, callback){
+validateInput.validate_listing = function(req, res, callback){
     //calls callback if listings is validated, otherwise it sends a error code with relevant error messages
     var item_name = req.body.item_name;
     var item_description = req.body.item_description;

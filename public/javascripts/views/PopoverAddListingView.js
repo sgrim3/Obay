@@ -48,8 +48,8 @@ window.PopoverAddListingView = AddListingView.extend({
                 //associate server save time and user with the model
                 model.listing_time_created = response.listing_time_created;
                 model.listing_creator = response.listing_creator;
-                thisView.broadcoastListingAdded(model);
                 thisView.broadcoastExitPopoverAddListing();
+                thisView.broadcoastListingAdded(model);
             },
             error: function(model, response, options) {
                 if (response.status === 401) {

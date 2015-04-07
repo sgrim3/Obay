@@ -64,19 +64,20 @@ window.SidebarView = Backbone.View.extend({
     },
 
     showPopoverAddListing: function(){
-        $('#PageContainer').append("<div class='overlay'></div>");
+        $('#PageContainer').append("<div id='popoverMask'></div>");
         //create mountpoint for the popover
         $('#PageContainer').append("<div id='popoverAddListing'></div>");
         this.popoverAddListing = new PopoverAddListingView({el: $('#popoverAddListing')});
         this.urlBeforePop = Backbone.history.location.href;
-        Backbone.history.navigate('#addListing');
+        //purposely chose to use window.history here instead of backbone.history because backbone.history seemed to be jumping to the top of the page in certain weird cases.
+        window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');
     },
 
     hidePopoverAddListing: function(){
-        $('.overlay').remove();
+        $('#popoverMask').remove();
         this.popoverAddListing.destroyView();
         this.popoverAddListing = null;
-        Backbone.history.navigate(this.urlBeforePop);
+        window.history.pushState({}, '', this.urlBeforePop);
     },
 
 });

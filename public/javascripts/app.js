@@ -123,11 +123,7 @@ for (var i=0; i<scripts.length; i++) {
 }
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-<<<<<<< HEAD
-utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'CollapsedListingView', 'PopoverAddListingView', 'AccountView'], function() {
-=======
 utils.loadTemplate(viewList, function() {
->>>>>>> master
     //the line below creates a global object that views listen to/broadcoast events to.
     Backbone.pubSub = _.extend({}, Backbone.Events);
     app = new AppRouter();

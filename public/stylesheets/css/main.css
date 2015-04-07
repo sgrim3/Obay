@@ -316,9 +316,25 @@ html, body, #PageContainer {
 
 body {
   background-color: #ececec;
-  overflow-y: scroll;
   max-width: 900px;
   display: flex; }
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 10px; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1); }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.7); }
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 0, 0, 0.4); }
 
 p {
   margin: 0px; }
@@ -428,6 +444,9 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   right: 0;
   margin-right: 20px;
   margin-bottom: 20px; }
+
+#feed_view_mount_point {
+  margin-top: 50px; }
 
 .listingHighlight {
   text-decoration: none; }
@@ -620,9 +639,6 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   position: fixed;
   left: 50px;
   top: 50px; }
-
-#PageContainer {
-  margin-top: 50px; }
 
 video#backgroundLoginVideo {
   position: fixed;

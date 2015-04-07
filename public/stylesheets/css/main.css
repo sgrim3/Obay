@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, #collapsedListingView, #text_area #price, #watchEye:hover, #loginButton, #addContainer {
+.sh1, .round-button, #loginButton, #buyButton, #collapsedListingView, #text_area #price, #watchEye:hover, #addContainer, #imageDisplay {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, #addButton, #image_area {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, #addButton:hover, #collapsedListingView:hover, #loginBox, #loginButton:hover {
+.sh3, #addButton:hover, #loginButton:hover, #buyButton:hover, #collapsedListingView:hover, #loginBox {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -409,6 +409,26 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   #deleteImageButton .fa-times {
     cursor: pointer; }
 
+#loginButton, #buyButton {
+  background-color: #388E3C;
+  color: #ffffff;
+  border: 0px;
+  border-radius: 3px;
+  width: 100%;
+  display: block;
+  font-size: 14pt;
+  padding: 12px; }
+  #loginButton:hover, #buyButton:hover {
+    cursor: pointer; }
+
+#buyButton {
+  position: absolute;
+  width: auto;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-bottom: 20px; }
+
 .listingHighlight {
   text-decoration: none; }
   .listingHighlight:hover {
@@ -505,18 +525,6 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   margin-bottom: 40px;
   color: rgba(0, 0, 0, 0.87); }
 
-#loginButton {
-  background-color: #388E3C;
-  color: #ffffff;
-  border: 0px;
-  border-radius: 3px;
-  width: 100%;
-  display: block;
-  font-size: 14pt;
-  padding: 12px; }
-  #loginButton:hover {
-    cursor: pointer; }
-
 .add {
   width: 100%;
   height: 100%;
@@ -576,6 +584,35 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
 .dz-preview, .dz-processing, .dz-image-preview, .dz-success, .dz-complete, .dz-image {
   width: 100%;
   height: 100%; }
+
+#imageDisplay {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  overflow: hidden; }
+
+#imageDisplay img {
+  display: block;
+  max-height: 100%; }
+
+#textDisplay {
+  margin-left: 20px; }
+  #textDisplay #name {
+    font-size: 32pt; }
+  #textDisplay #creator {
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: 5px; }
+  #textDisplay #price {
+    margin-bottom: 10px;
+    font-size: 18pt;
+    display: inline-block;
+    color: white;
+    background-color: #D32F2F;
+    padding: 5px;
+    border-radius: 3px; }
+  #textDisplay #description {
+    color: rgba(0, 0, 0, 0.87); }
 
 #sidebar {
   position: fixed;

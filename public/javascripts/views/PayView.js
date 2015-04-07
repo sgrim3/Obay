@@ -1,10 +1,9 @@
-window.PayView = PayView.extend({
+window.PayView = Backbone.View.extend({
   initialize:function () {
     this.render();
   },
 
   render: function (){
+  },
 
-
-  }
 });

@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         "": "login",
         "home": "home",
+        "account": "account",
         "addListing": "addListing",
         "logout": "logout",
         "listing/:id" : "listing",
@@ -11,6 +12,10 @@ var AppRouter = Backbone.Router.extend({
     },
 
     initialize: function () {
+    },
+
+    account: function(){
+        this.Page = new AccountView({el: $('#PageContainer')});
     },
 
     notFound: function(){

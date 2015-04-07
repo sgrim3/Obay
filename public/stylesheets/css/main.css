@@ -597,6 +597,7 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   max-height: 100%; }
 
 #textDisplay {
+  flex: 1;
   margin-left: 20px; }
   #textDisplay #name {
     font-size: 32pt; }
@@ -612,6 +613,7 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
     padding: 5px;
     border-radius: 3px; }
   #textDisplay #description {
+    margin-right: 50px;
     color: rgba(0, 0, 0, 0.87); }
 
 #sidebar {

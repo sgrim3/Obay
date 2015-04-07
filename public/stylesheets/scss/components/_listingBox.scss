@@ -14,6 +14,7 @@
 }
 
 #textDisplay {
+  flex: 1;
   margin-left: 20px;
 
 
@@ -38,6 +39,7 @@
   }
 
   #description {
+    margin-right: 50px;
     color: palette(Black, Text);
   }
 

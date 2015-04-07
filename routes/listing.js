@@ -35,6 +35,7 @@ exports.postListing = function (req, res) {
 
 exports.getListing = function(req, res) {
     var id=req.params.id;
+
     Listing.findOne({_id:id}).exec(function (err, item) {
         if (err) {
             console.log ("Could not search Listings!");
@@ -45,6 +46,31 @@ exports.getListing = function(req, res) {
             //console.log('found item' + id);
         }
     });
+}
+
+exports.updateListing = function(req,res){
+    var id=req.params.id;
+
+    var listing_open = req.body.listing_open;
+
+    //check that listing_open is not undefined
+    //need to come back to this if statements so it's not so dumb
+    if(listing_open==false){
+        //handle buy sell
+        Listing.findByIdAndUpdate(id, {$set:{ listing_open:listing_open }}, 
+            function (err, listing) {
+            if (err){
+                return handleError(err);
+            }
+            res.send(listing);
+        });
+        //i'll come back and make this more robust. 
+        //and watch for users
+    }
+    else{
+        //here's handle edits!!
+        //check for creatorname and session and authenticate
+    }
 }
 
 

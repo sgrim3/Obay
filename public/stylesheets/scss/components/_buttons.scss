@@ -70,3 +70,30 @@ $colorIntensity: 700;
         cursor: pointer;
     }
 }
+
+#loginButton {
+  background-color: palette(Green, $colorIntensity);
+  color: palette(White, Text);
+  border: 0px;
+  border-radius: 3px;
+  width: 100%;
+  display: block;
+  font-size: 14pt;
+  padding: 12px;
+  @extend .sh1;
+
+  &:hover {
+    @extend .sh3;
+    cursor: pointer;
+  } 
+}
+
+#buyButton {
+    @extend #loginButton;
+    position: absolute;
+    width: auto;
+    bottom: 0;
+    right: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}

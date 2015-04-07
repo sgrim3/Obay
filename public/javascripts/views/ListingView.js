@@ -1,7 +1,7 @@
 window.ListingView = Backbone.View.extend({
 
 	events: {		
-	    'click .buyButton': 'buyItem',		
+	    'click #buyButton': 'buyItem',		
 	},
 
 	initialize:function (options) {

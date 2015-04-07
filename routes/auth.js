@@ -1,5 +1,25 @@
 var request = require("request");
 
+var olinAuthMiddleware = function(req,res,next){
+    request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
+        function(olin_apps_server_error, response, body) {
+            var error = JSON.parse(body).error;
+            if (olin_apps_server_error || error) {
+                res.status(401).send('Log in to OlinApps to access this functionality!');
+            } else {
+                //check that the userid matches the userid associated w/ the session token, to stop authenticated people from editing their cookies to appear to be other users
+                var claimedId = req.session.user.userId;
+                var sessionAssociatedId = JSON.parse(body).user.id;
+                if (claimedId === sessionAssociatedId){
+                    next();
+                } else {
+                    res.status(401).send('Log in to OlinApps to access this functionality!');
+                }
+            }
+        }
+    );
+}
+
 var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_callback){
     //NOT RESTFUL, meant for on server authentication
     request('http://www.olinapps.com/api/me?sessionid='+req.session.olinAppsSessionId,
@@ -43,5 +63,6 @@ var ensureVenmoAuthenticatedServer = function(req,res,success_callback,error_cal
     ensureOlinAuthenticatedServer(req,res,onOlinAppSuccess,onOlinAppError);
 }
 
+module.exports.olinAuthMiddleware = olinAuthMiddleware;
 module.exports.ensureOlinAuthenticatedServer = ensureOlinAuthenticatedServer;
 module.exports.ensureVenmoAuthenticatedServer = ensureVenmoAuthenticatedServer;

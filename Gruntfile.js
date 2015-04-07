@@ -24,21 +24,21 @@ module.exports = function (grunt){
 
     sass: {
       options: {
-        sourceMap: true
+        sourceMap: false
       },
       dist: {
         files: [{
             expand: true,
-            cwd: "public/stylesheets/",
-            src: ["**/*.scss"],
-            dest: "public/stylesheets/",
+            cwd: "public/stylesheets/scss",
+            src: "main.scss",
+            dest: "public/stylesheets/css",
             ext: ".css"
-        }]
+        }],
       }
     },
 
     watch: {
-      app: {
+      sass: {
         files: '**/*.scss',
         tasks: ["sass"]
       }

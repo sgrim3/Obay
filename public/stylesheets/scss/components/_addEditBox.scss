@@ -1,0 +1,78 @@
+.add {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+$addContainerPadding: 40px;
+#addContainer {
+  background-color: white;
+  width: 100%;
+  padding: $addContainerPadding;
+  @extend .sh1;
+  display: flex;
+  position: relative;
+}
+
+#exitButton {
+  position: absolute;
+  right: -0px -$buttonSize/2;
+  top: -0px -$buttonSize/2;
+  margin-bottom: 0px; 
+  background: palette(Red, $colorIntensity);
+}
+
+#image_upload {
+  height: 300px;
+  width: 300px;
+  order: 0;
+  padding: 0px;
+  position: relative;
+}
+
+#addForm {
+  order: 1;
+  margin-left: 20px;
+  position: relative;
+  flex: 1;
+  #addListingImage, #addListingName, #addListingDescription, #addListingPrice{
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  #addListingName {
+    font-size: 24pt;
+  }
+
+  #addListingDescription {
+    height: 100px;
+  }
+
+  #addListingPrice {
+    font-size: 18pt;
+  }
+
+  #postButton {
+    position: absolute;
+    right: -$addContainerPadding - $buttonSize/2;
+    bottom: -$addContainerPadding - $buttonSize/2;
+    margin-bottom: 0px; 
+    background: palette(Green, $colorIntensity);
+  }
+}
+
+// Dropzone.
+.dropzone {
+  display: flex;
+  align-items: center;
+}
+
+.dz-preview, .dz-processing, .dz-image-preview, .dz-success, .dz-complete, .dz-image {
+  width: 100%;
+  height: 100%;
+}

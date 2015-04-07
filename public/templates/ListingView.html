@@ -1,14 +1,22 @@
-<div id="collapsedItemView" >
+<div class='add'>
+  <div id="addContainer">
+    <div id="imageDisplay">
+      <!-- <div id="im" style="background-image: url('<%= listing_image %>')"></div> -->
+      <img src="<%= listing_image %>"></img>
+    </div>
 
-	<!-- <button type="button" id= "watch">Watch</button> -->
-	
-	<img src="<%= item_image %>">
+    <div id="textDisplay">
+      <div id="name"><%= listing_name %></div>
+      <div id="creator"><%= listing_creator %></div>
+      <div id="price">$ <%= listing_price %></div>
+      <div id="description"><%= listing_description %></div>
+      <button id="buyButton">Buy</button>
+    </div>
 
-	<h3> <%= item_name %> </h3>
+    <a href="/#home">
+      <button class="round-button" id="exitButton"><i class="fa fa-times"></i></button>
+    </a>
 
-	<p> <%= item_description %> </p>
-
-	<p id="price">Price: $<%= item_price %></p>
-	<a href="#item/<%= _id %>">link to indvidual item view</a>
-
+  </div>
 </div>
+

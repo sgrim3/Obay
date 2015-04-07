@@ -1,0 +1,16 @@
+<a class="listingHighlight" href="#listing/<%= _id %>">
+    <div id="collapsedListingView">
+
+        <button type="button" id= "watchEye"><i class="fa fa-bookmark-o"></i></button>
+        <div id="image_area">
+            <img id="picture" src="<%= listing_thumbnail %>">
+        </div>
+
+        <div id="text_area">
+            <p id="title"> <%= listing_name %> </p>
+            <p id="description"> <%= listing_description %> </p>
+
+            <p id="price"><b>$ <%= listing_price %></b></p>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,46 @@
+#imageDisplay {
+  width:300px;
+  height:300px;    
+  overflow:hidden;
+  position: relative;
+  overflow: hidden;
+
+  @extend .sh1;
+}
+
+#imageDisplay img {
+    display: block;
+    max-height: 100%;
+}
+
+#textDisplay {
+  flex: 1;
+  margin-left: 20px;
+
+
+  #name {
+    font-size: 32pt;
+  }
+  
+  #creator {
+    color: palette(Black, Secondary Text);
+    margin-bottom: 5px;
+  }
+
+  #price {
+    margin-bottom: 10px;
+    font-size: 18pt;
+    // float: left;
+    display: inline-block;
+    color: white;
+    background-color: palette(Red, $colorIntensity);
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+  #description {
+    margin-right: 50px;
+    color: palette(Black, Text);
+  }
+
+}

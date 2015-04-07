@@ -38,22 +38,22 @@ $addContainerPadding: 40px;
   margin-left: 20px;
   position: relative;
   flex: 1;
-  #image, #name, #description, #price{
+  #addListingImage, #addListingName, #addListingDescription, #addListingPrice{
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 10px;
     padding: 5px;
   }
 
-  #name {
+  #addListingName {
     font-size: 24pt;
   }
 
-  #description {
+  #addListingDescription {
     height: 100px;
   }
 
-  #price {
+  #addListingPrice {
     font-size: 18pt;
   }
 

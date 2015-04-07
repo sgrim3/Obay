@@ -33,20 +33,3 @@
   margin-bottom: 40px;
   color: palette(Black, Text);
 }
-
-#loginButton {
-  background-color: palette(Green, $colorIntensity);
-  color: palette(White, Text);
-  border: 0px;
-  border-radius: 3px;
-  width: 100%;
-  display: block;
-  font-size: 14pt;
-  padding: 12px;
-  @extend .sh1;
-
-  &:hover {
-    @extend .sh3;
-    cursor: pointer;
-  } 
-}

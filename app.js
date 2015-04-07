@@ -41,6 +41,7 @@ app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', [olinAuthMiddleware, index.sessionData]);
 app.get('/feed', [olinAuthMiddleware, feed.getFeed]);
 app.get('/listing/:id', [olinAuthMiddleware, listing.getListing]);
+app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.

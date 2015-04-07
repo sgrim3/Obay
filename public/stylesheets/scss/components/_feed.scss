@@ -1,3 +1,7 @@
+#feed_view_mount_point {
+  margin-top: $sidebarSpacing;
+}
+
 .listingHighlight {
   text-decoration: none;
   &:hover {
@@ -78,7 +82,7 @@ $collapsedListingHeight: 150px;
   height: 40px;
   width: 40px;
   border-radius: 48px;
-  z-index: 9999999;
+  z-index: 99;
   font-size: 14pt;
   color: palette(Grey, 500);
 
@@ -87,4 +91,17 @@ $collapsedListingHeight: 150px;
     cursor: pointer;
     @extend .sh1;
   }
+}
+
+#popoverMask {
+  background-color: rgba(0,0,0,0.9);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }

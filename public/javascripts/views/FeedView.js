@@ -28,6 +28,7 @@ var FeedView = Backbone.View.extend({
     },
 
     addListingView: function(model){
+        console.log("hdz FeedView addListingView");
         var collapsedListingView = new CollapsedListingView({model: model});
         this.collection.add(collapsedListingView);
         this.$el.prepend(collapsedListingView.$el); 

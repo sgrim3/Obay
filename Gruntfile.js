@@ -10,6 +10,23 @@ module.exports = function (grunt){
       }
     },
 
+    includeSource: {
+      options: {
+        basePath: 'public/',
+        // baseUrl: 'public/'
+      },
+      templates: {
+        html: {
+          js: '<script src="{filePath}"></script>'
+        },
+      },
+      myTarget: {
+        files: {
+          'public/index.html': 'public/index.tpl.html'
+        }
+      }
+    },
+
     nodemon: {
       dev: {
         script: 'app.js',
@@ -41,11 +58,15 @@ module.exports = function (grunt){
       sass: {
         files: '**/*.scss',
         tasks: ["sass"]
+      },
+      viewFiles: {
+        files: ['**/*.js', 'public/index.tpl.html'],
+        tasks: ["includeSource"]  
       }
     }
-
   });
 
+  grunt.loadNpmTasks('grunt-include-source');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-sass');

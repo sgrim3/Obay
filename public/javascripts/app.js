@@ -6,6 +6,7 @@ var AppRouter = Backbone.Router.extend({
         "addListing": "addListing",
         "logout": "logout",
         "listing/:id" : "listing",
+        "temporaryPayRoute": "pay",
         '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
@@ -70,6 +71,14 @@ var AppRouter = Backbone.Router.extend({
         this.Page = new ListingView({el: $('#PageContainer'), id:id});
     },
 
+    pay: function (id){
+        // if (!this.Sidebar){
+        //     this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+        // }
+        //console.log(ListingView);
+        // this.Page = new PayView({el: $('#PageContainer'), id:id});
+    },
+
     login: function(id){
 
         var onOlinAuth = function(){
@@ -95,8 +104,21 @@ var AppRouter = Backbone.Router.extend({
     },
 });
 
+// Find all the views that we have.
+var scripts = document.getElementsByTagName("script");
+var viewList = [];
+for (var i=0; i<scripts.length; i++) {
+    if (scripts[i].src && (scripts[i].src.indexOf("views") > -1)) {
+
+        // Janky parsing for all the views that we own.
+        var currentView = scripts[i].src.split('/').pop(-1);
+        currentView = currentView.split('.')[0];
+        viewList.push(currentView);
+    }
+}
+
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'CollapsedListingView', 'PopoverAddListingView'], function() {
+utils.loadTemplate(viewList, function() {
     //the line below creates a global object that views listen to/broadcoast events to.
     Backbone.pubSub = _.extend({}, Backbone.Events);
     app = new AppRouter();

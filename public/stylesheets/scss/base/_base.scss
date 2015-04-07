@@ -13,9 +13,36 @@ html, body, #PageContainer {
 
 body {
   background-color: #ececec;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   max-width: 900px;
   display: flex;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    // -webkit-border-radius: 10px;
+    // border-radius: 10px;
+    background: rgba(0,0,0,0); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    // -webkit-border-radius: 10px;
+    // border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.1); 
+    &:hover {
+      background: rgba(0,0,0,0.7);
+    }
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0,0,0,0.1); 
 }
 
 p {

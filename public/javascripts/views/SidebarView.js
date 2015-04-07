@@ -5,6 +5,8 @@ window.SidebarView = Backbone.View.extend({
     },
 
     initialize:function () {
+        //toss in global event listeners
+        this.listenTo(Backbone.pubSub, 'exitPopoverAddListing', this.hidePopoverAddListing);
         this.render();
     },
 
@@ -44,11 +46,37 @@ window.SidebarView = Backbone.View.extend({
           break;
         case "addButton":
           // FIXME: This is such a messy way of doing things. Find a better way.
-          Backbone.history.navigate('#addListing');
-          Backbone.history.loadUrl('#addListing');
+          //Backbone.history.navigate('#addListing');
+          //Backbone.history.loadUrl('#addListing');
+          this.togglePopoverAddListing();
           break;
         default:
           return;
       }
     },
+
+    togglePopoverAddListing: function(){
+        if (this.popoverAddListing) {
+            this.hidePopoverAddListing();
+        } else {
+            this.showPopoverAddListing();
+        }
+    },
+
+    showPopoverAddListing: function(){
+        $('#PageContainer').append("<div class='overlay'></div>");
+        //create mountpoint for the popover
+        $('#PageContainer').append("<div id='popoverAddListing'></div>");
+        this.popoverAddListing = new PopoverAddListingView({el: $('#popoverAddListing')});
+        this.urlBeforePop = Backbone.history.location.href;
+        Backbone.history.navigate('#addListing');
+    },
+
+    hidePopoverAddListing: function(){
+        $('.overlay').remove();
+        this.popoverAddListing.destroyView();
+        this.popoverAddListing = null;
+        Backbone.history.navigate(this.urlBeforePop);
+    },
+
 });

@@ -1,7 +1,7 @@
 window.AddListingView = Backbone.View.extend({
 
 	events: {
-	    'submit': 'onFormSubmit',
+	    'click #postButton': 'postListing',
 	},
 
     initialize:function () {
@@ -33,15 +33,13 @@ window.AddListingView = Backbone.View.extend({
         };
         this.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
         this_dropzone = this.image_upload;
-        console.log($('.dz-image'));
         $('.dz-image').click(function(event) {
-            console.log('image clicked');
             this_dropzone.removeAllFiles(true);
         });
         return this;
     },
 
-    onFormSubmit: function(e) {
+    postListing: function(e) {
         e.preventDefault();
         console.log(this.image_upload);
     	var listing_name = $("#name").val();

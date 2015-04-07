@@ -1,6 +1,7 @@
 var FeedView = Backbone.View.extend({
 
     initialize:function () {
+        this.listenTo(Backbone.pubSub, 'listingAdded', this.addListingView);
         this.collection = new Feed();
     },
 
@@ -24,5 +25,12 @@ var FeedView = Backbone.View.extend({
                 console.log('error!');
             }
         });
-    }
+    },
+
+    addListingView: function(model){
+        var collapsedListingView = new CollapsedListingView({model: model});
+        this.collection.add(collapsedListingView);
+        this.$el.prepend(collapsedListingView.$el); 
+        collapsedListingView.render(); 
+    },
 });

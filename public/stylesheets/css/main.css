@@ -551,16 +551,16 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   margin-left: 20px;
   position: relative;
   flex: 1; }
-  #addForm #image, #addForm #name, #addForm #description, #addForm #price {
+  #addForm #addListingImage, #addForm #addListingName, #addForm #addListingDescription, #addForm #addListingPrice {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 10px;
     padding: 5px; }
-  #addForm #name {
+  #addForm #addListingName {
     font-size: 24pt; }
-  #addForm #description {
+  #addForm #addListingDescription {
     height: 100px; }
-  #addForm #price {
+  #addForm #addListingPrice {
     font-size: 18pt; }
   #addForm #postButton {
     position: absolute;

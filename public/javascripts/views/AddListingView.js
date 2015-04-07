@@ -23,11 +23,11 @@ window.AddListingView = Backbone.View.extend({
                     $('#deleteImageButton').click(function(event) {
                         this_dropzone.removeAllFiles(true);
                         $('#deleteImageButton').remove();
-                        $('#image').val('');
+                        $('#addListingImage').val('');
                     });
                 });
                 this.on("success", function(file, response) {
-                    $('#image').val(response);
+                    $('#addListingImage').val(response);
                 });
             }
         };
@@ -41,11 +41,10 @@ window.AddListingView = Backbone.View.extend({
 
     postListing: function(e) {
         e.preventDefault();
-        console.log(this.image_upload);
-    	var listing_name = $("#name").val();
-    	var listing_description = $("#description").val();
-    	var listing_image = $("#image").val();
-        var listing_price= $("#price").val();
+    	var listing_name = $("#addListingName").val();
+    	var listing_description = $("#addListingDescription").val();
+    	var listing_image = $("#addListingImage").val();
+        var listing_price= $("#addListingPrice").val();
 
         var new_listing = new Listing(
             {

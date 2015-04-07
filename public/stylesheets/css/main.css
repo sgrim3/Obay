@@ -334,7 +334,7 @@ body {
     background: rgba(0, 0, 0, 0.7); }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255, 0, 0, 0.4); }
+  background: rgba(0, 0, 0, 0.1); }
 
 p {
   margin: 0px; }

@@ -1,5 +1,21 @@
-<div id="name">Name: <%= listing_name %><div>
-<div id="description">Description: <%= listing_description %><div>
-<div id="creator">Creator: <%= listing_creator %><div>
-<input>Price</input>
-<button>Buy</button>
+<div class='add'>
+  <div id="addContainer">
+    <div id="imageDisplay">
+      <!-- <div id="im" style="background-image: url('<%= listing_image %>')"></div> -->
+      <img src="<%= listing_image %>"></img>
+    </div>
+
+    <div id="textDisplay">
+      <div id="name"><%= listing_name %></div>
+      <div id="creator"><%= listing_creator %></div>
+      <div id="price">$ <%= listing_price %></div>
+      <div id="description"><%= listing_description %></div>
+      <button id="buyButton">Buy</button>
+    </div>
+
+    <a href="/#home">
+      <button class="round-button" id="exitButton"><i class="fa fa-times"></i></button>
+    </a>
+
+  </div>
+</div>

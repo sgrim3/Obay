@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         "": "login",
         "home": "home",
+        "home/free":"home",
         "account": "account",
         "addListing": "addListing",
         "logout": "logout",
@@ -51,6 +52,20 @@ var AppRouter = Backbone.Router.extend({
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
+    free: function(id) {
+        var onOlinAuth = function(){
+            if (!this.Sidebar) {
+                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+            }
+            this.Page = new FreeHomeView({el: $('#PageContainer')});
+        }
+        var onOlinErr = function(){
+            //redirect to login page
+            window.location.replace('/');
+        }
+        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+
+    },
 
     addListing: function () {
         var onOlinAuth = function(){

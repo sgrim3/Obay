@@ -39,6 +39,7 @@ app.post('/olinAppsAuth', index.olinAppsAuth);
 app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
 app.get('/sessionData', [olinAuthMiddleware, index.sessionData]);
+app.get('/feed/free', [olinAuthMiddleware, feed.getFeed]);
 app.get('/feed', [olinAuthMiddleware, feed.getFeed]);
 app.get('/listing/:id', [olinAuthMiddleware, listing.getListing]);
 app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);

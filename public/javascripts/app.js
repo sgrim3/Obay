@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
     routes: {
         "": "login",
         "home": "home",
+        "account": "account",
         "addListing": "addListing",
         "logout": "logout",
         "listing/:id" : "listing",
@@ -10,6 +11,10 @@ var AppRouter = Backbone.Router.extend({
     },
 
     initialize: function () {
+    },
+
+    account: function(){
+        this.Page = new AccountView({el: $('#PageContainer')});
     },
 
     notFound: function(){
@@ -96,7 +101,7 @@ var AppRouter = Backbone.Router.extend({
 });
 
 //asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'CollapsedListingView', 'PopoverAddListingView'], function() {
+utils.loadTemplate(['HomeView', 'LoginView', 'AddListingView', 'SidebarView','NotFoundView', 'ListingView', 'CollapsedListingView', 'PopoverAddListingView', 'AccountView'], function() {
     //the line below creates a global object that views listen to/broadcoast events to.
     Backbone.pubSub = _.extend({}, Backbone.Events);
     app = new AppRouter();

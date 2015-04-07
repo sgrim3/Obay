@@ -507,12 +507,24 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   height: 40px;
   width: 40px;
   border-radius: 48px;
-  z-index: 9999999;
+  z-index: 99;
   font-size: 14pt;
   color: #9E9E9E; }
   #watchEye:hover {
     background-color: #E0E0E0;
     cursor: pointer; }
+
+#popoverMask {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999; }
 
 #loginBoxWrapper {
   display: flex;
@@ -552,6 +564,7 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   box-sizing: border-box;
   align-items: center; }
 
+/* The element to be centered, can also be of any width and height */
 #addContainer {
   background-color: white;
   width: 100%;

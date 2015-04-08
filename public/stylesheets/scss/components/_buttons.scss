@@ -71,29 +71,48 @@ $colorIntensity: 700;
     }
 }
 
-#loginButton {
-  background-color: palette(Green, $colorIntensity);
-  color: palette(White, Text);
-  border: 0px;
-  border-radius: 3px;
-  width: 100%;
-  display: block;
-  font-size: 14pt;
-  padding: 12px;
-  @extend .sh1;
+// Square buttons.
+%rectangular-button {
+    border: 0px;
+    border-radius: 3px;
+    color: palette(White, Text);
+    display: block;
+    font-size: 14pt;
+    padding: 12px;
+    @extend .sh1;
 
-  &:hover {
-    @extend .sh3;
-    cursor: pointer;
-  } 
+    &:hover {
+      @extend .sh3;
+      cursor: pointer;
+    } 
+}
+
+#loginButton {
+    @extend %rectangular-button;
+    width: 100%;
+    background-color: palette(Green, $colorIntensity);
 }
 
 #buyButton {
-    @extend #loginButton;
+    @extend %rectangular-button;
+    background-color: palette(Green, $colorIntensity);
     position: absolute;
     width: auto;
     bottom: 0;
     right: 0;
     margin-right: 20px;
     margin-bottom: 20px;
+}
+
+button#cashButton {
+    @extend %rectangular-button;
+    background-color: palette(Green, $colorIntensity);
+    display: inline;
+}
+
+button#venmoButton {
+    @extend %rectangular-button;
+    background-color: palette(Blue, $colorIntensity);
+    display: inline;
+    margin-left: 10px;
 }

@@ -1,7 +1,8 @@
 window.ListingView = Backbone.View.extend({
 
 	events: {		
-	    'click #buyButton': 'buyItem',		
+	    'click #buyButton': 'buyItem',
+        'click #exitButton': 'exitItem',      
 	},
 
 	initialize:function (options) {
@@ -60,5 +61,23 @@ window.ListingView = Backbone.View.extend({
     	else{
     		alert("Error buying item. Please try re-logging in and refreshing page.");
     	}
-    }
+    }, 
+
+    exitItem: function (options){
+        // COMPLETELY UNBIND THE VIEW
+        // this.undelegateEvents();
+        // this.$el.removeData().unbind(); 
+        // Remove view from DOM
+        // this.remove();
+        // Backbone.View.prototype.remove.call(this);
+
+        this.unbind(); // Unbind all local event bindings
+
+        // this.remove(); // Remove view from DOM
+     
+        // console.log(this.$el);
+        this.$el.removeData(); // Delete the jQuery wrapped object variable
+        delete this.el; // Delete the variable reference to this node
+         
+    } 
 });

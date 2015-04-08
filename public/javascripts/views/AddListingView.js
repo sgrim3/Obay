@@ -40,6 +40,7 @@ window.AddListingView = Backbone.View.extend({
     },
 
     postListing: function(e) {
+        console.log("dz AddListingView postListing");
         e.preventDefault();
     	var listing_name = $("#addListingName").val();
     	var listing_description = $("#addListingDescription").val();

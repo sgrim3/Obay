@@ -25,7 +25,7 @@ window.SidebarView = Backbone.View.extend({
     },
 
     onClick: function (ev){
-      // console.log(ev.currentTarget.id);
+      console.log("dz SidebarView onClick: " + ev.currentTarget.id);
       switch(ev.currentTarget.id) {
         case "homeButton":
           Backbone.history.navigate('#home');
@@ -51,6 +51,7 @@ window.SidebarView = Backbone.View.extend({
           // FIXME: This is such a messy way of doing things. Find a better way.
           //Backbone.history.navigate('#addListing');
           //Backbone.history.loadUrl('#addListing');
+          console.log("dz case addButton")
           this.togglePopoverAddListing();
           break;
         default:
@@ -62,21 +63,23 @@ window.SidebarView = Backbone.View.extend({
         if (this.popoverAddListing) {
             this.hidePopoverAddListing();
         } else {
+            console.log("dz SidebarView togglePopoverAddListing showPopoverAddListing");
             this.showPopoverAddListing();
         }
     },
 
     showPopoverAddListing: function(){
+        console.log("dz SidebarView showPopoverAddListing");
         $('#PageContainer').append("<div id='popoverMask'></div>");
-        //create mountpoint for the popover
         $('#popoverMask').append("<div id='popoverAddListing'></div>");
         this.popoverAddListing = new PopoverAddListingView({el: $('#popoverAddListing')});
         this.urlBeforePop = Backbone.history.location.href;
-        //purposely chose to use window.history here instead of backbone.history because backbone.history seemed to be jumping to the top of the page in certain weird cases.
+        // Purposefully chose to use window.history here instead of backbone.history because backbone.history seemed to be jumping to the top of the page in certain weird cases.
         window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');
     },
 
     hidePopoverAddListing: function(){
+        console.log("dz SidebarView hidePopoverAddListing");
         $('#popoverMask').remove();
         this.popoverAddListing.destroyView();
         this.popoverAddListing = null;

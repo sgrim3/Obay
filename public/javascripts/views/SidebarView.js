@@ -37,7 +37,8 @@ window.SidebarView = Backbone.View.extend({
           Backbone.history.loadUrl('#account');
           break;
         case "freeButton":
-          console.log("freeButton");
+          Backbone.history.navigate('#home/free');
+          Backbone.history.loadUrl('#home/free');
           break;
         case "notificationsButton":
           console.log("notificationsButton");

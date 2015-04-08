@@ -29,11 +29,6 @@ window.ListingView = Backbone.View.extend({
     },
 
     buyItem: function(options){	
-    	console.log(this);	
-    	// hashurl = window.location.hash
-    	// index=hashurl.indexOf('/');
-    	// var parsed_id = hashurl.substring(index+1);
-
     	if(this.id){	
     		this.model = new Listing({id:this.id});		
     		var listingView = this;		
@@ -53,17 +48,17 @@ window.ListingView = Backbone.View.extend({
     			}		
     		});
 
-			//TEMPORARY: will eventually show success message
-			Backbone.history.navigate('#home');
-        	Backbone.history.loadUrl('#home');
+			//TODO: will eventually show success message
+            // Create a new view.
+            var payView = new PayView({el: $('#buyButton')});
+            $("#buyButton").replaceWith(payView.template());
+
+			// Backbone.history.navigate('#home');
+        	// Backbone.history.loadUrl('#home');
     	}
 
     	else{
-
     		alert("Error buying item. Please try re-logging in and refreshing page.");
-
     	}
-
-    			
     }
 });

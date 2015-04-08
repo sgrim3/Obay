@@ -92,11 +92,11 @@ var AppRouter = Backbone.Router.extend({
     },
 
     pay: function (id){
-        // if (!this.Sidebar){
-        //     this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-        // }
-        //console.log(ListingView);
-        // this.Page = new PayView({el: $('#PageContainer'), id:id});
+        if (!this.Sidebar){
+            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+        }
+        console.log(ListingView);
+        this.Page = new PayView({el: $('#PageContainer'), id:id});
     },
 
     login: function(id){

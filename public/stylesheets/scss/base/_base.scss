@@ -45,26 +45,14 @@ body {
   background: rgba(0,0,0,0.1); 
 }
 
+h1, h2, h3, h4 {
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+
 p {
-  margin: 0px;
-}
-
-h1 {
-    color: #404040;
-    font-size: 40px;
-    margin-top: 0px;
-}
-
-h2 {
-    color: #383838  ;
-    font-size: 30px;
-}
-
-h3 {
-    color: #00248F;
-    margin-left: 20px;
-    font-size: 30px;
-    text-align: center;
+  margin: 0;
 }
 
 a {

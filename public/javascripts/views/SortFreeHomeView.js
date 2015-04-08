@@ -12,7 +12,6 @@ window.SortFreeHomeView = HomeView.extend({
         	feedModel: freeFilter
         });
         
-        this.FeedView.render();
         return this;
     }
 

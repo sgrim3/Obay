@@ -10,7 +10,6 @@ window.HomeView = Backbone.View.extend({
 
 
         this.FeedView = new FeedView({el: $('#feed_view_mount_point')});
-        this.FeedView.render();
         return this;
     }
 

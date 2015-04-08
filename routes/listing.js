@@ -25,8 +25,11 @@ exports.postListing = function (req, res) {
                 console.error('Could not save listing!');
                 res.status(500).send("Could not save listing!");
             }
-            console.log(newListing)
-            res.send(newListing);
+            console.log(newListing);
+            io.sockets.emit("updateFeed", {
+                status:"updated"
+            });
+            res.status(200).json(newListing);
         }); 
     };
     validate_listing(req, res, onValidListing);

@@ -1,9 +1,15 @@
 var FeedView = Backbone.View.extend({
 
-    initialize:function (freeFilter) {
+    initialize:function (data) {
         this.listenTo(Backbone.pubSub, 'listingAdded', this.addListingView);
-        console.log(freeFilter)
-        this.collection = freeFilter;
+        this.collection = new Feed()
+
+        console.log(data);
+        if (data.feedModel) {
+            console.log("into data.feedmodel")
+            this.collection = data.feedModel;
+        }
+
     },
 
     render: function (){

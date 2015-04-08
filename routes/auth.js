@@ -41,6 +41,11 @@ var ensureOlinAuthenticatedServer = function(req,res,success_callback,error_call
     );
 }
 
+// // FIXME: Temporary for dev purposes.
+// var ensureOlinAuthenticatedServer = function (req, res, success_callback, error_callback){
+//     success_callback();
+// }
+
 var ensureVenmoAuthenticatedServer = function(req,res,success_callback,error_callback){
     //NOT RESTFUL, meant for on server authentication. Does OlinApps auth before doing Venmo auth.
     var onOlinAppSuccess = function(){

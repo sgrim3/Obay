@@ -1,5 +1,5 @@
 // Dependencies.
-var express = require('express');
+var express = require('express.io');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -15,8 +15,15 @@ var email = require('./routes/email');
 var image = require('./routes/image');
 var olinAuth = require('./routes/auth');
 var olinAuthMiddleware = olinAuth.olinAuthMiddleware;
+// var olinAuthMiddleware = function (req, res, next) {
+// 	next();
+// };
 
 var app = express();
+
+// Connect socket.io
+app.http().io();
+io = app.io;
 
 //Set up mongolab and PORTS to work locally and on heroku.
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";

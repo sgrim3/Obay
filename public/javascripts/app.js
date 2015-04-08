@@ -12,6 +12,8 @@ var AppRouter = Backbone.Router.extend({
     },
 
     initialize: function () {
+        window.socket = io.connect('http://127.0.0.1:3000');
+        //console.log(socket);
     },
 
     account: function(){
@@ -38,6 +40,7 @@ var AppRouter = Backbone.Router.extend({
     },
 
     home: function(id){
+        //console.log(socket);
         var onOlinAuth = function(){
             if (!this.Sidebar) {
                 this.Sidebar = new SidebarView({el: $('#SidebarContainer')});

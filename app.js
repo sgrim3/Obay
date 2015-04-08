@@ -15,6 +15,9 @@ var email = require('./routes/email');
 var image = require('./routes/image');
 var olinAuth = require('./routes/auth');
 var olinAuthMiddleware = olinAuth.olinAuthMiddleware;
+// var olinAuthMiddleware = function (req, res, next) {
+// 	next();
+// };
 
 var app = express();
 

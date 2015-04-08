@@ -3,6 +3,11 @@ var FeedView = Backbone.View.extend({
     initialize:function () {
         this.listenTo(Backbone.pubSub, 'listingAdded', this.addListingView);
         this.collection = new Feed();
+        var feedView = this;
+        this.render();
+        socket.on("updateFeed", function(data){
+            feedView.render();
+        })
     },
 
     render: function (){

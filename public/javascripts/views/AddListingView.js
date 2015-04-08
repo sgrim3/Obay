@@ -9,6 +9,7 @@ window.AddListingView = Backbone.View.extend({
     },
 
     render:function () {
+        console.log(socket);
         $(this.el).html(this.template());
         var dropzone_options = {
             dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',

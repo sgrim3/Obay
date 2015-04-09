@@ -2,13 +2,22 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-], function ($, _, Backbone) {
-  var PayView = Backbone.View.extend({
-    initialize:function () {
-      this.render();
+
+  'scripts/views/DestroyableView',
+
+  'text!templates/PayView.html'
+], function ($, _, Backbone, DestroyableView, PayTemplate) {
+  var PayView = DestroyableView.extend({
+    tagname: "div",
+    id: "PayView",
+
+    initialize: function (){
+      this.childViews = [];
+      this.template = _.template(PayTemplate);
     },
 
-    render: function (){
+    render: function (info){
+      info.parentDiv.append(this.$el);
       this.$el.html(this.template());
       return this;
     },

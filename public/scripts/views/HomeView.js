@@ -2,24 +2,30 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+
+  'scripts/collections/feed',
+  
+  'scripts/views/DestroyableView',
   'scripts/views/FeedView',
+  
   'text!templates/HomeView.html'
-], function ($, _, Backbone, FeedView, homeTemplate) {
-  var HomeView = Backbone.View.extend({
-    initialize:function () {
-      this.template = _.template(homeTemplate);
-      this.render();
-    },
+], function ($, _, Backbone, Feed, DestroyableView, FeedView, homeTemplate) {
+  var HomeView = DestroyableView.extend({
+      tagname: "div",
+      id: "HomeView",
 
-    render:function() {
-      //must instantiate template before rendering subviews, since they mount onto the template!
-      this.$el.html(this.template());
+      render:function(info) {
+          this.template = _.template(homeTemplate);
+          //must instantiate template before rendering subviews, since they mount onto the template!
+          info.parentDiv.append(this.$el);
+          this.$el.html(this.template());
+          var feedView = new FeedView( {feedModel: new Feed()} );
 
+          this.childViews.push(feedView);
 
-      this.FeedView = new FeedView({el: $('#feed_view_mount_point')});
-      this.FeedView.render();
-      return this;
-    }
+          feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
+          return this;
+      },
   });
 
   return HomeView;

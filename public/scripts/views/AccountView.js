@@ -2,14 +2,20 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-], function ($, _, Backbone) {
-  var AccountView = Backbone.View.extend({
+  'scripts/views/DestroyableView'
+], function ($, _, Backbone, DestroyableView) {
+  var AccountView = DestroyableView.extend({
+
+    tagname: "div",
+    id: "AccountView",
+
     initialize:function () {
       this.render();
     },
-    render:function () {
-      this.$el.html(this.template());
-      return this;
+    render:function (info) {
+        info.parentDiv.append(this.$el);
+        this.$el.html(this.template());
+        return this;
     }
   });
 

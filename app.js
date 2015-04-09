@@ -14,7 +14,10 @@ var feed = require ("./routes/feed");
 var email = require('./routes/email');
 var image = require('./routes/image');
 var olinAuth = require('./routes/auth');
+
+// Line below disabled authentication for testing purposes.
 var olinAuthMiddleware = olinAuth.olinAuthMiddleware;
+// var olinAuthMiddleware = function (req, res, next) { next(); };
 
 var app = express();
 

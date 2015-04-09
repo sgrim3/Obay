@@ -49,20 +49,24 @@ exports.getListing = function(req, res) {
 }
 
 exports.updateListing = function(req,res){
+    console.log('server side buy!');
     var id=req.params.id;
 
     var listing_open = req.body.listing_open;
 
     //check that listing_open is not undefined
     //need to come back to this if statements so it's not so dumb
-    if(listing_open==false){
+    if(listing_open===false){
         //handle buy sell
         Listing.findByIdAndUpdate(id, {$set:{ listing_open:listing_open }}, 
             function (err, listing) {
             if (err){
+                console.log("dz Buy Error");
                 return handleError(err);
             }
-            res.send(listing);
+            console.log("dz Buy Success");
+            console.log(listing);
+            res.status(200).send(listing);
         });
         //i'll come back and make this more robust. 
         //and watch for users

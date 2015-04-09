@@ -3,102 +3,95 @@ define([
   'underscore', 
   'backbone',
 
+  'scripts/views/DestroyableView',
   'scripts/views/PopoverAddListingView',
 
   'text!templates/SidebarView.html',
-], function ($, _, Backbone, PopoverAddListingView, sidebarTemplate) {
-  var SidebarView = Backbone.View.extend({
+], function ($, _, Backbone, DestroyableView, PopoverAddListingView, SidebarTemplate) {
+  var SidebarView = DestroyableView.extend({
+      tagname: "div",
+      id: "SidebarView",
 
-    events: {
-      'click .round-button': 'onClick',
-    },
+      events: {
+        'click .round-button': 'onClick',
+      },
 
-    initialize:function () {
-      //toss in global event listeners
-      console.log(Backbone);
-      this.template = _.template(sidebarTemplate);
-      this.listenTo(Backbone.pubSub, 'exitPopoverAddListing', this.hidePopoverAddListing);
-      console.log("SidebarView initialize");
-      this.render();
-    },
+      initialize:function () {
+          this.childViews = [];
+          //toss in global event listeners
+          this.listenTo(Backbone.pubSub, 'exitPopoverAddListing', this.hidePopoverAddListing);
+          this.template = _.template(SidebarTemplate);
+      },
 
-    render:function () {
-      this.$el.html(this.template());
-      return this;
-    },
+      render:function (info) {
+          info.parentDiv.append(this.$el);
+          this.$el.html(this.template());
+          return this;
+      },
 
-    destroyView: function() {
-      // COMPLETELY UNBIND THE VIEW
-      this.undelegateEvents();
-      this.$el.removeData().unbind(); 
-      // Remove view from DOM
-      this.remove();  
-      Backbone.View.prototype.remove.call(this);
-    },
+      destroyView: function() {
+          // COMPLETELY UNBIND THE VIEW
+          this.undelegateEvents();
+          this.$el.removeData().unbind(); 
+          // Remove view from DOM
+          this.remove();  
+          Backbone.View.prototype.remove.call(this);
+      },
 
-    onClick: function (ev){
-      console.log("dz SidebarView onClick: " + ev.currentTarget.id);
-      switch(ev.currentTarget.id) {
-      case "homeButton":
-        Backbone.history.navigate('#home');
-        Backbone.history.loadUrl('#home');
-        break;
-      case "accountButton":
-        console.log("accountButton");
-        Backbone.history.navigate('#account');
-        Backbone.history.loadUrl('#account');
-        break;
-      case "freeButton":
-        Backbone.history.navigate('#home/free');
-        Backbone.history.loadUrl('#home/free');
-        break;
-      case "notificationsButton":
-        console.log("notificationsButton");
-        break;
-      case "logoutButton":
-        Backbone.history.navigate('#logout');
-        Backbone.history.loadUrl('#logout');
-        break;
-      case "addButton":
-        // FIXME: This is such a messy way of doing things. Find a better way.
-        //Backbone.history.navigate('#addListing');
-        //Backbone.history.loadUrl('#addListing');
-        console.log("dz case addButton")
-        this.togglePopoverAddListing();
-        break;
-      default:
-        return;
-      }
-    },
+      onClick: function (ev){
+        switch(ev.currentTarget.id) {
+          case "homeButton":
+            Backbone.history.navigate('#home');
+            Backbone.history.loadUrl('#home');
+            break;
+          case "accountButton":
+            Backbone.history.navigate('#account');
+            Backbone.history.loadUrl('#account');
+            break;
+          case "freeButton":
+            Backbone.history.navigate('#home/free');
+            Backbone.history.loadUrl('#home/free');
+            break;
+          case "notificationsButton":
+            console.log("notificationsButton");
+            break;
+          case "logoutButton":
+            Backbone.history.navigate('#logout');
+            Backbone.history.loadUrl('#logout');
+            break;
+          case "addButton":
+            this.togglePopoverAddListing();
+            break;
+          default:
+            return;
+        }
+      },
 
-    togglePopoverAddListing: function(){
-      if (this.popoverAddListing) {
-        this.hidePopoverAddListing();
-      } else {
-        console.log("dz SidebarView togglePopoverAddListing showPopoverAddListing");
-        this.showPopoverAddListing();
-      }
-    },
+      togglePopoverAddListing: function(){
+          if (this.popoverAddListing) {
+              this.hidePopoverAddListing();
+          } else {
+              this.showPopoverAddListing();
+          }
+      },
 
-    showPopoverAddListing: function(){
-      console.log("dz SidebarView showPopoverAddListing");
-      $('#PageContainer').append("<div id='popoverMask'></div>");
-      $('#popoverMask').append("<div id='popoverAddListing'></div>");
-      this.popoverAddListing = new PopoverAddListingView({el: $('#popoverAddListing')});
-      this.urlBeforePop = Backbone.history.location.href;
-      // Purposefully chose to use window.history here instead of backbone.history because backbone.history seemed to be jumping to the top of the page in certain weird cases.
-      window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');
-    },
+      showPopoverAddListing: function(){
+          // $('#PopoverContainer').append("<div id='popoverMask'></div>");
+          this.popoverAddListing = new PopoverAddListingView();
+          this.popoverAddListing.render({parentDiv: $('#PopoverContainer')});
+          this.urlBeforePop = Backbone.history.location.href;
+          //purposely chose to use window.history here instead of backbone.history because backbone.history seemed to be jumping to the top of the page in certain weird cases.
+          window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');
+      },
 
-    hidePopoverAddListing: function(){
-      console.log("dz SidebarView hidePopoverAddListing");
-      $('#popoverMask').remove();
-      this.popoverAddListing.destroyView();
-      this.popoverAddListing = null;
-      window.history.pushState({}, '', this.urlBeforePop);
-    },
+      hidePopoverAddListing: function(){
+          // $('#popoverMask').remove();
+          this.popoverAddListing.destroy();
+          this.popoverAddListing = null;
+          window.history.pushState({}, '', this.urlBeforePop);
+      },
 
   });
 
   return SidebarView;
-});  
+}); 

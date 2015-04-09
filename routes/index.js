@@ -18,6 +18,11 @@ var isOlinAuthenticated = function(req,res){
     ensureOlinAuthenticatedServer(req,res,onOlinAuth,onOlinErr)
 }
 
+// var isOlinAuthenticated = function (req, res){
+//     //disabled auth for debugging
+//     res.send({olinAuth:true});
+// }
+
 var isVenmoAuthenticated = function(req,res){
     //returns status of venmo auth. note that venmo is not authenticated if olinapps is not authenticated.
     var onVenmoAuth = function(){

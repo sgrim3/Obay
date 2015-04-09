@@ -30,6 +30,7 @@ require([
   'scripts/collections/feed',
   'scripts/collections/freeFeed',
 
+  'scripts/views/DestroyableView',
   'scripts/views/AccountView',
   'scripts/views/AddListingView',
   'scripts/views/CollapsedListingView',
@@ -47,11 +48,13 @@ require([
   Backbone,
   utils,
 
-  ListingModel,
+  // FIXME: Naming convention standardization.
+  Listing,
   UserModel,
   FeedCollection,
   FreeFeedCollection,
 
+  DestroyableView,
   AccountView,
   AddListingView,
   CollapsedListingView,
@@ -68,105 +71,153 @@ require([
   var Router = Backbone.Router.extend({
     routes: {
       "": "login",
-      "logout": "logout",
       "home": "home",
       "home/free":"free",
       "account": "account",
-      "listing/:id" : "listing",
       "addListing": "addListing",
+      "logout": "logout",
+      "listing/:id" : "listing",
       "temporaryPayRoute": "pay",
       '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
-    login: function(id){
-      var onOlinAuth = function(){
-        //redirect to home if user is logged in already
-        window.location.replace('/#home');
-      }
-      var onOlinErr = function(){
-        this.Page = new LoginView({el: $('#PageContainer')});
-      }
-      utils.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    },
-
-    logout: function (id){
-      console.log("Logging out.");
-      $.post('/logout')
-        .done(function (){
-            Backbone.history.navigate("", true);
-            window.Sidebar.destroyView(); // FIXME: This is a hack.
-        })
-        .error(function(){
-            console.log("Failed to log out.");
-        });
-    },
-
-    home: function(id){
-      var onOlinAuth = function(){
-        if (!this.Sidebar) {
-          this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-          console.log("dz home Sidebar");
-        }
-        this.Page = new HomeView({el: $('#PageContainer')});
-      }
-      var onOlinErr = function(){
-        //redirect to login page
-        window.location.replace('/');
-      }
-      utils.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    },
-
-    free: function(id) {
-      var onOlinAuth = function(){
-          if (!this.Sidebar) {
-              this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-          }
-          this.Page = new SortFreeHomeView({el: $('#PageContainer')});
-      }
-      var onOlinErr = function(){
-          //redirect to login page
-          window.location.replace('/');
-      }
-      utils.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    },
-
     account: function(){
-        this.Page = new AccountView({el: $('#PageContainer')});
-    },
-
-    listing: function(id){
-        if (!this.Sidebar){
-            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+        var router = this;
+        if (!router.Sidebar) {
+            router.Sidebar = new SidebarView();
+            router.Sidebar.render({parentDiv:$('#SidebarContainer')});
         }
-        console.log(ListingView);
-        this.Page = new ListingView({el: $('#PageContainer'), id:id});
-    },
-
-    addListing: function () {
-        var onOlinAuth = function(){
-            if (!this.Sidebar) {
-                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-            }
-            this.Page = new AddListingView({el: $('#PageContainer')});
-        }
-        var onOlinErr = function(){
-            //redirect to login + alert user
-            alert("Please log in to add an item")
-            window.location.replace('/');
-        }
-        utils.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    },
-
-    pay: function (id){
-      if (!this.Sidebar){
-          this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
-      }
-      console.log(ListingView);
-      this.Page = new PayView({el: $('#PageContainer'), id:id});
+        if (router.Page) { router.Page.destroy();  router.Page = null };
+        router.Page = new AccountView();
+        router.Page.render({parentDiv: $('#PageContainer')});
     },
 
     notFound: function(){
-      this.Page = new NotFoundView({el: $('#PageContainer')});
+        var router = this;
+        if (router.Page) { router.Page.destroy(); router.Page = null };
+        router.Page = new NotFoundView();
+        router.Page.render({parentDiv: $('#PageContainer')});
+    },
+
+    ensureOlinAuthenticated: function(onAuth,onErr){
+        $.get('/isOlinAuthenticated')
+            .done(function(data){
+                var isAuth = data.olinAuth;
+                if (isAuth) {
+                    onAuth();
+                } else {
+                    onErr();
+                }
+            })
+            .error(function(){
+                onErr();
+            });
+    },
+
+    home: function(){
+        var router = this;
+        var onOlinAuth = function(){
+            if (!router.Sidebar) {
+                router.Sidebar = new SidebarView();
+                router.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            }
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new HomeView();
+            router.Page.render({parentDiv: $('#PageContainer')});
+        }
+        var onOlinErr = function(){
+            //redirect to login page
+            window.location.replace('/');
+        }
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    free: function(id) {
+        var router = this;
+        var onOlinAuth = function(){
+            if (!router.Sidebar) {
+                router.Sidebar = new SidebarView();
+                router.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            }
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new SortFreeHomeView();
+            router.Page.render({parentDiv: $('#PageContainer')});
+        }
+        var onOlinErr = function(){
+            //redirect to login page
+            window.location.replace('/');
+        }
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+
+    },
+
+    addListing: function () {
+        var router = this;
+        var onOlinAuth = function(){
+            if (!router.Sidebar) {
+                router.Sidebar = new SidebarView();
+                router.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            }
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new AddListingView();
+            router.Page.render({parentDiv: $('#PageContainer')});
+        }
+        var onOlinErr = function(){
+            window.location.replace('/');
+        }
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+
+    listing: function(id){
+        var router = this;
+        if (!router.Sidebar){
+            router.Sidebar = new SidebarView();
+            router.Sidebar.render({parentDiv:$('#SidebarContainer')});
+        }
+        if (router.Page) { router.Page.destroy(); router.Page = null; };
+        var model = new Listing({id: id});
+        router.Page = new ListingView({model: model});
+        router.Page.render({parentDiv: $('#PageContainer')});
+    },
+
+    pay: function (id){
+        var router = this;
+        if (!router.Sidebar){
+            router.Sidebar = new SidebarView();
+            router.Sidebar.render({parentDiv:$('#SidebarContainer')});
+        }
+        if (router.Page) { router.Page.destroy(); router.Page = null; };
+        router.Page = new PayView();
+        router.Page.render({parentDiv: $('#PageContainer')});
+    },
+
+    login: function(id){
+        var router = this;
+        var onOlinAuth = function(){
+            //redirect to home if user is logged in already
+            window.location.replace('/#home');
+        }
+        var onOlinErr = function(){
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new LoginView();
+            router.Page.render({parentDiv: $('#PageContainer')});
+        }
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    logout: function (id){
+        var router = this;
+        $.post('/logout')
+            .done(function (){
+                //destroy everything completely, we are redirecting to login page which doesn't need page/sidebar mounts to display
+                if (router.Page) { router.Page.destroy(); router.Page = null; };
+                if (router.Sidebar) { router.Sidebar.destroy(); router.Sidebar = null; };
+                Backbone.history.navigate("", true);
+            })
+            .error(function(){
+                console.log("Failed to log out.");
+            });
     },
 
   });

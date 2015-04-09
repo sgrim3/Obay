@@ -1,5 +1,6 @@
 .add {
-  width: 100%;
+  // FIXME: Make this dynamic.
+  min-width: 900 !important;
   height: 100%;
   display: flex;
   flex-wrap: wrap;

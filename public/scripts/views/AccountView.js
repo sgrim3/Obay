@@ -1,12 +1,17 @@
-window.AccountView = Backbone.View.extend({
-
+define([
+  'jquery', 
+  'underscore', 
+  'Backbone',
+], function ($, _, Backbone) {
+  var AccountView = Backbone.View.extend({
     initialize:function () {
-        this.render();
+      this.render();
     },
-
     render:function () {
-        this.$el.html(this.template());
-        return this;
+      this.$el.html(this.template());
+      return this;
     }
+  });
 
+  return AccountView;
 });

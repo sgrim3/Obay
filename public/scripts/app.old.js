@@ -12,9 +12,6 @@ var AppRouter = Backbone.Router.extend({
         '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
-    initialize: function () {
-    },
-
     account: function(){
         this.Page = new AccountView({el: $('#PageContainer')});
     },

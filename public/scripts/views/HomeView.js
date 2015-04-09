@@ -1,17 +1,21 @@
-window.HomeView = Backbone.View.extend({
-
+define([
+  'jquery', 
+  'underscore', 
+  'Backbone',
+], function ($, _, Backbone) {
+  var HomeView = Backbone.View.extend({
     initialize:function () {
-        this.render();
+      this.render();
     },
 
     render:function() {
-        //must instantiate template before rendering subviews, since they mount onto the template!
-        this.$el.html(this.template());
+      //must instantiate template before rendering subviews, since they mount onto the template!
+      this.$el.html(this.template());
 
 
-        this.FeedView = new FeedView({el: $('#feed_view_mount_point')});
-        this.FeedView.render();
-        return this;
+      this.FeedView = new FeedView({el: $('#feed_view_mount_point')});
+      this.FeedView.render();
+      return this;
     }
-
+  });
 });

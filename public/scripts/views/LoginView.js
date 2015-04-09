@@ -1,12 +1,21 @@
-window.LoginView = Backbone.View.extend({
+define([
+  'jquery', 
+  'underscore', 
+  'backbone',
+  'text!templates/LoginView.html',
+], function ($, _, Backbone, loginTemplate) {
+	var LoginView = Backbone.View.extend({
 
-    initialize:function () {
-        this.render();
-    },
+	  initialize:function () {
+      this.template = _.template(loginTemplate);
+	    this.render();
+	  },
 
-    render:function () {
-        this.$el.html(this.template());
-        return this;
-    }
+	  render:function () {
+	    this.$el.html(this.template());
+	    return this;
+	  }
+	});
 
+	return LoginView;
 });

@@ -1,13 +1,20 @@
-window.NotFoundView = Backbone.View.extend({
+define([
+  'jquery', 
+  'underscore', 
+  'Backbone',
+], function ($, _, Backbone) {
+  var NotFoundView = Backbone.View.extend({
 
     initialize:function () {
-        this.render();
+      this.render();
     },
 
     render:function () {
-        console.log(this.template);
-        this.$el.html(this.template());
-        return this;
+      this.$el.html(this.template());
+      return this;
     }
 
+  });
+
+  return NotFoundView;
 });

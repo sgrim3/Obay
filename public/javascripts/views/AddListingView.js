@@ -1,14 +1,13 @@
-window.AddListingView = Backbone.View.extend({
+window.AddListingView = DestroyableView.extend({
+    tagname: "div",
+    id: "AddListingView",
 
 	events: {
 	    'click #postButton': 'postListing',
 	},
 
-    initialize:function () {
-        this.render();
-    },
-
-    render:function () {
+    render:function (info) {
+        info.parentDiv.append(this.$el);
         $(this.el).html(this.template());
         var dropzone_options = {
             dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',

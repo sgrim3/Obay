@@ -1,4 +1,6 @@
 window.PopoverAddListingView = AddListingView.extend({
+    tagname: "div",
+    id: "PopoverAddListingView",
 	events: {
 	    'click #exitButton': 'broadcoastExitPopoverAddListing',
 	    'click #postButton': 'postListing',
@@ -11,15 +13,6 @@ window.PopoverAddListingView = AddListingView.extend({
     broadcoastListingAdded: function(listingModel){
         //called when user makes a new listing from the Popover Add Listing
         Backbone.pubSub.trigger('listingAdded', listingModel);
-    },
-
-    destroyView: function() {
-        // COMPLETELY UNBIND THE VIEW
-        this.undelegateEvents();
-        this.$el.removeData().unbind(); 
-        // Remove view from DOM
-        this.remove();  
-        Backbone.View.prototype.remove.call(this);
     },
 
     postListing: function(e) {

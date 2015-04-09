@@ -1,17 +1,20 @@
-window.ListingView = Backbone.View.extend({
+window.ListingView = DestroyableView.extend({
+    tagname: "div",
+    id: "ListingView",
 
 	events: {		
 	    'click #buyButton': 'buyItem',		
 	},
 
 	initialize:function (options) {
+        this.childViews = [];
         this.render(options);
     },
 
-    render: function(options){
-    	console.log(options.id);
-    	if (options.id) {
-    		this.model = new Listing({id:options.id});
+    render: function(info){
+        info.parentDiv.append(this.$el);
+    	if (info.id) {
+    		this.model = new Listing({id:info.id});
     		var listingView = this;
 	    	this.model.fetch({
 	    		success: function(listing){
@@ -51,6 +54,7 @@ window.ListingView = Backbone.View.extend({
 			//TODO: will eventually show success message
             // Create a new view.
             var payView = new PayView({el: $('#buyButton')});
+            this.childViews.push(payView);
             $("#buyButton").replaceWith(payView.template());
 
 			// Backbone.history.navigate('#home');

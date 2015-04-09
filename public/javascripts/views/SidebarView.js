@@ -1,16 +1,19 @@
-window.SidebarView = Backbone.View.extend({
+window.SidebarView = DestroyableView.extend({
+    tagname: "div",
+    id: "SidebarView",
 
     events: {
       'click .round-button': 'onClick',
     },
 
     initialize:function () {
+        this.childViews = [];
         //toss in global event listeners
         this.listenTo(Backbone.pubSub, 'exitPopoverAddListing', this.hidePopoverAddListing);
-        this.render();
     },
 
-    render:function () {
+    render:function (info) {
+        info.parentDiv.append(this.$el);
         this.$el.html(this.template());
         return this;
     },
@@ -48,9 +51,6 @@ window.SidebarView = Backbone.View.extend({
           Backbone.history.loadUrl('#logout');
           break;
         case "addButton":
-          // FIXME: This is such a messy way of doing things. Find a better way.
-          //Backbone.history.navigate('#addListing');
-          //Backbone.history.loadUrl('#addListing');
           this.togglePopoverAddListing();
           break;
         default:
@@ -68,9 +68,8 @@ window.SidebarView = Backbone.View.extend({
 
     showPopoverAddListing: function(){
         $('#PageContainer').append("<div id='popoverMask'></div>");
-        //create mountpoint for the popover
-        $('#popoverMask').append("<div id='popoverAddListing'></div>");
-        this.popoverAddListing = new PopoverAddListingView({el: $('#popoverAddListing')});
+        this.popoverAddListing = new PopoverAddListingView();
+        this.popoverAddListing.render({parentDiv: $('#PopoverContainer')});
         this.urlBeforePop = Backbone.history.location.href;
         //purposely chose to use window.history here instead of backbone.history because backbone.history seemed to be jumping to the top of the page in certain weird cases.
         window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');
@@ -78,7 +77,7 @@ window.SidebarView = Backbone.View.extend({
 
     hidePopoverAddListing: function(){
         $('#popoverMask').remove();
-        this.popoverAddListing.destroyView();
+        this.popoverAddListing.destroy();
         this.popoverAddListing = null;
         window.history.pushState({}, '', this.urlBeforePop);
     },

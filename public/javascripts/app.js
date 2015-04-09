@@ -12,15 +12,25 @@ var AppRouter = Backbone.Router.extend({
         '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
-    initialize: function () {
-    },
-
     account: function(){
-        this.Page = new AccountView({el: $('#PageContainer')});
+        console.log('account route called!');
+        if (!this.Sidebar) {
+            this.Sidebar = new SidebarView();
+            this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+        }
+        console.log('account route!');
+        console.log(this);
+        console.log(this.Page);
+        console.log(this.potato);
+        if (this.Page) { this.Page.destroy();  this.Page = null };
+        this.Page = new AccountView();
+        this.Page.render({parentDiv: $('#PageContainer')});
     },
 
     notFound: function(){
-        this.Page = new NotFoundView({el: $('#PageContainer')});
+        if (this.Page) { this.Page.destroy(); this.Page = null };
+        this.Page = new NotFoundView();
+        this.Page.render({parentDiv: $('#PageContainer')});
     },
 
     ensureOlinAuthenticated: function(onAuth,onErr){
@@ -38,12 +48,19 @@ var AppRouter = Backbone.Router.extend({
             });
     },
 
-    home: function(id){
+    home: function(){
         var onOlinAuth = function(){
             if (!this.Sidebar) {
-                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+                this.Sidebar = new SidebarView();
+                this.Sidebar.render({parentDiv:$('#SidebarContainer')});
             }
-            this.Page = new HomeView({el: $('#PageContainer')});
+            if (this.Page) { this.Page.destroy(); this.Page = null };
+            console.log(this);
+            this.potato = 'eh';
+            this.Page = new HomeView();
+            this.Page.render({parentDiv: $('#PageContainer')});
+            console.log('in home!');
+            console.log(this.Page);
         }
         var onOlinErr = function(){
             //redirect to login page
@@ -55,9 +72,12 @@ var AppRouter = Backbone.Router.extend({
     free: function(id) {
         var onOlinAuth = function(){
             if (!this.Sidebar) {
-                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+                this.Sidebar = new SidebarView();
+                this.Sidebar.render({parentDiv:$('#SidebarContainer')});
             }
-            this.Page = new SortFreeHomeView({el: $('#PageContainer')});
+            if (this.Page) { this.Page.destroy(); this.Page = null };
+            this.Page = new SortFreeHomeView();
+            this.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page
@@ -70,13 +90,14 @@ var AppRouter = Backbone.Router.extend({
     addListing: function () {
         var onOlinAuth = function(){
             if (!this.Sidebar) {
-                this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+                this.Sidebar = new SidebarView();
+                this.Sidebar.render({parentDiv:$('#SidebarContainer')});
             }
-            this.Page = new AddListingView({el: $('#PageContainer')});
+            if (this.Page) { this.Page.destroy(); this.Page = null };
+            this.Page = new AddListingView();
+            this.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
-            //redirect to login + alert user
-            alert("Please log in to add an item")
             window.location.replace('/');
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
@@ -85,18 +106,22 @@ var AppRouter = Backbone.Router.extend({
 
     listing: function(id){
         if (!this.Sidebar){
-            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+            this.Sidebar = new SidebarView();
+            this.Sidebar.render({parentDiv:$('#SidebarContainer')});
         }
-        //console.log(ListingView);
-        this.Page = new ListingView({el: $('#PageContainer'), id:id});
+        if (this.Page) { this.Page.destroy(); this.Page = null };
+        this.Page = new ListingView();
+        this.Page.render({parentDiv: $('#PageContainer')});
     },
 
     pay: function (id){
         if (!this.Sidebar){
-            this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+            this.Sidebar = new SidebarView();
+            this.Sidebar.render({parentDiv:$('#SidebarContainer')});
         }
-        console.log(ListingView);
-        this.Page = new PayView({el: $('#PageContainer'), id:id});
+        if (this.Page) { this.Page.destroy(); this.Page = null };
+        this.Page = new PayView();
+        this.Page.render({parentDiv: $('#PageContainer')});
     },
 
     login: function(id){
@@ -106,7 +131,9 @@ var AppRouter = Backbone.Router.extend({
             window.location.replace('/#home');
         }
         var onOlinErr = function(){
-            this.Page = new LoginView({el: $('#PageContainer')});
+            if (this.Page) { this.Page.destroy(); this.Page = null };
+            this.Page = new LoginView();
+            this.Page.render({parentDiv: $('#PageContainer')});
         }
         this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
@@ -115,8 +142,10 @@ var AppRouter = Backbone.Router.extend({
         console.log("Logging out.");
         $.post('/logout')
             .done(function (){
+                //destroy everything completely, we are redirecting to login page which doesn't need page/sidebar mounts to display
+                if (this.Page) { this.Page.destroy(); this.Page = null };
+                if (this.Sidebar) { this.Sidebar.destroy(); this.Sidebar = null };
                 Backbone.history.navigate("", true);
-                window.Sidebar.destroyView(); // FIXME: This is a hack.
             })
             .error(function(){
                 console.log("Failed to log out.");

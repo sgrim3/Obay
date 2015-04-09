@@ -8,6 +8,7 @@ var ensureVenmoAuthenticatedServer = require('./auth.js').ensureVenmoAuthenticat
 //ALL ROUTES BELOW ARE RESTFUL API ROUTES
 
 var isOlinAuthenticated = function(req,res){
+    /*
     //returns status of olinApps Auth
     var onOlinAuth = function(){
         res.send({olinAuth:true});
@@ -16,6 +17,10 @@ var isOlinAuthenticated = function(req,res){
         res.send({olinAuth:false});
     };
     ensureOlinAuthenticatedServer(req,res,onOlinAuth,onOlinErr)
+    */
+
+    //disabled auth for debugging
+    res.send({olinAuth:true});
 }
 
 var isVenmoAuthenticated = function(req,res){

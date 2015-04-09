@@ -1,10 +1,9 @@
-window.AccountView = Backbone.View.extend({
+window.AccountView = DestroyableView.extend({
+    tagname: "div",
+    id: "AccountView",
 
-    initialize:function () {
-        this.render();
-    },
-
-    render:function () {
+    render:function (info) {
+        info.parentDiv.append(this.$el);
         this.$el.html(this.template());
         return this;
     }

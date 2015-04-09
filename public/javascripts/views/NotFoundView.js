@@ -1,10 +1,9 @@
-window.NotFoundView = Backbone.View.extend({
+window.NotFoundView = DestroyableView.extend({
+    tagname: "div",
+    id: "NotFoundView",
 
-    initialize:function () {
-        this.render();
-    },
-
-    render:function () {
+    render:function (info) {
+        info.parentDiv.append(this.$el);
         console.log(this.template);
         this.$el.html(this.template());
         return this;

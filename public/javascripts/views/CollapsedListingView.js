@@ -1,5 +1,6 @@
-window.CollapsedListingView = Backbone.View.extend({
+window.CollapsedListingView = DestroyableView.extend({
     tagname: "div",
+    id: "CollapsedListingView",
     model: Listing,
     getThumbnailUrl: function(url){
         if (this.isImgurLink(url)){
@@ -16,7 +17,8 @@ window.CollapsedListingView = Backbone.View.extend({
             return false;
         }
     },
-    render: function (){
+    render: function (info){
+        info.parentDiv.append(this.$el);
         var listing_attrs = this.model.attributes;
         listing_attrs.listing_thumbnail = this.getThumbnailUrl(listing_attrs.listing_image);
         this.$el.html(this.template(listing_attrs));

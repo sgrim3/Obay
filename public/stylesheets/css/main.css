@@ -665,7 +665,8 @@ button#venmoButton {
   right: 0px;
   bottom: 0px;
   margin-right: -30px;
-  margin-bottom: -30px; }
+  margin-bottom: -30px;
+  color: black; }
   #payView > h1, #payView h4 {
     margin-bottom: 10px; }
   #payView > h4 {

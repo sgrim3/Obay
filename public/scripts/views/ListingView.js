@@ -6,9 +6,10 @@ define([
   'scripts/models/listing',
 
   'scripts/views/DestroyableView',
+  'scripts/views/PayView',
 
   'text!templates/ListingView.html',
-], function ($, _, Backbone, Listing, DestroyableView, listingTemplate) {
+], function ($, _, Backbone, Listing, DestroyableView, PayView, listingTemplate) {
 
   var ListingView = DestroyableView.extend({
       tagname: "div",
@@ -40,21 +41,22 @@ define([
 
       buyItem: function(){	
           console.log('buy item called!');
-          var listingView = this;		
+          var self = this;		
           //sets the listing open to false in the backbone model
           this.model.set({		
               listing_open: false		
           });		
           //saves backbone model and does PUT request to server
-          this.model.save({
+          console.log('dz About to save.');
+          console.log(this.model);
+          this.model.save(null, {
               success: function(listing){
-                  console.log(listing.attributes);
-                  var payView = new PayView({el: $('#buyButton')});
-                  this.childViews.push(payView);
-                  payView.render({parentDiv: $('#buyButton')});
-                  //$("#buyButton").remove();
-                  // Backbone.history.navigate('#home');
-                  // Backbone.history.loadUrl('#home');
+                var payView = new PayView({el: $('#buyButton')});
+                self.childViews.push(payView);
+                payView.render({parentDiv: $('#buyButton')});
+                //$("#buyButton").remove();
+                // Backbone.history.navigate('#home');
+                // Backbone.history.loadUrl('#home');
               },
               error: function(){
                   console.log('error buying item');

@@ -1,0 +1,8 @@
+{
+  "name": "Obay",
+  "dependencies": {
+    "jquery": null,
+    "underscore": null,
+    "backbone": null
+  }
+}

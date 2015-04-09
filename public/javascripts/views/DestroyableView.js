@@ -8,7 +8,6 @@ window.DestroyableView = Backbone.View.extend({
 
     destroy:function () {
         //destroys view and corresponding mount point /$el
-        console.log('destroy called!');
         this.childViews.forEach( function (childView) {
             //destroy all child views!
             childView.destroy();

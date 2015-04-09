@@ -28,14 +28,12 @@ window.SidebarView = DestroyableView.extend({
     },
 
     onClick: function (ev){
-      // console.log(ev.currentTarget.id);
       switch(ev.currentTarget.id) {
         case "homeButton":
           Backbone.history.navigate('#home');
           Backbone.history.loadUrl('#home');
           break;
         case "accountButton":
-          console.log("accountButton");
           Backbone.history.navigate('#account');
           Backbone.history.loadUrl('#account');
           break;

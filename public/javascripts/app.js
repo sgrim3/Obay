@@ -13,24 +13,21 @@ var AppRouter = Backbone.Router.extend({
     },
 
     account: function(){
-        console.log('account route called!');
-        if (!this.Sidebar) {
-            this.Sidebar = new SidebarView();
-            this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+        var router = this;
+        if (!router.Sidebar) {
+            router.Sidebar = new SidebarView();
+            router.Sidebar.render({parentDiv:$('#SidebarContainer')});
         }
-        console.log('account route!');
-        console.log(this);
-        console.log(this.Page);
-        console.log(this.potato);
-        if (this.Page) { this.Page.destroy();  this.Page = null };
-        this.Page = new AccountView();
-        this.Page.render({parentDiv: $('#PageContainer')});
+        if (router.Page) { router.Page.destroy();  router.Page = null };
+        router.Page = new AccountView();
+        router.Page.render({parentDiv: $('#PageContainer')});
     },
 
     notFound: function(){
-        if (this.Page) { this.Page.destroy(); this.Page = null };
-        this.Page = new NotFoundView();
-        this.Page.render({parentDiv: $('#PageContainer')});
+        var router = this;
+        if (router.Page) { router.Page.destroy(); router.Page = null };
+        router.Page = new NotFoundView();
+        router.Page.render({parentDiv: $('#PageContainer')});
     },
 
     ensureOlinAuthenticated: function(onAuth,onErr){
@@ -49,102 +46,104 @@ var AppRouter = Backbone.Router.extend({
     },
 
     home: function(){
+        var router = this;
         var onOlinAuth = function(){
-            if (!this.Sidebar) {
-                this.Sidebar = new SidebarView();
-                this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            if (!router.Sidebar) {
+                router.Sidebar = new SidebarView();
+                router.Sidebar.render({parentDiv:$('#SidebarContainer')});
             }
-            if (this.Page) { this.Page.destroy(); this.Page = null };
-            console.log(this);
-            this.potato = 'eh';
-            this.Page = new HomeView();
-            this.Page.render({parentDiv: $('#PageContainer')});
-            console.log('in home!');
-            console.log(this.Page);
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new HomeView();
+            router.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page
             window.location.replace('/');
         }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     free: function(id) {
+        var router = this;
         var onOlinAuth = function(){
-            if (!this.Sidebar) {
-                this.Sidebar = new SidebarView();
-                this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            if (!router.Sidebar) {
+                router.Sidebar = new SidebarView();
+                router.Sidebar.render({parentDiv:$('#SidebarContainer')});
             }
-            if (this.Page) { this.Page.destroy(); this.Page = null };
-            this.Page = new SortFreeHomeView();
-            this.Page.render({parentDiv: $('#PageContainer')});
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new SortFreeHomeView();
+            router.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page
             window.location.replace('/');
         }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
 
     },
 
     addListing: function () {
+        var router = this;
         var onOlinAuth = function(){
-            if (!this.Sidebar) {
-                this.Sidebar = new SidebarView();
-                this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            if (!router.Sidebar) {
+                router.Sidebar = new SidebarView();
+                router.Sidebar.render({parentDiv:$('#SidebarContainer')});
             }
-            if (this.Page) { this.Page.destroy(); this.Page = null };
-            this.Page = new AddListingView();
-            this.Page.render({parentDiv: $('#PageContainer')});
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new AddListingView();
+            router.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             window.location.replace('/');
         }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
 
     listing: function(id){
-        if (!this.Sidebar){
-            this.Sidebar = new SidebarView();
-            this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+        var router = this;
+        if (!router.Sidebar){
+            router.Sidebar = new SidebarView();
+            router.Sidebar.render({parentDiv:$('#SidebarContainer')});
         }
-        if (this.Page) { this.Page.destroy(); this.Page = null };
-        this.Page = new ListingView();
-        this.Page.render({parentDiv: $('#PageContainer')});
+        if (router.Page) { router.Page.destroy(); router.Page = null; };
+        var model = new Listing({id: id});
+        router.Page = new ListingView({model: model});
+        router.Page.render({parentDiv: $('#PageContainer')});
     },
 
     pay: function (id){
-        if (!this.Sidebar){
-            this.Sidebar = new SidebarView();
-            this.Sidebar.render({parentDiv:$('#SidebarContainer')});
+        var router = this;
+        if (!router.Sidebar){
+            router.Sidebar = new SidebarView();
+            router.Sidebar.render({parentDiv:$('#SidebarContainer')});
         }
-        if (this.Page) { this.Page.destroy(); this.Page = null };
-        this.Page = new PayView();
-        this.Page.render({parentDiv: $('#PageContainer')});
+        if (router.Page) { router.Page.destroy(); router.Page = null; };
+        router.Page = new PayView();
+        router.Page.render({parentDiv: $('#PageContainer')});
     },
 
     login: function(id){
-
+        var router = this;
         var onOlinAuth = function(){
             //redirect to home if user is logged in already
             window.location.replace('/#home');
         }
         var onOlinErr = function(){
-            if (this.Page) { this.Page.destroy(); this.Page = null };
-            this.Page = new LoginView();
-            this.Page.render({parentDiv: $('#PageContainer')});
+            if (router.Page) { router.Page.destroy(); router.Page = null; };
+            router.Page = new LoginView();
+            router.Page.render({parentDiv: $('#PageContainer')});
         }
-        this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        router.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     logout: function (id){
-        console.log("Logging out.");
+        var router = this;
         $.post('/logout')
             .done(function (){
                 //destroy everything completely, we are redirecting to login page which doesn't need page/sidebar mounts to display
-                if (this.Page) { this.Page.destroy(); this.Page = null };
-                if (this.Sidebar) { this.Sidebar.destroy(); this.Sidebar = null };
+                if (router.Page) { router.Page.destroy(); router.Page = null; };
+                if (router.Sidebar) { router.Sidebar.destroy(); router.Sidebar = null; };
                 Backbone.history.navigate("", true);
             })
             .error(function(){

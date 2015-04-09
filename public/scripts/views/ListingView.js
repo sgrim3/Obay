@@ -1,8 +1,12 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+
+  'scripts/models/listing',
+
+  'text!templates/ListingView.html',
+], function ($, _, Backbone, Listing, listingTemplate) {
   var ListingView = Backbone.View.extend({
 
     events: {   
@@ -11,6 +15,8 @@ define([
     },
 
     initialize:function (options) {
+      console.log('dz ListingView initialize');
+      this.template = _.template(listingTemplate);
       this.render(options);
     },
 

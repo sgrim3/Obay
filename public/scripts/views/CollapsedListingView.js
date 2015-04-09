@@ -1,11 +1,20 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+
+  'scripts/models/listing',
+
+  'text!templates/CollapsedListingView.html'
+], function ($, _, Backbone, Listing, collapsedListingTemplate) {
   var CollapsedListingView = Backbone.View.extend({
     tagname: "div",
     model: Listing,
+
+    initialize: function (){
+      this.template = _.template(collapsedListingTemplate);
+    },
+
     getThumbnailUrl: function(url){
       if (this.isImgurLink(url)){
         return url.substring(0,url.length-4)+'b'+url.substring(url.length-4,url.length);

@@ -1,10 +1,13 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+  'scripts/views/FeedView',
+  'text!templates/HomeView.html'
+], function ($, _, Backbone, FeedView, homeTemplate) {
   var HomeView = Backbone.View.extend({
     initialize:function () {
+      this.template = _.template(homeTemplate);
       this.render();
     },
 
@@ -18,4 +21,6 @@ define([
       return this;
     }
   });
+
+  return HomeView;
 });

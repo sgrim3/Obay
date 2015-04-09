@@ -6,6 +6,7 @@ requirejs.config({
     underscore: "scripts/libs/underscore/underscore",
     backbone: "scripts/libs/backbone/backbone",
     text: "scripts/libs/text/text",
+    dropzone: "scripts/libs/dropzone",
     utils: "scripts/utils"
   },
   shim: {
@@ -23,8 +24,47 @@ require([
   'jquery',
   'backbone',
   'utils',
-  'scripts/views/LoginView'
-], function($, Backbone, utils, LoginView) {
+  // TODO: Refactor so that router doesn't handle everything.
+  'scripts/models/listing',
+  'scripts/models/user',
+  'scripts/collections/feed',
+  'scripts/collections/freeFeed',
+
+  'scripts/views/AccountView',
+  'scripts/views/AddListingView',
+  'scripts/views/CollapsedListingView',
+  'scripts/views/FeedView',
+  'scripts/views/HomeView',
+  'scripts/views/ListingView',
+  'scripts/views/LoginView',
+  'scripts/views/NotFoundView',
+  'scripts/views/PayView',
+  'scripts/views/PopoverAddListingView',
+  'scripts/views/SidebarView',
+  'scripts/views/SortFreeHomeView'
+], function(
+  $,
+  Backbone,
+  utils,
+
+  ListingModel,
+  UserModel,
+  FeedCollection,
+  FreeFeedCollection,
+
+  AccountView,
+  AddListingView,
+  CollapsedListingView,
+  FeedView,
+  HomeView,
+  ListingView,
+  LoginView,
+  NotFoundView,
+  PayView,
+  PopoverAddListingView,
+  SidebarView,
+  SortFreeHomeView
+){
   var Router = Backbone.Router.extend({
     routes: {
       "": "login",
@@ -37,8 +77,6 @@ require([
       "temporaryPayRoute": "pay",
       '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
-
-    /*== PLEASE LIST THESE IN THE ORDER OF THE ROUTERS FOR EASY NAVIGATION. ==*/
 
     login: function(id){
       var onOlinAuth = function(){
@@ -67,6 +105,7 @@ require([
       var onOlinAuth = function(){
         if (!this.Sidebar) {
           this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
+          console.log("dz home Sidebar");
         }
         this.Page = new HomeView({el: $('#PageContainer')});
       }
@@ -99,7 +138,7 @@ require([
         if (!this.Sidebar){
             this.Sidebar = new SidebarView({el: $('#SidebarContainer')});
         }
-        //console.log(ListingView);
+        console.log(ListingView);
         this.Page = new ListingView({el: $('#PageContainer'), id:id});
     },
 
@@ -132,6 +171,7 @@ require([
 
   });
 
+  Backbone.pubSub = _.extend({}, Backbone.Events);
   var router = new Router();
   Backbone.history.start();
 });

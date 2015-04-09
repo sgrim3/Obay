@@ -1,8 +1,11 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+  'dropzone',
+
+  'text!templates/AddListingView.html'
+], function ($, _, Backbone, Dropzone, addListingTemplate) {
 
   var AddListingView = Backbone.View.extend({
 
@@ -11,6 +14,7 @@ define([
     },
 
     initialize:function () {
+      this.template = _.template(addListingTemplate);
       this.render();
     },
 
@@ -37,6 +41,7 @@ define([
           });
         }
       };
+      console.log(Dropzone);
       this.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
       this_dropzone = this.image_upload;
       $('.dz-image').click(function(event) {

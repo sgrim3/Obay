@@ -1,8 +1,12 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+
+  'scripts/views/PopoverAddListingView',
+
+  'text!templates/SidebarView.html',
+], function ($, _, Backbone, PopoverAddListingView, sidebarTemplate) {
   var SidebarView = Backbone.View.extend({
 
     events: {
@@ -11,7 +15,10 @@ define([
 
     initialize:function () {
       //toss in global event listeners
+      console.log(Backbone);
+      this.template = _.template(sidebarTemplate);
       this.listenTo(Backbone.pubSub, 'exitPopoverAddListing', this.hidePopoverAddListing);
+      console.log("SidebarView initialize");
       this.render();
     },
 

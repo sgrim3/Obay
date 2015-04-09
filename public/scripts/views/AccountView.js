@@ -1,7 +1,7 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
+  'backbone',
 ], function ($, _, Backbone) {
   var AccountView = Backbone.View.extend({
     initialize:function () {

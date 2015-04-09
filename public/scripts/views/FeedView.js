@@ -1,13 +1,17 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+  
+  'scripts/collections/feed',
+
+  'scripts/views/CollapsedListingView'
+], function ($, _, Backbone, Feed, CollapsedListingView) {
   var FeedView = Backbone.View.extend({
 
     initialize:function (data) {
       this.listenTo(Backbone.pubSub, 'listingAdded', this.addListingView);
-      this.collection = new Feed()
+      this.collection = new Feed();
 
       console.log(data);
       if (data.feedModel) {

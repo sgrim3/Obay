@@ -1,8 +1,10 @@
 define([
   'jquery', 
   'underscore', 
-  'Backbone',
-], function ($, _, Backbone) {
+  'backbone',
+  'scripts/views/HomeView'
+], function ($, _, Backbone, HomeView) {
+  console.log(HomeView);
   var SortFreeHomeView = HomeView.extend({
 
     render:function() {

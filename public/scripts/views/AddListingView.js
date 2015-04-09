@@ -4,8 +4,10 @@ define([
   'backbone',
   'dropzone',
 
+  'scripts/models/listing',
+
   'text!templates/AddListingView.html'
-], function ($, _, Backbone, Dropzone, addListingTemplate) {
+], function ($, _, Backbone, Dropzone, Listing, addListingTemplate) {
 
   var AddListingView = Backbone.View.extend({
 

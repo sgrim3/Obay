@@ -2,8 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+
+  'scripts/models/listing',
+
   'scripts/views/AddListingView'
-], function ($, _, Backbone, AddListingView) {
+], function ($, _, Backbone, Listing, AddListingView) {
   var PopoverAddListingView = AddListingView.extend({
     events: {
       'click #exitButton': 'broadcoastExitPopoverAddListing',

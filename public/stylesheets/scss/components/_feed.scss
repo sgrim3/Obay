@@ -1,4 +1,8 @@
-#feed_view_mount_point {
+#AddListingView, #FeedViewMountPoint {
+  @extend %max;
+}
+
+#FeedViewMountPoint {
   margin-top: $sidebarSpacing;
 }
 
@@ -93,7 +97,7 @@ $collapsedListingHeight: 150px;
   }
 }
 
-#popoverMask {
+#PopoverAddListingView {
   background-color: rgba(0,0,0,0.9);
   position: fixed;
   display: flex;

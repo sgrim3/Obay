@@ -48,7 +48,8 @@ require([
   Backbone,
   utils,
 
-  ListingModel,
+  // FIXME: Naming convention standardization.
+  Listing,
   UserModel,
   FeedCollection,
   FreeFeedCollection,

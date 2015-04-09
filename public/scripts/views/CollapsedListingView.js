@@ -30,7 +30,7 @@ define([
         },
         render: function (info){
             this.template = _.template(CollapsedListingTemplate);
-            info.parentDiv.append(this.$el);
+            info.parentDiv.prepend(this.$el);
             var listing_attrs = this.model.attributes;
             listing_attrs.listing_thumbnail = this.getThumbnailUrl(listing_attrs.listing_image);
             this.$el.html(this.template(listing_attrs));

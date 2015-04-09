@@ -4,10 +4,12 @@ define([
   'backbone',
   'dropzone',
 
+  'scripts/models/listing',
+
   'scripts/views/DestroyableView',
 
   'text!templates/AddListingView.html'
-], function ($, _, Backbone, Dropzone, DestroyableView, AddListingTemplate) {
+], function ($, _, Backbone, Dropzone, Listing, DestroyableView, AddListingTemplate) {
     var AddListingView = DestroyableView.extend({
         tagname: "div",
         id: "AddListingView",
@@ -16,8 +18,12 @@ define([
     	    'click #postButton': 'postListing',
     	},
 
-        render:function (info) {
+        initialize: function (){
+            this.childViews = [];
             this.template = _.template(AddListingTemplate);
+        },
+
+        render:function (info) {
             info.parentDiv.append(this.$el);
             $(this.el).html(this.template());
             var dropzone_options = {

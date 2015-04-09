@@ -21,6 +21,7 @@ define([
   	initialize:function (info) {
           this.childViews = [];
           this.model = info.model;
+          this.template = _.template(listingTemplate);
       },
 
       render: function (info){

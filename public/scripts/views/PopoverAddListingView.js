@@ -3,8 +3,11 @@ define([
   'underscore', 
   'backbone',
 
-  'scripts/views/AddListingView'
-], function ($, _, Backbone, AddListingView) {
+  'scripts/models/listing',
+
+  'scripts/views/AddListingView',
+  'text!templates/PopoverAddListingView.html'
+], function ($, _, Backbone, Listing, AddListingView, PopoverAddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",
         id: "PopoverAddListingView",
@@ -12,6 +15,11 @@ define([
     	    'click #exitButton': 'broadcoastExitPopoverAddListing',
     	    'click #postButton': 'postListing',
     	},
+
+        initialize: function (){
+            this.childViews = [];
+            this.template = _.template(PopoverAddListingTemplate);
+        },
 
         broadcoastExitPopoverAddListing: function(){
             Backbone.pubSub.trigger('exitPopoverAddListing');

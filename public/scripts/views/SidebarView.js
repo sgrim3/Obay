@@ -76,7 +76,7 @@ define([
       },
 
       showPopoverAddListing: function(){
-          $('#PageContainer').append("<div id='popoverMask'></div>");
+          // $('#PopoverContainer').append("<div id='popoverMask'></div>");
           this.popoverAddListing = new PopoverAddListingView();
           this.popoverAddListing.render({parentDiv: $('#PopoverContainer')});
           this.urlBeforePop = Backbone.history.location.href;
@@ -85,7 +85,7 @@ define([
       },
 
       hidePopoverAddListing: function(){
-          $('#popoverMask').remove();
+          // $('#popoverMask').remove();
           this.popoverAddListing.destroy();
           this.popoverAddListing = null;
           window.history.pushState({}, '', this.urlBeforePop);

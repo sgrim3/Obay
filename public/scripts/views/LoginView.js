@@ -11,6 +11,11 @@ define([
       tagname: "div",
       id: "LoginView",
 
+      initialize: function (){
+        this.childViews = [];
+        this.template = _.template(loginTemplate);    
+      },
+
       render:function (info) {
           info.parentDiv.append(this.$el);
           this.$el.html(this.template());

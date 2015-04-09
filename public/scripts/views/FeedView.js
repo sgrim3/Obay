@@ -43,8 +43,7 @@ define([
             var collapsedListingView = new CollapsedListingView({model: model});
             this.childViews.push(collapsedListingView);
             this.collection.add(collapsedListingView);
-            this.$el.prepend(collapsedListingView.$el); 
-            collapsedListingView.render(); 
+            collapsedListingView.render({parentDiv: this.$el}); 
         },
     });
 

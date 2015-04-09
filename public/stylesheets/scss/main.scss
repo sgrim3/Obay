@@ -5,6 +5,7 @@
 @import "vendors/palette";
 
 // Helpers: Stuff that other stylesheets would find useful.
+@import "helpers/helpers";
 @import "helpers/variables";
 @import "helpers/mixins";
 
@@ -25,3 +26,4 @@
 
 // Pages: Other styles that may apply to specific pages.
 @import "pages/login";
+@import "pages/home";

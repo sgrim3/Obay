@@ -1,11 +1,22 @@
-window.LoginView = DestroyableView.extend({
-    tagname: "div",
-    id: "LoginView",
+define([
+  'jquery', 
+  'underscore', 
+  'backbone',
 
-    render:function (info) {
-        info.parentDiv.append(this.$el);
-        this.$el.html(this.template());
-        return this;
-    }
+  'scripts/views/DestroyableView',
 
+  'text!templates/LoginView.html',
+], function ($, _, Backbone, DestroyableView, loginTemplate) {
+  var LoginView = DestroyableView.extend({
+      tagname: "div",
+      id: "LoginView",
+
+      render:function (info) {
+          info.parentDiv.append(this.$el);
+          this.$el.html(this.template());
+          return this;
+      }
+  });
+
+  return LoginView;
 });

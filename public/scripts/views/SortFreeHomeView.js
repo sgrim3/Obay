@@ -1,4 +1,12 @@
-window.SortFreeHomeView = HomeView.extend({
+define([
+  'jquery', 
+  'underscore', 
+  'backbone',
+  'scripts/views/HomeView'
+], function ($, _, Backbone, HomeView) {
+  console.log(HomeView);
+  var SortFreeHomeView = HomeView.extend({
+
     tagname: "div",
     id: "SortFreeHomeView",
 
@@ -11,5 +19,7 @@ window.SortFreeHomeView = HomeView.extend({
         feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
         return this;
     },
+  });
 
+  return SortFreeHomeView;
 });

@@ -1,15 +1,83 @@
-var AppRouter = Backbone.Router.extend({
+// Configure external dependencies.
+requirejs.config({
+  baseUrl: "",
+  paths: {
+    jquery: "scripts/libs/jquery/dist/jquery",
+    underscore: "scripts/libs/underscore/underscore",
+    backbone: "scripts/libs/backbone/backbone",
+    text: "scripts/libs/text/text",
+    dropzone: "scripts/libs/dropzone",
+    utils: "scripts/utils"
+  },
+  shim: {
+    'backbone': {
+      deps: ['underscore', 'jquery'],
+      exports: 'backbone'
+    },
+    'underscore': {
+      exports: 'underscore'
+    },
+  }
+});
 
+require([
+  'jquery',
+  'backbone',
+  'utils',
+  // TODO: Refactor so that router doesn't handle everything.
+  'scripts/models/listing',
+  'scripts/models/user',
+  'scripts/collections/feed',
+  'scripts/collections/freeFeed',
+
+  'scripts/views/DestroyableView',
+  'scripts/views/AccountView',
+  'scripts/views/AddListingView',
+  'scripts/views/CollapsedListingView',
+  'scripts/views/FeedView',
+  'scripts/views/HomeView',
+  'scripts/views/ListingView',
+  'scripts/views/LoginView',
+  'scripts/views/NotFoundView',
+  'scripts/views/PayView',
+  'scripts/views/PopoverAddListingView',
+  'scripts/views/SidebarView',
+  'scripts/views/SortFreeHomeView'
+], function(
+  $,
+  Backbone,
+  utils,
+
+  ListingModel,
+  UserModel,
+  FeedCollection,
+  FreeFeedCollection,
+
+  DestroyableView,
+  AccountView,
+  AddListingView,
+  CollapsedListingView,
+  FeedView,
+  HomeView,
+  ListingView,
+  LoginView,
+  NotFoundView,
+  PayView,
+  PopoverAddListingView,
+  SidebarView,
+  SortFreeHomeView
+){
+  var Router = Backbone.Router.extend({
     routes: {
-        "": "login",
-        "home": "home",
-        "home/free":"free",
-        "account": "account",
-        "addListing": "addListing",
-        "logout": "logout",
-        "listing/:id" : "listing",
-        "temporaryPayRoute": "pay",
-        '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
+      "": "login",
+      "home": "home",
+      "home/free":"free",
+      "account": "account",
+      "addListing": "addListing",
+      "logout": "logout",
+      "listing/:id" : "listing",
+      "temporaryPayRoute": "pay",
+      '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
     },
 
     account: function(){
@@ -150,25 +218,10 @@ var AppRouter = Backbone.Router.extend({
                 console.log("Failed to log out.");
             });
     },
-});
 
-// Find all the views that we have.
-var scripts = document.getElementsByTagName("script");
-var viewList = [];
-for (var i=0; i<scripts.length; i++) {
-    if (scripts[i].src && (scripts[i].src.indexOf("views") > -1)) {
+  });
 
-        // Janky parsing for all the views that we own.
-        var currentView = scripts[i].src.split('/').pop(-1);
-        currentView = currentView.split('.')[0];
-        viewList.push(currentView);
-    }
-}
-
-//asynchronously load templates to increase speeds. To add templates to load, just add them in the list below.
-utils.loadTemplate(viewList, function() {
-    //the line below creates a global object that views listen to/broadcoast events to.
-    Backbone.pubSub = _.extend({}, Backbone.Events);
-    app = new AppRouter();
-    Backbone.history.start();
+  Backbone.pubSub = _.extend({}, Backbone.Events);
+  var router = new Router();
+  Backbone.history.start();
 });

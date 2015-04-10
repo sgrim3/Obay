@@ -5,15 +5,15 @@ define([
 
   'scripts/views/DestroyableView',
 
-  'text!templates/LoginView.html',
-], function ($, _, Backbone, DestroyableView, loginTemplate) {
+  'text!templates/LoginTemplate.html',
+], function ($, _, Backbone, DestroyableView, LoginTemplate) {
   var LoginView = DestroyableView.extend({
       tagname: "div",
       id: "LoginView",
 
       initialize: function (){
         this.childViews = [];
-        this.template = _.template(loginTemplate);    
+        this.template = _.template(LoginTemplate);    
       },
 
       render:function (info) {

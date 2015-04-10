@@ -1,9 +1,13 @@
 define([
-  'jquery', 
-  'underscore', 
-  'backbone',
-  'scripts/views/HomeView'
-], function ($, _, Backbone, HomeView) {
+    'jquery' 
+  , 'underscore' 
+  , 'backbone'
+
+  , 'scripts/collections/freeFeed'
+
+  , 'scripts/views/HomeView'
+  , 'scripts/views/FeedView'
+], function ($, _, Backbone, FreeFeed, HomeView, FeedView) {
   var SortFreeHomeView = HomeView.extend({
 
     tagname: "div",

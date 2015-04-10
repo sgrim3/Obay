@@ -5,7 +5,7 @@ define([
 
   'scripts/views/DestroyableView',
 
-  'text!templates/PayView.html'
+  'text!templates/PayTemplate.html'
 ], function ($, _, Backbone, DestroyableView, PayTemplate) {
   var PayView = DestroyableView.extend({
     tagname: "div",

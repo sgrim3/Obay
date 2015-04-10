@@ -24,7 +24,7 @@ require([
     'jquery'
   , 'backbone'
   , 'utils'
-  // TODO: Refactor so that router doesn't handle everything.
+
   , 'scripts/models/listing'
   , 'scripts/models/user'
   // , 'scripts/collections/feed'

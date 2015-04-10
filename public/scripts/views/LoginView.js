@@ -12,7 +12,7 @@ define([
       id: "LoginView",
 
       initialize: function (){
-        this.template = _.template(loginTemplate);    
+        this.template = _.template(LoginTemplate);    
       },
 
       render:function (info) {

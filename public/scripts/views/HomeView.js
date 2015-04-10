@@ -15,12 +15,7 @@ define([
       id: "HomeView",
     
       initialize:function(){
-          this.template = _.template(homeTemplate);
-      },
-
-      initialize: function (){
-        this.childViews = [];
-        this.template = _.template(HomeTemplate);
+          this.template = _.template(HomeTemplate);
       },
 
       render:function(info) {

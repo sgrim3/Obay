@@ -1,5 +1,4 @@
 define(['jquery'], function ($){
-    console.log('dz in utils.js');
     var utils = {
         // Asynchronously load templates located in separate .html files.
         loadTemplate: function(views, callback) {

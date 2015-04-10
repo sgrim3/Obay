@@ -4,7 +4,6 @@ define([
   'backbone',
   'scripts/views/HomeView'
 ], function ($, _, Backbone, HomeView) {
-  console.log(HomeView);
   var SortFreeHomeView = HomeView.extend({
 
     tagname: "div",

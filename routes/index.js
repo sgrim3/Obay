@@ -36,7 +36,7 @@ var isVenmoAuthenticated = function(req,res){
 
 var sessionData = function(req,res){
     //returns the current session info as a JSON. Session stuff is not easily accessed or parsed client side so we do it on the server instead. Maybe change this if we find a way to get cookie info on the client side?
-    res.send(req.session);
+    res.json(req.session);
 }
 
 var logout = function(req,res){
@@ -55,12 +55,12 @@ var venmoPay = function(req,res){
         var error = JSON.parse(response.body).error;
         if (venmo_server_error || error) {
             if (venmo_server_error) {
-                res.send({success:false, message:'Venmo had an internal server error!'});
+                res.status(503).send({success:false, message:'Venmo had an internal server error!'});
             } else {
-                res.send({success:false, message:error.message});
+                res.status(400).send({success:false, message:error.message});
             }
         } else {
-            res.send({success:true, message:'Transaction made!'});
+            res.status(200).send({success:true, message:'Transaction made!'});
         }
     });
 };
@@ -105,7 +105,7 @@ var olinAppsAuth = function(req,res){
                             res.redirect('/#home');
                         } else {
                             //user does not exist in database yet, create the user
-                            var user_info = {userId:userId,olinAppsInfo:olinAppsInfo,listings:[]};
+                            var user_info = {userId:userId,olinAppsInfo:olinAppsInfo,listings:[],venmoPayId:'',venmoUserName:''};
                             var new_user = new User(user_info);
                             new_user.save(function (err) {
                                 if (err){
@@ -124,10 +124,56 @@ var olinAppsAuth = function(req,res){
     );
 };
 
+var venmoLinkAccount = function (req, res) {
+    //route accessed by venmo API, does venmo authentication and links user account to venmo
+    var onSuccess = function(){
+        var venmo_access_token = req.query.access_token;
+        request.get('https://api.venmo.com/v1/me?access_token='+venmo_access_token, function(venmo_server_error, venmo_response){
+            var error = JSON.parse(venmo_response.body).error;
+            if (venmo_server_error || error) {
+                if (venmo_server_error) {
+                    res.status(503).send({success:false, message:'Venmo had an internal server error!'});
+                } else {
+                    res.status(400).send({success:false, message:error.message});
+                }
+            } else {
+                var olinAuthId = req.session.user.userId;
+                var venmoUserId = JSON.parse(venmo_response.body).data.user.id;
+                var venmoUserName = JSON.parse(venmo_response.body).data.user.username;
+                console.log(venmoUserId);
+                console.log(venmoUserName);
+                User.findOne({userId:olinAuthId}, function(err, user){
+                    if (err) {
+                        res.status(500).send('Obay server could not search user models!');
+                    } else {
+                        user.venmoPayId = venmoUserId;
+                        user.venmoUserName = venmoUserName;
+                        console.log(user);
+                        user.save(function (err) {
+                            if (err){
+                                res.status(500).send('Obay server could not associate venmo id with your account!');
+                            } else {
+                                res.status(200).redirect('/#account');
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    };
+    var onError = function(){
+        //else destroy session and redirect to login
+        req.session.destroy();
+        res.redirect('/');
+    }
+    ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
+}
+
 module.exports.sessionData = sessionData;
 module.exports.isOlinAuthenticated = isOlinAuthenticated;
 module.exports.isVenmoAuthenticated = isVenmoAuthenticated;
 module.exports.venmoPay = venmoPay;
+module.exports.venmoLinkAccount = venmoLinkAccount;
 module.exports.venmoAuth = venmoAuth;
 module.exports.olinAppsAuth = olinAppsAuth;
 module.exports.logout = logout;

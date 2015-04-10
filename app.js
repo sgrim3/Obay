@@ -35,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //API Authentication Routes
 app.get('/venmoAuth', index.venmoAuth);
+app.get('/venmoAuth/addAccount', [olinAuthMiddleware, index.venmoLinkAccount]);
 app.post('/olinAppsAuth', index.olinAppsAuth);
 
 // Our Routes.

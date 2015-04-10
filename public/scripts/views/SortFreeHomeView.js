@@ -5,8 +5,7 @@ define([
   'scripts/collections/freeFeed',
   'scripts/views/HomeView',
   'scripts/views/FeedView',
-  'text!templates/HomeView.html'
-], function ($, _, Backbone, FreeFeed, HomeView, FeedView, homeTemplate) {
+], function ($, _, Backbone, FreeFeed, HomeView, FeedView) {
   var SortFreeHomeView = HomeView.extend({
 
     tagname: "div",

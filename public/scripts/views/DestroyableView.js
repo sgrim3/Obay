@@ -7,7 +7,7 @@ define([
         tagname: "div",
         id: "DestroyableView",
 
-        initialize: function () {
+        initialize:function() {
             this.childViews = [];
         },
 

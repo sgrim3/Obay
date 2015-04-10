@@ -5,14 +5,20 @@ define([
     defaults: {
       userId: '',
       olinAppsInfo: {},
-      listings: []
+      listings: [],
+      venmoUserName: '',
+      venmoUserId: '',
     },
     //use userId to uniquely identify user objects
     idAttribute: 'userId',
-    initialize: function (id) {
-    
-    },
-    urlRoot:'127.0.0.1/3000/users'
+    fetch: function(callback){
+      var self = this;
+      $.get('/sessionData')
+        .done(function(data){
+          self.userData = data.user;
+          callback();
+        })
+    }
   });
 
   return User;

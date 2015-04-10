@@ -126,47 +126,59 @@ var olinAppsAuth = function(req,res){
 
 var venmoLinkAccount = function (req, res) {
     //route accessed by venmo API, does venmo authentication and links user account to venmo
-    var onSuccess = function(){
-        var venmo_access_token = req.query.access_token;
-        request.get('https://api.venmo.com/v1/me?access_token='+venmo_access_token, function(venmo_server_error, venmo_response){
-            var error = JSON.parse(venmo_response.body).error;
-            if (venmo_server_error || error) {
-                if (venmo_server_error) {
-                    res.status(503).send({success:false, message:'Venmo had an internal server error!'});
-                } else {
-                    res.status(400).send({success:false, message:error.message});
-                }
+    var venmo_access_token = req.query.access_token;
+    request.get('https://api.venmo.com/v1/me?access_token='+venmo_access_token, function(venmo_server_error, venmo_response){
+        var error = JSON.parse(venmo_response.body).error;
+        if (venmo_server_error || error) {
+            if (venmo_server_error) {
+                res.status(503).send({success:false, message:'Venmo had an internal server error!'});
             } else {
-                var olinAuthId = req.session.user.userId;
-                var venmoUserId = JSON.parse(venmo_response.body).data.user.id;
-                var venmoUserName = JSON.parse(venmo_response.body).data.user.username;
-                console.log(venmoUserId);
-                console.log(venmoUserName);
-                User.findOne({userId:olinAuthId}, function(err, user){
-                    if (err) {
-                        res.status(500).send('Obay server could not search user models!');
-                    } else {
-                        user.venmoPayId = venmoUserId;
-                        user.venmoUserName = venmoUserName;
-                        console.log(user);
-                        user.save(function (err) {
-                            if (err){
-                                res.status(500).send('Obay server could not associate venmo id with your account!');
-                            } else {
-                                res.status(200).redirect('/#account');
-                            }
-                        });
-                    }
-                });
+                res.status(400).send({success:false, message:error.message});
             }
-        });
-    };
-    var onError = function(){
-        //else destroy session and redirect to login
-        req.session.destroy();
-        res.redirect('/');
-    }
-    ensureOlinAuthenticatedServer(req,res,onSuccess,onError);
+        } else {
+            var olinAuthId = req.session.user.userId;
+            var venmoUserId = JSON.parse(venmo_response.body).data.user.id;
+            var venmoUserName = JSON.parse(venmo_response.body).data.user.username;
+            User.findOne({userId:olinAuthId}, function(err, user){
+                if (err) {
+                    res.status(500).send('Obay server could not search user models!');
+                } else {
+                    user.venmoPayId = venmoUserId;
+                    user.venmoUserName = venmoUserName;
+                    user.save(function (err) {
+                        if (err){
+                            res.status(500).send('Obay server could not associate venmo id with your account!');
+                        } else {
+                            //must update the session user, since the front end user information actually looks at session data to determine current user information
+                            req.session.user = user;
+                            res.status(200).redirect('/#account');
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
+var venmoRemoveAccount = function(req,res){
+    var olinAuthId = req.session.user.userId;
+    User.findOne({userId:olinAuthId}, function(err, user){
+        if (err) {
+            res.status(500).send('Obay server could not search user models!');
+        } else {
+            user.venmoPayId = '';
+            user.venmoUserName = '';
+            user.save(function (err) {
+                if (err){
+                    res.status(500).send('Obay server could not unlink venmo id from your account!');
+                } else {
+                    //must update the session user, since the front end user information actually looks at session data to determine current user information
+                    req.session.user = user;
+                    res.status(200).redirect('/#account');
+                }
+            });
+        }
+    });
 }
 
 module.exports.sessionData = sessionData;
@@ -174,6 +186,7 @@ module.exports.isOlinAuthenticated = isOlinAuthenticated;
 module.exports.isVenmoAuthenticated = isVenmoAuthenticated;
 module.exports.venmoPay = venmoPay;
 module.exports.venmoLinkAccount = venmoLinkAccount;
+module.exports.venmoRemoveAccount = venmoRemoveAccount;
 module.exports.venmoAuth = venmoAuth;
 module.exports.olinAppsAuth = olinAppsAuth;
 module.exports.logout = logout;

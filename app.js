@@ -55,6 +55,7 @@ app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 app.get('/temporary_email_route', email.sendEmail);
 
 // POST.
+app.post('/venmoRemoveAccount', [olinAuthMiddleware, index.venmoRemoveAccount]);
 app.post('/venmoPay', [olinAuthMiddleware, index.venmoPay]);
 app.post('/logout', index.logout);
 app.post('/listing', [olinAuthMiddleware, listing.postListing]);

@@ -12,8 +12,7 @@ define([
       id: "LoginView",
 
       initialize: function (){
-        this.childViews = [];
-        this.template = _.template(LoginTemplate);    
+        this.template = _.template(loginTemplate);    
       },
 
       render:function (info) {

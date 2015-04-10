@@ -17,7 +17,6 @@ define([
       },
 
       initialize:function () {
-          this.childViews = [];
           //toss in global event listeners
           this.listenTo(Backbone.pubSub, 'exitPopoverAddListing', this.hidePopoverAddListing);
           this.template = _.template(SidebarTemplate);

@@ -7,8 +7,10 @@ define([
         tagname: "div",
         id: "DestroyableView",
 
-        initialize:function() {
+        constructor: function (attributes, options) {
             this.childViews = [];
+            //line below does what the backbone constructor should actually do
+            Backbone.View.apply(this, arguments);
         },
 
         destroy:function () {

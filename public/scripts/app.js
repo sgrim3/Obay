@@ -32,7 +32,7 @@ require([
 
   // , 'scripts/views/DestroyableView'
   , 'scripts/views/AccountView'
-  // , 'scripts/views/AddListingView'
+  , 'scripts/views/AddListingView'
   // , 'scripts/views/CollapsedListingView'
   // , 'scripts/views/FeedView'
   , 'scripts/views/HomeView'
@@ -56,7 +56,7 @@ require([
 
   // , DestroyableView
   , AccountView
-  // , AddListingView
+  , AddListingView
   // , CollapsedListingView
   // , FeedView
   , HomeView

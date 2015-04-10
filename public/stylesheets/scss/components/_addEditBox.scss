@@ -1,21 +1,12 @@
 .add {
   // FIXME: Make this dynamic.
-  min-width: 900 !important;
+  min-width: 900px !important;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
   align-items: center;
 }
-
-// /* The ghost, nudged to maintain perfect centering */
-// .add:before {
-//   content: '';
-//   display: inline-block;
-//   height: 100%;
-//   vertical-align: middle;
-//   margin-right: -0.25em; /* Adjusts for spacing */
-// }
 
 /* The element to be centered, can also be of any width and height */ 
 $addContainerPadding: 40px;

@@ -10,4 +10,7 @@ Current venmo account that your buyers can pay with venmo: <%= venmoUserName %>
 </div>
 
 <p> Click the button below to remove your venmo/obay account association! Buyers of your items will have to pay you in cash. </p>
-<button id="removeVenmoButton">Remove dat venmo account association!</button>
+
+<form method="POST" action="/venmoRemoveAccount">
+    <input type="submit"></input>
+</form>

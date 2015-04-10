@@ -6,7 +6,7 @@ define([
   'scripts/models/listing',
 
   'scripts/views/AddListingView',
-  'text!templates/PopoverAddListingView.html'
+  'text!templates/PopoverAddListingTemplate.html'
 ], function ($, _, Backbone, Listing, AddListingView, PopoverAddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",

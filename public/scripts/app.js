@@ -42,7 +42,7 @@ require([
   // , 'scripts/views/PayView'
   // , 'scripts/views/PopoverAddListingView'
   , 'scripts/views/SidebarView'
-  // , 'scripts/views/SortFreeHomeView'
+  , 'scripts/views/SortFreeHomeView'
 ], function(
     $
   , Backbone
@@ -66,7 +66,7 @@ require([
   // , PayView
   // , PopoverAddListingView
   , SidebarView
-  // , SortFreeHomeView
+  , SortFreeHomeView
 ){
   var Router = Backbone.Router.extend({
     routes: {

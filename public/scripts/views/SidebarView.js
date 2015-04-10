@@ -6,7 +6,7 @@ define([
   'scripts/views/DestroyableView',
   'scripts/views/PopoverAddListingView',
 
-  'text!templates/SidebarView.html',
+  'text!templates/SidebarTemplate.html',
 ], function ($, _, Backbone, DestroyableView, PopoverAddListingView, SidebarTemplate) {
   var SidebarView = DestroyableView.extend({
       tagname: "div",

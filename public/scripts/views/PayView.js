@@ -12,7 +12,6 @@ define([
     id: "PayView",
 
     initialize: function (){
-      this.childViews = [];
       this.template = _.template(PayTemplate);
     },
 

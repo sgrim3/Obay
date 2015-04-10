@@ -13,9 +13,12 @@ define([
   var HomeView = DestroyableView.extend({
       tagname: "div",
       id: "HomeView",
+    
+      initialize:function(){
+          this.template = _.template(homeTemplate);
+      },
 
       render:function(info) {
-          this.template = _.template(homeTemplate);
           //must instantiate template before rendering subviews, since they mount onto the template!
           info.parentDiv.append(this.$el);
           this.$el.html(this.template());

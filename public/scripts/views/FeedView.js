@@ -12,7 +12,6 @@ define([
         id: "FeedView",
 
         initialize:function (data) {
-            this.childViews = [];
             this.listenTo(Backbone.pubSub, 'listingAdded', this.addListingView);
             this.collection = data.feedModel;
         },

@@ -145,11 +145,12 @@ var venmoLinkAccount = function (req, res) {
                 } else {
                     user.venmoPayId = venmoUserId;
                     user.venmoUserName = venmoUserName;
-                    console.log(user);
                     user.save(function (err) {
                         if (err){
                             res.status(500).send('Obay server could not associate venmo id with your account!');
                         } else {
+                            //must update the session user, since the front end user information actually looks at session data to determine current user information
+                            req.session.user = user;
                             res.status(200).redirect('/#account');
                         }
                     });
@@ -171,6 +172,8 @@ var venmoRemoveAccount = function(req,res){
                 if (err){
                     res.status(500).send('Obay server could not unlink venmo id from your account!');
                 } else {
+                    //must update the session user, since the front end user information actually looks at session data to determine current user information
+                    req.session.user = user;
                     res.status(200).redirect('/#account');
                 }
             });

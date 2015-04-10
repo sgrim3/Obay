@@ -11,7 +11,6 @@ define([
     id: "AccountView",
 
     initialize: function(info){
-        this.childView = [];
         this.template = _.template(AccountTemplate);
         this.model = info.model;
     },

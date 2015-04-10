@@ -17,7 +17,6 @@ define([
     	},
 
         initialize: function (){
-            this.childViews = [];
             this.template = _.template(PopoverAddListingTemplate);
         },
 

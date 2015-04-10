@@ -2,8 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'scripts/views/HomeView'
-], function ($, _, Backbone, HomeView) {
+  'scripts/collections/freeFeed',
+  'scripts/views/HomeView',
+  'scripts/views/FeedView',
+  'text!templates/HomeView.html'
+], function ($, _, Backbone, FreeFeed, HomeView, FeedView, homeTemplate) {
   var SortFreeHomeView = HomeView.extend({
 
     tagname: "div",
@@ -18,6 +21,7 @@ define([
         feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
         return this;
     },
+
   });
 
   return SortFreeHomeView;

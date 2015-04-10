@@ -7,7 +7,7 @@ define([
 
   'scripts/views/DestroyableView',
 
-  'text!templates/CollapsedListingView.html'
+  'text!templates/CollapsedListingTemplate.html'
 ], function ($, _, Backbone, Listing, DestroyableView, CollapsedListingTemplate) {
     var CollapsedListingView = DestroyableView.extend({
         tagname: "div",

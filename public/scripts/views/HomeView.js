@@ -8,14 +8,19 @@ define([
   'scripts/views/DestroyableView',
   'scripts/views/FeedView',
   
-  'text!templates/HomeView.html'
-], function ($, _, Backbone, Feed, DestroyableView, FeedView, homeTemplate) {
+  'text!templates/HomeTemplate.html'
+], function ($, _, Backbone, Feed, DestroyableView, FeedView, HomeTemplate) {
   var HomeView = DestroyableView.extend({
       tagname: "div",
       id: "HomeView",
     
       initialize:function(){
           this.template = _.template(homeTemplate);
+      },
+
+      initialize: function (){
+        this.childViews = [];
+        this.template = _.template(HomeTemplate);
       },
 
       render:function(info) {

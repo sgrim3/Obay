@@ -8,8 +8,8 @@ define([
   'scripts/views/DestroyableView',
   'scripts/views/PayView',
 
-  'text!templates/ListingView.html',
-], function ($, _, Backbone, Listing, DestroyableView, PayView, listingTemplate) {
+  'text!templates/ListingTemplate.html',
+], function ($, _, Backbone, Listing, DestroyableView, PayView, ListingTemplate) {
 
   var ListingView = DestroyableView.extend({
       tagname: "div",
@@ -21,7 +21,7 @@ define([
 
   	initialize:function (info) {
           this.model = info.model;
-          this.template = _.template(listingTemplate);
+          this.template = _.template(ListingTemplate);
       },
 
       render: function (info){

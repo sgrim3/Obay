@@ -8,7 +8,7 @@ define([
 
   'scripts/views/DestroyableView',
 
-  'text!templates/AddListingView.html'
+  'text!templates/AddListingTemplate.html'
 ], function ($, _, Backbone, Dropzone, Listing, DestroyableView, AddListingTemplate) {
     var AddListingView = DestroyableView.extend({
         tagname: "div",

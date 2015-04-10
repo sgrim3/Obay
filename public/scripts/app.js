@@ -21,52 +21,52 @@ requirejs.config({
 });
 
 require([
-  'jquery',
-  'backbone',
-  'utils',
-  // TODO: Refactor so that router doesn't handle everything.
-  'scripts/models/listing',
-  'scripts/models/user',
-  'scripts/collections/feed',
-  'scripts/collections/freeFeed',
+    'jquery'
+  , 'backbone'
+  , 'utils'
 
-  'scripts/views/DestroyableView',
-  'scripts/views/AccountView',
-  'scripts/views/AddListingView',
-  'scripts/views/CollapsedListingView',
-  'scripts/views/FeedView',
-  'scripts/views/HomeView',
-  'scripts/views/ListingView',
-  'scripts/views/LoginView',
-  'scripts/views/NotFoundView',
-  'scripts/views/PayView',
-  'scripts/views/PopoverAddListingView',
-  'scripts/views/SidebarView',
-  'scripts/views/SortFreeHomeView'
+  , 'scripts/models/listing'
+  , 'scripts/models/user'
+  // , 'scripts/collections/feed'
+  // , 'scripts/collections/freeFeed'
+
+  // , 'scripts/views/DestroyableView'
+  , 'scripts/views/AccountView'
+  // , 'scripts/views/AddListingView'
+  // , 'scripts/views/CollapsedListingView'
+  // , 'scripts/views/FeedView'
+  , 'scripts/views/HomeView'
+  , 'scripts/views/ListingView'
+  , 'scripts/views/LoginView'
+  // , 'scripts/views/NotFoundView'
+  // , 'scripts/views/PayView'
+  // , 'scripts/views/PopoverAddListingView'
+  , 'scripts/views/SidebarView'
+  , 'scripts/views/SortFreeHomeView'
 ], function(
-  $,
-  Backbone,
-  utils,
+    $
+  , Backbone
+  , utils
 
   // FIXME: Naming convention standardization.
-  Listing,
-  UserModel,
-  FeedCollection,
-  FreeFeedCollection,
+  , Listing
+  , UserModel
+  // , FeedCollection
+  // , FreeFeedCollection
 
-  DestroyableView,
-  AccountView,
-  AddListingView,
-  CollapsedListingView,
-  FeedView,
-  HomeView,
-  ListingView,
-  LoginView,
-  NotFoundView,
-  PayView,
-  PopoverAddListingView,
-  SidebarView,
-  SortFreeHomeView
+  // , DestroyableView
+  , AccountView
+  // , AddListingView
+  // , CollapsedListingView
+  // , FeedView
+  , HomeView
+  , ListingView
+  , LoginView
+  // , NotFoundView
+  // , PayView
+  // , PopoverAddListingView
+  , SidebarView
+  , SortFreeHomeView
 ){
   var Router = Backbone.Router.extend({
     routes: {

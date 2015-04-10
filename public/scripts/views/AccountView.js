@@ -3,7 +3,7 @@ define([
   'underscore', 
   'backbone',
   'scripts/views/DestroyableView',
-  'text!templates/AccountView.html'
+  'text!templates/AccountTemplate.html'
 ], function ($, _, Backbone, DestroyableView, AccountTemplate) {
   var AccountView = DestroyableView.extend({
 

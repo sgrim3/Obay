@@ -53,17 +53,25 @@ exports.updateListing = function(req,res){
     var id=req.params.id;
     var real_listing_creator= req.session.user.userId;
 
+
     var listing_name= req.body.listing_name;
     var listing_description= req.body.listing_description;
     var listing_image= req.body.listing_image;
     var listing_time_created= Date.now();
-    var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
+
+    console.log(listing_open);
+    console.log(listing_description);
+    console.log(listing_image);
+    //var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
+    var listing_price= parseFloat(req.body.listing_price);
+
     var listing_open = req.body.listing_open;
 
     //check that listing_open is not undefined
     //need to come back to this if statements so it's not so dumb
-    if(listing_open===false){
+    if(listing_open==false){
         //handle buy sell
+        //console.log("trying to serverside buy");
         Listing.findByIdAndUpdate(id, {$set:{ listing_open:listing_open }}, 
             function (err, listing) {
             if (err){

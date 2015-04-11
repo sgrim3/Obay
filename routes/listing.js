@@ -62,6 +62,7 @@ exports.updateListing = function(req,res){
     console.log(listing_open);
     console.log(listing_description);
     console.log(listing_image);
+    //FIXME: Why doesn't .replace work???
     //var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
     var listing_price= parseFloat(req.body.listing_price);
 

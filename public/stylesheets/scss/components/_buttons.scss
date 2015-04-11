@@ -104,6 +104,12 @@ $colorIntensity: 700;
     margin-bottom: 20px;
 }
 
+#editButton {
+    @extend #buyButton;
+    right: 80px;
+    background-color: palette(Blue, $colorIntensity);
+}
+
 button#cashButton {
     @extend %rectangular-button;
     background-color: palette(Green, $colorIntensity);

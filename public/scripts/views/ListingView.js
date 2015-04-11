@@ -16,7 +16,8 @@ define([
       id: "ListingView",
 
   	events: {		
-  	    'click #buyButton': 'buyItem',		
+  	    'click #buyButton': 'buyItem',	
+        'click #editButton': 'editItem',	
   	},
 
   	initialize:function (info) {
@@ -36,6 +37,14 @@ define([
               }
           });
           return listingView;
+      },
+
+      editItem: function () {
+        var url = '#editListing/'+this.model.id;
+        console.log(url);
+            Backbone.history.navigate(url);
+            Backbone.history.loadUrl(url);
+
       },
 
       buyItem: function(){	

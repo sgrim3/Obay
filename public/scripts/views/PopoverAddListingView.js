@@ -6,8 +6,8 @@ define([
   'scripts/models/listing',
 
   'scripts/views/AddListingView',
-  'text!templates/PopoverAddListingTemplate.html'
-], function ($, _, Backbone, Listing, AddListingView, PopoverAddListingTemplate) {
+  'text!templates/AddListingTemplate.html'
+], function ($, _, Backbone, Listing, AddListingView, AddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",
         id: "PopoverAddListingView",
@@ -17,7 +17,7 @@ define([
     	},
 
         initialize: function (){
-            this.template = _.template(PopoverAddListingTemplate);
+            this.template = _.template(AddListingTemplate);
         },
 
         broadcoastExitPopoverAddListing: function(){

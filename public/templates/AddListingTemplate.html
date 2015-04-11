@@ -3,10 +3,10 @@
     <div id="image_upload" class="dropzone"></div>
 
     <form id="addForm" >
-      <input type="text" id="addListingName" placeholder="Item Name" name="name"> <br>
-      <input type="text" id="addListingPrice" placeholder="Price"><br>
-      <input type="text" id="addListingImage" placeholder="Image url" > <br>
-      <textarea id="addListingDescription" placeholder="Description" name="Description"></textarea><br>
+      <input type="text" id="addListingName" placeholder="Item Name" name="name" value='<%= listing_name %>'></input><br>
+      <input type="text" id="addListingPrice" placeholder="Price" value='<%= listing_price %>'><br>
+      <input type="text" id="addListingImage" placeholder="Image url" value='<%= listing_image %>'> <br>
+      <textarea id="addListingDescription" placeholder="Description" name="Description" value='<%= listing_description %>'><%= listing_description %></textarea><br>
       
       <label id="toCarpeCheckbox"><input id="carpeButton" type="checkbox" name="toCarpe" checked>Send a copy to Carpe?</label>
       <button type="submit" class="round-button" id="postButton"><i class="fa fa-check"></i></button>

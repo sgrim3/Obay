@@ -33,6 +33,7 @@ require([
   // , 'scripts/views/DestroyableView'
   , 'scripts/views/AccountView'
   , 'scripts/views/AddListingView'
+  , 'scripts/views/EditListingView'
   // , 'scripts/views/CollapsedListingView'
   // , 'scripts/views/FeedView'
   , 'scripts/views/HomeView'
@@ -57,6 +58,7 @@ require([
   // , DestroyableView
   , AccountView
   , AddListingView
+  , EditListingView
   // , CollapsedListingView
   // , FeedView
   , HomeView
@@ -75,6 +77,7 @@ require([
       "home/free":"free",
       "account": "account",
       "addListing": "addListing",
+      "editListing/:id": "editListing",
       "logout": "logout",
       "listing/:id" : "listing",
       "temporaryPayRoute": "pay",
@@ -162,6 +165,24 @@ require([
             if (self.Page) { self.Page.destroy(); self.Page = null; };
             self.Page = new AddListingView();
             self.Page.render({parentDiv: $('#PageContainer')});
+        }
+        var onOlinErr = function(){
+            window.location.replace('/');
+        }
+        self.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    editListing: function(id) {
+        var self = this;
+        var onOlinAuth = function(){
+            if (!self.Sidebar) {
+                self.Sidebar = new SidebarView();
+                self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            }
+            if (self.Page) { self.Page.destroy(); self.Page = null; };
+            var model = new Listing({id: id});
+            self.Page = new EditListingView({model:model});
+            self.Page.render({parentDiv: $('#PageContainer'), model:model});
         }
         var onOlinErr = function(){
             window.location.replace('/');

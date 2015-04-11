@@ -443,7 +443,7 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   margin-bottom: 20px; }
 
 #editButton {
-  right: 80px;
+  left: 350px;
   background-color: #1976D2; }
 
 button#cashButton {

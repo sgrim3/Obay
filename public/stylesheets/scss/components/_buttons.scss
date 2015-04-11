@@ -106,7 +106,7 @@ $colorIntensity: 700;
 
 #editButton {
     @extend #buyButton;
-    right: 80px;
+    left: 350px;
     background-color: palette(Blue, $colorIntensity);
 }
 

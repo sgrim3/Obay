@@ -11,26 +11,28 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-var email = {};
+module.exports = {
+  sendEmail: function (res, mailOptions){
 
-email.sendEmail = function (req, res, next){
+    // Send mail with defined transport object.
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+        res.status(500).send('Email failed to send: ' + error);
+      }else{
+        res.status(200).send('Message sent: ' + info.response);
+      }
+    });
+  },
+  testEmail: function (req, res, next){
+    // Setup e-mail data with unicode symbols.
+    var mailOptions = {
+      from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
+      to: req.body.emailTo ||'allisongpatterson@gmail.com', // list of receivers
+      subject: req.body.emailSubject || 'Hello', // Subject line
+      text: req.body.emailText || 'Hello world' // plaintext body
+    };
 
-  // Setup e-mail data with unicode symbols.
-  var mailOptions = {
-    from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
-    to: req.body.emailTo ||'hdavidzhu@gmail.com', // list of receivers
-    subject: req.body.emailSubject || 'Hello', // Subject line
-    text: req.body.emailText || 'Hello world' // plaintext body
-  };
+    this.sendEmail(res, mailOptions);
+  }
 
-  // Send mail with defined transport object.
-  transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-      res.status(500).send('Email failed to send: ' + error);
-    }else{
-      res.status(200).send('Message sent: ' + info.response);
-    }
-  });
-}
-
-module.exports = email;
+};

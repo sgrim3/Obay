@@ -44,7 +44,13 @@ define([
 
         render:function (info) {
             info.parentDiv.append(this.$el);
-            $(this.el).html(this.template());
+            var listing_attributes={
+                listing_name:'',
+                listing_price:'',
+                listing_description:'',
+                listing_image:''
+            }
+            $(this.el).html(this.template(listing_attributes));
             var dropzone_options = {
                 dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',
                 url: "/image",

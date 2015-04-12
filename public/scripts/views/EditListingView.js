@@ -58,37 +58,37 @@ define([
             // var listing_image = $("#addListingImage").val();
             // var listing_price= $("#addListingPrice").val();            
             // console.log(this.model.attributes);
-            // self_model = new Listing({id:info.model.id});
-            // console.log(self_model);
-            var self = this;
+            // _this_model = new Listing({id:info.model.id});
+            // console.log(_this_model);
+            var _this = this;
             this.model.fetch({
                 success: function(listing){
                     console.log(listing.attributes);
-                    info.parentDiv.append(self.$el);
-                    $(self.el).html(self.template(listing.attributes));
+                    info.parentDiv.append(_this.$el);
+                    $(_this.el).html(_this.template(listing.attributes));
                     var dropzone_options = {
                         dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',
                         url: "/image",
                         init: function() {
-                            self.on("addedfile", function() {
-                                if (self.files[1]!=null){
-                                    self.removeFile(self.files[0]);
+                            _this.on("addedfile", function() {
+                                if (_this.files[1]!=null){
+                                    _this.removeFile(_this.files[0]);
                                 }
                                 $('#image_upload').append("<button class='round-button' id='deleteImageButton'><i class='fa fa-times'></i></button>");
-                                var this_dropzone = self;
+                                var this_dropzone = _this;
                                 $('#deleteImageButton').click(function(event) {
                                     this_dropzone.removeAllFiles(true);
                                     $('#deleteImageButton').remove();
                                     $('#addListingImage').val('');
                                 });
                             });
-                            self.on("success", function(file, response) {
+                            _this.on("success", function(file, response) {
                                 $('#addListingImage').val(response);
                             });
                         }
                     };
-                    self.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
-                    this_dropzone = self.image_upload;
+                    _this.image_upload = new Dropzone($('#image_upload').get(0), dropzone_options);
+                    this_dropzone = _this.image_upload;
                     $('.dz-image').click(function(event) {
                         this_dropzone.removeAllFiles(true);
                     });
@@ -97,7 +97,7 @@ define([
                     console.log("error loading object from server");
                 }
             });
-            return self;
+            return _this;
         },
 
         updateListing: function(e) {
@@ -117,8 +117,6 @@ define([
                 listing_price: listing_price    
        
             });   
-
-            
 
             // var new_listing = new Listing(
             //     {

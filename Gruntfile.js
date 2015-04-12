@@ -4,7 +4,7 @@ module.exports = function (grunt){
   grunt.initConfig({
 
     concurrent: {
-      tasks: ['nodemon', 'watch'],
+      tasks: ['nodemon', 'watch:sass'],
       options: {
         logConcurrentOutput: true
       }

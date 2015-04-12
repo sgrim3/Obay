@@ -1,7 +1,8 @@
 //require my util scripts
-var validate_listing = require('./validateInput.js').validate_listing
+var validate_listing = require('./validateInput.js').validate_listing;
 
 var path = require("path");
+var email = require("./email.js");
 var User = require(path.join(__dirname,"../models/user_model")).user;
 var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 

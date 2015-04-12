@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, #loginButton, #buyButton, button#cashButton, button#venmoButton, #toCarpeCheckbox, #collapsedListingView, #text_area #price, #watchEye:hover, #addContainer, #imageDisplay, #payView {
+.sh1, .round-button, #loginButton, #buyButton, #editButton, button#cashButton, button#venmoButton, #toCarpeCheckbox, #collapsedListingView, #text_area #price, #watchEye:hover, #addContainer, #imageDisplay, #payView {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, #addButton, #image_area {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, #addButton:hover, #loginButton:hover, #buyButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover, #collapsedListingView:hover, #loginBox {
+.sh3, #addButton:hover, #loginButton:hover, #buyButton:hover, #editButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover, #collapsedListingView:hover, #loginBox {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -419,21 +419,21 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   #deleteImageButton .fa-times {
     cursor: pointer; }
 
-#loginButton, #buyButton, button#cashButton, button#venmoButton, #toCarpeCheckbox {
+#loginButton, #buyButton, #editButton, button#cashButton, button#venmoButton, #toCarpeCheckbox {
   border: 0px;
   border-radius: 3px;
   color: #ffffff;
   display: block;
   font-size: 14pt;
   padding: 12px; }
-  #loginButton:hover, #buyButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover {
+  #loginButton:hover, #buyButton:hover, #editButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover {
     cursor: pointer; }
 
 #loginButton {
   width: 100%;
   background-color: #388E3C; }
 
-#buyButton {
+#buyButton, #editButton {
   background-color: #388E3C;
   position: absolute;
   width: auto;
@@ -441,6 +441,10 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   right: 0;
   margin-right: 20px;
   margin-bottom: 20px; }
+
+#editButton {
+  left: 350px;
+  background-color: #1976D2; }
 
 button#cashButton {
   background-color: #388E3C;
@@ -502,7 +506,9 @@ button#venmoButton {
   float: left; }
 
 #picture {
-  max-height: 100%; }
+  position: relative;
+  max-height: 100%;
+  margin-left: -25%; }
 
 #watchEye {
   position: absolute;
@@ -639,15 +645,15 @@ button#venmoButton {
   background-color: #1976D2; }
 
 #imageDisplay {
-  width: 300px;
-  height: 300px;
-  overflow: hidden;
+  max-width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden; }
 
 #imageDisplay img {
   display: block;
-  max-height: 100%; }
+  max-height: 100%;
+  width: 300px; }
 
 #textDisplay {
   flex: 1;

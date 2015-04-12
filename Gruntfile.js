@@ -59,10 +59,10 @@ module.exports = function (grunt){
         files: '**/*.scss',
         tasks: ["sass"]
       },
-      viewFiles: {
-        files: ['**/*.js', 'public/index.tpl.html'],
-        tasks: ["includeSource"]  
-      }
+      // viewFiles: {
+      //   files: ['**/*.js', 'public/index.tpl.html'],
+      //   tasks: ["includeSource"]  
+      // }
     }
   });
 

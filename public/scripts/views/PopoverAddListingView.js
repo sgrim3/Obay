@@ -6,7 +6,8 @@ define([
   'scripts/models/listing',
 
   'scripts/views/AddListingView',
-], function ($, _, Backbone, Listing, AddListingView) {
+  'text!templates/AddListingTemplate.html',
+], function ($, _, Backbone, Listing, AddListingView, AddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",
         id: "PopoverAddListingView",
@@ -16,8 +17,9 @@ define([
     	},
 
         initialize: function (){
-            var self = this;
-            Backbone.pubSub.on('listing_save:success', self.redirectHome, self);
+            var _this = this;
+            Backbone.pubSub.on('listing_save:success', _this.redirectHome, _this);
+            this.template = _.template(AddListingTemplate);
         },
 
         broadcoastExitPopoverAddListing: function(){

@@ -30,6 +30,9 @@ define([
           var listingView = this;
           this.model.fetch({
               success: function(listing){
+                  var currentUser = listing.attributes.currentUser;
+                  var itemCreator = listing.attributes.listing_creator;
+
                   listingView.$el.html(listingView.template(listing.attributes));
               },
               error: function(err){

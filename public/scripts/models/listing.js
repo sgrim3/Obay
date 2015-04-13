@@ -4,7 +4,7 @@ define([
     var Listing = Backbone.Model.extend({
 
         defaults: {
-            listing_name: 'David',
+            listing_name: '',
             listing_description: '',
             listing_image: '',
             listing_creator: '',

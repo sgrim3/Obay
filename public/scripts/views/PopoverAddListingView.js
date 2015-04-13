@@ -44,6 +44,9 @@ define([
         	var listing_image = $("#addListingImage").val();
             var listing_price= $("#addListingPrice").val();
 
+            var toCarpe = $("#carpeButton").val();
+            console.log(toCarpe);
+
             var new_listing = new Listing({
                 //listing_creator and listing_time_created is set on the server
                 listing_name: listing_name,
@@ -53,29 +56,6 @@ define([
                 listing_price: listing_price
             });
             new_listing.update();
-
-            //this save function looks funny because it's not a mongoose save, it's a backbone models .save!
-            // new_listing.save({}, {
-            //     success: function(model, response, options) {
-            //         $('#error_message').text('');
-            //         //associate server save time and user with the model
-            //         model.listing_time_created = response.listing_time_created;
-            //         model.listing_creator = response.listing_creator;
-            //         thisView.broadcoastExitPopoverAddListing();
-            //         thisView.broadcoastListingAdded(model);
-            //     },
-            //     error: function(model, response, options) {
-            //         if (response.status === 401) {
-            //             //if not authenticated, redirect
-            //             if (!response.authenticated){
-            //                 window.location.replace('/');
-            //             }
-            //         } else {
-            //             $('#error_message').text(response.responseText);
-            //         }
-            //     }
-            // });
-
         },
 
         redirectHome: function (model){

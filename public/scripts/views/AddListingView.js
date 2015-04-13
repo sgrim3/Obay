@@ -86,9 +86,6 @@ define([
         	var listing_description = $("#addListingDescription").val();
         	var listing_image = $("#addListingImage").val();
             var listing_price = $("#addListingPrice").val();
-            var toCarpe = $("#carpeButton").val();
-
-            console.log(toCarpe);
 
             var new_listing = new Listing(
                 {

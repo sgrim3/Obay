@@ -21,6 +21,7 @@ define([
           model.listing_time_created = response.listing_time_created;
           model.listing_creator = response.listing_creator;
           Backbone.pubSub.trigger("listing_save:success", model);
+        },
         error: function(model, response, options) {
           Backbone.pubSub.trigger("listing_save:error", response);
         }

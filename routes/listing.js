@@ -36,6 +36,8 @@ exports.postListing = function (req, res) {
 
 exports.getListing = function(req, res) {
     var id=req.params.id;
+    var currentUser= req.session.user.userId;
+    var authenticated = false;
 
     Listing.findOne({_id:id}).exec(function (err, item) {
         if (err) {
@@ -43,6 +45,9 @@ exports.getListing = function(req, res) {
             res.status(500).send("Could not search Listings!");
         }
         else {
+            if (currentUser===item.listing_creator) {
+                authenticated = true;
+            }
             res.send(item); 
             //console.log('found item' + id);
         }

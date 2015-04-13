@@ -26,11 +26,16 @@ define([
 
 
         render:function (info) {
+            console.log(info);
+            console.log(info.model);
+            console.log(info.model.attributes);
+            console.log(info.model.get("listing_name"));
+
 
             var self = this;
             this.model.fetch({
                 success: function(listing){
-                    console.log(listing.attributes);
+                    // console.log(listing.attributes);
                     info.parentDiv.append(self.$el);
                     $(self.el).html(self.template(listing.attributes));
                     var dropzone_options = {

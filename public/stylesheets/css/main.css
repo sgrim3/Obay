@@ -388,6 +388,10 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
 #homeButton {
   background: #1976D2; }
 
+#littleO {
+  max-width: 75%;
+  margin-top: 15%; }
+
 #accountButton {
   background: #F57C00; }
 

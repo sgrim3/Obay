@@ -27,6 +27,11 @@ $colorIntensity: 700;
     background: palette(Blue, $colorIntensity);
 }
 
+#littleO {
+    max-width: 75%;
+    margin-top: 15%;
+}
+
 #accountButton {
     background: palette(Orange, $colorIntensity);
 }

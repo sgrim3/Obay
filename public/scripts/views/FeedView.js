@@ -22,9 +22,11 @@ define([
             var feedview = this;
             this.collection.fetch({
                 //fetch must be called asynchronously to work!
-                success: function(){
-                    //remove the loading listings message
+                success: function(data){
+                    console.log('success!!!!');
+                    console.log(data);
                     feedview.collection.models.forEach(function(m){
+                      console.log(m);
                         var collapsedListingView = new CollapsedListingView({model: m});
                         feedview.childViews.push(collapsedListingView);
                         collapsedListingView.render({parentDiv: feedview.$el}); 

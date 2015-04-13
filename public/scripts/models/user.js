@@ -13,9 +13,9 @@ define([
     idAttribute: 'userId',
     fetch: function(callback){
       var self = this;
-      $.get('/sessionData')
+      $.get('/userData')
         .done(function(data){
-          self.userData = data.user;
+          self.set(data.user);
           callback();
         })
     }

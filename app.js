@@ -13,10 +13,12 @@ var listing = require ("./routes/listing");
 var feed = require ("./routes/feed");
 var email = require('./routes/email');
 var image = require('./routes/image');
-var olinAuth = require('./routes/auth');
+var payment = require('./routes/payment');
+var auth = require('./routes/auth');
 
 // Line below disabled authentication for testing purposes.
-var olinAuthMiddleware = olinAuth.olinAuthMiddleware;
+var olinAuthMiddleware = auth.olinAuthMiddleware;
+var venmoAuthMiddleware = auth.venmoAuthMiddleware;
 // var olinAuthMiddleware = function (req, res, next) { next(); };
 
 var app = express();
@@ -34,14 +36,15 @@ app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //API Authentication Routes
-app.get('/venmoAuth', index.venmoAuth);
-app.get('/venmoAuth/addAccount', [olinAuthMiddleware, index.venmoLinkAccount]);
-app.post('/olinAppsAuth', index.olinAppsAuth);
+app.get('/venmoAuth', auth.venmoAuth);
+app.get('/venmoAuth/addAccount', [olinAuthMiddleware, auth.venmoLinkAccount]);
+app.get('/venmoAuth/redirect', [olinAuthMiddleware, payment.venmoRedirect]);
+app.post('/olinAppsAuth', auth.olinAppsAuth);
 
 // Our Routes.
 // GET.
-app.get('/isVenmoAuthenticated', index.isVenmoAuthenticated);
-app.get('/isOlinAuthenticated', index.isOlinAuthenticated);
+app.get('/isVenmoAuthenticated', auth.isVenmoAuthenticated);
+app.get('/isOlinAuthenticated', auth.isOlinAuthenticated);
 
 app.get('/sessionData', [olinAuthMiddleware, index.sessionData]);
 app.get('/feed/free', [olinAuthMiddleware, feed.getFeed]);
@@ -55,8 +58,9 @@ app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 app.get('/temporary_email_route', email.sendEmail);
 
 // POST.
-app.post('/venmoRemoveAccount', [olinAuthMiddleware, index.venmoRemoveAccount]);
-app.post('/venmoPay', [olinAuthMiddleware, index.venmoPay]);
+app.post('/venmoRemoveAccount', [olinAuthMiddleware, auth.venmoRemoveAccount]);
+app.post('/venmoPay', [venmoAuthMiddleware, payment.venmoPay]);
+app.post('/setVenmoPayRedirect', [olinAuthMiddleware, payment.setVenmoPayRedirect]);
 app.post('/logout', index.logout);
 app.post('/listing', [olinAuthMiddleware, listing.postListing]);
 app.post('/image', [olinAuthMiddleware, image.uploadMiddleware, image.uploadImage]);

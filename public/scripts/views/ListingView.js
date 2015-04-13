@@ -48,9 +48,10 @@ define([
           //saves backbone model and does PUT request to server
           console.log('dz About to save.');
           console.log(this.model);
+          var self = this;
           this.model.save(null, {
               success: function(listing){
-                var payView = new PayView({el: $('#buyButton')});
+                var payView = new PayView({model:self.model});
                 self.childViews.push(payView);
                 payView.render({parentDiv: $('#buyButton')});
                 //$("#buyButton").remove();

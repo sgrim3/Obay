@@ -9,6 +9,7 @@ var listingSchema = mongoose.Schema({
   listing_timeCreated: Number,
   listing_open: Boolean,
   listing_price: Number
+
 });
 
 module.exports.listing = mongoose.model('listing',listingSchema);

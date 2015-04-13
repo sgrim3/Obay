@@ -2,12 +2,13 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+  'utils',
 
   'scripts/models/listing',
 
   'scripts/views/AddListingView',
   'text!templates/AddListingTemplate.html',
-], function ($, _, Backbone, Listing, AddListingView, AddListingTemplate) {
+], function ($, _, Backbone, utils, Listing, AddListingView, AddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",
         id: "PopoverAddListingView",
@@ -43,9 +44,7 @@ define([
         	var listing_description = $("#addListingDescription").val();
         	var listing_image = $("#addListingImage").val();
             var listing_price= $("#addListingPrice").val();
-
-            var toCarpe = $("#carpeButton").val();
-            console.log(toCarpe);
+            var toCarpe = $("#carpeButton:checked").val();
 
             var new_listing = new Listing({
                 //listing_creator and listing_time_created is set on the server
@@ -56,6 +55,12 @@ define([
                 listing_price: listing_price
             });
             new_listing.update();
+
+            // Send an email to Carpe.
+            if (toCarpe==="on") {
+                utils.sendCarpe();
+            }
+
         },
 
         redirectHome: function (model){

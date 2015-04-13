@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-module.exports = {
+var email = {
   sendEmail: function (res, mailOptions){
 
     // Send mail with defined transport object.
@@ -27,12 +27,14 @@ module.exports = {
     // Setup e-mail data with unicode symbols.
     var mailOptions = {
       from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
-      to: req.body.emailTo ||'allisongpatterson@gmail.com', // list of receivers
+      to: req.body.emailTo ||'hdavidzhu@gmail.com', // list of receivers
       subject: req.body.emailSubject || 'Hello', // Subject line
       text: req.body.emailText || 'Hello world' // plaintext body
     };
 
-    this.sendEmail(res, mailOptions);
-  }
 
+    email.sendEmail(res, mailOptions);
+  }
 };
+
+module.exports = email;

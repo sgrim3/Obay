@@ -1,6 +1,7 @@
 define([
+  'jquery',
   'backbone',
-], function (Backbone) {
+], function ($, Backbone) {
   var Listing = Backbone.Model.extend({
 
     defaults: {
@@ -14,7 +15,6 @@ define([
     },
 
     update: function (){
-      var self = this;
       this.save(null, {
         success: function(model, response, options) {
           // Associate server save time and user with the model.

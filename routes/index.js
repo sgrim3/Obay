@@ -3,7 +3,7 @@ var request = require("request");
 
 //ALL ROUTES BELOW ARE RESTFUL API ROUTES
 
-var sessionData = function(req,res){
+var userData = function(req,res){
     //returns the current session info as a JSON. Session stuff is not easily accessed or parsed client side so we do it on the server instead. Maybe change this if we find a way to get cookie info on the client side?
     res.json(req.session);
 }
@@ -13,5 +13,5 @@ var logout = function(req,res){
     res.end();
 }
 
-module.exports.sessionData = sessionData;
+module.exports.userData = userData;
 module.exports.logout = logout;

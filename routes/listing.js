@@ -25,9 +25,24 @@ exports.postListing = function (req, res) {
             if(err){
                 console.error('Could not save listing!');
                 res.status(500).send("Could not save listing!");
+            } else {
+              User.findOne({userId: req.session.user.userId}).exec(function(err, user){
+                if (err) {
+                  console.error('Could not find User!');
+                  res.status(500).send("Could not find User!");
+                } else {
+                  user.listings.push(newListing);
+                  user.save(function(err){
+                    if (err) {
+                      console.error('Could not save listing!');
+                      res.status(500).send("Could not save listing!");
+                    } else {
+                      res.send(newListing);
+                    }
+                  });
+                }
+              });
             }
-            console.log(newListing)
-            res.send(newListing);
         }); 
     };
     validate_listing(req, res, onValidListing);
@@ -40,12 +55,11 @@ exports.getListing = function(req, res) {
 
     Listing.findOne({_id:id}).exec(function (err, item) {
         if (err) {
-            console.log ("Could not search Listings!");
+            console.error("Could not search Listings!");
             res.status(500).send("Could not search Listings!");
         }
         else {
             res.send({"item":item, "currentUser":currentUser}); 
-            //console.log('found item' + id);
         }
     });
 }
@@ -80,10 +94,11 @@ exports.updateListing = function(req,res){
             if (err){
                 console.log("dz Buy Error");
                 return handleError(err);
+            } else {
+              console.log("dz Buy Success");
+              console.log(listing);
+              res.status(200).send(listing);
             }
-            console.log("dz Buy Success");
-            console.log(listing);
-            res.status(200).send(listing);
         });
         //i'll come back and make this more robust. 
         //and watch for users

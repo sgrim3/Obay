@@ -2,9 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+  'scripts/collections/userFeed',
+  'scripts/views/FeedView',
   'scripts/views/DestroyableView',
   'text!templates/AccountTemplate.html'
-], function ($, _, Backbone, DestroyableView, AccountTemplate) {
+], function ($, _, Backbone, userFeed, FeedView, DestroyableView, AccountTemplate) {
   var AccountView = DestroyableView.extend({
 
     tagname: "div",
@@ -19,8 +21,11 @@ define([
         info.parentDiv.append(this.$el);
         var self = this;
         this.model.fetch(function(){
-            console.log(self.model.userData);
-            self.$el.html(self.template(self.model.userData));
+          self.$el.html(self.template(self.model.attributes));
+          console.log(self.model.attributes.userId);
+          var feedView = new FeedView( {feedModel: new userFeed(self.model.attributes.userId)} );
+          self.childViews.push(feedView);
+          feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
         });
         return this;
     },

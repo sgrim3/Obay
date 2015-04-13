@@ -30,9 +30,9 @@ define([
             var self = this;
             this.model.fetch({
                 success: function(listing){
-                    console.log(listing.attributes);
+
                     info.parentDiv.append(self.$el);
-                    $(self.el).html(self.template(listing.attributes));
+                    $(self.el).html(self.template(listing.attributes.item));
                     var dropzone_options = {
                         dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',
                         url: "/image",

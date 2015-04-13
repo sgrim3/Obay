@@ -30,6 +30,9 @@ define([
           var listingView = this;
           this.model.fetch({
               success: function(listing){
+                  var currentUser = listing.attributes.currentUser;
+                  var itemCreator = listing.attributes.listing_creator;
+
                   listingView.$el.html(listingView.template(listing.attributes));
               },
               error: function(err){
@@ -55,11 +58,10 @@ define([
               listing_open: false		
           });		
           //saves backbone model and does PUT request to server
-          console.log('dz About to save.');
-          console.log(this.model);
-          this.model.save({}, {
+          var self = this;
+          this.model.save(null, {
               success: function(listing){
-                var payView = new PayView({el: $('#buyButton')});
+                var payView = new PayView({model:self.model});
                 self.childViews.push(payView);
                 payView.render({parentDiv: $('#buyButton')});
                 //$("#buyButton").remove();

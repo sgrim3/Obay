@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var listingSchema = mongoose.Schema({
-	listing_name: String,
+  	listing_name: String,
     listing_description: String, 
     listing_image: String,
     listing_creator: String,

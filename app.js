@@ -55,7 +55,7 @@ app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.
-app.get('/temporary_email_route', email.sendEmail);
+app.get('/temporary_email_route', email.testEmail);
 
 // POST.
 app.post('/venmoRemoveAccount', [olinAuthMiddleware, auth.venmoRemoveAccount]);

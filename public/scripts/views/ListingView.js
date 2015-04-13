@@ -16,7 +16,8 @@ define([
       id: "ListingView",
 
   	events: {		
-  	    'click #buyButton': 'buyItem',		
+  	    'click #buyButton': 'buyItem',	
+        'click #editButton': 'editItem',	
   	},
 
   	initialize:function (info) {
@@ -38,6 +39,14 @@ define([
           return listingView;
       },
 
+      editItem: function () {
+        var url = '#editListing/'+this.model.id;
+        console.log(url);
+            Backbone.history.navigate(url);
+            Backbone.history.loadUrl(url);
+
+      },
+
       buyItem: function(){	
           console.log('buy item called!');
           var self = this;		
@@ -46,8 +55,6 @@ define([
               listing_open: false		
           });		
           //saves backbone model and does PUT request to server
-          console.log('dz About to save.');
-          console.log(this.model);
           var self = this;
           this.model.save(null, {
               success: function(listing){

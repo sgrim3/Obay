@@ -71,7 +71,7 @@ exports.getListing = function(req, res) {
 
 exports.updateListing = function(req,res){
     var id=req.params.id;
-    var real_listing_creator= req.session.user.userId;
+    var listing_creator= req.body.listing_creator;
     var listing_name= req.body.listing_name;
     var listing_description= req.body.listing_description;
     var listing_image= req.body.listing_image;
@@ -87,7 +87,7 @@ exports.updateListing = function(req,res){
     //need to come back to this if statements so it's not so dumb
     if(!listing_open){
         //handle buy sell, the listing has been closed
-        if (req.session.user === listing_creator){
+        if (req.session.user.userId === listing_creator){
           //disallow user from closing their own listings, but we will add the 'delete listing' option later
           res.status(400).send("You can't buy your own listing!");
         } else {

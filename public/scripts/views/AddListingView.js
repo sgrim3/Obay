@@ -15,7 +15,7 @@ define([
         id: "AddListingView",
 
     	events: {
-    	    'click #postButton': 'postListing',
+    	    'click #postButton': 'postListing'
     	},
 
         initialize: function (){
@@ -23,6 +23,9 @@ define([
         },
 
         destroy:function () {
+
+            // TODO: Why is this rewritten? Shouldn't it be received from DestroyableView?
+
             //destroy dropzone instance to prevent memory leaks
             Dropzone.instances = _.without(Dropzone.instances, this.image_upload);
             //destroys view and corresponding mount point /$el
@@ -82,7 +85,7 @@ define([
         	var listing_name = $("#addListingName").val();
         	var listing_description = $("#addListingDescription").val();
         	var listing_image = $("#addListingImage").val();
-            var listing_price= $("#addListingPrice").val();
+            var listing_price = $("#addListingPrice").val();
 
             var new_listing = new Listing(
                 {
@@ -116,7 +119,7 @@ define([
                     }
                 }
             });
-        }
+        },
     });
 
     return AddListingView;

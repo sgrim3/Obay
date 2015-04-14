@@ -14,6 +14,10 @@ define(['jquery'], function ($){
           onErr();
         });
     },
+
+    sendCarpe: function (model){
+      $.get('temporary_email_route');
+    },
   };
 
   return utils;

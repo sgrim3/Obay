@@ -1,21 +1,12 @@
 .add {
   // FIXME: Make this dynamic.
-  min-width: 900 !important;
+  min-width: 900px !important;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
   align-items: center;
 }
-
-// /* The ghost, nudged to maintain perfect centering */
-// .add:before {
-//   content: '';
-//   display: inline-block;
-//   height: 100%;
-//   vertical-align: middle;
-//   margin-right: -0.25em; /* Adjusts for spacing */
-// }
 
 /* The element to be centered, can also be of any width and height */ 
 $addContainerPadding: 40px;
@@ -88,4 +79,19 @@ $addContainerPadding: 40px;
 .dz-preview, .dz-processing, .dz-image-preview, .dz-success, .dz-complete, .dz-image {
   width: 100%;
   height: 100%;
+}
+
+#toCarpeCheckbox {
+  @extend %rectangular-button;
+  @include scale(0.8);
+
+  -webkit-transform-origin-x: 100%;
+  transform-origin-x: 100%;
+  -webkit-transform-origin-y: 100%;
+  transform-origin-y: 100%;
+
+  display: inline;
+  float: right;
+  margin-top: 20px;
+  background-color: palette(Blue, $colorIntensity);
 }

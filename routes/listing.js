@@ -11,10 +11,15 @@ var exports = {};
 
 exports.postListing = function (req, res) {
     var onValidListing = function(){
+        if (req.body.listing_image){
+          var listing_image = req.body.listing_image;
+        } else {
+          var listing_image = '/images/default_listing_image.jpg';
+        }
         var newListing = new Listing({
             listing_name: req.body.listing_name,
             listing_description: req.body.listing_description,
-            listing_image: req.body.listing_image,
+            listing_image: listing_image,
             listing_creator: req.session.user.userId,
             listing_time_created: Date.now(),
             listing_open: true,

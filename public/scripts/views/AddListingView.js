@@ -23,9 +23,7 @@ define([
         },
 
         destroy:function () {
-
-            // TODO: Why is this rewritten? Shouldn't it be received from DestroyableView?
-
+            //This is rewritten so that dropzone instances are automatically destroyed
             //destroy dropzone instance to prevent memory leaks
             Dropzone.instances = _.without(Dropzone.instances, this.image_upload);
             //destroys view and corresponding mount point /$el
@@ -81,7 +79,7 @@ define([
         },
 
         postListing: function(e) {
-            e.preventDefault();
+          e.preventDefault();
         	var listing_name = $("#addListingName").val();
         	var listing_description = $("#addListingDescription").val();
         	var listing_image = $("#addListingImage").val();
@@ -115,6 +113,7 @@ define([
                             window.location.replace('/');
                         }
                     } else {
+                      console.log(response);
                         $('#error_message').text(response.responseText);
                     }
                 }

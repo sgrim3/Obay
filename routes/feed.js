@@ -41,7 +41,8 @@ exports.getFreeFeed = function(req,res){
 
 exports.getUserFeed = function(req, res){
   var userId = req.params.id;
-  User.findOne({userId:userId}).exec(function(err, user){
+  //.populate turns references into the actual mongo objects
+  User.findOne({userId:userId}).populate('listings').exec(function(err, user){
     if (err) {
       res.status(500).send("Could not search Users!");
     } else {

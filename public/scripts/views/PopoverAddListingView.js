@@ -34,15 +34,10 @@ define([
 
         postListing: function(e) {
             var thisView = this;
-            console.log(thisView);
             e.preventDefault();
-
-        	var listing_name = $("#addListingName").val();
-            console.log(listing_name);
-
-
-        	var listing_description = $("#addListingDescription").val();
-        	var listing_image = $("#addListingImage").val();
+            var listing_name = $("#addListingName").val();
+            var listing_description = $("#addListingDescription").val();
+            var listing_image = $("#addListingImage").val();
             var listing_price= $("#addListingPrice").val();
             var toCarpe = $("#carpeButton:checked").val();
 
@@ -56,6 +51,7 @@ define([
             });
             new_listing.update();
 
+            //TODO: Change this to a serverside email send! This should not happen until listing is validated.
             // Send an email to Carpe.
             if (toCarpe==="on") {
                 utils.sendCarpe();

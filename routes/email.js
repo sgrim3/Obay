@@ -40,7 +40,7 @@ var email = {
     var mailOptions = {
       from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
       to: req.body.emailTo ||'allisongpatterson@gmail.com', // list of receivers
-      subject: req.body.emailSubject || 'Obay Reciept for ' + item_name // Subject line
+      subject: req.body.emailSubject || 'Obay Reciept for ' + item_name, // Subject line
       text: req.body.emailText || 'This is an aknowledgement that ' + buyer + ' has successfully purchased ' + item_name + ' from ' + seller + '. By making this purchase, ' + buyer + ' has agreed to pay the amount of ' + item_price + ' dollars to ' + seller + '. Please save this message for your records until the IOU is resolved.' // plaintext body
     };
 

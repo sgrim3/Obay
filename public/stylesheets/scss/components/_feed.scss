@@ -2,6 +2,11 @@
   @extend %max;
 }
 
+#topLogo {
+  margin-top: -10%;
+  margin-bottom: 10%;
+}
+
 #FeedViewMountPoint {
   margin-top: $sidebarSpacing;
 }

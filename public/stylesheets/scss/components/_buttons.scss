@@ -25,6 +25,7 @@ $colorIntensity: 700;
 
 #homeButton {
     background: palette(Blue, $colorIntensity);
+    margin-left: 33%;
 }
 
 #littleO {
@@ -34,18 +35,22 @@ $colorIntensity: 700;
 
 #accountButton {
     background: palette(Orange, $colorIntensity);
+    margin-left: 33%;
 }
 
 #freeButton {
     background: palette(Green, $colorIntensity);
+    margin-left: 33%;
 }
 
 #notificationsButton {
-    background: palette(Purple, $colorIntensity);    
+    background: palette(Purple, $colorIntensity);
+    margin-left: 33%;    
 }
 
 #logoutButton {
     background: palette(Indigo, $colorIntensity);
+    margin-left: 33%;
 }
 
 #addButton {

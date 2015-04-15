@@ -1,7 +1,8 @@
 define([
   'backbone',
-], function (Backbone) {
-  var User = Backbone.Model.extend({
+  'scripts/models/baseModel',
+], function (Backbone, BaseModel) {
+  var User = BaseModel.extend({
     defaults: {
       userId: '',
       olinAppsInfo: {},

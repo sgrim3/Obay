@@ -2,11 +2,8 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-
   'scripts/models/listing',
-
   'scripts/views/DestroyableView',
-
   'text!templates/CollapsedListingTemplate.html'
 ], function ($, _, Backbone, Listing, DestroyableView, CollapsedListingTemplate) {
     var CollapsedListingView = DestroyableView.extend({

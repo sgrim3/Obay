@@ -48,8 +48,7 @@ exports.postListing = function(req, res, next) {
                         res.json(newListing);
                       }
                       if (req.body.extraData && req.body.extraData.toCarpe === 'on'){ 
-                        console.log(req.body);
-                        email.sendCarpeEmail(req, res, callback);
+                        email.sendCarpeEmail(newListing, res, callback);
                       } else {
                         callback();
                       }

@@ -9,11 +9,11 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 var transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: process.env.OBAY_GMAIL_USER,
-    pass: process.env.OBAY_GMAIL_PASS,
+    user: process.env.OBAY_GMAIL_USER || '',
+    pass: process.env.OBAY_GMAIL_PASS || '',
   }
 });
-var OBAY_RECIEVER = process.env.OBAY_RECIEVER; //who gets the emails
+var OBAY_RECIEVER = process.env.OBAY_RECIEVER || ''; //who gets the emails
 
 var email = {
 

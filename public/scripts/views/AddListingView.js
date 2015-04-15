@@ -78,29 +78,37 @@ define([
             return this;
         },
 
-        postHelper: function(event, callbacks) {
-            //posts listing and then calls success or error callbacks
-            event.preventDefault();
+        broadcastFeedAddListing: function(broadcastObj){
+          //broadcasts to feed collections and tells them to add a model and sync with the server
+          Backbone.pubSub.trigger('feedAddListing', broadcastObj);
+        },
+
+        getModelInfoAndextraData: function(){
+          //returns obj containing extra arguments and model info like so: {extraData:{},modelInfo:{}}
             var listing_name = $("#addListingName").val();
             var listing_description = $("#addListingDescription").val();
             var listing_image = $("#addListingImage").val();
             var listing_price = $("#addListingPrice").val();
             var toCarpe = $("#carpeButton:checked").val();
-            var new_listing = new Listing(
-                {
-                    //listing_creator and listing_time_created is set on the server
-                    listing_name: listing_name,
-                    listing_description: listing_description,
-                    listing_image: listing_image,
-                    listing_open: true,
-                    listing_price: listing_price
-                }
-            );
-            //this save function looks funny because it's not a mongoose save, it's a backbone models .save!
-            new_listing.saveWithExtraData({toCarpe: toCarpe}, callbacks);
+            var modelInfo = {
+              listing_name: listing_name,
+              listing_description: listing_description,
+              listing_image: listing_image,
+              listing_open: true,
+              listing_price: listing_price
+            };
+            var extraData = {toCarpe:toCarpe};
+            return {extraData:extraData, modelInfo:modelInfo};
+        },
+
+        postHelper: function(callbacks){
+          var broadcastObj = this.getModelInfoAndextraData();
+          broadcastObj.callbacks = callbacks;
+          this.broadcastFeedAddListing(broadcastObj);
         },
 
         postListing: function(event){
+          event.preventDefault();
           var callbacks = {
             success: function(model, response, options) {
                 $('#error_message').text('');
@@ -117,7 +125,7 @@ define([
                 }
             }
           };
-          this.postHelper(event, callbacks)
+          this.postHelper(callbacks)
         },
 
     });

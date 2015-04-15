@@ -12,7 +12,6 @@ define([
         id: "FeedView",
 
         initialize:function (data) {
-            this.listenTo(Backbone.pubSub, 'listingAdded', this.addListingView);
             this.collection = data.feedModel;
         },
 
@@ -23,10 +22,7 @@ define([
             this.collection.fetch({
                 //fetch must be called asynchronously to work!
                 success: function(data){
-                    console.log('success!!!!');
-                    console.log(data);
                     feedview.collection.models.forEach(function(m){
-                      console.log(m);
                         var collapsedListingView = new CollapsedListingView({model: m});
                         feedview.childViews.push(collapsedListingView);
                         collapsedListingView.render({parentDiv: feedview.$el}); 
@@ -40,8 +36,8 @@ define([
             return this;
         },
 
-        addListingView: function(model){
-            var collapsedListingView = new CollapsedListingView({model: model});
+        addListingView: function(listing){
+            var collapsedListingView = new CollapsedListingView({model: listing});
             this.childViews.push(collapsedListingView);
             this.collection.add(collapsedListingView);
             collapsedListingView.render({parentDiv: this.$el}); 

@@ -84,7 +84,6 @@ define([
       },
 
       hidePopoverAddListing: function(){
-          // $('#popoverMask').remove();
           this.popoverAddListing.destroy();
           this.popoverAddListing = null;
           window.history.pushState({}, '', this.urlBeforePop);

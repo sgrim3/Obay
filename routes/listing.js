@@ -9,7 +9,7 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 //exports is the exported module object
 var exports = {};
 
-exports.postListing = function (req, res) {
+exports.postListing = function(req, res, next) {
     console.log(req.body);
     var onValidListing = function(){
         if (req.body.listing_image){
@@ -44,7 +44,14 @@ exports.postListing = function (req, res) {
                       console.error('Could not save listing!');
                       res.status(500).send("Could not save listing!");
                     } else {
-                      res.send(newListing);
+                      var callback = function(){
+                        res.json(newListing);
+                      }
+                      if (req.body.extraData && req.body.extraData.toCarpe === 'on'){ 
+                        email.sendCarpeEmail(newListing, res, callback);
+                      } else {
+                        callback();
+                      }
                     }
                   });
                 }
@@ -99,6 +106,7 @@ var editListing = function(req,res){
           if (err) {
             res.status(500).send('Could not save new listing!');
           } else {
+            email.email();
             res.status(200).json(listing);
           }
         });

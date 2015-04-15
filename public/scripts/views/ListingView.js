@@ -32,8 +32,6 @@ define([
               success: function(listing){
                   var currentUser = listing.attributes.currentUser;
                   var itemCreator = listing.attributes.listing_creator;
-
-                  console.log(listing.attributes);
                   listingView.$el.html(listingView.template(listing.attributes));
               },
               error: function(err){

@@ -10,6 +10,7 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 var exports = {};
 
 exports.postListing = function (req, res) {
+    console.log(req.body);
     var onValidListing = function(){
         if (req.body.listing_image){
           var listing_image = req.body.listing_image;

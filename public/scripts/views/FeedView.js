@@ -37,8 +37,8 @@ define([
             return this;
         },
 
-        addListingView: function(model){
-            var collapsedListingView = new CollapsedListingView({model: model});
+        addListingView: function(listing){
+            var collapsedListingView = new CollapsedListingView({model: listing});
             this.childViews.push(collapsedListingView);
             this.collection.add(collapsedListingView);
             collapsedListingView.render({parentDiv: this.$el}); 

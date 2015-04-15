@@ -24,7 +24,6 @@ define([
             this.template = _.template(AddListingTemplate);
         },
 
-
         render:function (info) {
             var _this = this;
             this.model.fetch({
@@ -67,8 +66,6 @@ define([
 
         updateListing: function(e) {
             e.preventDefault();
-            // console.log(this.model);
-            // var id = this.model.id;
             var listing_name = $("#addListingName").val();
             var listing_description = $("#addListingDescription").val();
             var listing_image = $("#addListingImage").val();
@@ -80,7 +77,6 @@ define([
                 listing_image: listing_image,
                 listing_open: true,
                 listing_price: listing_price    
-       
             });   
 
             //this save function looks funny because it's not a mongoose save, it's a backbone models .save!

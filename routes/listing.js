@@ -71,61 +71,72 @@ exports.getListing = function(req, res) {
     });
 }
 
-exports.updateListing = function(req,res){
-    var listing_id=req.params.id;
-    var listing_name= req.body.listing_name;
-    var listing_description= req.body.listing_description;
-    var listing_image= req.body.listing_image;
-    var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
-    var listing_open = req.body.listing_open;
-    if(listing_open){
-      //check if user has privileges to edit this listing
-      //We can't trust listing_creator info sent from serverside so we check our database for the creator instead.
-      Listing.findOne({_id:listing_id}).exec(function(err, listing){
-        var listing_creator = listing.listing_creator;
-        //we can trust that req.session.user.userId is accurate because our middleware checks that the userId is not being faked
-        if (listing_creator === req.session.user.userId){
-          //purposely set each attribute instead of using upsert here because we are only changing some of the attributes.
-          listing.listing_name = listing_name;
-          listing.listing_description = listing_description;
-          listing.listing_image = listing_image;
-          if (listing.listing_price !== listing_price){
-            if (listing.listing_open){
-              listing.listing_price = listing_price;
-            } else {
-              res.status(400).send("You can't change a listing price after the listing is closed!");
-            }
-          } 
-          listing.save(function(err){
-            if (err) {
-              res.status(500).send('Could not save new listing!');
-            } else {
-              res.status(200).json(listing);
-            }
-          });
+var editListing = function(req,res){
+  //TODO: Add input vaidation!
+  //check if user has privileges to edit this listing
+  //We can't trust listing_creator info sent from serverside so we check our database for the creator instead.
+  var listing_id=req.params.id;
+  var listing_name= req.body.listing_name;
+  var listing_description= req.body.listing_description;
+  var listing_image= req.body.listing_image;
+  var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
+  var listing_open = req.body.listing_open;
+  Listing.findOne({_id:listing_id}).exec(function(err, listing){
+    var listing_creator = listing.listing_creator;
+    //we can trust that req.session.user.userId is accurate because our middleware checks that the userId is not being faked
+    if (listing_creator === req.session.user.userId){
+      //purposely set each attribute instead of using upsert here because we are only changing some of the attributes. Don't allow users to change the time something was created!
+      listing.listing_name = listing_name;
+      listing.listing_description = listing_description;
+      listing.listing_image = listing_image;
+      if (listing.listing_price !== listing_price){
+        if (listing.listing_open){
+          listing.listing_price = listing_price;
         } else {
-          res.status(401).send("You do not have authorization to edit listings that aren't yours!");
+          res.status(400).send("You can't change a listing price after the listing is closed!");
+        }
+      } 
+      listing.save(function(err){
+        if (err) {
+          res.status(500).send('Could not save new listing!');
+        } else {
+          res.status(200).json(listing);
         }
       });
     } else {
-      //any user but the creator may close a listing by buying it, but they may not edit anything else. the update function here should ONLY change the listing_open attribute
-      Listing.findOne({_id:listing_id}).exec(function(err, listing){
-        var listing_creator = listing.listing_creator;
-        //we can trust that req.session.user.userId is accurate because our middleware checks that the userId is not being faked
-        if (listing_creator === req.session.user.userId){
-          res.status(401).send("You can't buy your own listings!");
+      res.status(401).send("You do not have authorization to edit listings that aren't yours!");
+    }
+  });
+}
+
+var buyListing = function(req,res){
+  //any user but the creator may close a listing by buying it, but they may not edit anything else. the update function here should ONLY change the listing_open attribute
+  var listing_id=req.params.id;
+  //check that listing_creator is not being faked! the only trustworthy info is listing_id
+  Listing.findOne({_id:listing_id}).exec(function(err, listing){
+    var listing_creator = listing.listing_creator;
+    //we can trust that req.session.user.userId is accurate because our middleware checks that the userId is not being faked
+    if (listing_creator === req.session.user.userId){
+      res.status(401).send("You can't buy your own listings!");
+    } else {
+      //if user closing listing is not 
+      Listing.findByIdAndUpdate(id, {$set:{ listing_open:false }}, 
+        function (err, listing) {
+        if (err){
+          res.status(500).send('Could not buy listing!');
         } else {
-          //if user closing listing is not 
-          Listing.findByIdAndUpdate(id, {$set:{ listing_open:listing_open }}, 
-            function (err, listing) {
-            if (err){
-              res.status(500).send('Could not buy listing!');
-            } else {
-              res.status(200).send(listing);
-            }
-          });
+          res.status(200).send(listing);
         }
       });
+    }
+  });
+}
+
+exports.updateListing = function(req,res){
+    if(req.body.listing_open){
+      editListing(req,res);
+    } else {
+      buyListing(req,res);
     }
 }
 

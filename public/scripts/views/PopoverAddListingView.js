@@ -14,7 +14,7 @@ define([
         id: "PopoverAddListingView",
 
         events: {
-          'click #exitButton': 'broadcoastExitPopoverAddListing',
+          'click #exitButton': 'broadcastExitPopoverAddListing',
           'click #postButton': 'postListing',
         },
 

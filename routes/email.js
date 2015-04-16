@@ -75,6 +75,39 @@ var email = {
     });
   },
 
+  sendCashEmail: function(listing,res,success_callback){
+    emailTemplates(templatesDir, function(err, template){
+      if (err) {
+        console.log(err);
+        res.status(500).send('Could not create email template!');
+      } else {
+        template('cashEmail', listing, function(err, html, text){
+          if (err) {
+            console.log(err);
+            res.status(500).send('Could not create email template!');
+          } else {
+            var subject_line = listing.listing_name + ' has been purchased!';
+            var mailOptions = {
+              from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
+              to: OBAY_RECIEVER, // list of receivers
+              subject: subject_line, // Subject line
+              text: text, // plaintext body
+              html: html,
+            };
+            transporter.sendMail(mailOptions, function(error, info){
+              if(error){
+                console.log(error);
+                res.status(500).send('Email failed to send: ' + error);
+              }else{
+                success_callback();
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
 };
 
 module.exports = email;

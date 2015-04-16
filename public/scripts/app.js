@@ -127,7 +127,6 @@ require([
             }
             if (self.Page) { self.Page.destroy(); self.Page = null; };
             self.Page = new HomeView();
-            self.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page

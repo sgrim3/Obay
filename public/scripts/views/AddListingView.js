@@ -78,10 +78,10 @@ define([
             return this;
         },
 
-        broadcastFeedAddListing: function(broadcastObj){
-          //broadcasts to feed collections and tells them to add a model and sync with the server
-          Backbone.pubSub.trigger('feedAddListing', broadcastObj);
-        },
+        // broadcastFeedAddListing: function(broadcastObj){
+        //   //broadcasts to feed collections and tells them to add a model and sync with the server
+        //   Backbone.pubSub.trigger('feedAddListing', broadcastObj);
+        // },
 
         getModelInfoAndextraData: function(){
           //returns obj containing extra arguments and model info like so: {extraData:{},modelInfo:{}}
@@ -101,11 +101,11 @@ define([
             return {extraData:extraData, modelInfo:modelInfo};
         },
 
-        postHelper: function(callbacks){
-          var broadcastObj = this.getModelInfoAndextraData();
-          broadcastObj.callbacks = callbacks;
-          this.broadcastFeedAddListing(broadcastObj);
-        },
+        // postHelper: function(callbacks){
+        //   var broadcastObj = this.getModelInfoAndextraData();
+        //   broadcastObj.callbacks = callbacks;
+        //   this.broadcastFeedAddListing(broadcastObj);
+        // },
 
         postListing: function(event){
           event.preventDefault();

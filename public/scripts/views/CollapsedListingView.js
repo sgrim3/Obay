@@ -9,7 +9,18 @@ define([
     var CollapsedListingView = DestroyableView.extend({
         tagname: "div",
         id: "CollapsedListingView",
-        model: Listing,
+        // model: Listing,
+
+        initialize: function(data){
+            this.template = _.template(CollapsedListingTemplate);
+            this.render(data);
+
+
+
+
+            // collapsedListingView.render({parentDiv: _this.$el});
+        },
+
         getThumbnailUrl: function(url){
             if (this.isImgurLink(url)){
                 return url.substring(0,url.length-4)+'b'+url.substring(url.length-4,url.length);
@@ -25,10 +36,9 @@ define([
                 return false;
             }
         },
-        render: function (info){
-            this.template = _.template(CollapsedListingTemplate);
-            info.parentDiv.prepend(this.$el);
-            var listing_attrs = this.model.attributes;
+        render: function (data){
+            data.parentDiv.prepend(this.$el);
+            var listing_attrs = data.model.attributes;
             listing_attrs.listing_thumbnail = this.getThumbnailUrl(listing_attrs.listing_image);
             this.$el.html(this.template(listing_attrs));
             return this;

@@ -27,6 +27,7 @@ define([
                 return url;
             }
         },
+
         isImgurLink: function(url){
             if (url.match(/^(http:\/\/)?(i\.imgur\.com)/)){
                 //code intentionally written this way and is NOT redundant. Takes advantage of javascript's 'truthiness', where null is false and non-empty values are true.
@@ -35,6 +36,7 @@ define([
                 return false;
             }
         },
+
         render: function (){
             var listing_attrs = this.model.attributes;
             listing_attrs.listing_thumbnail = this.getThumbnailUrl(listing_attrs.listing_image);

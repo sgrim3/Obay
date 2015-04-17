@@ -572,14 +572,6 @@ button#venmoButton {
   justify-content: center;
   z-index: 99999; }
 
-#loginLogo {
-  width: 100%;
-  font-size: 72pt;
-  text-align: center;
-  font-weight: 300;
-  margin-bottom: 40px;
-  color: rgba(0, 0, 0, 0.87); }
-
 .add {
   min-width: 900px !important;
   height: 100%;

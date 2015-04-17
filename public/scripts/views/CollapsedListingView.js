@@ -12,12 +12,11 @@ define([
         // model: Listing,
 
         initialize: function(data){
+            data.parentDiv.prepend(this.$el);
             this.template = _.template(CollapsedListingTemplate);
-            this.render(data);
-
-
-
-
+            this.model = data.model
+            this.listenTo(this.model, 'change', this.render);
+            this.render();
             // collapsedListingView.render({parentDiv: _this.$el});
         },
 
@@ -36,9 +35,8 @@ define([
                 return false;
             }
         },
-        render: function (data){
-            data.parentDiv.prepend(this.$el);
-            var listing_attrs = data.model.attributes;
+        render: function (){
+            var listing_attrs = this.model.attributes;
             listing_attrs.listing_thumbnail = this.getThumbnailUrl(listing_attrs.listing_image);
             this.$el.html(this.template(listing_attrs));
             return this;

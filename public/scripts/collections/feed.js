@@ -10,25 +10,8 @@ define([
     initialize: function(){
 
       var _this = this;
-      this.fetch({
-        // Fetch must be called asynchronously to work!
-        // NOTE: In this case, 'data' isn't even used.
-        success: function(data){
-
-          _this.trigger("feed:created", _this);
-          // _this.models.forEach(function(m){
-            // var collapsedListingView = new CollapsedListingView({model: m});
-            // feedview.childViews.push(collapsedListingView);
-            // collapsedListingView.render({parentDiv: feedview.$el}); 
-          // });
-        },
-        error: function(){
-          //TODO: display error in a div
-          // console.log('error!');
-        }
-      });
-
-
+      this.fetch({reset: true});
+      //use fetch w/reset = true because that indicates that this fetch is populating an empty collection or repopulating a collection. This allows us to bind render in the view onto the nice 'reset' trigger and stick with backbone conventions!
       // this.listenTo(Backbone.pubSub, 'feedAddListing', this.addListingToCollection);
     },
 

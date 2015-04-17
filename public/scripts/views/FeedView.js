@@ -13,23 +13,20 @@ define([
 
         // TODO: Change 'data' into something more descriptive.
         initialize:function (data) {
-            this.collection = data.feedCollection;
             data.parentDiv.append(this.$el);
-            this.listenTo(this.collection, "feed:created", this.render);
-
-            // this.collection.fetch();
+            this.collection = data.feedCollection;
+            this.listenTo(this.collection, 'reset', this.render);
         },
 
         render: function (){
             console.log("FeedView rendered.");
-
-            var _this = this;
-            this.collection.models.forEach(function(m){
+            var self = this;
+           this.collection.models.forEach(function(m){
                 var collapsedListingView = new CollapsedListingView({
-                    parentDiv: _this.$el,
+                    parentDiv: self.$el,
                     model: m,
                 });
-                _this.childViews.push(collapsedListingView);
+                self.childViews.push(collapsedListingView);
 
                 // collapsedListingView.render({parentDiv: _this.$el}); 
             });

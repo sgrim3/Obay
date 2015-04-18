@@ -108,21 +108,21 @@ require([
     },
 
     home: function(){
-        var _this = this;
-        var onOlinAuth = function(){
-            if (!_this.Sidebar) {
-                _this.Sidebar = new SidebarView({
-                  parentDiv:$('#SidebarContainer')
-                });
-            }
-            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            _this.Page = new HomeView({parentDiv:$('#PageContainer')});
+      var _this = this;
+      var onOlinAuth = function(){
+        if (!_this.Sidebar) {
+            _this.Sidebar = new SidebarView({
+              parentDiv:$('#SidebarContainer')
+            });
         }
-        var onOlinErr = function(){
-            // Redirect to login page.
-            window.location.replace('/');
-        }
-        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+        _this.Page = new HomeView({parentDiv:$('#PageContainer')});
+      }
+      var onOlinErr = function(){
+        // Redirect to login page.
+        window.location.replace('/');
+      }
+      _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     account: function(){
@@ -131,7 +131,7 @@ require([
       }
       if (this.Page) {
         this.Page.destroy();
-        this.Page = null 
+        this.Page = null;
       };
 
       // QUESTION: Should a userModel be declared here?
@@ -144,22 +144,22 @@ require([
     },
 
     free: function(id) {
-        var _this = this;
-        var onOlinAuth = function(){
-            if (!_this.Sidebar) {
-                _this.Sidebar = new SidebarView({
-                  parentDiv:$('#SidebarContainer')
-                });
-            }
-            if (_this.Page) { _this.Page.dwestroy(); _this.Page = null; };
-            _this.Page = new SortFreeHomeView({parentDiv: $('#PageContainer')});
+      var _this = this;
+      var onOlinAuth = function(){
+        if (!_this.Sidebar) {
+          _this.Sidebar = new SidebarView({
+            parentDiv:$('#SidebarContainer')
+          });
         }
-        var onOlinErr = function(){
-            //redirect to login page
-            window.location.replace('/');
-        }
-        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-
+        if (_this.Page) { _this.Page.dwestroy(); _this.Page = null; };
+        _this.Page = new SortFreeHomeView({parentDiv: $('#PageContainer')});
+      }
+      var onOlinErr = function(){
+        //redirect to login page
+        window.location.replace('/');
+      }
+      
+      _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     addListing: function () {

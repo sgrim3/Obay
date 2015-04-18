@@ -8,7 +8,8 @@ define([
     url : '/feed',
     model: Listing,
     
-    initialize: function(){
+    initialize: function(info){
+      console.log(info);
       var _this = this;
       /*Use fetch w/reset = true because that indicates that this fetch 
       is populating an empty collection or repopulating a collection. 

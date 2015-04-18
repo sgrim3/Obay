@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
 
-//Import routes
+//Import routes.
 var index = require('./routes/index');
 var listing = require ("./routes/listing");
 var feed = require ("./routes/feed");
@@ -16,8 +16,8 @@ var image = require('./routes/image');
 var payment = require('./routes/payment');
 var auth = require('./routes/auth');
 
-// Line below disabled authentication for testing purposes.
 var olinAuthMiddleware = auth.olinAuthMiddleware;
+// Line below disabled authentication for testing purposes.
 var venmoAuthMiddleware = auth.venmoAuthMiddleware;
 // var olinAuthMiddleware = function (req, res, next) { next(); };
 
@@ -25,10 +25,10 @@ var app = express();
 
 // Connect socket.io
 app.http().io();
-//intentionally make a global variable here! That way the routes can access io
+// Intentionally make a global variable here! That way the routes can access io.
 io = app.io;
 
-//Set up mongolab and PORTS to work locally and on heroku.
+//Set up mongolab and PORTS to work locally and on Heroku.
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 mongoose.connect(mongoURI);
 var PORT = process.env.PORT || 3000;
@@ -64,12 +64,22 @@ app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 app.get('/temporary_email_route', email.testEmail);
 
 // POST.
-app.post('/venmoRemoveAccount', [olinAuthMiddleware, auth.venmoRemoveAccount]);
+app.post('/venmoRemoveAccount', [
+  olinAuthMiddleware, 
+  auth.venmoRemoveAccount
+]);
 app.post('/venmoPay', [venmoAuthMiddleware, payment.venmoPay]);
-app.post('/setVenmoPayRedirect', [olinAuthMiddleware, payment.setVenmoPayRedirect]);
+app.post('/setVenmoPayRedirect', [
+  olinAuthMiddleware, 
+  payment.setVenmoPayRedirect
+]);
 app.post('/logout', index.logout);
 app.post('/listing', [olinAuthMiddleware, listing.postListing]);
-app.post('/image', [olinAuthMiddleware, image.uploadMiddleware, image.uploadImage]);
+app.post('/image', [
+  olinAuthMiddleware, 
+  image.uploadMiddleware, 
+  image.uploadImage
+]);
 
 app.listen(PORT, function(){
     console.log("Application running on port:", PORT);

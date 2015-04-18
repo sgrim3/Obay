@@ -26,8 +26,6 @@ define([
             feedCollection: new Feed()
           });
           this.childViews.push(feedView);
-
-          // feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
           return this;
       },
   });

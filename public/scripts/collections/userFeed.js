@@ -13,23 +13,26 @@ define([
     url: '', 
 
     initialize: function(userId){
-
+      this.userId = userId;
       this.url = '/feed/user/' + userId;
-
       var _this = this;
       /*Use fetch w/reset = true because that indicates that this fetch 
       is populating an empty collection or repopulating a collection. 
       This allows us to bind render in the view onto the nice 'reset' trigger 
       and stick with backbone conventions!*/
       this.fetch({reset: true});
-
       // QUESTION: Should we use the global instance of window.socket instead?
       this.socket = io.connect('127.0.0.1');
-
       /*TODO: Change this to feed:create? We are starting from the feed 
       collection so it may make more sense to change the naming convention.*/
       // QUESTION: What does .bind mean in this situation for createListing? 
       this.socket.on('listing:create', this.createListing.bind(_this));
+    },
+
+    createListing: function(model){
+      if (model.listing_creator === this.userId){
+        this.add(model);
+      }
     },
 
   });

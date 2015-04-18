@@ -148,8 +148,7 @@ require([
                 });
             }
             if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            _this.Page = new SortFreeHomeView();
-            _this.Page.render({parentDiv: $('#PageContainer')});
+            _this.Page = new SortFreeHomeView({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page

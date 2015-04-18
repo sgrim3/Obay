@@ -91,8 +91,9 @@ define([
               listing_image: listing_image,
               listing_open: true,
               listing_price: listing_price,
-              extraData: {toCarpe:toCarpe},
+              toCarpe: toCarpe,
             };
+            console.log(postObj);
             return postObj;
         },
 

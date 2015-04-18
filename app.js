@@ -1,5 +1,5 @@
 // Dependencies.
-var express = require('express');
+var express = require('express.io');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -22,6 +22,11 @@ var venmoAuthMiddleware = auth.venmoAuthMiddleware;
 // var olinAuthMiddleware = function (req, res, next) { next(); };
 
 var app = express();
+
+// Connect socket.io
+app.http().io();
+//intentionally make a global variable here! That way the routes can access io
+io = app.io;
 
 //Set up mongolab and PORTS to work locally and on heroku.
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";

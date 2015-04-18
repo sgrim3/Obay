@@ -17,7 +17,6 @@ define([
             this.model = data.model
             this.listenTo(this.model, 'change', this.render);
             this.render();
-            // collapsedListingView.render({parentDiv: _this.$el});
         },
 
         getThumbnailUrl: function(url){
@@ -39,6 +38,7 @@ define([
 
         render: function (){
             var listing_attrs = this.model.attributes;
+            console.log(listing_attrs);
             listing_attrs.listing_thumbnail = this.getThumbnailUrl(listing_attrs.listing_image);
             this.$el.html(this.template(listing_attrs));
             return this;

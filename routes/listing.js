@@ -46,8 +46,9 @@ exports.postListing = function(req, res, next) {
                     } else {
                       var callback = function(){
                         res.json(newListing);
+                        io.sockets.emit('listing:create', newListing);
                       }
-                      if (req.body.extraData && req.body.extraData.toCarpe === 'on'){ 
+                      if (req.body.toCarpe && req.body.toCarpe === 'on'){ 
                         email.sendCarpeEmail(newListing, res, callback);
                       } else {
                         callback();

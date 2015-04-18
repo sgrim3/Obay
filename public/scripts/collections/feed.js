@@ -1,42 +1,30 @@
 define([
   'backbone',
-  'scripts/models/listing'
-], function (Backbone, Listing){
+  'scripts/models/listing',
+  '/socket.io/socket.io.js'
+], function (Backbone, Listing, io){
 
   var Feed = Backbone.Collection.extend({
     url : '/feed',
     model: Listing,
     
     initialize: function(){
-
       var _this = this;
       this.fetch({reset: true});
       //use fetch w/reset = true because that indicates that this fetch is populating an empty collection or repopulating a collection. This allows us to bind render in the view onto the nice 'reset' trigger and stick with backbone conventions!
-      // this.listenTo(Backbone.pubSub, 'feedAddListing', this.addListingToCollection);
+      this.socket = io.connect('127.0.0.1');
+      var self = this;
+      console.log(self);
+      this.socket.on('listing:create', this.createListing.bind(self));
     },
 
-    // addListingToCollection: function(broadcastObj){
-    //   this.create(broadcastObj.modelInfo,broadcastObj.extraData,broadcastObj.callbacks)
-    // },
-    
-    // create: function(modelInfo, extraData, callback){
-    //   /*Overwrites backbone create function. 
-    //   Creates model, saves it to server, adds it to current collection, 
-    //   and calls callbacks.*/
-    //   var _this = this;
-    //   var newSuccessCallback = function(model, response, options){
-    //     _this.add(model);
-    //     callback.success.call(callback.success, model, response, options);
-    //   };
-    //   var newCallback = {
-    //     error: callback.error,
-    //     success: newSuccessCallback,
-    //   };
-    //   var newListing = new this.model(modelInfo)
-    //   newListing.saveWithExtraData(extraData,newCallbacks);
-    // },
-  
-  });
+    createListing: function(model){
+      console.log(model);
+      console.log('create listing called!');
+      console.log(this);
+      this.add(model);
+    },
 
+  });
   return Feed;
 });

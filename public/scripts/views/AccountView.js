@@ -6,28 +6,36 @@ define([
   'scripts/views/FeedView',
   'scripts/views/DestroyableView',
   'text!templates/AccountTemplate.html'
-], function ($, _, Backbone, userFeed, FeedView, DestroyableView, AccountTemplate) {
+], function ($, _, Backbone, userFeed, FeedView, 
+  DestroyableView, AccountTemplate) {
   var AccountView = DestroyableView.extend({
 
     tagname: "div",
     id: "AccountView",
 
-    initialize: function(info){
-        this.template = _.template(AccountTemplate);
-        this.model = info.model;
+    initialize: function(options){
+      options.parentDiv.append(this.$el);
+      this.template = _.template(AccountTemplate);
+      this.model = options.model;
+      this.listenTo(this.model, 'change', this.render);
+
+      this.model.fetch();
     },
 
-    render:function (info) {
-        info.parentDiv.append(this.$el);
-        var self = this;
-        this.model.fetch(function(){
-          self.$el.html(self.template(self.model.attributes));
-          console.log(self.model.attributes.userId);
-          var feedView = new FeedView( {feedCollection: new userFeed(self.model.attributes.userId)} );
-          self.childViews.push(feedView);
-          feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
-        });
-        return this;
+    render:function(){
+      // TODO: Refactor this so that the UserModel is handling this action.
+      this.$el.html(this.template(this.model.attributes));
+      
+      console.log(this.model.attributes.userId);
+      var feedView = new FeedView({
+        feedCollection: new userFeed(this.model.attributes.userId)
+      });
+
+      this.childViews.push(feedView);
+
+      // TODO: Change render information.
+      feedView.render({parentDiv: $('#FeedViewMountPoint')});
+      return this;
     },
   });
 

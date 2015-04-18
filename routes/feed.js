@@ -1,11 +1,11 @@
-//require my util scripts
-var validate_listing = require('./validateInput.js').validate_listing
+// Require my util scripts.
+var validate_listing = require('./validateInput.js').validate_listing;
 
 var path = require("path");
 var User = require(path.join(__dirname,"../models/user_model")).user;
 var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 
-//get feed (which only includes open listings) sorted by time
+// Get feed (which only includes open listings) sorted by time.
 exports.getFeed = function(req, res) {
   Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
       if (err) {
@@ -13,7 +13,7 @@ exports.getFeed = function(req, res) {
           res.status(500).send("Could not search Listings!");
       }
       else {
-          //only return open listings
+          // Only return open listings.
           listings = listings.filter(function(listing){
               return listing.listing_open;
           });
@@ -23,14 +23,15 @@ exports.getFeed = function(req, res) {
 };
 
 exports.getFreeFeed = function(req,res){
-  Listing.find({listing_price: 0}).sort({"item_timeCreated": -1}).exec(function (err, listings) {
+  Listing.find({listing_price: 0}).sort({"item_timeCreated": -1})
+    .exec(function (err, listings) {
       if (err) {
           console.log ("Could not search Listings!");
           res.status(500).send("Could not search Listings!");
       }
       else {
           console.log("listings: " +listings)
-          //only return open listings
+          // Only return open listings.
           listings = listings.filter(function(listing){
               return listing.listing_open;
           });
@@ -41,7 +42,7 @@ exports.getFreeFeed = function(req,res){
 
 exports.getUserFeed = function(req, res){
   var userId = req.params.id;
-  //.populate turns references into the actual mongo objects
+  // .populate turns references into the actual mongo objects.
   User.findOne({userId:userId}).populate('listings').exec(function(err, user){
     if (err) {
       res.status(500).send("Could not search Users!");
@@ -55,4 +56,3 @@ exports.getUserFeed = function(req, res){
 }
 
 module.exports = exports;
-

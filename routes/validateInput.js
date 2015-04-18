@@ -9,18 +9,19 @@ var contains_non_whitespace = function(str){
 }
 
 var is_valid_price = function(val){
-    //checks that price is in dollar.cents format like x.xx
+    // Checks that price is in dollar.cents format like x.xx
     if (!contains_non_whitespace){
         return false;
     } 
-    //regex from http://stackoverflow.com/questions/2227370/currency-validation
+    // Regex from http://stackoverflow.com/questions/2227370/currency-validation
     var regex = /^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
-    //var regex = /^\d+(?:\.\d{0,2})$/;
+    // var regex = /^\d+(?:\.\d{0,2})$/;
     return regex.test(val);
 }
 
 validateInput.validate_listing = function(req, res, callback){
-    //calls callback if listings is validated, otherwise it sends a error code with relevant error messages
+    /*Calls callback if listings is validated, otherwise it sends 
+    an error code with relevant error messages.*/
     var listing_name = req.body.listing_name;
     var listing_description = req.body.listing_description;
     var listing_image = req.body.listing_image;

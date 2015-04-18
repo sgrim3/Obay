@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
     pass: process.env.OBAY_GMAIL_PASS || '',
   }
 });
-var OBAY_RECIEVER = process.env.OBAY_RECIEVER || ''; //who gets the emails
+var OBAY_RECIEVER = process.env.OBAY_RECIEVER || ''; // Who gets the emails.
 
 var email = {
 
@@ -32,41 +32,38 @@ var email = {
   testEmail: function (req, res, next){
     // Setup e-mail data with unicode symbols.
     var mailOptions = {
-      from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
-      to: req.body.emailTo ||'hdavidzhu@gmail.com', // list of receivers
-      subject: req.body.emailSubject || 'Hello', // Subject line
-      text: req.body.emailText || 'Hello world' // plaintext body
+      from: 'Olin Obay<noreply@obay.herokuapp.com>', // Sender address.
+      to: req.body.emailTo ||'hdavidzhu@gmail.com', // List of receivers.
+      subject: req.body.emailSubject || 'Hello', // Subject line.
+      text: req.body.emailText || 'Hello world' // Plaintext body.
     };
-
 
     email.sendEmail(res, mailOptions);
   },
 
-  sendCarpeEmail: function(listing,res,success_callback){
+  sendCarpeEmail: function(listing){
     emailTemplates(templatesDir, function(err, template){
       if (err) {
         console.log(err);
-        res.status(500).send('Could not create email template!');
       } else {
         template('carpeEmail', listing, function(err, html, text){
           if (err) {
             console.log(err);
-            res.status(500).send('Could not create email template!');
           } else {
-            var subject_line = 'Selling ' + listing.listing_name + ' for $' + listing.listing_price;
+            var subject_line = 'Selling ' + listing.listing_name + ' for $' 
+              + listing.listing_price;
+
             var mailOptions = {
-              from: 'Olin Obay<noreply@obay.herokuapp.com>', // sender address
-              to: OBAY_RECIEVER, // list of receivers
-              subject: subject_line, // Subject line
-              text: text, // plaintext body
+              from: 'Olin Obay<noreply@obay.herokuapp.com>', // Sender address.
+              to: OBAY_RECIEVER, // List of receivers.
+              subject: subject_line, // Subject line.
+              text: text, // Plaintext body.
               html: html,
             };
+
             transporter.sendMail(mailOptions, function(error, info){
               if(error){
                 console.log(error);
-                res.status(500).send('Email failed to send: ' + error);
-              }else{
-                success_callback();
               }
             });
           }
@@ -74,7 +71,6 @@ var email = {
       }
     });
   },
-
 };
 
 module.exports = email;

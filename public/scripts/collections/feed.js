@@ -15,10 +15,16 @@ define([
       this.socket = io.connect('127.0.0.1');
       var self = this;
       this.socket.on('listing:create', this.createListing.bind(self));
+      this.socket.on('listing:update', this.updateListing.bind(self));
     },
 
     createListing: function(model){
       this.add(model);
+    },
+
+    updateListing: function(model){
+      var updated_model = this.get(model._id);
+      updated_model.set(model);
     },
 
   });

@@ -44,15 +44,11 @@ exports.postListing = function(req, res, next) {
                       console.error('Could not save listing!');
                       res.status(500).send("Could not save listing!");
                     } else {
-                      var callback = function(){
-                        res.json(newListing);
-                        io.sockets.emit('listing:create', newListing);
-                      }
+                      res.json(newListing);
+                      io.sockets.emit('listing:create', newListing);
                       if (req.body.toCarpe && req.body.toCarpe === 'on'){ 
-                        email.sendCarpeEmail(newListing, res, callback);
-                      } else {
-                        callback();
-                      }
+                        email.sendCarpeEmail(newListing);
+                      } 
                     }
                   });
                 }

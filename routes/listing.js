@@ -10,7 +10,6 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 var exports = {};
 
 exports.postListing = function(req, res, next) {
-  console.log("dz | listing.js | postListing | Printing out req.body.");
   console.log(req.body);
   var onValidListing = function(){
     if (req.body.listing_image){
@@ -29,7 +28,6 @@ exports.postListing = function(req, res, next) {
       listing_price: parseFloat(req.body.listing_price.replace(/,/g, ''))
     });
     
-    // Save new listing to database.
     // TODO: Make this cleaner. Too many nested if statements.
     newListing.save(function(err){
       if(err){
@@ -51,21 +49,20 @@ exports.postListing = function(req, res, next) {
                 console.error('Could not save listing!');
                 res.status(500).send("Could not save listing!");
               } else {
-                var callback = function(){
-                  console.log("dz | listing.js | socket emit.")
-                  io.sockets.emit('listing:create', newListing);
-                  res.json(newListing);
-                }
-
-                // QUESTION: Why is this conditional like this?
-                if (req.body.toCarpe && req.body.toCarpe === 'on'){
-
-                  // TODO: This seems winded. Can we not have sendCarpeEmail
-                  // have its own route?
-                  email.sendCarpeEmail(newListing, res, callback);
-                } else {
-                  callback();
-                }
+                //add reference and NOT the document! We don't want to make a copy, just store a reference
+                user.listings.push(newListing._id);
+                user.save(function(err){
+                  if (err) {
+                    console.error('Could not save listing!');
+                    res.status(500).send("Could not save listing!");
+                  } else {
+                    res.json(newListing);
+                    io.sockets.emit('listing:create', newListing);
+                    if (req.body.toCarpe === 'on'){ 
+                      email.sendCarpeEmail(newListing);
+                    } 
+                  }
+                });
               }
             });
           }
@@ -79,7 +76,6 @@ exports.postListing = function(req, res, next) {
 exports.getListing = function(req, res) {
   var id=req.params.id;
   var currentUser= req.session.user.userId;
-
   Listing.findOne({_id:id}).exec(function (err, item) {
     if (err) {
       console.error("Could not search Listings!");

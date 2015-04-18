@@ -14,9 +14,8 @@ define([
     url: '', 
 
     initialize: function(userId){
-
+      this.userId = userId;
       this.url = '/feed/user/' + userId;
-
 
       // FIXME: All of the following code is redundant from the Feed model.
       var _this = this;
@@ -30,6 +29,12 @@ define([
       collection so it may make more sense to change the naming convention.*/
       // QUESTION: What does .bind mean in this situation for createListing? 
       this.socket.on('listing:create', this.createListing.bind(_this));
+    },
+
+    createListing: function(model){
+      if (model.listing_creator === this.userId){
+        this.add(model);
+      }
     },
 
   });

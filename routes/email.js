@@ -41,20 +41,18 @@ var email = {
     email.sendEmail(res, mailOptions);
   },
 
-  sendCarpeEmail: function(listing,res,success_callback){
+  sendCarpeEmail: function(listing){
     emailTemplates(templatesDir, function(err, template){
       if (err) {
         console.log(err);
-        res.status(500).send('Could not create email template!');
       } else {
         template('carpeEmail', listing, function(err, html, text){
           if (err) {
             console.log(err);
-            res.status(500).send('Could not create email template!');
           } else {
             var subject_line = 'Selling ' + listing.listing_name + ' for $' 
               + listing.listing_price;
-            
+
             var mailOptions = {
               from: 'Olin Obay<noreply@obay.herokuapp.com>', // Sender address.
               to: OBAY_RECIEVER, // List of receivers.
@@ -62,12 +60,10 @@ var email = {
               text: text, // Plaintext body.
               html: html,
             };
+
             transporter.sendMail(mailOptions, function(error, info){
               if(error){
                 console.log(error);
-                res.status(500).send('Email failed to send: ' + error);
-              }else{
-                success_callback();
               }
             });
           }

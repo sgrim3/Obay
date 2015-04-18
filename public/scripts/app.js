@@ -29,7 +29,6 @@ require([
   , 'scripts/models/user'
   // , 'scripts/collections/feed'
   // , 'scripts/collections/freeFeed'
-
   // , 'scripts/views/DestroyableView'
   , 'scripts/views/AccountView'
   , 'scripts/views/AddListingView'
@@ -54,7 +53,6 @@ require([
   , UserModel
   // , FeedCollection
   // , FreeFeedCollection
-
   // , DestroyableView
   , AccountView
   , AddListingView
@@ -85,7 +83,6 @@ require([
       "logout": "logout",
       "listing/:id" : "listing",
       "temporaryPayRoute": "pay",
-      
       // This route must go last to act as the catchall/404 page.
       '*notFound': 'notFound'
     },
@@ -154,9 +151,8 @@ require([
                   parentDiv:$('#SidebarContainer')
                 });
             }
-            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            _this.Page = new SortFreeHomeView();
-            _this.Page.render({parentDiv: $('#PageContainer')});
+            if (_this.Page) { _this.Page.dwestroy(); _this.Page = null; };
+            _this.Page = new SortFreeHomeView({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page

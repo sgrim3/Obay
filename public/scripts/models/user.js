@@ -19,12 +19,7 @@ define([
       $.get('/userData')
         .done(function(data){
           _this.set(data.user);
-<<<<<<< HEAD
-        })
-=======
-          
         });
->>>>>>> dz-clean
     }
   });
   return User;

@@ -128,7 +128,7 @@ var buyListing = function(req,res){
     if (listing_creator === req.session.user.userId){
       res.status(401).send("You can't buy your own listings!");
     } else {
-      //if user closing listing is not 
+      //listing_open is set to false here to be extra sure in case code gets changed in the future.
       Listing.findByIdAndUpdate(id, {$set:{ listing_open:false }}, 
         function (err, listing) {
         if (err){

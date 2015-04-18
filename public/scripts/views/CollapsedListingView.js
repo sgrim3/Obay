@@ -30,7 +30,7 @@ define([
 
         isImgurLink: function(url){
             if (url.match(/^(http:\/\/)?(i\.imgur\.com)/)){
-                //code intentionally written this way and is NOT redundant. Takes advantage of javascript's 'truthiness', where null is false and non-empty values are true.
+                //code intentionally written this way and is NOT redundant. Takes advantage of javascript's 'truthiness', where null is false and non-empty values are true. Could use ternary operator if ya really want a one liner
                 return true;
             } else {
                 return false;

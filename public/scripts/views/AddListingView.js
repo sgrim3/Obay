@@ -14,12 +14,14 @@ define([
         tagname: "div",
         id: "AddListingView",
 
-    	events: {
-    	    'click #postButton': 'postListing'
-    	},
+        events: {
+            'click #postButton': 'postListing'
+        },
 
-        initialize: function (){
+        initialize: function(info){
+            info.parentDiv.append(this.$el);
             this.template = _.template(AddListingTemplate);
+            this.render();
         },
 
         destroy:function () {
@@ -41,7 +43,6 @@ define([
         },
 
         render:function (info) {
-            info.parentDiv.append(this.$el);
             var listing_attributes={
                 listing_name:'',
                 listing_price:'',
@@ -50,7 +51,7 @@ define([
             }
             $(this.el).html(this.template(listing_attributes));
             var dropzone_options = {
-                dictDefaultMessage: 'Drag file here or click to upload to Imgur! (Automatically populates Image url)',
+                dictDefaultMessage: 'Click to upload to Imgur! (Automatically populates Image url)',
                 url: "/image",
                 init: function() {
                     this.on("addedfile", function() {
@@ -78,57 +79,51 @@ define([
             return this;
         },
 
-        // broadcastFeedAddListing: function(broadcastObj){
-        //   //broadcasts to feed collections and tells them to add a model and sync with the server
-        //   Backbone.pubSub.trigger('feedAddListing', broadcastObj);
-        // },
-
-        getModelInfoAndextraData: function(){
-          //returns obj containing extra arguments and model info like so: {extraData:{},modelInfo:{}}
+        getPostObj: function(){
             var listing_name = $("#addListingName").val();
             var listing_description = $("#addListingDescription").val();
             var listing_image = $("#addListingImage").val();
             var listing_price = $("#addListingPrice").val();
             var toCarpe = $("#carpeButton:checked").val();
-            var modelInfo = {
+            var postObj = {
               listing_name: listing_name,
               listing_description: listing_description,
               listing_image: listing_image,
               listing_open: true,
-              listing_price: listing_price
+              listing_price: listing_price,
+              extraData: {toCarpe:toCarpe},
             };
-            var extraData = {toCarpe:toCarpe};
-            return {extraData:extraData, modelInfo:modelInfo};
+            return postObj;
         },
 
-        // postHelper: function(callbacks){
-        //   var broadcastObj = this.getModelInfoAndextraData();
-        //   broadcastObj.callbacks = callbacks;
-        //   this.broadcastFeedAddListing(broadcastObj);
-        // },
+        postHelper: function(event, onSuccess, onErr){
+          event.preventDefault();
+          var postObj = this.getPostObj();
+          $.post('/listing',postObj)
+            .success(function(response){
+              onSuccess(response);
+            })
+            .error(function(response){
+              onErr(response);
+            });
+        },
 
         postListing: function(event){
-          event.preventDefault();
-          var callbacks = {
-            success: function(model, response, options) {
-                $('#error_message').text('');
-                Backbone.history.navigate('#home');
-                Backbone.history.loadUrl('#home');
-            },
-            error: function(model, response, options) {
-                if (response.status === 401) {
-                    if (!response.authenticated){
-                        window.location.replace('/');
-                    }
-                } else {
-                    $('#error_message').text(response.responseText);
-                }
+          var onSuccess = function(response){
+            $('#error_message').text('');
+            Backbone.history.navigate('#home');
+            Backbone.history.loadUrl('#home');
+          };
+          var onErr = function(response){
+            if (response.status === 401) {
+                window.location.replace('/');
+            } else {
+                $('#error_message').text(response.responseText);
             }
           };
-          this.postHelper(callbacks)
+          this.postHelper(event, onSuccess, onErr);
         },
 
     });
-
     return AddListingView;
 });

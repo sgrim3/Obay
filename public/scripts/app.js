@@ -87,8 +87,7 @@ require([
     account: function(){
         var self = this;
         if (!self.Sidebar) {
-            self.Sidebar = new SidebarView();
-            self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
         }
         if (self.Page) { self.Page.destroy();  self.Page = null };
         var model = new UserModel();
@@ -122,11 +121,10 @@ require([
         var self = this;
         var onOlinAuth = function(){
             if (!self.Sidebar) {
-                self.Sidebar = new SidebarView();
-                self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
             }
             if (self.Page) { self.Page.destroy(); self.Page = null; };
-            self.Page = new HomeView();
+            self.Page = new HomeView({parentDiv:$('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page
@@ -139,8 +137,7 @@ require([
         var self = this;
         var onOlinAuth = function(){
             if (!self.Sidebar) {
-                self.Sidebar = new SidebarView();
-                self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
             }
             if (self.Page) { self.Page.destroy(); self.Page = null; };
             self.Page = new SortFreeHomeView();
@@ -158,12 +155,10 @@ require([
         var self = this;
         var onOlinAuth = function(){
             if (!self.Sidebar) {
-                self.Sidebar = new SidebarView();
-                self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
             }
             if (self.Page) { self.Page.destroy(); self.Page = null; };
-            self.Page = new AddListingView();
-            self.Page.render({parentDiv: $('#PageContainer')});
+            self.Page = new AddListingView({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             window.location.replace('/');
@@ -175,8 +170,7 @@ require([
         var self = this;
         var onOlinAuth = function(){
             if (!self.Sidebar) {
-                self.Sidebar = new SidebarView();
-                self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
             }
             if (self.Page) { self.Page.destroy(); self.Page = null; };
             var model = new Listing({id: id});
@@ -193,8 +187,7 @@ require([
     listing: function(id){
         var self = this;
         if (!self.Sidebar){
-            self.Sidebar = new SidebarView();
-            self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
         }
         if (self.Page) { self.Page.destroy(); self.Page = null; };
         var model = new Listing({id: id});
@@ -205,8 +198,7 @@ require([
     pay: function (id){
         var self = this;
         if (!self.Sidebar){
-            self.Sidebar = new SidebarView();
-            self.Sidebar.render({parentDiv:$('#SidebarContainer')});
+            self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
         }
         if (self.Page) { self.Page.destroy(); self.Page = null; };
         self.Page = new PayView();

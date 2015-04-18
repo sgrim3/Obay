@@ -11,25 +11,23 @@ define([
         tagname: "div",
         id: "FeedView",
 
-        // TODO: Change 'data' into something more descriptive.
-        initialize:function (data) {
-            data.parentDiv.append(this.$el);
-            this.collection = data.feedCollection;
+        // TODO: Change 'info' into something more descriptive.
+        initialize:function (info) {
+            info.parentDiv.append(this.$el);
+            this.collection = info.feedCollection;
             this.listenTo(this.collection, 'reset', this.render);
         },
 
         render: function (){
             console.log("FeedView rendered.");
             var self = this;
-           this.collection.models.forEach(function(m){
-                var collapsedListingView = new CollapsedListingView({
-                    parentDiv: self.$el,
-                    model: m,
-                });
-                self.childViews.push(collapsedListingView);
-
-                // collapsedListingView.render({parentDiv: _this.$el}); 
+            this.collection.models.forEach(function(m){
+            var collapsedListingView = new CollapsedListingView({
+                parentDiv: self.$el,
+                model: m,
             });
+            self.childViews.push(collapsedListingView);
+        });
 
 
             //mount to parentDiv passed on creation

@@ -7,20 +7,19 @@ define([
   'text!templates/NotFoundView.html'
 ], function ($, _, Backbone, NotFoundView, DestroyableView, NotFoundTemplate) {
   var NotFoundView = DestroyableView.extend({
-      tagname: "div",
-      id: "NotFoundView",
-    
-      initialize:function(){
-          this.template = _.template(NotFoundTemplate);
-      },
+    tagname: "div",
+    id: "NotFoundView",
+  
+    initialize:function(info){
+      this.template = _.template(NotFoundTemplate);
+      info.parentDiv.append(this.$el);
+      this.render();
+    },
 
-      render:function (info) {
-          info.parentDiv.append(this.$el);
-          this.$el.html(this.template());
-          return this;
-      }
-
+    render:function () {
+      this.$el.html(this.template());
+      return this;
+    }
   });
-
   return NotFoundView;
 });

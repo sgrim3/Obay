@@ -81,158 +81,176 @@ require([
       "logout": "logout",
       "listing/:id" : "listing",
       "temporaryPayRoute": "pay",
-      '*notFound': 'notFound' // This route must go last to act as the catchall/404 page.
-    },
-
-    account: function(){
-        var self = this;
-        if (!self.Sidebar) {
-            self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
-        }
-        if (self.Page) { self.Page.destroy();  self.Page = null };
-        var model = new UserModel();
-        self.Page = new AccountView({model:model});
-        self.Page.render({parentDiv: $('#PageContainer')});
-    },
-
-    notFound: function(){
-        var self = this;
-        if (self.Page) { self.Page.destroy(); self.Page = null };
-        self.Page = new NotFoundView();
-        self.Page.render({parentDiv: $('#PageContainer')});
+      
+      // This route must go last to act as the catchall/404 page.
+      '*notFound': 'notFound'
     },
 
     ensureOlinAuthenticated: function(onAuth,onErr){
-        $.get('/isOlinAuthenticated')
-            .done(function(data){
-                var isAuth = data.olinAuth;
-                if (isAuth) {
-                    onAuth();
-                } else {
-                    onErr();
-                }
-            })
-            .error(function(){
-                onErr();
-            });
+      $.get('/isOlinAuthenticated')
+        .done(function(data){
+          var isAuth = data.olinAuth;
+          if (isAuth) {
+            onAuth();
+          } else {
+            onErr();
+          }
+        })
+        .error(function(){
+          onErr();
+        });
+    },
+
+    notFound: function(){
+      if (this.Page) { this.Page.destroy(); this.Page = null };
+      this.Page = new NotFoundView({parentDiv: $('#PageContainer')});
     },
 
     home: function(){
-        var self = this;
+        var _this = this;
         var onOlinAuth = function(){
-            if (!self.Sidebar) {
-                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+            if (!_this.Sidebar) {
+                _this.Sidebar = new SidebarView({
+                  parentDiv:$('#SidebarContainer')
+                });
             }
-            if (self.Page) { self.Page.destroy(); self.Page = null; };
-            self.Page = new HomeView({parentDiv:$('#PageContainer')});
+            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+            _this.Page = new HomeView({parentDiv:$('#PageContainer')});
         }
         var onOlinErr = function(){
-            //redirect to login page
+            // Redirect to login page.
             window.location.replace('/');
         }
-        self.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    account: function(){
+      if (!this.Sidebar) {
+        this.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+      }
+      if (this.Page) {
+        this.Page.destroy();
+        this.Page = null 
+      };
+
+      // QUESTION: Should a userModel be declared here?
+      // Also, should this be checked to determine if the user already exists?
+      var userModel = new UserModel();
+      this.Page = new AccountView({
+        parentDiv: $('#PageContainer'),
+        model: userModel
+      });
     },
 
     free: function(id) {
-        var self = this;
+        var _this = this;
         var onOlinAuth = function(){
-            if (!self.Sidebar) {
-                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+            if (!_this.Sidebar) {
+                _this.Sidebar = new SidebarView({
+                  parentDiv:$('#SidebarContainer')
+                });
             }
-            if (self.Page) { self.Page.destroy(); self.Page = null; };
-            self.Page = new SortFreeHomeView();
-            self.Page.render({parentDiv: $('#PageContainer')});
+            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+            _this.Page = new SortFreeHomeView();
+            _this.Page.render({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             //redirect to login page
             window.location.replace('/');
         }
-        self.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
 
     },
 
     addListing: function () {
-        var self = this;
+        var _this = this;
         var onOlinAuth = function(){
-            if (!self.Sidebar) {
-                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+            if (!_this.Sidebar) {
+                _this.Sidebar = new SidebarView({
+                  parentDiv:$('#SidebarContainer')
+                });
             }
-            if (self.Page) { self.Page.destroy(); self.Page = null; };
-            self.Page = new AddListingView({parentDiv: $('#PageContainer')});
+            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+            _this.Page = new AddListingView({parentDiv: $('#PageContainer')});
         }
         var onOlinErr = function(){
             window.location.replace('/');
         }
-        self.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     editListing: function(id) {
-        var self = this;
+        var _this = this;
         var onOlinAuth = function(){
-            if (!self.Sidebar) {
-                self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+            if (!_this.Sidebar) {
+                _this.Sidebar = new SidebarView({
+                  parentDiv:$('#SidebarContainer')
+                });
             }
-            if (self.Page) { self.Page.destroy(); self.Page = null; };
+            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
             var model = new Listing({id: id});
-            self.Page = new EditListingView({model:model});
-            self.Page.render({parentDiv: $('#PageContainer'), model:model});
+            _this.Page = new EditListingView({model:model});
+            _this.Page.render({parentDiv: $('#PageContainer'), model:model});
         }
         var onOlinErr = function(){
             window.location.replace('/');
         }
-        self.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
 
     listing: function(id){
-        var self = this;
-        if (!self.Sidebar){
-            self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+        var _this = this;
+        if (!_this.Sidebar){
+            _this.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
         }
-        if (self.Page) { self.Page.destroy(); self.Page = null; };
+        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
         var model = new Listing({id: id});
-        self.Page = new ListingView({model: model});
-        self.Page.render({parentDiv: $('#PageContainer')});
+        _this.Page = new ListingView({model: model});
+        _this.Page.render({parentDiv: $('#PageContainer')});
     },
 
     pay: function (id){
-        var self = this;
-        if (!self.Sidebar){
-            self.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+        var _this = this;
+        if (!_this.Sidebar){
+            _this.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
         }
-        if (self.Page) { self.Page.destroy(); self.Page = null; };
-        self.Page = new PayView();
-        self.Page.render({parentDiv: $('#PageContainer')});
+        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+        _this.Page = new PayView();
+        _this.Page.render({parentDiv: $('#PageContainer')});
     },
 
     login: function(id){
-        var self = this;
+        var _this = this;
         var onOlinAuth = function(){
             //redirect to home if user is logged in already
             window.location.replace('/#home');
         }
         var onOlinErr = function(){
-            if (self.Page) { self.Page.destroy(); self.Page = null; };
-            self.Page = new LoginView();
-            self.Page.render({parentDiv: $('#PageContainer')});
+            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+            _this.Page = new LoginView();
+            _this.Page.render({parentDiv: $('#PageContainer')});
         }
-        self.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     logout: function (id){
-        var self = this;
-        $.post('/logout')
-            .done(function (){
-                //destroy everything completely, we are redirecting to login page which doesn't need page/sidebar mounts to display
-                if (self.Page) { self.Page.destroy(); self.Page = null; };
-                if (self.Sidebar) { self.Sidebar.destroy(); self.Sidebar = null; };
-                Backbone.history.navigate("", true);
-            })
-            .error(function(){
-                console.log("Failed to log out.");
-            });
+      var _this = this;
+      $.post('/logout')
+        .done(function (){
+          /*Destroy everything completely, we are redirecting to login 
+          page which doesn't need page/sidebar mounts to display.*/
+          if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+          if (_this.Sidebar) { 
+            _this.Sidebar.destroy(); 
+            _this.Sidebar = null; 
+          };
+          Backbone.history.navigate("", true);
+        })
+        .error(function(){
+          console.log("Failed to log out.");
+        });
     },
-
   });
 
   Backbone.pubSub = _.extend({}, Backbone.Events);

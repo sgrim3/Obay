@@ -10,17 +10,18 @@ define([
       venmoUserName: '',
       venmoUserId: '',
     },
-    //use userId to uniquely identify user objects
+    // Use userId to uniquely identify user objects.
     idAttribute: 'userId',
-    fetch: function(callback){
-      var self = this;
+
+    // QUESTION: Why is this fetch overwritten?
+    fetch: function(){
+      var _this = this;
       $.get('/userData')
         .done(function(data){
-          self.set(data.user);
-          callback();
-        })
+          _this.set(data.user);
+          
+        });
     }
   });
-
   return User;
 });

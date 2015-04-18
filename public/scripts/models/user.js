@@ -12,14 +12,13 @@ define([
     },
     // Use userId to uniquely identify user objects.
     idAttribute: 'userId',
-    fetch: function(callback){
+
+    // QUESTION: Why is this fetch overwritten?
+    fetch: function(){
       var _this = this;
       $.get('/userData')
         .done(function(data){
           _this.set(data.user);
-
-          // FIXME: Change this into an emit.
-          callback();
         })
     }
   });

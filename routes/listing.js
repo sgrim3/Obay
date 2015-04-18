@@ -34,6 +34,7 @@ exports.postListing = function(req, res, next) {
     newListing.save(function(err){
       if(err){
         console.error('Could not save listing!');
+        console.error(err);
         res.status(500).send("Could not save listing!");
       } else {
         User.findOne({userId: req.session.user.userId})
@@ -51,12 +52,16 @@ exports.postListing = function(req, res, next) {
                 res.status(500).send("Could not save listing!");
               } else {
                 var callback = function(){
-                  res.json(newListing);
-
                   console.log("dz | listing.js | socket emit.")
                   io.sockets.emit('listing:create', newListing);
+                  res.json(newListing);
                 }
-                if (req.body.toCarpe && req.body.toCarpe === 'on'){ 
+
+                // QUESTION: Why is this conditional like this?
+                if (req.body.toCarpe && req.body.toCarpe === 'on'){
+
+                  // TODO: This seems winded. Can we not have sendCarpeEmail
+                  // have its own route?
                   email.sendCarpeEmail(newListing, res, callback);
                 } else {
                   callback();

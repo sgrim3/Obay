@@ -16,7 +16,6 @@ define([
       and stick with backbone conventions!*/
       this.fetch({reset: true});
       this.socket = io.connect('127.0.0.1');
-      var _this = this;
 
       /*TODO: Change this to feed:create? We are starting from the feed 
       collection so it may make more sense to change the naming convention.*/

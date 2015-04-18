@@ -85,42 +85,24 @@ require([
       '*notFound': 'notFound'
     },
 
-    account: function(){
-      if (!this.Sidebar) {
-        this.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
-      }
-      if (this.Page) {
-        this.Page.destroy();
-        this.Page = null 
-      };
-
-      // QUESTION: Should a userModel be declared here?
-      // Also, should this be checked to determine if the user already exists?
-      var userModel = new UserModel();
-      
-      this.Page = new AccountView({model: userModel});
+    ensureOlinAuthenticated: function(onAuth,onErr){
+      $.get('/isOlinAuthenticated')
+        .done(function(data){
+          var isAuth = data.olinAuth;
+          if (isAuth) {
+            onAuth();
+          } else {
+            onErr();
+          }
+        })
+        .error(function(){
+          onErr();
+        });
     },
 
     notFound: function(){
-      var _this = this;
-      if (_this.Page) { _this.Page.destroy(); _this.Page = null };
-      _this.Page = new NotFoundView();
-      _this.Page.render({parentDiv: $('#PageContainer')});
-    },
-
-    ensureOlinAuthenticated: function(onAuth,onErr){
-        $.get('/isOlinAuthenticated')
-            .done(function(data){
-                var isAuth = data.olinAuth;
-                if (isAuth) {
-                    onAuth();
-                } else {
-                    onErr();
-                }
-            })
-            .error(function(){
-                onErr();
-            });
+      if (this.Page) { this.Page.destroy(); this.Page = null };
+      this.Page = new NotFoundView({parentDiv: $('#PageContainer')});
     },
 
     home: function(){
@@ -139,6 +121,21 @@ require([
             window.location.replace('/');
         }
         _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    account: function(){
+      if (!this.Sidebar) {
+        this.Sidebar = new SidebarView({parentDiv:$('#SidebarContainer')});
+      }
+      if (this.Page) {
+        this.Page.destroy();
+        this.Page = null 
+      };
+
+      // QUESTION: Should a userModel be declared here?
+      // Also, should this be checked to determine if the user already exists?
+      var userModel = new UserModel();
+      this.Page = new AccountView({model: userModel});
     },
 
     free: function(id) {
@@ -234,23 +231,22 @@ require([
     },
 
     logout: function (id){
-        var _this = this;
-        $.post('/logout')
-            .done(function (){
-                /*Destroy everything completely, we are redirecting to login 
-                page which doesn't need page/sidebar mounts to display.*/
-                if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-                if (_this.Sidebar) { 
-                  _this.Sidebar.destroy(); 
-                  _this.Sidebar = null; 
-                };
-                Backbone.history.navigate("", true);
-            })
-            .error(function(){
-                console.log("Failed to log out.");
-            });
+      var _this = this;
+      $.post('/logout')
+        .done(function (){
+          /*Destroy everything completely, we are redirecting to login 
+          page which doesn't need page/sidebar mounts to display.*/
+          if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+          if (_this.Sidebar) { 
+            _this.Sidebar.destroy(); 
+            _this.Sidebar = null; 
+          };
+          Backbone.history.navigate("", true);
+        })
+        .error(function(){
+          console.log("Failed to log out.");
+        });
     },
-
   });
 
   Backbone.pubSub = _.extend({}, Backbone.Events);

@@ -13,28 +13,29 @@ define([
     tagname: "div",
     id: "AccountView",
 
-    initialize: function(info){
-      info.parentDiv.append(this.$el);
+    initialize: function(options){
+      options.parentDiv.append(this.$el);
       this.template = _.template(AccountTemplate);
-      this.model = info.model;
+      this.model = options.model;
+      this.listenTo(this.collection, 'reset', this.render);
 
-      this.render();
+      this.model.fetch();
     },
 
-    render:function (info) {
-        var _this = this;
+    render:function(){
+      // TODO: Refactor this so that the UserModel is handling this action.
+      this.$el.html(this.template(this.model.attributes));
+      
+      console.log(this.model.attributes.userId);
+      var feedView = new FeedView({
+        feedCollection: new userFeed(this.model.attributes.userId)
+      });
 
-        // TODO: Refactor this so that the UserModel is handling this action.
-        this.model.fetch(function(){
-          _this.$el.html(_this.template(_this.model.attributes));
-          console.log(_this.model.attributes.userId);
-          var feedView = new FeedView({
-            feedCollection: new userFeed(_this.model.attributes.userId)
-          });
-          _this.childViews.push(feedView);
-          feedView.render( {parentDiv: $('#FeedViewMountPoint')} );
-        });
-        return this;
+      this.childViews.push(feedView);
+
+      // TODO: Change render information.
+      feedView.render({parentDiv: $('#FeedViewMountPoint')});
+      return this;
     },
   });
 

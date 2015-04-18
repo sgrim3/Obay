@@ -81,6 +81,7 @@ require([
       "logout": "logout",
       "listing/:id" : "listing",
       "temporaryPayRoute": "pay",
+      
       // This route must go last to act as the catchall/404 page.
       '*notFound': 'notFound'
     },

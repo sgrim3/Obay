@@ -14,6 +14,8 @@ define([
       is populating an empty collection or repopulating a collection. 
       This allows us to bind render in the view onto the nice 'reset' trigger 
       and stick with backbone conventions!*/
+      /*SUGGESTION: The feed can't really 'change' that much. It should cover
+      of your cases.*/
       this.fetch({reset: true});
       this.socket = io.connect('127.0.0.1');
 

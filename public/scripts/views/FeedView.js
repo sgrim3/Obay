@@ -19,14 +19,14 @@ define([
     },
 
     render: function (){
-      var self = this;
+      var _this = this;
       this.collection.models.forEach(function(m){
         var collapsedListingView = new CollapsedListingView({
-          parentDiv: self.$el,
+          parentDiv: _this.$el,
           model: m,
           collection: this.collection,
         });
-        self.childViews.push(collapsedListingView);
+        _this.childViews.push(collapsedListingView);
       });
     },
 

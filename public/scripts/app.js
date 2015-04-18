@@ -135,7 +135,7 @@ require([
             _this.Page = new HomeView({parentDiv:$('#PageContainer')});
         }
         var onOlinErr = function(){
-            //redirect to login page
+            // Redirect to login page.
             window.location.replace('/');
         }
         _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);

@@ -17,6 +17,7 @@ exports.postListing = function(req, res, next) {
     } else {
       var listing_image = '/images/default_listing_image.jpg';
     }
+
     var newListing = new Listing({
       listing_name: req.body.listing_name,
       listing_description: req.body.listing_description,
@@ -26,6 +27,7 @@ exports.postListing = function(req, res, next) {
       listing_open: true,
       listing_price: parseFloat(req.body.listing_price.replace(/,/g, ''))
     });
+    
     // TODO: Make this cleaner. Too many nested if statements.
     newListing.save(function(err){
       if(err){

@@ -21,6 +21,8 @@ define([
       this.socket.on('listing:update', this.updateListing.bind(_this));
       /*TODO: Change this to feed:create? We are starting from the feed 
       collection so it may make more sense to change the naming convention.*/
+      /*SUGGESTION: The feed can't really 'change' that much. It should cover
+      of your cases.*/
     },
 
     createListing: function(model){

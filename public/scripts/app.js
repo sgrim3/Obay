@@ -29,7 +29,6 @@ require([
   , 'scripts/models/user'
   // , 'scripts/collections/feed'
   // , 'scripts/collections/freeFeed'
-
   // , 'scripts/views/DestroyableView'
   , 'scripts/views/AccountView'
   , 'scripts/views/AddListingView'
@@ -54,7 +53,6 @@ require([
   , UserModel
   // , FeedCollection
   // , FreeFeedCollection
-
   // , DestroyableView
   , AccountView
   , AddListingView

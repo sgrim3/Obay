@@ -34,7 +34,8 @@ module.exports = function (grunt){
           nodeArgs: ['--debug'],
           env: {
             PORT: '3000'
-          }
+          },
+          ignore: ['node_modules/**', 'public/'],
         }
       }
     },

@@ -7,6 +7,7 @@ define([
   var userFeed = Feed.extend({
 
     model: Listing,
+    socket: window.socket,
 
     /*Purposely overwriting parent model's url since we have custom functions 
     to fetch/put/post/etc.*/
@@ -16,15 +17,14 @@ define([
 
       this.url = '/feed/user/' + userId;
 
+
+      // FIXME: All of the following code is redundant from the Feed model.
       var _this = this;
       /*Use fetch w/reset = true because that indicates that this fetch 
       is populating an empty collection or repopulating a collection. 
       This allows us to bind render in the view onto the nice 'reset' trigger 
       and stick with backbone conventions!*/
       this.fetch({reset: true});
-
-      // QUESTION: Should we use the global instance of window.socket instead?
-      this.socket = io.connect('127.0.0.1');
 
       /*TODO: Change this to feed:create? We are starting from the feed 
       collection so it may make more sense to change the naming convention.*/

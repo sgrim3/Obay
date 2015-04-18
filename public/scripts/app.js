@@ -70,6 +70,10 @@ require([
   , SidebarView
   , SortFreeHomeView
 ){
+
+  // Declare socket instance.
+  window.socket = io.connect('127.0.0.1');
+
   var Router = Backbone.Router.extend({
     routes: {
       "": "login",

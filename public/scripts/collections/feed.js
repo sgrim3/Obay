@@ -7,6 +7,7 @@ define([
   var Feed = Backbone.Collection.extend({
     url : '/feed',
     model: Listing,
+    socket: window.socket,
     
     initialize: function(){
       var _this = this;
@@ -17,7 +18,6 @@ define([
       /*SUGGESTION: The feed can't really 'change' that much. It should cover
       of your cases.*/
       this.fetch({reset: true});
-      this.socket = io.connect('127.0.0.1');
 
       /*TODO: Change this to feed:create? We are starting from the feed 
       collection so it may make more sense to change the naming convention.*/

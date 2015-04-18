@@ -135,7 +135,10 @@ require([
       // QUESTION: Should a userModel be declared here?
       // Also, should this be checked to determine if the user already exists?
       var userModel = new UserModel();
-      this.Page = new AccountView({model: userModel});
+      this.Page = new AccountView({
+        parentDiv: $('#PageContainer'),
+        model: userModel
+      });
     },
 
     free: function(id) {

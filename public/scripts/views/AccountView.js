@@ -17,7 +17,7 @@ define([
       options.parentDiv.append(this.$el);
       this.template = _.template(AccountTemplate);
       this.model = options.model;
-      this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.model, 'change', this.render);
 
       this.model.fetch();
     },

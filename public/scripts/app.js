@@ -151,7 +151,7 @@ require([
             parentDiv:$('#SidebarContainer')
           });
         }
-        if (_this.Page) { _this.Page.dwestroy(); _this.Page = null; };
+        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
         _this.Page = new SortFreeHomeView({parentDiv: $('#PageContainer')});
       }
       var onOlinErr = function(){

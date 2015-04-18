@@ -110,7 +110,7 @@ var editListing = function(req,res){
     listing.listing_image = listing_image;
     if (listing.listing_price !== listing_price){
       if (listing.listing_open){
-      listing.listing_price = listing_price;
+        listing.listing_price = listing_price;
       } else {
       res.status(400)
         .send("You can't change a listing price " 
@@ -119,10 +119,12 @@ var editListing = function(req,res){
     } 
     listing.save(function(err){
       if (err) {
-      res.status(500).send('Could not save new listing!');
+        res.status(500).send('Could not save new listing!');
       } else {
-      email.email();
-      res.status(200).json(listing);
+        if (req.body.toCarpe === 'on'){ 
+          email.sendCarpeEmail(newListing);
+        } 
+        res.status(200).json(listing);
       }
     });
     } else {

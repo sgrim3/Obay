@@ -7,7 +7,6 @@ define([
   var userFeed = Feed.extend({
 
     model: Listing,
-    socket: window.socket,
 
     /*Purposely overwriting parent model's url since we have custom functions 
     to fetch/put/post/etc.*/
@@ -28,7 +27,7 @@ define([
       /*TODO: Change this to feed:create? We are starting from the feed 
       collection so it may make more sense to change the naming convention.*/
       // QUESTION: What does .bind mean in this situation for createListing? 
-      this.socket.on('listing:create', this.createListing.bind(_this));
+      window.socket.on('listing:create', this.createListing.bind(_this));
     },
 
     createListing: function(model){

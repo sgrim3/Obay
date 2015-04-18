@@ -93,7 +93,6 @@ define([
               listing_price: listing_price,
               toCarpe: toCarpe,
             };
-            console.log(postObj);
             return postObj;
         },
 

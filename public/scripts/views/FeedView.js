@@ -19,7 +19,6 @@ define([
         },
 
         render: function (){
-            console.log("FeedView rendered.");
             var self = this;
             this.collection.models.forEach(function(m){
               var collapsedListingView = new CollapsedListingView({
@@ -32,8 +31,6 @@ define([
         },
 
         addListingView: function(listing){
-            console.log('in addlistingview');
-            console.log(listing);
             var collapsedListingView = new CollapsedListingView({
               parentDiv: this.$el, 
               model: listing,

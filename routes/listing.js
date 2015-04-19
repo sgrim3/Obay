@@ -82,6 +82,8 @@ exports.getListing = function(req, res) {
       res.status(500).send("Could not search Listings!");
     }
     else {
+
+      console.log("dz getListing | Getting a new listing.");
       res.send({"item":item, "currentUser":currentUser}); 
     }
   });

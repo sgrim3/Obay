@@ -199,7 +199,7 @@ require([
       this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
-    editListing: function(id) {
+    editListing: function editListing(id) {
       var _this = this;
       var onOlinAuth = function(){
         _this.createSidebar();
@@ -220,35 +220,38 @@ require([
     },
 
 
-    listing: function(id){
-        var _this = this;
-        this.createSidebar();
-        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-        var model = new Listing({id: id});
-        _this.Page = new ListingView({model: model});
-        _this.Page.render({parentDiv: $('#PageContainer')});
+    listing: function listing(id) {
+      this.createSidebar();
+      if (this.Page) { this.Page.destroy(); this.Page = null; };
+      var model = new Listing({id: id});
+      this.Page = new ListingView({
+        model: model, 
+        parentDiv: $('#PageContainer')
+      });
     },
 
+    // QUESTION: Is this necessary?
     pay: function (id){
-        var _this = this;
-        this.createSidebar();
-        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-        _this.Page = new PayView();
-        _this.Page.render({parentDiv: $('#PageContainer')});
+      this.createSidebar();
+      if (this.Page) { this.Page.destroy(); this.Page = null; };
+      this.Page = new PayView({parentDiv: $('#PageContainer')});
     },
 
     login: function(id){
-        var _this = this;
-        var onOlinAuth = function(){
-            //redirect to home if user is logged in already
-            window.location.replace('/#home');
-        }
-        var onOlinErr = function(){
-            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            _this.Page = new LoginView();
-            _this.Page.render({parentDiv: $('#PageContainer')});
-        }
-        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+      var _this = this;
+      
+      var onOlinAuth = function(){
+          //redirect to home if user is logged in already
+          window.location.replace('/#home');
+      }
+
+      var onOlinErr = function(){
+          if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+          _this.Page = new LoginView();
+          _this.Page.render({parentDiv: $('#PageContainer')});
+      }
+
+      this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     logout: function (id){

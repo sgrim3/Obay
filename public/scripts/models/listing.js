@@ -14,7 +14,7 @@ define([
         listing_open: true,
         listing_price: 0
     },
-
+    
     urlRoot : "http://127.0.0.1:3000/listing/"
   });
 

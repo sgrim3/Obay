@@ -69,6 +69,7 @@ define([
       return this;
     },
 
+    // TODO: Potentially refactor. Not sure what's the best way for this yet.
     updateListing: function(e) {
       e.preventDefault();
       var listing_name = $("#addListingName").val();
@@ -89,7 +90,7 @@ define([
       this.model.save({}, {
         success: function(model, response, options) {
           $('#error_message').text('');
-          //associate server save time and user with the model
+          // Associate server save time and user with the model.
           model.listing_time_created = response.listing_time_created;
           model.listing_creator = response.listing_creator;
           Backbone.history.navigate('#home');

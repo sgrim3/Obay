@@ -2,47 +2,43 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-
   'scripts/views/DestroyableView',
   'scripts/views/CollapsedListingView',
 
 ], function ($, _, Backbone, DestroyableView, CollapsedListingView) {
-    var FeedView = DestroyableView.extend({
-        tagname: "div",
-        id: "FeedView",
+  var FeedView = DestroyableView.extend({
+    tagname: "div",
+    id: "FeedView",
 
-        initialize:function (data) {
-            this.collection = data.feedModel;
-        },
+    // TODO: Change 'info' into something more descriptive.
+    initialize:function (info) {
+      info.parentDiv.append(this.$el);
+      this.collection = info.feedCollection;
+      this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'add', this.addListingView);
+    },
 
-        render: function (info){
-            //mount to parentDiv passed on creation
-            info.parentDiv.append(this.$el);
-            var feedview = this;
-            this.collection.fetch({
-                //fetch must be called asynchronously to work!
-                success: function(data){
-                    feedview.collection.models.forEach(function(m){
-                        var collapsedListingView = new CollapsedListingView({model: m});
-                        feedview.childViews.push(collapsedListingView);
-                        collapsedListingView.render({parentDiv: feedview.$el}); 
-                    });
-                },
-                error: function(){
-                    //TODO: display error in a div
-                    console.log('error!');
-                }
-            });
-            return this;
-        },
+    render: function (){
+      var _this = this;
+      this.collection.models.forEach(function(m){
+        var collapsedListingView = new CollapsedListingView({
+          parentDiv: _this.$el,
+          model: m,
+          collection: this.collection,
+        });
+        _this.childViews.push(collapsedListingView);
+      });
+    },
 
-        addListingView: function(listing){
-            var collapsedListingView = new CollapsedListingView({model: listing});
-            this.childViews.push(collapsedListingView);
-            this.collection.add(collapsedListingView);
-            collapsedListingView.render({parentDiv: this.$el}); 
-        },
-    });
+    addListingView: function(listing){
+      var collapsedListingView = new CollapsedListingView({
+        parentDiv: this.$el, 
+        model: listing,
+        collection: this.collection});
+      this.childViews.push(collapsedListingView);
+    },
 
-    return FeedView;
+  });
+
+  return FeedView;
 });

@@ -3,12 +3,11 @@ define([
   'underscore', 
   'backbone',
   'utils',
-
   'scripts/models/listing',
-
   'scripts/views/AddListingView',
   'text!templates/AddListingTemplate.html',
-], function ($, _, Backbone, utils, Listing, AddListingView, AddListingTemplate) {
+], function ($, _, Backbone, utils, Listing, 
+    AddListingView, AddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",
         id: "PopoverAddListingView",
@@ -18,26 +17,23 @@ define([
           'click #postButton': 'postListing',
         },
 
-        initialize: function (){
-          this.template = _.template(AddListingTemplate);
-        },
-
         broadcastExitPopoverAddListing: function(){
           Backbone.pubSub.trigger('exitPopoverAddListing');
         },
 
-        postListing: function(event) {
-          event.preventDefault();
+        postListing: function(event){
           var self = this;
-          var callbacks = {
-              success: function(model, response, options) {
-                self.broadcastExitPopoverAddListing();
-              },
-              error: function(model, response, options) {
-                $('#error_message').text(response.responseText);
-              }
+          var onSuccess = function(response){
+            self.broadcastExitPopoverAddListing();
           };
-          this.postHelper(callbacks);
+          var onErr = function(response){
+            if (response.status === 401) {
+                window.location.replace('/');
+            } else {
+                $('#error_message').text(response.responseText);
+            }
+          };
+          this.postHelper(event, onSuccess, onErr);
         },
 
     });

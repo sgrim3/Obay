@@ -41,28 +41,24 @@ exports.postListing = function(req, res, next) {
             console.error('Could not find User!');
             res.status(500).send("Could not find User!");
           } else {
+            
             /*Add reference and NOT the document! We don't want to 
             make a copy, just store a reference.*/
             user.listings.push(newListing._id);
             user.save(function(err){
+              console.error(err);
+              
               if (err) {
                 console.error('Could not save listing!');
                 res.status(500).send("Could not save listing!");
               } else {
-                //add reference and NOT the document! We don't want to make a copy, just store a reference
-                user.listings.push(newListing._id);
-                user.save(function(err){
-                  if (err) {
-                    console.error('Could not save listing!');
-                    res.status(500).send("Could not save listing!");
-                  } else {
-                    res.json(newListing);
-                    io.sockets.emit('listing:create', newListing);
-                    if (req.body.toCarpe === 'on'){ 
-                      email.sendCarpeEmail(newListing);
-                    } 
-                  }
-                });
+
+                res.json(newListing);
+                io.sockets.emit('listing:create', newListing);
+                
+                if (req.body.toCarpe === 'on'){ 
+                  email.sendCarpeEmail(newListing);
+                } 
               }
             });
           }
@@ -126,6 +122,7 @@ var editListing = function(req,res){
         if (req.body.toCarpe === 'on'){ 
           email.sendCarpeEmail(newListing);
         } 
+        io.sockets.emit("listing:update", listing);
         res.status(200).json(listing);
       }
     });
@@ -160,6 +157,7 @@ var buyListing = function(req,res){
     if (err){
       res.status(500).send('Could not buy listing!');
     } else {
+
       res.status(200).send(listing);
     }
     });

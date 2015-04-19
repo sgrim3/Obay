@@ -199,13 +199,13 @@ require([
       this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
-    editListing: function editListing(id) {
+    editListing: function editListing(_id) {
       var _this = this;
       var onOlinAuth = function(){
         _this.createSidebar();
         if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
         
-        var listing = new Listing({id: id});
+        var listing = new Listing({_id: _id});
         _this.Page = new EditListingView({
           model:listing, 
           parentDiv: $('#PageContainer')
@@ -220,10 +220,10 @@ require([
     },
 
 
-    listing: function listing(id) {
+    listing: function listing(_id) {
       this.createSidebar();
       if (this.Page) { this.Page.destroy(); this.Page = null; };
-      var model = new Listing({id: id});
+      var model = new Listing({_id: _id});
       this.Page = new ListingView({
         model: model, 
         parentDiv: $('#PageContainer')

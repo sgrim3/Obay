@@ -2,11 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'utils',
+  // 'utils',
   'scripts/models/listing',
   'scripts/views/AddListingView',
   'text!templates/AddListingTemplate.html',
-], function ($, _, Backbone, utils, Listing, 
+], function ($, _, Backbone, Listing, 
     AddListingView, AddListingTemplate) {
     var PopoverAddListingView = AddListingView.extend({
         tagname: "div",

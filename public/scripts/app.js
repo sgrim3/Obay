@@ -6,8 +6,9 @@ requirejs.config({
     underscore: "scripts/libs/underscore/underscore",
     backbone: "scripts/libs/backbone/backbone",
     text: "scripts/libs/text/text",
-    dropzone: "scripts/libs/dropzone",
-    utils: "scripts/utils"
+    dropzone: "scripts/libs/dropzone"
+    // ,
+    // utils: "scripts/utils"
   },
   shim: {
     'backbone': {
@@ -23,7 +24,7 @@ requirejs.config({
 require([
     'jquery'
   , 'backbone'
-  , 'utils'
+  // , 'utils'
 
   , 'scripts/models/listing'
   , 'scripts/models/user'
@@ -46,7 +47,7 @@ require([
 ], function(
     $
   , Backbone
-  , utils
+  // , utils
 
   // FIXME: Naming convention standardization.
   , Listing

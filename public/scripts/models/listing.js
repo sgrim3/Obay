@@ -4,6 +4,7 @@ define([
   'scripts/models/baseModel',
 ], function ($, Backbone, BaseModel) {
   var Listing = BaseModel.extend({
+    idAttribute: '_id',
 
     defaults: {
         listing_name: '',

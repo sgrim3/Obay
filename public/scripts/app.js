@@ -102,7 +102,7 @@ require([
         });
     },
 
-    // and the function that parses the query string can be something like : 
+    // Helper to convert input into a query.
     parseQueryString: function parseQueryString(queryString) {
       var params = {};
       if(queryString){
@@ -157,11 +157,7 @@ require([
 
     account: function(){
       this.createSidebar();
-
-      if (this.Page) {
-        this.Page.destroy();
-        this.Page = null;
-      };
+      if (this.Page) { this.Page.destroy(); this.Page = null; };
 
       // QUESTION: Should a userModel be declared here?
       // Also, should this be checked to determine if the user already exists?
@@ -189,31 +185,38 @@ require([
     // },
 
     addListing: function () {
-        var _this = this;
-        var onOlinAuth = function(){
-            this.createSidebar();
-            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            _this.Page = new AddListingView({parentDiv: $('#PageContainer')});
-        }
-        var onOlinErr = function(){
-            window.location.replace('/');
-        }
-        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+      var onOlinAuth = function(){
+        this.createSidebar();
+        if (this.Page) { this.Page.destroy(); this.Page = null; };
+        
+        this.Page = new AddListingView({parentDiv: $('#PageContainer')});
+      }
+
+      var onOlinErr = function(){
+        window.location.replace('/');
+      }
+
+      this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     editListing: function(id) {
-        var _this = this;
-        var onOlinAuth = function(){
-            this.createSidebar();
-            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            var listing = new Listing({id: id});
-            _this.Page = new EditListingView({model:listing});
-            _this.Page.render({parentDiv: $('#PageContainer'), model:model});
-        }
-        var onOlinErr = function(){
-            window.location.replace('/');
-        }
-        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+      var _this = this;
+      var onOlinAuth = function(){
+        _this.createSidebar();
+        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+        
+        var listing = new Listing({id: id});
+        _this.Page = new EditListingView({
+          model:listing, 
+          parentDiv: $('#PageContainer')
+        });
+      }
+
+      var onOlinErr = function(){
+        window.location.replace('/');
+      }
+
+      this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
 

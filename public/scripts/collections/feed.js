@@ -30,12 +30,8 @@ define([
     },
 
     updateListing: function(model){
-      console.log(this);
-      console.log(model);
-      console.log(this.models);
-      //console.log(model._id);
+
       var updated_model = this.get(model._id);
-      console.log(updated_model);
       updated_model.set(model);
     },
 

@@ -26,7 +26,6 @@ define([
     render:function(){
       // TODO: Refactor this so that the UserModel is handling this action.
       this.$el.html(this.template(this.model.attributes));
-      console.log(this.model.attributes.userId);
       var feedView = new FeedView({
         parentDiv: $('#FeedViewMountPoint'),
         feedCollection: new userFeed(this.model.attributes.userId)

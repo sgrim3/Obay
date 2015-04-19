@@ -46,6 +46,7 @@ define([
           Backbone.history.loadUrl('#home/free');
           break;
         case "notificationsButton":
+          //TODO- either delete this button or make it do something
           console.log("notificationsButton");
           break;
         case "logoutButton":

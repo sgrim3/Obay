@@ -30,6 +30,7 @@ define([
     },
 
     cashPay: function (){
+      //TODO send email to buyer and seller
       console.log('cashpay called!');
     },
 

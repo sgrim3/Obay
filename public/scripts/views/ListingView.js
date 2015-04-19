@@ -40,17 +40,13 @@ define([
 
     editItem: function () {
       var url = '#editListing/'+this.model.id;
-      
-      console.log(url);
-      
+            
       Backbone.history.navigate(url);
       Backbone.history.loadUrl(url);
     },
 
     buyItem: function(){  
-      
-      console.log('ListingView > buyItem');
-      
+          
       var _this = this;    
       
       // Sets the listing open to false in the backbone model.
@@ -72,7 +68,7 @@ define([
         },
         
         error: function(){
-          console.log('error buying item');
+          console.log('SG|/public/views/ListingView.js|buyItem| error buying item');
         }
 
       });

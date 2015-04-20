@@ -2,7 +2,6 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  // 'utils',
   'scripts/models/listing',
   'scripts/views/AddListingView',
   'text!templates/AddListingTemplate.html',

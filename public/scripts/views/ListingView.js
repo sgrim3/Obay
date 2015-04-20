@@ -59,9 +59,12 @@ define([
       var _this = this;
       this.model.save(null, {
         success: function(listing){
-          var payView = new PayView({model:_this.model});
+          var payView = new PayView({
+            model:_this.model, 
+            parentDiv: $('#buyButton')
+          });
+
           _this.childViews.push(payView);
-          payView.render({parentDiv: $('#buyButton')});
           // $("#buyButton").remove();
           // Backbone.history.navigate('#home');
           // Backbone.history.loadUrl('#home');

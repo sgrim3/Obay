@@ -49,7 +49,7 @@ define([
                 .done(function(response){
                   window.location.replace('https://api.venmo.com/v1/oauth/' 
                     + 'authorize?client_id=2492&scope=make_payments%20' 
-                    + 'access_profile&redirect_uri=http://127.0.0.1:3000/' 
+                    + 'access_profile&redirect_uri=http://' + window.PORT+':3000/' 
                     + 'venmoAuth/redirect');
                 })
                 .error(function(response){

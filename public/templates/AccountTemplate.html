@@ -1,7 +1,7 @@
 <h1> Venmo Payment Options </h1>
 <p>To allow buyers to pay you by Venmo, hit the button below to link a Venmo account with your Obay account!</p>
 
-<a href='https://api.venmo.com/v1/oauth/authorize?client_id=2492&scope=make_payments%20access_profile&redirect_uri=http://127.0.0.1:3000/venmoAuth/addAccount'>Have buyers pay my Venmo account Money!</a>
+<a href='https://api.venmo.com/v1/oauth/authorize?client_id=2492&scope=make_payments%20access_profile&redirect_uri=http://<%= PORT %>:3000/venmoAuth/addAccount'>Have buyers pay my Venmo account Money!</a>
 
 <% if (venmoUserName) { %>
     <div>

@@ -81,6 +81,4 @@ app.post('/image', [
   image.uploadImage
 ]);
 
-app.listen(PORT, function(){
-    console.log("Application running on port:", PORT);
-});
+app.listen(PORT, "0.0.0.0");

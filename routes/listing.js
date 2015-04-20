@@ -138,6 +138,7 @@ var buyListing = function(req,res){
   not edit anything else. the update function here should ONLY change the 
   listing_open attribute.*/
   var listing_id=req.params.id;
+  console.log(listing_id);
   /*Check that listing_creator is not being faked! the only trustworthy 
   info is listing_id.*/
   Listing.findOne({_id:listing_id}).exec(function(err, listing){
@@ -149,7 +150,7 @@ var buyListing = function(req,res){
   } else {
     /*listing_open is set to false here to be extra sure in case code 
     gets changed in the future.*/
-    Listing.findByIdAndUpdate(id, {$set:{ listing_open:false }}, 
+    Listing.findByIdAndUpdate(listing_id, {$set:{ listing_open:false }}, 
     function (err, listing) {
     if (err){
       console.error("SG|/routes/listing.js|buyListing|error");

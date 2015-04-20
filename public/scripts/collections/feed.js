@@ -14,14 +14,20 @@ define([
       } else {
         this.criteria = {};
       }
+      
       this.fetch({reset: true});
+
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
+      window.socket.on('listing:delete', this.deleteListing.bind(_this));
+
     },
 
     ListingFitsCriteria: function(listing){
-      //checks if a listing fits the specified criteria and returns true or false. This is not nearly as complex or good as mongodb's query operators, but it will do basic matching.
+      /*Checks if a listing fits the specified criteria and returns true or 
+      false. This is not nearly as complex or good as mongodb's query operators, 
+      but it will do basic matching.*/
       if (_.where([listing], this.criteria).length > 0){
         return true;
       } else {
@@ -40,15 +46,25 @@ define([
       updated_model.set(model);
     },
 
+    deleteListing: function deleteListing(model) {
+      var chosenListing = this.get(model._id);
+
+      // console.log(model._id);
+      // console.log(this);
+      // console.log(chosenListing);
+      
+      chosenListing.trigger('destroy', chosenListing, chosenListing.collection);
+    },
+
     fetch: function(){
       var _this = this;
-      $.get(_this.url,_this.criteria)
+      $.get(this.url, this.criteria)
         .success(function(data){
           _this.reset(data);
         })
         .error(function(data){
           console.log(data);
-          console.log('Error fetching collection from servar!');
+          console.log('Error fetching collection from server!');
         });
     },
 

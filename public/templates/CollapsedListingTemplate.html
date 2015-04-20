@@ -1,16 +1,21 @@
-<a class="listingHighlight" href="#listing/<%= _id %>">
-    <div id="collapsedListingView">
+<a class="listingHighlight" id="<%= _id %>" href="#listing/<%= _id %>">
+  <div id="collapsedListingView">
 
-        <!-- <button type="button" id= "watchEye"><i class="fa fa-bookmark-o"></i></button> -->
-        <div id="image_area">
-            <img id="picture" src="<%= listing_thumbnail %>">
-        </div>
+    <!-- <button type="button" id= "watchEye"><i class="fa fa-bookmark-o"></i></button> -->
 
-        <div id="text_area">
-            <p id="title"> <%= listing_name %> </p>
-            <div id="description"><p><%= listing_description %></p></div>
-
-            <p id="price"><b>$ <%= listing_price %></b></p>
-        </div>
+    <% if (isCreator !== "undefined") { %>
+      <button type="button" class="round-button" id="deleteButton"><i class="fa fa-times"></i></button>
+    <% } %>
+  
+    <div id="image_area">
+      <img id="picture" src="<%= listing_thumbnail %>">
     </div>
+
+    <div id="text_area">
+      <p id="title"> <%= listing_name %> </p>
+      <div id="description"><p><%= listing_description %></p></div>
+
+      <p id="price"><b>$ <%= listing_price %></b></p>
+    </div>
+  </div>
 </a>

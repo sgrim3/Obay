@@ -176,4 +176,17 @@ exports.updateListing = function(req,res){
   }
 }
 
+exports.deleteListing = function deleteListing(req,res) {
+  console.log("Deleting");
+
+  var listing_id=req.params.id;
+  console.log(listing_id);
+
+  Listing.findOneAndRemove({_id:listing_id}, function(err, listing) {
+    if(err) throw err;
+    res.status(200).json({status: 'success'});
+    io.sockets.emit('listing:delete', listing);
+  });
+}
+
 module.exports = exports;

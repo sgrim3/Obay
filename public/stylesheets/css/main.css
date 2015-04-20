@@ -390,7 +390,7 @@ button#homeButton {
   margin-left: 33%; }
   button#homeButton > #littleO {
     max-width: 75%;
-    margin-top: 15%; }
+    margin-top: -10%; }
 
 button#accountButton {
   background: #F57C00;
@@ -476,7 +476,7 @@ button#venmoButton {
   margin-bottom: 10%; }
 
 #FeedViewMountPoint {
-  margin-top: 50px; }
+  margin-top: 70px; }
 
 #FeedView {
   display: flex;
@@ -564,7 +564,7 @@ button#venmoButton {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 999; }
+  z-index: 99999; }
 
 #loginBoxWrapper {
   display: flex;

@@ -4,8 +4,6 @@ define([
   'scripts/models/baseModel',
 ], function ($, Backbone, BaseModel) {
   var url = "http://"+window.PORT+":3000/listing/";
-  console.log(window.PORT);
-  console.log(url);
   var Listing = BaseModel.extend({
     idAttribute: '_id',
 

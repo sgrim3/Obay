@@ -9,7 +9,6 @@ define([
     model: Listing,
     
     initialize: function(info){
-      console.log(info);
       var _this = this;
       /*Use fetch w/reset = true because that indicates that this fetch 
       is populating an empty collection or repopulating a collection. 

@@ -3,6 +3,9 @@ define([
   'backbone',
   'scripts/models/baseModel',
 ], function ($, Backbone, BaseModel) {
+  var url = "http://"+window.PORT+":3000/listing/";
+  console.log(window.PORT);
+  console.log(url);
   var Listing = BaseModel.extend({
     idAttribute: '_id',
 
@@ -16,7 +19,11 @@ define([
         listing_price: 0
     },
     
-    urlRoot : "http://127.0.0.1:3000/listing/"
+    urlRoot : url,
+
+    intialize: function intialize() {
+      console.log(this.urlRoot);
+    }
   });
 
   return Listing;

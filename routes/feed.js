@@ -9,7 +9,8 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 exports.getFeed = function(req, res) {
   Listing.find().sort({"item_timeCreated": -1}).exec(function (err, listings) {
       if (err) {
-          console.error("Could not search Listings!");
+          console.error("SG|/routes/feed.js|getFeed|error");
+          console.log(err);
           res.status(500).send("Could not search Listings!");
       }
       else {
@@ -26,11 +27,11 @@ exports.getFreeFeed = function(req,res){
   Listing.find({listing_price: 0}).sort({"item_timeCreated": -1})
     .exec(function (err, listings) {
       if (err) {
-          console.log ("Could not search Listings!");
+          console.log ("SG|/routes/feed.js|getFreeFeed|error");
+          console.log(err);
           res.status(500).send("Could not search Listings!");
       }
       else {
-          console.log("listings: " +listings)
           // Only return open listings.
           listings = listings.filter(function(listing){
               return listing.listing_open;
@@ -45,11 +46,10 @@ exports.getUserFeed = function(req, res){
   // .populate turns references into the actual mongo objects.
   User.findOne({userId:userId}).populate('listings').exec(function(err, user){
     if (err) {
+      console.log("SG|/routes/feed.js|getUserFeed| error");
+      console.log(err);
       res.status(500).send("Could not search Users!");
     } else {
-      console.log('get userFeed');
-      console.log(user);
-      console.log(user.listings);
       res.send(user.listings);
     }
   });

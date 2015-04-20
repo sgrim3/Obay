@@ -70,14 +70,16 @@ define([
     // TODO: Should this feature be here? It doesn't seem like the SidebarView
     // should be controlling the toggle feature of the popover.
     togglePopoverAddListing: function(){
+
       if (this.popoverAddListing) {
-          this.hidePopoverAddListing();
+        this.hidePopoverAddListing();
       } else {
-          this.showPopoverAddListing();
+        this.showPopoverAddListing();
       }
     },
 
     showPopoverAddListing: function(){
+      document.getElementById("addButton").style.display="none";
       this.popoverAddListing = new PopoverAddListingView({
         parentDiv: $('#PopoverContainer')
       });
@@ -92,6 +94,7 @@ define([
       this.popoverAddListing.destroy();
       this.popoverAddListing = null;
       window.history.pushState({}, '', this.urlBeforePop);
+      document.getElementById("addButton").style.display="inline";
     },
   });
   return SidebarView;

@@ -77,6 +77,13 @@ require([
       '*notFound': 'notFound'
     },
 
+    initialize: function() {
+      this.on('all', function(routeEvent) {
+        console.log("Sup, I changed route.");
+        document.getElementById("addButton").style.display="inline";
+      });
+    },
+
     ensureOlinAuthenticated: function ensureOlinAuthenticated(onAuth,onErr){
       $.get('/isOlinAuthenticated')
         .done(function(data){

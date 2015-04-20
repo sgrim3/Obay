@@ -444,12 +444,10 @@ button#loginButton {
 
 button#buyButton, button#editButton {
   background-color: #388E3C;
-  position: absolute;
   width: auto;
-  bottom: 0;
-  right: 0;
-  margin-right: 20px;
-  margin-bottom: 20px; }
+  display: inline;
+  float: right;
+  margin-top: 20px; }
 
 button#editButton {
   background-color: #1976D2; }
@@ -588,18 +586,26 @@ button#venmoButton {
   z-index: 99999; }
 
 .add {
-  min-width: 900px !important;
   height: 100%;
+  margin-left: 40px;
+  margin-right: 40px;
   display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
   align-items: center; }
+
+@media only screen and (max-width: 1400px) {
+  .add {
+    margin-top: 70px; } }
 
 /* The element to be centered, can also be of any width and height */
 #addContainer {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   background-color: white;
   width: 100%;
-  padding: 40px;
+  padding: 30px;
   display: flex;
   position: relative; }
 
@@ -608,13 +614,16 @@ button#venmoButton {
   width: 300px;
   order: 0;
   padding: 0px;
-  position: relative; }
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px; }
 
 #addForm {
   order: 1;
-  margin-left: 20px;
+  min-width: 200px;
   position: relative;
-  flex: 1; }
+  flex: 1;
+  overflow: visible; }
   #addForm #addListingImage, #addForm #addListingName, #addForm #addListingDescription, #addForm #addListingPrice {
     width: 100%;
     box-sizing: border-box;
@@ -628,8 +637,8 @@ button#venmoButton {
     font-size: 18pt; }
   #addForm #postButton {
     position: absolute;
-    right: -68px;
-    bottom: -68px;
+    right: -58px;
+    bottom: -58px;
     margin-bottom: 0px;
     background: #388E3C; }
 
@@ -668,8 +677,10 @@ button#venmoButton {
   width: 300px; }
 
 #textDisplay {
+  overflow: none;
   flex: 1;
-  margin-left: 20px; }
+  margin-left: 20px;
+  min-width: 200px; }
   #textDisplay #name {
     font-size: 32pt; }
   #textDisplay #creator {

@@ -111,12 +111,11 @@ button#loginButton {
 button#buyButton {
   @extend %rectangular-button;
   background-color: palette(Green, $colorIntensity);
-  position: absolute;
   width: auto;
-  bottom: 0;
-  right: 0;
-  margin-right: 20px;
-  margin-bottom: 20px;
+
+  display: inline;
+  float: right;
+  margin-top: 20px;
 }
 
 button#editButton {

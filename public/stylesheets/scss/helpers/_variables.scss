@@ -1,1 +1,6 @@
+$contentWidth: 900px;
 $sidebarSpacing: 50px;
+
+$listingPadding: 10px;
+
+$collapsedListingHeight: $contentWidth/3 - 3*$listingPadding;

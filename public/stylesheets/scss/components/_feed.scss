@@ -2,6 +2,7 @@
   @extend %max;
 }
 
+// TODO: Move this to the appropriate place.
 #topLogo {
   margin-top: -10%;
   margin-bottom: 10%;
@@ -11,6 +12,12 @@
   margin-top: $sidebarSpacing;
 }
 
+#FeedView {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .listingHighlight {
   text-decoration: none;
   &:hover {
@@ -18,53 +25,24 @@
   }
 }
 
-$collapsedListingHeight: 150px;
-#collapsedListingView {
+#CollapsedListingView {
+  flex: 0 0 auto;
   background-color: white;
   position: relative;
   height: $collapsedListingHeight;
-  margin-bottom: 10px;
+  width: $collapsedListingHeight;
+  // margin-bottom: 5px;
+  margin: 10px;
+  opacity: 0.9;
   @extend .sh1;
 
   &:hover {
-    @extend .sh3;
-  }
-}
-
-#text_area {
-  position: relative;
-  margin-left: $collapsedListingHeight + 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  height: 100%;
-  color: black;
-
-  #title {
-    font-size: 24pt;
-    margin: 0;
-  }
-
-  #price {
-    position: absolute;
-    background-color: palette(Blue, $colorIntensity);
-    bottom:0px;
-    right: 0px;
-    color: white;
-    font-size: 18pt;
-    padding: 10px;
-    box-sizing: border-box;
-    @extend .sh1;
-  }
-
-  #description {
-    margin-top: 5px;
-    margin-right: 50px;
-    height: 80px;
-    overflow: hidden;
-    // text-overflow: ellipsis;
-    text-overflow-multiline:ellipsis;
-    color: palette(Black, Secondary Text);
-    font-size: 12pt;
+    @extend .sh5;
+    opacity: 1;
+    // border: 2px solid gray;
+    // margin-top: 20px;
+    // margin-bottom: 20px;
+    z-index: 999999;
   }
 }
 
@@ -74,8 +52,12 @@ $collapsedListingHeight: 150px;
   overflow: hidden;
   position: relative;
   display: block;
+  // padding: 15px;
+  // padding-bottom: 15px;
+  // padding-left: 0px;
+  box-sizing: border-box;
   float: left;
-  @extend .sh2;
+  @extend .sh1;
 }
 
 #picture {
@@ -83,25 +65,126 @@ $collapsedListingHeight: 150px;
   max-height:100%;
 }
 
-#watchEye {
+#text_area {
   position: absolute;
-  right: 5px;
-  top: 5px;
-  background-color: transparent;
-  border: 0px;
-  height: 40px;
-  width: 40px;
-  border-radius: 48px;
-  z-index: 99;
-  font-size: 14pt;
-  color: palette(Grey, 500);
+  // margin-left: $collapsedListingHeight + 10px;
+  // padding: 10px;
+  // text-align: center;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  color: black;
+  // opacity: 0.1;
 
-  &:hover {
-    background-color: palette(Grey, 300);
-    cursor: pointer;
+  #title {
+    position: absolute;
+    // top: 40%;
+    font-size: 14pt;
+    margin: 0;
+    padding: 10px; 
+    box-sizing: border-box;
+    // display: inline-block;
+    width: 100%;
+    // background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    // color: white;
     @extend .sh1;
   }
+
+  #price {
+    position: absolute;
+    background-color: palette(Blue, $colorIntensity);
+    // background-color: ;
+    bottom: 0px;
+    right: 0px;
+    color: white;
+    font-size: 14pt;
+    padding: 10px; 
+    box-sizing: border-box;
+    @extend .sh1;
+  }
+
+  #description {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0);
+    text-overflow-multiline:ellipsis;
+    font-size: 12pt;
+    padding: 10px;
+
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  &:hover > #title {
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  &:hover > #description {
+    color: palette(Black, Text);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
 }
+
+// #text_area {
+//   position: relative;
+//   margin-left: $collapsedListingHeight + 10px;
+//   padding: 10px;
+//   box-sizing: border-box;
+//   height: 100%;
+//   color: black;
+
+//   #title {
+//     font-size: 24pt;
+//     margin: 0;
+//   }
+
+//   #price {
+//     position: absolute;
+//     background-color: palette(Blue, $colorIntensity);
+//     bottom:0px;
+//     right: 0px;
+//     color: white;
+//     font-size: 18pt;
+//     padding: 10px;
+//     box-sizing: border-box;
+//     @extend .sh1;
+//   }
+
+//   #description {
+//     margin-top: 5px;
+//     margin-right: 50px;
+//     height: 80px;
+//     overflow: hidden;
+//     // text-overflow: ellipsis;
+//     text-overflow-multiline:ellipsis;
+//     color: palette(Black, Secondary Text);
+//     font-size: 12pt;
+//   }
+// }
+
+// #watchEye {
+//   position: absolute;
+//   right: 5px;
+//   top: 5px;
+//   background-color: transparent;
+//   border: 0px;
+//   height: 40px;
+//   width: 40px;
+//   border-radius: 48px;
+//   z-index: 99;
+//   font-size: 14pt;
+//   color: palette(Grey, 500);
+
+//   &:hover {
+//     background-color: palette(Grey, 300);
+//     cursor: pointer;
+//     @extend .sh1;
+//   }
+// }
 
 #PopoverAddListingView {
   background-color: rgba(0,0,0,0.9);

@@ -14,7 +14,7 @@ html, body, #PageContainer {
 body {
   background-color: #ececec;
   // overflow-y: scroll;
-  max-width: 900px;
+  max-width: $contentWidth;
   display: flex;
 }
 

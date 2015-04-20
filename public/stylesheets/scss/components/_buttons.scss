@@ -121,7 +121,7 @@ button#buyButton {
 
 button#editButton {
   @extend #buyButton;
-  left: 350px;
+  // left: 350px;
   background-color: palette(Blue, $colorIntensity);
 }
 

@@ -452,7 +452,6 @@ button#buyButton, button#editButton {
   margin-bottom: 20px; }
 
 button#editButton {
-  left: 350px;
   background-color: #1976D2; }
 
 button#exitButton {

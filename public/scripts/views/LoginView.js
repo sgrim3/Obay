@@ -11,14 +11,18 @@ define([
       tagname: "div",
       id: "LoginView",
 
-      initialize: function (){
-        this.template = _.template(LoginTemplate);    
+      initialize: function (info){
+        this.template = _.template(LoginTemplate);  
+        info.parentDiv.append(this.$el);
+        this.render();
       },
 
       render:function (info) {
-          info.parentDiv.append(this.$el);
-          this.$el.html(this.template());
-          return this;
+        this.$el.html(this.template({
+          PORT: window.PORT
+        }));
+          
+        return this;
       }
   });
 

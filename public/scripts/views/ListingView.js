@@ -40,17 +40,13 @@ define([
 
     editItem: function () {
       var url = '#editListing/'+this.model.id;
-      
-      console.log(url);
-      
+            
       Backbone.history.navigate(url);
       Backbone.history.loadUrl(url);
     },
 
     buyItem: function(){  
-      
-      console.log('ListingView > buyItem');
-      
+          
       var _this = this;    
       
       // Sets the listing open to false in the backbone model.
@@ -63,16 +59,16 @@ define([
       var _this = this;
       this.model.save(null, {
         success: function(listing){
-          var payView = new PayView({model:_this.model});
+          var payView = new PayView({
+            model:_this.model, 
+            parentDiv: $('#buyButton')
+          });
+
           _this.childViews.push(payView);
-          payView.render({parentDiv: $('#buyButton')});
-          // $("#buyButton").remove();
-          // Backbone.history.navigate('#home');
-          // Backbone.history.loadUrl('#home');
         },
         
         error: function(){
-          console.log('error buying item');
+          console.log('SG|/public/views/ListingView.js|buyItem| error buying item');
         }
 
       });

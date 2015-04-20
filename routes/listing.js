@@ -10,7 +10,6 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 var exports = {};
 
 exports.postListing = function(req, res, next) {
-  console.log(req.body);
   var onValidListing = function(){
     if (req.body.listing_image){
       var listing_image = req.body.listing_image;
@@ -31,39 +30,34 @@ exports.postListing = function(req, res, next) {
     // TODO: Make this cleaner. Too many nested if statements.
     newListing.save(function(err){
       if(err){
-        console.error('Could not save listing!');
-        console.error(err);
+          console.error("SG|/routes/listing.js|postListing|save listing error");
+          console.log(err);
         res.status(500).send("Could not save listing!");
       } else {
         User.findOne({userId: req.session.user.userId})
           .exec(function(err, user){
           if (err) {
-            console.error('Could not find User!');
+            console.error("SG|/routes/listing.js|postListing| User.findOne error");
             res.status(500).send("Could not find User!");
           } else {
+            
             /*Add reference and NOT the document! We don't want to 
             make a copy, just store a reference.*/
             user.listings.push(newListing._id);
             user.save(function(err){
+              console.error(err);
+              
               if (err) {
-                console.error('Could not save listing!');
-                res.status(500).send("Could not save listing!");
+                console.error("SG|/routes/listing.js|postListing|save user error");
+                console.log(err);
+                res.status(500).send("Could not save listing to user!");
               } else {
-                /*Add reference and NOT the document! We don't want to make a 
-                copy, just store a reference.*/
-                user.listings.push(newListing._id);
-                user.save(function(err){
-                  if (err) {
-                    console.error('Could not save listing!');
-                    res.status(500).send("Could not save listing!");
-                  } else {
-                    res.json(newListing);
-                    io.sockets.emit('listing:create', newListing);
-                    if (req.body.toCarpe === 'on'){ 
-                      email.sendCarpeEmail(newListing);
-                    } 
-                  }
-                });
+                res.json(newListing);
+                io.sockets.emit('listing:create', newListing);
+                
+                if (req.body.toCarpe === 'on'){ 
+                  email.sendCarpeEmail(newListing);
+                } 
               }
             });
           }
@@ -79,7 +73,8 @@ exports.getListing = function(req, res) {
   var currentUser= req.session.user.userId;
   Listing.findOne({_id:id}).exec(function (err, item) {
     if (err) {
-      console.error("Could not search Listings!");
+      console.error("SG|/routes/listing.js|getListing|error");
+      console.log(err);
       res.status(500).send("Could not search Listings!");
     }
     else {
@@ -122,11 +117,14 @@ var editListing = function(req,res){
     } 
     listing.save(function(err){
       if (err) {
+        console.error("SG|/routes/listing.js|editListing|error");
+        console.log(err);
         res.status(500).send('Could not save new listing!');
       } else {
         if (req.body.toCarpe === 'on'){ 
           email.sendCarpeEmail(newListing);
         } 
+        io.sockets.emit("listing:update", listing);
         res.status(200).json(listing);
       }
     });
@@ -145,6 +143,7 @@ var buyListing = function(req,res){
   not edit anything else. the update function here should ONLY change the 
   listing_open attribute.*/
   var listing_id=req.params.id;
+  console.log(listing_id);
   /*Check that listing_creator is not being faked! the only trustworthy 
   info is listing_id.*/
   Listing.findOne({_id:listing_id}).exec(function(err, listing){
@@ -156,11 +155,14 @@ var buyListing = function(req,res){
   } else {
     /*listing_open is set to false here to be extra sure in case code 
     gets changed in the future.*/
-    Listing.findByIdAndUpdate(id, {$set:{ listing_open:false }}, 
+    Listing.findByIdAndUpdate(listing_id, {$set:{ listing_open:false }}, 
     function (err, listing) {
     if (err){
+      console.error("SG|/routes/listing.js|buyListing|error");
+      console.log(err);
       res.status(500).send('Could not buy listing!');
     } else {
+
       res.status(200).send(listing);
     }
     });

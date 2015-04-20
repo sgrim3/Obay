@@ -82,6 +82,3 @@ app.post('/image', [
 ]);
 
 app.listen(PORT, "0.0.0.0");
-// app.listen(PORT, function(){
-//     console.log("Application running on port:", PORT);
-// });

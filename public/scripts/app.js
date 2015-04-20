@@ -1,3 +1,6 @@
+// Set global port. Change whether in dev or prod mode.
+window.PORT = "0.0.0.0";
+
 // Configure external dependencies.
 requirejs.config({
   baseUrl: "",
@@ -6,8 +9,7 @@ requirejs.config({
     underscore: "scripts/libs/underscore/underscore",
     backbone: "scripts/libs/backbone/backbone",
     text: "scripts/libs/text/text",
-    dropzone: "scripts/libs/dropzone",
-    utils: "scripts/utils"
+    dropzone: "scripts/libs/dropzone"
   },
   shim: {
     'backbone': {
@@ -23,54 +25,35 @@ requirejs.config({
 require([
     'jquery'
   , 'backbone'
-  , 'utils'
 
   , 'scripts/models/listing'
   , 'scripts/models/user'
-  // , 'scripts/collections/feed'
-  // , 'scripts/collections/freeFeed'
-  // , 'scripts/views/DestroyableView'
   , 'scripts/views/AccountView'
   , 'scripts/views/AddListingView'
   , 'scripts/views/EditListingView'
-  // , 'scripts/views/CollapsedListingView'
-  // , 'scripts/views/FeedView'
   , 'scripts/views/HomeView'
   , 'scripts/views/ListingView'
   , 'scripts/views/LoginView'
-  // , 'scripts/views/NotFoundView'
-  // , 'scripts/views/PayView'
-  // , 'scripts/views/PopoverAddListingView'
   , 'scripts/views/SidebarView'
   , 'scripts/views/SortFreeHomeView'
 ], function(
     $
   , Backbone
-  , utils
 
   // FIXME: Naming convention standardization.
   , Listing
   , UserModel
-  // , FeedCollection
-  // , FreeFeedCollection
-  // , DestroyableView
   , AccountView
   , AddListingView
   , EditListingView
-  // , CollapsedListingView
-  // , FeedView
   , HomeView
   , ListingView
   , LoginView
-  // , NotFoundView
-  // , PayView
-  // , PopoverAddListingView
   , SidebarView
   , SortFreeHomeView
 ){
-
   // Declare socket instance.
-  window.socket = io.connect('127.0.0.1');
+  window.socket = io.connect(window.PORT);
 
   var Router = Backbone.Router.extend({
     routes: {
@@ -164,25 +147,10 @@ require([
       var userModel = new UserModel();
       this.Page = new AccountView({
         parentDiv: $('#PageContainer'),
-        model: userModel
+        model: userModel,
+        PORT: window.PORT
       });
     },
-
-    // free: function(id) {
-    //   var _this = this;
-    //   var onOlinAuth = function(){
-        
-    //     this.createSidebar();
-    //     if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-    //     _this.Page = new SortFreeHomeView({parentDiv: $('#PageContainer')});
-    //   }
-    //   var onOlinErr = function(){
-    //     // Redirect to login page.
-    //     window.location.replace('/');
-    //   }
-      
-    //   _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
-    // },
 
     addListing: function () {
       var onOlinAuth = function(){
@@ -199,13 +167,13 @@ require([
       this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
-    editListing: function editListing(id) {
+    editListing: function editListing(_id) {
       var _this = this;
       var onOlinAuth = function(){
         _this.createSidebar();
         if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
         
-        var listing = new Listing({id: id});
+        var listing = new Listing({_id: _id});
         _this.Page = new EditListingView({
           model:listing, 
           parentDiv: $('#PageContainer')
@@ -220,22 +188,16 @@ require([
     },
 
 
-    listing: function listing(id) {
+    listing: function listing(_id) {
       this.createSidebar();
       if (this.Page) { this.Page.destroy(); this.Page = null; };
-      var model = new Listing({id: id});
+      var model = new Listing({_id: _id});
       this.Page = new ListingView({
         model: model, 
         parentDiv: $('#PageContainer')
       });
     },
 
-    // QUESTION: Is this necessary?
-    pay: function (id){
-      this.createSidebar();
-      if (this.Page) { this.Page.destroy(); this.Page = null; };
-      this.Page = new PayView({parentDiv: $('#PageContainer')});
-    },
 
     login: function(id){
       var _this = this;
@@ -247,8 +209,7 @@ require([
 
       var onOlinErr = function(){
           if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-          _this.Page = new LoginView();
-          _this.Page.render({parentDiv: $('#PageContainer')});
+          _this.Page = new LoginView({parentDiv: $('#PageContainer')});
       }
 
       this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);

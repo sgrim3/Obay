@@ -15,7 +15,6 @@ var is_valid_price = function(val){
     } 
     // Regex from http://stackoverflow.com/questions/2227370/currency-validation
     var regex = /^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
-    // var regex = /^\d+(?:\.\d{0,2})$/;
     return regex.test(val);
 }
 

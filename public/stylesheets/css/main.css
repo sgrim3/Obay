@@ -390,7 +390,7 @@ button#homeButton {
   margin-left: 33%; }
   button#homeButton > #littleO {
     max-width: 75%;
-    margin-top: 15%; }
+    margin-top: -10%; }
 
 button#accountButton {
   background: #F57C00;
@@ -413,7 +413,8 @@ button#addButton {
   position: fixed;
   right: 25px;
   bottom: 25px;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  z-index: 99999999999999; }
 
 button#deleteImageButton, button#deleteButton {
   background: #D32F2F;
@@ -451,7 +452,6 @@ button#buyButton, button#editButton {
   margin-bottom: 20px; }
 
 button#editButton {
-  left: 350px;
   background-color: #1976D2; }
 
 button#exitButton {
@@ -475,7 +475,7 @@ button#venmoButton {
   margin-bottom: 10%; }
 
 #FeedViewMountPoint {
-  margin-top: 50px; }
+  margin-top: 70px; }
 
 #FeedView {
   display: flex;
@@ -563,7 +563,7 @@ button#venmoButton {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 999; }
+  z-index: 99999; }
 
 #loginBoxWrapper {
   display: flex;
@@ -709,6 +709,19 @@ button#venmoButton {
   position: fixed;
   left: 50px;
   top: 50px; }
+
+#sidebarNav {
+  display: none; }
+
+@media only screen and (max-width: 480px) {
+  #sidebar {
+    display: none; } }
+
+@media only screen and (max-width: 1400px) {
+  #sidebar {
+    display: none; }
+  #sidebarNav {
+    display: inline-block; } }
 
 video#backgroundLoginVideo {
   position: fixed;

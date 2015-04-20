@@ -29,7 +29,7 @@ button#homeButton {
 
   & > #littleO {
     max-width: 75%;
-    margin-top: 15%;
+    margin-top: -10%;
   }
 }
 
@@ -59,6 +59,7 @@ button#addButton {
   right: 25px;
   bottom: 25px;
   margin-bottom: 0px;
+  z-index: 99999999999999;
   @extend .sh2;
 
   &:hover {
@@ -120,7 +121,7 @@ button#buyButton {
 
 button#editButton {
   @extend #buyButton;
-  left: 350px;
+  // left: 350px;
   background-color: palette(Blue, $colorIntensity);
 }
 

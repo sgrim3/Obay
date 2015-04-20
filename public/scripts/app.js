@@ -1,3 +1,7 @@
+define('jquery', [], function() {
+  return jQuery;
+});
+
 // Declare socket instance.
 window.socket = io.connect('127.0.0.1');
 // Set global port. Change whether in dev or prod mode.

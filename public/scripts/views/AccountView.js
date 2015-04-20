@@ -31,14 +31,19 @@ define([
         {PORT: window.PORT}
       )));
 
-      var feedView = new FeedView({
-        parentDiv: $('#FeedViewMountPoint'),
-        
-        feedCollection: new Feed({criteria:{
+      console.log(window.dataHolder.accountCollection);
+      if (typeof window.dataHolder.accountCollection == 'undefined') {
+        console.log("success");
+        window.dataHolder.accountCollection = new Feed({
+          criteria:{
             listing_creator:this.model.attributes.userId
           },
-        }),
+        });
+      }
 
+      var feedView = new FeedView({
+        parentDiv: $('#FeedViewMountPoint'),
+        collection: window.dataHolder.accountCollection,
         currentUser: this.model.attributes.userId,
       });
 

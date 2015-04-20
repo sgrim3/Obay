@@ -23,12 +23,15 @@ define([
       render:function() {
         this.$el.html(this.template());
 
-        // FIXME: feedCollection may not be the best name.
-        var feedCollection = new Feed({criteria: this.criteria});
+        if (typeof window.dataHolder.feedCollection == 'undefined') {
+          window.dataHolder.feedCollection = new Feed({
+            criteria: this.criteria,
+          });
+        }
 
         var feedView = new FeedView({
           parentDiv: $('#FeedViewMountPoint'),
-          feedCollection: feedCollection
+          collection: window.dataHolder.feedCollection
         });
         this.childViews.push(feedView);
         return this;

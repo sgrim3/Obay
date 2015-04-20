@@ -7,6 +7,8 @@ window.socket = io.connect('127.0.0.1');
 // Set global port. Change whether in dev or prod mode.
 window.PORT = "0.0.0.0";
 
+window.dataHolder = {};
+
 // Configure external dependencies.
 requirejs.config({
   baseUrl: "",
@@ -79,8 +81,9 @@ require([
 
     initialize: function() {
       this.on('all', function(routeEvent) {
-        console.log("Sup, I changed route.");
-        document.getElementById("addButton").style.display="inline";
+        try {
+          document.getElementById("addButton").style.display="inline";
+        } catch (err) {}
       });
     },
 

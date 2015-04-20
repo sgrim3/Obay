@@ -15,8 +15,6 @@ define([
         this.criteria = {};
       }
       
-      this.fetch({reset: true});
-
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
@@ -47,7 +45,11 @@ define([
     },
 
     deleteListing: function deleteListing(model) {
+
+      console.log(model);
+
       var chosenListing = this.get(model._id);
+      console.log(chosenListing);
 
       // console.log(model._id);
       // console.log(this);
@@ -68,6 +70,10 @@ define([
         });
     },
 
+    // destroyAll: function() {
+    //   // console.log("Called");
+    //   this.val(undefined);      
+    // }
   });
   return Feed;
 });

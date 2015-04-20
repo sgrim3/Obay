@@ -45,16 +45,7 @@ define([
     },
 
     deleteListing: function deleteListing(model) {
-
-      console.log(model);
-
       var chosenListing = this.get(model._id);
-      console.log(chosenListing);
-
-      // console.log(model._id);
-      // console.log(this);
-      // console.log(chosenListing);
-      
       chosenListing.trigger('destroy', chosenListing, chosenListing.collection);
     },
 
@@ -69,11 +60,6 @@ define([
           console.log('Error fetching collection from server!');
         });
     },
-
-    // destroyAll: function() {
-    //   // console.log("Called");
-    //   this.val(undefined);      
-    // }
   });
   return Feed;
 });

@@ -20,7 +20,6 @@ define([
     urlRoot : url,
 
     intialize: function intialize() {
-      console.log(this.urlRoot);
     }
   });
 

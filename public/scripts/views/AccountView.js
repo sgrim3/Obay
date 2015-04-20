@@ -31,9 +31,8 @@ define([
         {PORT: window.PORT}
       )));
 
-      console.log(window.dataHolder.accountCollection);
+      // Check to see if a collection instance already exists.
       if (typeof window.dataHolder.accountCollection == 'undefined') {
-        console.log("success");
         window.dataHolder.accountCollection = new Feed({
           criteria:{
             listing_creator:this.model.attributes.userId

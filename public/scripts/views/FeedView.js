@@ -16,8 +16,6 @@ define([
       
       this.currentUser = info.currentUser;
       this.collection = info.collection;
-      console.log("FeedView collection: ");
-      console.log(this.collection);
 
       this.collection.fetch({reset: true});
 

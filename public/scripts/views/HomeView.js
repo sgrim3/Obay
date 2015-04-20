@@ -23,6 +23,7 @@ define([
       render:function() {
         this.$el.html(this.template());
 
+        // Check to see if a feedCollection instance already exists.
         if (typeof window.dataHolder.feedCollection == 'undefined') {
           window.dataHolder.feedCollection = new Feed({
             criteria: this.criteria,

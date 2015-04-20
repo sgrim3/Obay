@@ -46,6 +46,7 @@ define([
           Backbone.history.loadUrl('#free');
           break;
         case "notificationsButton":
+          //TODO- either delete this button or make it do something
           console.log("notificationsButton");
           break;
         case "logoutButton":
@@ -78,7 +79,7 @@ define([
       /*Purposely chose to use window.history here instead of 
       backbone.history because backbone.history seemed to be jumping 
       to the top of the page in certain weird cases.*/
-      window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');  
+      window.history.pushState({}, '', 'http://'+window.PORT+':3000/#addListing');  
     },
 
     hidePopoverAddListing: function(){

@@ -6,10 +6,10 @@ var listingSchema = mongoose.Schema({
   listing_description: String, 
   listing_image: String,
   listing_creator: String,
+  listing_buyer: String,
   listing_timeCreated: Number,
   listing_open: Boolean,
   listing_price: Number
-
 });
 
 module.exports.listing = mongoose.model('listing',listingSchema);

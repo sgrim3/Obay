@@ -9,7 +9,8 @@ var Listing = require(path.join(__dirname,"../models/listing_model")).listing;
 exports.getFeed = function(req, res) {
   Listing.find(req.query).sort({"item_timeCreated": -1}).exec(function (err, listings) {
       if (err) {
-          console.error("Could not search Listings!");
+          console.error("SG|/routes/feed.js|getFeed|error");
+          console.log(err);
           res.status(500).send("Could not search Listings!");
       }
       else {

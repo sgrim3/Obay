@@ -13,6 +13,7 @@ define([
 
     events: {
       'click .round-button': 'onClick',
+      'click .nav a': 'onNavClick',
     },
 
     initialize:function (info) {
@@ -59,6 +60,11 @@ define([
         default:
           return;
       }
+    },
+
+    onNavClick: function onNavClick() {
+      $(".btn-navbar").click(); //bootstrap 2.x
+      $(".navbar-toggle").click(); //bootstrap 3.x by Richard
     },
 
     // TODO: Should this feature be here? It doesn't seem like the SidebarView

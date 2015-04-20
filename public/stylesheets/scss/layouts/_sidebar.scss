@@ -1,5 +1,30 @@
 #sidebar {
-    position: fixed;
-    left: $sidebarSpacing;
-    top: $sidebarSpacing;
+  position: fixed;
+  left: $sidebarSpacing;
+  top: $sidebarSpacing;
+}
+
+#sidebarNav {
+  display: none;
+}
+
+@include phone {
+  #sidebar {
+    display: none;
+  }
+}
+
+
+
+@include flexedContent {
+  #sidebar {
+    display: none;
+    // position: static;
+    // display: inline-block;
+    // width: 100%;
+  }
+
+  #sidebarNav {
+    display: inline-block;
+  }
 }

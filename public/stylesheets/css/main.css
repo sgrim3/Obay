@@ -413,7 +413,8 @@ button#addButton {
   position: fixed;
   right: 25px;
   bottom: 25px;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  z-index: 99999999999999; }
 
 button#deleteImageButton, button#deleteButton {
   background: #D32F2F;
@@ -709,6 +710,19 @@ button#venmoButton {
   position: fixed;
   left: 50px;
   top: 50px; }
+
+#sidebarNav {
+  display: none; }
+
+@media only screen and (max-width: 480px) {
+  #sidebar {
+    display: none; } }
+
+@media only screen and (max-width: 1400px) {
+  #sidebar {
+    display: none; }
+  #sidebarNav {
+    display: inline-block; } }
 
 video#backgroundLoginVideo {
   position: fixed;

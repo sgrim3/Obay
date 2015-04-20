@@ -59,6 +59,7 @@ button#addButton {
   right: 25px;
   bottom: 25px;
   margin-bottom: 0px;
+  z-index: 99999999999999;
   @extend .sh2;
 
   &:hover {

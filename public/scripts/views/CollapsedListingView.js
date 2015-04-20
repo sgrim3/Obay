@@ -21,7 +21,8 @@ define([
 
         getThumbnailUrl: function(url){
             if (this.isImgurLink(url)){
-                return url.substring(0,url.length-4)+'b'+url.substring(url.length-4,url.length);
+                // return url.substring(0,url.length-4)+'b'+url.substring(url.length-4,url.length);
+                return url.substring(0,url.length-4)+url.substring(url.length-4,url.length);
             } else {
                 return url;
             }

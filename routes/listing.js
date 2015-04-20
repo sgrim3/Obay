@@ -49,7 +49,8 @@ exports.postListing = function(req, res, next) {
                 console.error('Could not save listing!');
                 res.status(500).send("Could not save listing!");
               } else {
-                //add reference and NOT the document! We don't want to make a copy, just store a reference
+                /*Add reference and NOT the document! We don't want to make a 
+                copy, just store a reference.*/
                 user.listings.push(newListing._id);
                 user.save(function(err){
                   if (err) {

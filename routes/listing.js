@@ -70,16 +70,14 @@ exports.postListing = function(req, res, next) {
 };
 
 exports.getListing = function(req, res) {
-  var id=req.params.id;
-  var currentUser= req.session.user.userId;
+  var id = req.params.id;
+  var currentUser = req.session.user.userId;
   Listing.findOne({_id:id}).exec(function (err, item) {
     if (err) {
       console.error("Could not search Listings!");
       res.status(500).send("Could not search Listings!");
     }
     else {
-
-      console.log("dz getListing | Getting a new listing.");
       res.send({"item":item, "currentUser":currentUser}); 
     }
   });

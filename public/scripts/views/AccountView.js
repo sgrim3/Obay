@@ -2,11 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'scripts/collections/userFeed',
+  'scripts/collections/feed',
   'scripts/views/FeedView',
   'scripts/views/DestroyableView',
   'text!templates/AccountTemplate.html'
-], function ($, _, Backbone, userFeed, FeedView, 
+], function ($, _, Backbone, Feed, FeedView, 
   DestroyableView, AccountTemplate) {
   var AccountView = DestroyableView.extend({
 
@@ -29,7 +29,7 @@ define([
       console.log(this.model.attributes.userId);
       var feedView = new FeedView({
         parentDiv: $('#FeedViewMountPoint'),
-        feedCollection: new userFeed(this.model.attributes.userId)
+        feedCollection: new Feed({criteria:{listing_creator:this.model.attributes.userId}}),
       });
       this.childViews.push(feedView);
       return this;

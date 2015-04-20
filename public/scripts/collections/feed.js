@@ -1,38 +1,55 @@
 define([
+  'underscore',
   'backbone',
   'scripts/models/listing',
-  '/socket.io/socket.io.js'
-], function (Backbone, Listing, io){
+], function (_, Backbone, Listing){
 
   var Feed = Backbone.Collection.extend({
     url : '/feed',
     model: Listing,
     
     initialize: function(info){
-      console.log(info);
-      var _this = this;
-      /*Use fetch w/reset = true because that indicates that this fetch 
-      is populating an empty collection or repopulating a collection. 
-      This allows us to bind render in the view onto the nice 'reset' trigger 
-      and stick with backbone conventions!*/
+      if (info.criteria){
+        this.criteria = info.criteria;
+      } else {
+        this.criteria = {};
+      }
       this.fetch({reset: true});
-
+      var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
-      /*TODO: Change this to feed:create? We are starting from the feed 
-      collection so it may make more sense to change the naming convention.*/
-      /*SUGGESTION: The feed can't really 'change' that much. It should cover
-      of your cases.*/
+    },
+
+    ListingFitsCriteria: function(listing){
+      //checks if a listing fits the specified criteria and returns true or false. This is not nearly as complex or good as mongodb's query operators, but it will do basic matching.
+      if (_.where([listing], this.criteria).length > 0){
+        return true;
+      } else {
+        return false;
+      }
     },
 
     createListing: function(model){
-      this.add(model);
+      if (this.ListingFitsCriteria(model)){
+        this.add(model);
+      }
     },
 
     updateListing: function(model){
-
       var updated_model = this.get(model._id);
       updated_model.set(model);
+    },
+
+    fetch: function(){
+      var _this = this;
+      $.get(_this.url,_this.criteria)
+        .success(function(data){
+          _this.reset(data);
+        })
+        .error(function(data){
+          console.log(data);
+          console.log('Error fetching collection from servar!');
+        });
     },
 
   });

@@ -19,6 +19,7 @@
 }
 
 .listingHighlight {
+  z-index: -999999999999;
   text-decoration: none;
   &:hover {
     text-decoration: none;

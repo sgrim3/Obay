@@ -14,30 +14,33 @@ define([
     initialize:function (info) {
       info.parentDiv.append(this.$el);
       this.collection = info.feedCollection;
+      this.currentUser = info.currentUser;
+
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.addListingView);
+    },
+
+    renderOne: function renderOne(listing) {
+      var collapsedListingView = new CollapsedListingView({
+        parentDiv: this.$el,
+        model: listing,
+        collection: this.collection,
+        currentUser: this.currentUser,
+      });
+
+      this.childViews.push(collapsedListingView);
     },
 
     render: function (){
       var _this = this;
       this.collection.models.forEach(function(m){
-        var collapsedListingView = new CollapsedListingView({
-          parentDiv: _this.$el,
-          model: m,
-          collection: this.collection,
-        });
-        _this.childViews.push(collapsedListingView);
+        _this.renderOne(m);
       });
     },
 
     addListingView: function(listing){
-      var collapsedListingView = new CollapsedListingView({
-        parentDiv: this.$el, 
-        model: listing,
-        collection: this.collection});
-      this.childViews.push(collapsedListingView);
+      this.renderOne(listing);
     },
-
   });
 
   return FeedView;

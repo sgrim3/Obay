@@ -21,14 +21,6 @@ $addContainerPadding: 40px;
   position: relative;
 }
 
-#exitButton {
-  position: absolute;
-  right: -0px -$buttonSize/2;
-  top: -0px -$buttonSize/2;
-  margin-bottom: 0px; 
-  background: palette(Red, $colorIntensity);
-}
-
 #image_upload {
   height: 300px;
   width: 300px;

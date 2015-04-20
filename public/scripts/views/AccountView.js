@@ -30,10 +30,18 @@ define([
         this.model.attributes,
         {PORT: window.PORT}
       )));
+
       var feedView = new FeedView({
         parentDiv: $('#FeedViewMountPoint'),
-        feedCollection: new Feed({criteria:{listing_creator:this.model.attributes.userId}}),
+        
+        feedCollection: new Feed({criteria:{
+            listing_creator:this.model.attributes.userId
+          },
+        }),
+
+        currentUser: this.model.attributes.userId,
       });
+
       this.childViews.push(feedView);
       return this;
     },

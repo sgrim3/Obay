@@ -7,6 +7,8 @@ window.socket = io.connect('127.0.0.1');
 // Set global port. Change whether in dev or prod mode.
 window.PORT = "0.0.0.0";
 
+window.dataHolder = {};
+
 // Configure external dependencies.
 requirejs.config({
   baseUrl: "",
@@ -75,6 +77,14 @@ require([
       "temporaryPayRoute": "pay",
       // This route must go last to act as the catchall/404 page.
       '*notFound': 'notFound'
+    },
+
+    initialize: function() {
+      this.on('all', function(routeEvent) {
+        try {
+          document.getElementById("addButton").style.display="inline";
+        } catch (err) {}
+      });
     },
 
     ensureOlinAuthenticated: function ensureOlinAuthenticated(onAuth,onErr){

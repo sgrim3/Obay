@@ -18,9 +18,10 @@
 }
 
 #textDisplay {
+  overflow: none;
   flex: 1;
   margin-left: 20px;
-
+  min-width: 200px;
 
   #name {
     font-size: 32pt;

@@ -15,8 +15,6 @@ define([
         this.criteria = {};
       }
       
-      this.fetch({reset: true});
-
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
@@ -48,11 +46,6 @@ define([
 
     deleteListing: function deleteListing(model) {
       var chosenListing = this.get(model._id);
-
-      // console.log(model._id);
-      // console.log(this);
-      // console.log(chosenListing);
-      
       chosenListing.trigger('destroy', chosenListing, chosenListing.collection);
     },
 
@@ -67,7 +60,6 @@ define([
           console.log('Error fetching collection from server!');
         });
     },
-
   });
   return Feed;
 });

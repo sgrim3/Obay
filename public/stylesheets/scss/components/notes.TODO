@@ -1,3 +1,0 @@
- ☐ Refactor PostListing and PopoverPostListing
- ☐ Create an event listener on the button that changes the state of sending to Carpe.
- ☐ Create a router that sends an email to Carpe.

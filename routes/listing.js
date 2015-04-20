@@ -14,7 +14,7 @@ exports.postListing = function(req, res, next) {
     if (req.body.listing_image){
       var listing_image = req.body.listing_image;
     } else {
-      var listing_image = '/images/default_listing_image.jpg';
+      var listing_image = '/images/Logo2_transparency_x2.gif';
     }
 
     var newListing = new Listing({

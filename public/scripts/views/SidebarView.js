@@ -42,8 +42,8 @@ define([
           Backbone.history.loadUrl('#account');
           break;
         case "freeButton":
-          Backbone.history.navigate('#home/free');
-          Backbone.history.loadUrl('#home/free');
+          Backbone.history.navigate('#free');
+          Backbone.history.loadUrl('#free');
           break;
         case "notificationsButton":
           //TODO- either delete this button or make it do something

@@ -13,8 +13,7 @@ define([
     
       initialize:function(info){
         this.template = _.template(HomeTemplate);
-        this.params = info.params;
-
+        this.criteria = info.criteria;
         /*Must instantiate template before rendering subviews, since they 
         mount onto the template! */         
         info.parentDiv.append(this.$el);
@@ -25,7 +24,7 @@ define([
         this.$el.html(this.template());
 
         // FIXME: feedCollection may not be the best name.
-        var feedCollection = new Feed({params: this.params});
+        var feedCollection = new Feed({criteria: this.criteria});
 
         var feedView = new FeedView({
           parentDiv: $('#FeedViewMountPoint'),

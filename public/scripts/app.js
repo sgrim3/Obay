@@ -1,3 +1,5 @@
+// Declare socket instance.
+window.socket = io.connect('127.0.0.1');
 // Set global port. Change whether in dev or prod mode.
 window.PORT = "0.0.0.0";
 
@@ -25,7 +27,6 @@ requirejs.config({
 require([
     'jquery'
   , 'backbone'
-
   , 'scripts/models/listing'
   , 'scripts/models/user'
   , 'scripts/views/AccountView'
@@ -34,12 +35,13 @@ require([
   , 'scripts/views/HomeView'
   , 'scripts/views/ListingView'
   , 'scripts/views/LoginView'
+  , 'scripts/views/NotFoundView'
+  // , 'scripts/views/PayView'
+  // , 'scripts/views/PopoverAddListingView'
   , 'scripts/views/SidebarView'
-  , 'scripts/views/SortFreeHomeView'
 ], function(
     $
   , Backbone
-
   // FIXME: Naming convention standardization.
   , Listing
   , UserModel
@@ -49,17 +51,18 @@ require([
   , HomeView
   , ListingView
   , LoginView
+  , NotFoundView
+  // , PayView
+  // , PopoverAddListingView
   , SidebarView
-  , SortFreeHomeView
-){
-  // Declare socket instance.
-  window.socket = io.connect(window.PORT);
-
+  )
+{
   var Router = Backbone.Router.extend({
     routes: {
       "": "login",
-      'home': 'feed',
-      'home?*queryString' : 'feed',
+      'home': 'home',
+      'free': 'free',
+      'feed?*queryString' : 'feed',
       "account": "account",
       "addListing": "addListing",
       "editListing/:id": "editListing",
@@ -105,6 +108,12 @@ require([
           } 
         );
       }
+      Object.keys(params).forEach(function(key){
+        var val = params[key];
+        if (!isNaN(val)){
+          params[key] = Number(val);
+        }
+      })
       return params;
     },
 
@@ -119,16 +128,24 @@ require([
       this.Page = new NotFoundView({parentDiv: $('#PageContainer')});
     },
 
+    home: function home(){
+      this.feed('');
+    },
+
+    free: function free(){
+      this.feed('listing_price=0');
+    },
+
     feed: function feed(queryString){
       var _this = this;
-      var params = this.parseQueryString(queryString);
+      var criteria = this.parseQueryString(queryString);
 
       var onOlinAuth = function(){
         _this.createSidebar();
         if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-        _this.Page = new HomeView({
+          _this.Page = new HomeView({
           parentDiv:$('#PageContainer'),
-          params: params
+          criteria: criteria,
         });
       }
       var onOlinErr = function(){

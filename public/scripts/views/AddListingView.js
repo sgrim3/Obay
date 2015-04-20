@@ -3,11 +3,8 @@ define([
   'underscore', 
   'backbone',
   'dropzone',
-
   'scripts/models/listing',
-
   'scripts/views/DestroyableView',
-
   'text!templates/AddListingTemplate.html'
 ], function ($, _, Backbone, Dropzone, Listing, 
   DestroyableView, AddListingTemplate) {

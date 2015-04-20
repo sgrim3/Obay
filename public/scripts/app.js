@@ -198,12 +198,6 @@ require([
       });
     },
 
-    // QUESTION: Is this necessary?
-    // pay: function (id){
-    //   this.createSidebar();
-    //   if (this.Page) { this.Page.destroy(); this.Page = null; };
-    //   this.Page = new PayView({parentDiv: $('#PageContainer')});
-    // },
 
     login: function(id){
       var _this = this;

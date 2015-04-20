@@ -65,9 +65,6 @@ define([
           });
 
           _this.childViews.push(payView);
-          // $("#buyButton").remove();
-          // Backbone.history.navigate('#home');
-          // Backbone.history.loadUrl('#home');
         },
         
         error: function(){

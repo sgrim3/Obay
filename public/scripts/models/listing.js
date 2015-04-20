@@ -7,6 +7,7 @@ define([
   console.log(window.PORT);
   console.log(url);
   var Listing = BaseModel.extend({
+    idAttribute: '_id',
 
     defaults: {
         listing_name: '',

@@ -40,10 +40,13 @@ exports.postListing = function(req, res, next) {
             console.error("SG|/routes/listing.js|postListing| User.findOne error");
             res.status(500).send("Could not find User!");
           } else {
+            
             /*Add reference and NOT the document! We don't want to 
             make a copy, just store a reference.*/
             user.listings.push(newListing._id);
             user.save(function(err){
+              console.error(err);
+              
               if (err) {
                 console.error("SG|/routes/listing.js|postListing|save user error");
                 console.log(err);
@@ -51,9 +54,10 @@ exports.postListing = function(req, res, next) {
               } else {
                 res.json(newListing);
                 io.sockets.emit('listing:create', newListing);
+                
                 if (req.body.toCarpe === 'on'){ 
-                email.sendCarpeEmail(newListing);
-                }
+                  email.sendCarpeEmail(newListing);
+                } 
               }
             });
           }
@@ -120,6 +124,7 @@ var editListing = function(req,res){
         if (req.body.toCarpe === 'on'){ 
           email.sendCarpeEmail(newListing);
         } 
+        io.sockets.emit("listing:update", listing);
         res.status(200).json(listing);
       }
     });
@@ -157,6 +162,7 @@ var buyListing = function(req,res){
       console.log(err);
       res.status(500).send('Could not buy listing!');
     } else {
+
       res.status(200).send(listing);
     }
     });

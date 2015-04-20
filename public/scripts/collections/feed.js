@@ -29,6 +29,7 @@ define([
     },
 
     updateListing: function(model){
+
       var updated_model = this.get(model._id);
       updated_model.set(model);
     },

@@ -176,17 +176,26 @@ require([
     },
 
     account: function(){
-      this.createSidebar();
-      if (this.Page) { this.Page.destroy(); this.Page = null; };
+      var _this = this;
+      var onOlinAuth = function(){
+        _this.createSidebar();
+        if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
 
-      // QUESTION: Should a userModel be declared here?
-      // Also, should this be checked to determine if the user already exists?
-      var userModel = new UserModel();
-      this.Page = new AccountView({
-        parentDiv: $('#PageContainer'),
-        model: userModel,
-        PORT: window.PORT
-      });
+        // QUESTION: Should a userModel be declared here?
+        // Also, should this be checked to determine if the user already exists?
+        var userModel = new UserModel();
+        _this.Page = new AccountView({
+          parentDiv: $('#PageContainer'),
+          model: userModel,
+          PORT: window.PORT
+        });
+      }
+
+      var onOlinErr = function(){
+        window.location.replace('/');
+      }
+
+      _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     addListing: function () {

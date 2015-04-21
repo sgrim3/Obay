@@ -33,9 +33,11 @@ define([
 
       this.model.fetch({reset: true});
       this.listenTo(this.model, 'sync', this.render);
+
     },
 
     render: function (){
+      document.getElementById("addButton").style.display="none";
 
       var currentUser = this.model.attributes.currentUser;
       var itemCreator = this.model.attributes.model_creator;

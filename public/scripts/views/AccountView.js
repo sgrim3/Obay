@@ -7,11 +7,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'scripts/collections/userFeed',
+  'scripts/collections/feed',
   'scripts/views/FeedView',
   'scripts/views/DestroyableView',
   'text!templates/AccountTemplate.html'
-], function ($, _, Backbone, userFeed, FeedView, 
+], function ($, _, Backbone, Feed, FeedView, 
   DestroyableView, AccountTemplate) {
   var AccountView = DestroyableView.extend({
 
@@ -35,10 +35,22 @@ define([
         this.model.attributes,
         {PORT: window.PORT}
       )));
+
+      // Check to see if a collection instance already exists.
+      if (typeof window.dataHolder.accountCollection == 'undefined') {
+        window.dataHolder.accountCollection = new Feed({
+          criteria:{
+            listing_creator:this.model.attributes.userId
+          },
+        });
+      }
+
       var feedView = new FeedView({
         parentDiv: $('#FeedViewMountPoint'),
-        feedCollection: new userFeed(this.model.attributes.userId),
+        collection: window.dataHolder.accountCollection,
+        currentUser: this.model.attributes.userId,
       });
+
       this.childViews.push(feedView);
       return this;
     },

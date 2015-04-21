@@ -56,12 +56,12 @@ app.get('/isVenmoAuthenticated', auth.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', auth.isOlinAuthenticated);
 
 app.get('/userData', [olinAuthMiddleware, index.userData]);
-app.get('/feed/free', [olinAuthMiddleware, feed.getFreeFeed]);
+//app.get('/feed/free', [olinAuthMiddleware, feed.getFreeFeed]);
 app.get('/feed', [olinAuthMiddleware, feed.getFeed]);
-app.get('/feed/user/:id', [olinAuthMiddleware, feed.getUserFeed]);
+//app.get('/feed/user/:id', [olinAuthMiddleware, feed.getUserFeed]);
 app.get('/listing/:id', [olinAuthMiddleware, listing.getListing]);
 app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
-
+app.delete('/listing/:id', [olinAuthMiddleware, listing.deleteListing]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.

@@ -75,8 +75,8 @@ exports.postListing = function(req, res, next) {
 };
 
 exports.getListing = function(req, res) {
-  var id=req.params.id;
-  var currentUser= req.session.user.userId;
+  var id = req.params.id;
+  var currentUser = req.session.user.userId;
   Listing.findOne({_id:id}).exec(function (err, item) {
     if (err) {
       console.error("SG|/routes/listing.js|getListing|error");
@@ -84,8 +84,6 @@ exports.getListing = function(req, res) {
       res.status(500).send("Could not search Listings!");
     }
     else {
-
-      console.log("dz getListing | Getting a new listing.");
       res.send({"item":item, "currentUser":currentUser}); 
     }
   });
@@ -182,6 +180,19 @@ exports.updateListing = function(req,res){
   } else {
     buyListing(req,res);
   }
+}
+
+exports.deleteListing = function deleteListing(req,res) {
+  console.log("Deleting");
+
+  var listing_id=req.params.id;
+  console.log(listing_id);
+
+  Listing.findOneAndRemove({_id:listing_id}, function(err, listing) {
+    if(err) throw err;
+    res.status(200).json({status: 'success'});
+    io.sockets.emit('listing:delete', listing);
+  });
 }
 
 module.exports = exports;

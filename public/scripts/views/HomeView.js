@@ -19,8 +19,7 @@ define([
     
       initialize:function(info){
         this.template = _.template(HomeTemplate);
-        this.params = info.params;
-
+        this.criteria = info.criteria;
         /*Must instantiate template before rendering subviews, since they 
         mount onto the template! */         
         info.parentDiv.append(this.$el);
@@ -30,12 +29,16 @@ define([
       render:function() {
         this.$el.html(this.template());
 
-        // FIXME: feedCollection may not be the best name.
-        var feedCollection = new Feed({params: this.params});
+        // Check to see if a feedCollection instance already exists.
+        if (typeof window.dataHolder.feedCollection == 'undefined') {
+          window.dataHolder.feedCollection = new Feed({
+            criteria: this.criteria,
+          });
+        }
 
         var feedView = new FeedView({
           parentDiv: $('#FeedViewMountPoint'),
-          feedCollection: feedCollection
+          collection: window.dataHolder.feedCollection
         });
         this.childViews.push(feedView);
         return this;

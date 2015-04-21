@@ -37,6 +37,7 @@ define([
     },
 
     render:function () {
+      document.getElementById("addButton").style.display="none";
 
       $(this.el).html(this.template(this.model.attributes.item));
       

@@ -19,31 +19,37 @@ define([
     // TODO: Change 'info' into something more descriptive.
     initialize:function (info) {
       info.parentDiv.append(this.$el);
-      this.collection = info.feedCollection;
+      
+      this.currentUser = info.currentUser;
+      this.collection = info.collection;
+
+      this.collection.fetch({reset: true});
+
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.addListingView);
     },
 
+    renderOne: function renderOne(listing) {
+      var collapsedListingView = new CollapsedListingView({
+        parentDiv: this.$el,
+        model: listing,
+        collection: this.collection,
+        currentUser: this.currentUser,
+      });
+
+      this.childViews.push(collapsedListingView);
+    },
+
     render: function (){
       var _this = this;
-      this.collection.models.forEach(function(m){
-        var collapsedListingView = new CollapsedListingView({
-          parentDiv: _this.$el,
-          model: m,
-          collection: this.collection,
-        });
-        _this.childViews.push(collapsedListingView);
+      this.collection.models.forEach(function(listing){
+        _this.renderOne(listing);
       });
     },
 
     addListingView: function(listing){
-      var collapsedListingView = new CollapsedListingView({
-        parentDiv: this.$el, 
-        model: listing,
-        collection: this.collection});
-      this.childViews.push(collapsedListingView);
+      this.renderOne(listing);
     },
-
   });
 
   return FeedView;

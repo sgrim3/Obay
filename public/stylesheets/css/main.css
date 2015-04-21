@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, #loginButton, #buyButton, #editButton, button#cashButton, button#venmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, #payView {
+.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, #payView {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
-.sh2, .round-button:hover, #addButton {
+.sh2, .round-button:hover, button#addButton {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, #addButton:hover, #loginButton:hover, #buyButton:hover, #editButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover, #loginBox {
+.sh3, button#addButton:hover, button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover, #loginBox {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -385,38 +385,38 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   transform: rotate(10deg);
   cursor: pointer; }
 
-#homeButton {
+button#homeButton {
   background: #1976D2;
   margin-left: 33%; }
+  button#homeButton > #littleO {
+    max-width: 75%;
+    margin-top: -10%; }
 
-#littleO {
-  max-width: 75%;
-  margin-top: 15%; }
-
-#accountButton {
+button#accountButton {
   background: #F57C00;
   margin-left: 33%; }
 
-#freeButton {
+button#freeButton {
   background: #388E3C;
   margin-left: 33%; }
 
-#notificationsButton {
+button#notificationsButton {
   background: #7B1FA2;
   margin-left: 33%; }
 
-#logoutButton {
+button#logoutButton {
   background: #303F9F;
   margin-left: 33%; }
 
-#addButton {
+button#addButton {
   background: #D32F2F;
   position: fixed;
   right: 25px;
   bottom: 25px;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  z-index: 99999999999999; }
 
-#deleteImageButton {
+button#deleteImageButton, button#deleteButton {
   background: #D32F2F;
   position: absolute;
   z-index: 99999;
@@ -425,35 +425,39 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   margin-left: -28px;
   margin-top: -28px;
   margin-bottom: 0px; }
-  #deleteImageButton .fa-times {
+  button#deleteImageButton .fa-times, button#deleteButton .fa-times {
     cursor: pointer; }
 
-#loginButton, #buyButton, #editButton, button#cashButton, button#venmoButton, #toCarpeCheckbox {
+button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, #toCarpeCheckbox {
   border: 0px;
   border-radius: 3px;
   color: #ffffff;
   display: block;
   font-size: 14pt;
   padding: 12px; }
-  #loginButton:hover, #buyButton:hover, #editButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover {
+  button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, #toCarpeCheckbox:hover {
     cursor: pointer; }
 
-#loginButton {
+button#loginButton {
   width: 100%;
   background-color: #388E3C; }
 
-#buyButton, #editButton {
+button#buyButton, button#editButton {
   background-color: #388E3C;
-  position: absolute;
   width: auto;
-  bottom: 0;
-  right: 0;
-  margin-right: 20px;
-  margin-bottom: 20px; }
+  display: inline;
+  float: right;
+  margin-top: 20px; }
 
-#editButton {
-  left: 350px;
+button#editButton {
   background-color: #1976D2; }
+
+button#exitButton {
+  position: absolute;
+  right: -28px;
+  top: -28px;
+  margin-bottom: 0px;
+  background: #D32F2F; }
 
 button#cashButton {
   background-color: #388E3C;
@@ -469,7 +473,7 @@ button#venmoButton {
   margin-bottom: 10%; }
 
 #FeedViewMountPoint {
-  margin-top: 50px; }
+  margin-top: 70px; }
 
 #FeedView {
   display: flex;
@@ -477,6 +481,7 @@ button#venmoButton {
   justify-content: center; }
 
 .listingHighlight {
+  z-index: -999999999999;
   text-decoration: none; }
   .listingHighlight:hover {
     text-decoration: none; }
@@ -556,7 +561,7 @@ button#venmoButton {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 999; }
+  z-index: 99999; }
 
 #loginBoxWrapper {
   display: flex;
@@ -581,40 +586,44 @@ button#venmoButton {
   z-index: 99999; }
 
 .add {
-  min-width: 900px !important;
   height: 100%;
+  margin-left: 40px;
+  margin-right: 40px;
   display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
   align-items: center; }
+
+@media only screen and (max-width: 1400px) {
+  .add {
+    margin-top: 70px; } }
 
 /* The element to be centered, can also be of any width and height */
 #addContainer {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   background-color: white;
   width: 100%;
-  padding: 40px;
+  padding: 30px;
   display: flex;
   position: relative; }
-
-#exitButton {
-  position: absolute;
-  right: -28px;
-  top: -28px;
-  margin-bottom: 0px;
-  background: #D32F2F; }
 
 #image_upload {
   height: 300px;
   width: 300px;
   order: 0;
   padding: 0px;
-  position: relative; }
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px; }
 
 #addForm {
   order: 1;
-  margin-left: 20px;
+  min-width: 200px;
   position: relative;
-  flex: 1; }
+  flex: 1;
+  overflow: visible; }
   #addForm #addListingImage, #addForm #addListingName, #addForm #addListingDescription, #addForm #addListingPrice {
     width: 100%;
     box-sizing: border-box;
@@ -628,8 +637,8 @@ button#venmoButton {
     font-size: 18pt; }
   #addForm #postButton {
     position: absolute;
-    right: -68px;
-    bottom: -68px;
+    right: -58px;
+    bottom: -58px;
     margin-bottom: 0px;
     background: #388E3C; }
 
@@ -668,8 +677,10 @@ button#venmoButton {
   width: 300px; }
 
 #textDisplay {
+  overflow: none;
   flex: 1;
-  margin-left: 20px; }
+  margin-left: 20px;
+  min-width: 200px; }
   #textDisplay #name {
     font-size: 32pt; }
   #textDisplay #creator {
@@ -709,6 +720,19 @@ button#venmoButton {
   position: fixed;
   left: 50px;
   top: 50px; }
+
+#sidebarNav {
+  display: none; }
+
+@media only screen and (max-width: 480px) {
+  #sidebar {
+    display: none; } }
+
+@media only screen and (max-width: 1400px) {
+  #sidebar {
+    display: none; }
+  #sidebarNav {
+    display: inline-block; } }
 
 video#backgroundLoginVideo {
   position: fixed;

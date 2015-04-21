@@ -9,7 +9,7 @@ define([
   'backbone',
   'scripts/views/NotFoundView',
   'scripts/views/DestroyableView',
-  'text!templates/NotFoundView.html'
+  'text!templates/NotFoundTemplate.html'
 ], function ($, _, Backbone, NotFoundView, DestroyableView, NotFoundTemplate) {
   var NotFoundView = DestroyableView.extend({
     tagname: "div",

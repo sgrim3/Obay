@@ -20,10 +20,17 @@
     </a>
 
     <script>
+
+      // NOTE: This seems a bit convoluted.
+
       var currentUser = "<%= currentUser %>";
       var creator = "<%= item.listing_creator %>";
       if (currentUser!==creator) {
-        document.getElementById("editButton").style.visibility="hidden";
+        document.getElementById("editButton").style.display="none";
+        document.getElementById("buyButton").style.display="inline";
+      } else {
+        document.getElementById("editButton").style.display="inline";
+        document.getElementById("buyButton").style.display="none";
       }
     </script>
 

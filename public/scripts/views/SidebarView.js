@@ -19,6 +19,7 @@ define([
 
     events: {
       'click .round-button': 'onClick',
+      'click .nav a': 'onNavClick',
     },
 
     initialize:function (info) {
@@ -48,8 +49,8 @@ define([
           Backbone.history.loadUrl('#account');
           break;
         case "freeButton":
-          Backbone.history.navigate('#home/free');
-          Backbone.history.loadUrl('#home/free');
+          Backbone.history.navigate('#free');
+          Backbone.history.loadUrl('#free');
           break;
         case "notificationsButton":
           //TODO- either delete this button or make it do something
@@ -67,17 +68,24 @@ define([
       }
     },
 
+    onNavClick: function onNavClick() {
+      $(".btn-navbar").click(); //bootstrap 2.x
+      $(".navbar-toggle").click(); //bootstrap 3.x by Richard
+    },
+
     // TODO: Should this feature be here? It doesn't seem like the SidebarView
     // should be controlling the toggle feature of the popover.
     togglePopoverAddListing: function(){
+
       if (this.popoverAddListing) {
-          this.hidePopoverAddListing();
+        this.hidePopoverAddListing();
       } else {
-          this.showPopoverAddListing();
+        this.showPopoverAddListing();
       }
     },
 
     showPopoverAddListing: function(){
+      document.getElementById("addButton").style.display="none";
       this.popoverAddListing = new PopoverAddListingView({
         parentDiv: $('#PopoverContainer')
       });
@@ -92,6 +100,7 @@ define([
       this.popoverAddListing.destroy();
       this.popoverAddListing = null;
       window.history.pushState({}, '', this.urlBeforePop);
+      document.getElementById("addButton").style.display="inline";
     },
   });
   return SidebarView;

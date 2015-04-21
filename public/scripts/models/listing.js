@@ -1,3 +1,9 @@
+/*
+Backbone listing model
+Assigns defaults
+Initializes using urlRoot
+*/
+
 define([
   'jquery',
   'backbone',

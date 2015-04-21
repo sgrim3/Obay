@@ -1,3 +1,8 @@
+/*
+Backbone view that destroys the view
+All other views extend from this one
+*/
+
 define([
   'jquery', 
   'underscore', 

@@ -1,3 +1,10 @@
+/*
+Backbone view for Add Listing page
+Extends from Destroyable View
+Has code for an image dropzone
+Posts listing to server
+*/
+
 define([
   'jquery', 
   'underscore', 

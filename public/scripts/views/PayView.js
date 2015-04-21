@@ -1,3 +1,9 @@
+/*
+Backbone view pay popup (after buy button is clicked)
+Extends from DestroyableView
+Contains venmo and cash buttons + logic
+*/
+
 define([
   'jquery', 
   'underscore', 

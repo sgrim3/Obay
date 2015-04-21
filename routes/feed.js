@@ -1,3 +1,8 @@
+/*
+Routes relating to the feeds (home page, free page, account page)
+Queries Mongoose databases
+*/
+
 // Require my util scripts.
 var validate_listing = require('./validateInput.js').validate_listing;
 

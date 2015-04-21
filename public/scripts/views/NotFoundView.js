@@ -1,3 +1,8 @@
+/*
+Backbone view for not found page
+Extends from DestroyableView
+*/
+
 define([
   'jquery', 
   'underscore', 

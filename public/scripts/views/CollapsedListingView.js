@@ -1,3 +1,8 @@
+/*
+Backbone view for one listing on the feed
+Extends from DestroyableView
+*/
+
 define([
   'jquery', 
   'underscore', 

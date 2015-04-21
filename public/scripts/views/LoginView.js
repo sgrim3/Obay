@@ -1,3 +1,8 @@
+/*
+Backbone view for login
+Extends from DestroyableView
+*/
+
 define([
   'jquery', 
   'underscore', 

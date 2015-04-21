@@ -59,6 +59,10 @@
   box-sizing: border-box;
   float: left;
   @extend .sh1;
+
+  & > img {
+    @extend %centerImage;
+  }
 }
 
 #picture {

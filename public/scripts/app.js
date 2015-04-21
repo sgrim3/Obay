@@ -223,9 +223,9 @@ require([
     listing: function listing(_id) {
       this.createSidebar();
       if (this.Page) { this.Page.destroy(); this.Page = null; };
-      var model = new Listing({_id: _id});
+      var listing = new Listing({_id: _id});
       this.Page = new ListingView({
-        model: model, 
+        model: listing, 
         parentDiv: $('#PageContainer')
       });
     },

@@ -1,3 +1,9 @@
+/*
+Backbone view for single listing
+Extends from DestroyableView
+Contains edit and buy buttons + logic
+*/
+
 define([
   'jquery', 
   'underscore', 
@@ -27,9 +33,11 @@ define([
 
       this.model.fetch({reset: true});
       this.listenTo(this.model, 'sync', this.render);
+
     },
 
     render: function (){
+      document.getElementById("addButton").style.display="none";
 
       var currentUser = this.model.attributes.currentUser;
       var itemCreator = this.model.attributes.model_creator;
@@ -40,17 +48,13 @@ define([
 
     editItem: function () {
       var url = '#editListing/'+this.model.id;
-      
-      console.log(url);
-      
+            
       Backbone.history.navigate(url);
       Backbone.history.loadUrl(url);
     },
 
     buyItem: function(){  
-      
-      console.log('ListingView > buyItem');
-      
+          
       var _this = this;    
       
       // Sets the listing open to false in the backbone model.
@@ -63,16 +67,16 @@ define([
       var _this = this;
       this.model.save(null, {
         success: function(listing){
-          var payView = new PayView({model:_this.model});
+          var payView = new PayView({
+            model:_this.model, 
+            parentDiv: $('#buyButton')
+          });
+
           _this.childViews.push(payView);
-          payView.render({parentDiv: $('#buyButton')});
-          // $("#buyButton").remove();
-          // Backbone.history.navigate('#home');
-          // Backbone.history.loadUrl('#home');
         },
         
         error: function(){
-          console.log('error buying item');
+          console.log('SG|/public/views/ListingView.js|buyItem| error buying item');
         }
 
       });

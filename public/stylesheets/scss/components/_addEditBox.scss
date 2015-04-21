@@ -1,18 +1,34 @@
 .add {
   // FIXME: Make this dynamic.
-  min-width: 900px !important;
+  // min-width: 900px !important;
   height: 100%;
+  margin-left: 40px;
+  margin-right: 40px;
   display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
   align-items: center;
 }
 
+@include flexedContent {
+  .add {
+    margin-top: $contentMargin;
+  }
+}
+
 /* The element to be centered, can also be of any width and height */ 
-$addContainerPadding: 40px;
 #addContainer {
+  // overflow: hidden;
+
+  // flex: 1;
+
   // display: inline-block;
   // vertical-align: middle;
+
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
   background-color: white;
   width: 100%;
   padding: $addContainerPadding;
@@ -21,27 +37,24 @@ $addContainerPadding: 40px;
   position: relative;
 }
 
-#exitButton {
-  position: absolute;
-  right: -0px -$buttonSize/2;
-  top: -0px -$buttonSize/2;
-  margin-bottom: 0px; 
-  background: palette(Red, $colorIntensity);
-}
-
 #image_upload {
   height: 300px;
   width: 300px;
   order: 0;
   padding: 0px;
   position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 #addForm {
   order: 1;
-  margin-left: 20px;
+  min-width: 200px;
   position: relative;
   flex: 1;
+
+  overflow: visible;
+
   #addListingImage, #addListingName, #addListingDescription, #addListingPrice{
     width: 100%;
     box-sizing: border-box;

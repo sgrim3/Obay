@@ -1,13 +1,17 @@
+/*
+Backbone view for Add Listing page
+Extends from Destroyable View
+Has code for an image dropzone
+Posts listing to server
+*/
+
 define([
   'jquery', 
   'underscore', 
   'backbone',
   'dropzone',
-
   'scripts/models/listing',
-
   'scripts/views/DestroyableView',
-
   'text!templates/AddListingTemplate.html'
 ], function ($, _, Backbone, Dropzone, Listing, 
   DestroyableView, AddListingTemplate) {

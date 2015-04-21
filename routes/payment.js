@@ -1,3 +1,7 @@
+/*
+Routes relating to Venmo API
+*/
+
 var request = require("request");
 var Listing = require('../models/listing_model.js').listing;
 var User = require('../models/user_model.js').user;
@@ -7,13 +11,16 @@ var venmoPay = function(req,res){
   We can't trust information sent by user besides the objectId.*/
   Listing.findOne({_id:req.body.id}).exec(function (err, listing){
     if (err) {
+      console.error("SG|/routes/payment.js|venmoPay|find listing error");
+      console.log(err);
       res.status(500).send("Could not search through listings!");
     } else {
       /*Once you have listing data, look up the seller to find out 
       what their payId is.*/
-      console.log(listing);
       User.findOne({userId: listing.listing_creator}).exec(function (err, user){
         if (err) {
+          console.error("SG|/routes/payment.js|venmoPay|find user error");
+          console.log(err);
           res.status(500).send("Could not find listing creator to pay!");
         } else {
           var venmoPayId = user.venmoPayId;
@@ -24,7 +31,6 @@ var venmoPay = function(req,res){
             note: 'Obay donation for '+listing.listing_name+'!',
             amount: listing.listing_price,
           }};
-          console.log(post_data);
           request.post('https://api.venmo.com/v1/payments', post_data, 
             function(venmo_server_error, response, body){
             var error = JSON.parse(response.body).error;

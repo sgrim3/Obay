@@ -1,3 +1,8 @@
+/*
+Routes relating to sending emails from within the app
+Used for IOU emails and emails to carpe
+*/
+
 var nodemailer = require('nodemailer');
 var emailTemplates = require('email-templates');
 var path = require('path');

@@ -1,3 +1,7 @@
+/*
+Router and dependencies
+*/
+
 // Dependencies.
 var express = require('express.io');
 var path = require('path');
@@ -52,12 +56,12 @@ app.get('/isVenmoAuthenticated', auth.isVenmoAuthenticated);
 app.get('/isOlinAuthenticated', auth.isOlinAuthenticated);
 
 app.get('/userData', [olinAuthMiddleware, index.userData]);
-app.get('/feed/free', [olinAuthMiddleware, feed.getFreeFeed]);
+//app.get('/feed/free', [olinAuthMiddleware, feed.getFreeFeed]);
 app.get('/feed', [olinAuthMiddleware, feed.getFeed]);
-app.get('/feed/user/:id', [olinAuthMiddleware, feed.getUserFeed]);
+//app.get('/feed/user/:id', [olinAuthMiddleware, feed.getUserFeed]);
 app.get('/listing/:id', [olinAuthMiddleware, listing.getListing]);
 app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
-
+app.delete('/listing/:id', [olinAuthMiddleware, listing.deleteListing]);
 
 // TODO: Integrate email feature with actual app.
 // Temporary route to send email.
@@ -81,6 +85,4 @@ app.post('/image', [
   image.uploadImage
 ]);
 
-app.listen(PORT, function(){
-    console.log("Application running on port:", PORT);
-});
+app.listen(PORT, "0.0.0.0");

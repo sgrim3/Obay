@@ -1,3 +1,5 @@
+<!-- HTML template for login page -->
+
 <!-- <video autoplay loop poster="polina.jpg" id="bgvid"> -->
 <video autoplay loop id="backgroundLoginVideo">
   <source src="videos/background.mp4" type="video/mp4">
@@ -11,7 +13,7 @@
     <div>
       <img src="/images/Logo2_transparency_x2.gif">
       <!-- the callback url below should be changed for deployment -->
-      <a href="http://www.olinapps.com/external?callback=http://127.0.0.1:3000/olinAppsAuth">
+      <a href="http://www.olinapps.com/external?callback=http://<%= PORT %>:3000/olinAppsAuth">
         <button id="loginButton">
           Login with OlinApps!
         </button>

@@ -2,133 +2,145 @@ $buttonSize: 56px;
 $colorIntensity: 700;
 
 .round-button {
-    display:block;
-    width: $buttonSize;
-    height: $buttonSize;
-    border: 0px;
-    border-radius: 50%;
-    color: white;
-    text-align:center;
-    text-decoration:none;
-    font-size:25px;
-    margin-bottom: 20px;
-    transition: 0.1s ease-in-out;
-    @extend .sh1;
+  display:block;
+  width: $buttonSize;
+  height: $buttonSize;
+  border: 0px;
+  border-radius: 50%;
+  color: white;
+  text-align:center;
+  text-decoration:none;
+  font-size:25px;
+  margin-bottom: 20px;
+  transition: 0.1s ease-in-out;
+  @extend .sh1;
 }
 
 .round-button:hover {
-    -webkit-transform: rotate(10deg);
-    transform: rotate(10deg);
-    cursor: pointer;
-    @extend .sh2;
+  -webkit-transform: rotate(10deg);
+  transform: rotate(10deg);
+  cursor: pointer;
+  @extend .sh2;
 }
 
-#homeButton {
-    background: palette(Blue, $colorIntensity);
-    margin-left: 33%;
-}
+button#homeButton {
+  background: palette(Blue, $colorIntensity);
+  margin-left: 33%;
 
-#littleO {
+  & > #littleO {
     max-width: 75%;
-    margin-top: 15%;
+    margin-top: -10%;
+  }
 }
 
-#accountButton {
-    background: palette(Orange, $colorIntensity);
-    margin-left: 33%;
+button#accountButton {
+  background: palette(Orange, $colorIntensity);
+  margin-left: 33%;
 }
 
-#freeButton {
-    background: palette(Green, $colorIntensity);
-    margin-left: 33%;
+button#freeButton {
+  background: palette(Green, $colorIntensity);
+  margin-left: 33%;
 }
 
-#notificationsButton {
-    background: palette(Purple, $colorIntensity);
-    margin-left: 33%;    
+button#notificationsButton {
+  background: palette(Purple, $colorIntensity);
+  margin-left: 33%;    
 }
 
-#logoutButton {
-    background: palette(Indigo, $colorIntensity);
-    margin-left: 33%;
+button#logoutButton {
+  background: palette(Indigo, $colorIntensity);
+  margin-left: 33%;
 }
 
-#addButton {
-    background: palette(Red, $colorIntensity);
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    margin-bottom: 0px;
-    @extend .sh2;
+button#addButton {
+  background: palette(Red, $colorIntensity);
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  margin-bottom: 0px;
+  z-index: 99999999999999;
+  @extend .sh2;
 
-    &:hover {
-      @extend .sh3;
-    }
+  &:hover {
+    @extend .sh3;
+  }
 }
 
-#deleteImageButton {
-    background: palette(Red, $colorIntensity);
-    position: absolute;
-    z-index: 99999;
-    left: 50%;
-    top: 50%;
-    margin-left: -$buttonSize/2;
-    margin-top: -$buttonSize/2;
-    margin-bottom: 0px;
+button#deleteImageButton {
+  background: palette(Red, $colorIntensity);
+  position: absolute;
+  z-index: 99999;
+  left: 50%;
+  top: 50%;
+  margin-left: -$buttonSize/2;
+  margin-top: -$buttonSize/2;
+  margin-bottom: 0px;
 
-    .fa-times {
-        cursor: pointer;
-    }
+  .fa-times {
+    cursor: pointer;
+  }
+}
+
+button#deleteButton {
+  @extend button#deleteImageButton;
 }
 
 // Square buttons.
 %rectangular-button {
-    border: 0px;
-    border-radius: 3px;
-    color: palette(White, Text);
-    display: block;
-    font-size: 14pt;
-    padding: 12px;
-    @extend .sh1;
+  border: 0px;
+  border-radius: 3px;
+  color: palette(White, Text);
+  display: block;
+  font-size: 14pt;
+  padding: 12px;
+  @extend .sh1;
 
-    &:hover {
-      @extend .sh3;
-      cursor: pointer;
-    } 
+  &:hover {
+    @extend .sh3;
+    cursor: pointer;
+  } 
 }
 
-#loginButton {
-    @extend %rectangular-button;
-    width: 100%;
-    background-color: palette(Green, $colorIntensity);
+button#loginButton {
+  @extend %rectangular-button;
+  width: 100%;
+  background-color: palette(Green, $colorIntensity);
 }
 
-#buyButton {
-    @extend %rectangular-button;
-    background-color: palette(Green, $colorIntensity);
-    position: absolute;
-    width: auto;
-    bottom: 0;
-    right: 0;
-    margin-right: 20px;
-    margin-bottom: 20px;
+button#buyButton {
+  @extend %rectangular-button;
+  background-color: palette(Green, $colorIntensity);
+  width: auto;
+
+  display: inline;
+  float: right;
+  margin-top: 20px;
 }
 
-#editButton {
-    @extend #buyButton;
-    left: 350px;
-    background-color: palette(Blue, $colorIntensity);
+button#editButton {
+  @extend #buyButton;
+  // left: 350px;
+  background-color: palette(Blue, $colorIntensity);
+}
+
+button#exitButton {
+  position: absolute;
+  right: -0px -$buttonSize/2;
+  top: -0px -$buttonSize/2;
+  margin-bottom: 0px; 
+  background: palette(Red, $colorIntensity);
 }
 
 button#cashButton {
-    @extend %rectangular-button;
-    background-color: palette(Green, $colorIntensity);
-    display: inline;
+  @extend %rectangular-button;
+  background-color: palette(Green, $colorIntensity);
+  display: inline;
 }
 
 button#venmoButton {
-    @extend %rectangular-button;
-    background-color: palette(Blue, $colorIntensity);
-    display: inline;
-    margin-left: 10px;
+  @extend %rectangular-button;
+  background-color: palette(Blue, $colorIntensity);
+  display: inline;
+  margin-left: 10px;
 }

@@ -1,12 +1,17 @@
+/*
+Backbone view for Account page
+Extends from DestroyableView
+*/
+
 define([
   'jquery', 
   'underscore', 
   'backbone',
-  'scripts/collections/userFeed',
+  'scripts/collections/feed',
   'scripts/views/FeedView',
   'scripts/views/DestroyableView',
   'text!templates/AccountTemplate.html'
-], function ($, _, Backbone, userFeed, FeedView, 
+], function ($, _, Backbone, Feed, FeedView, 
   DestroyableView, AccountTemplate) {
   var AccountView = DestroyableView.extend({
 
@@ -25,12 +30,27 @@ define([
 
     render:function(){
       // TODO: Refactor this so that the UserModel is handling this action.
-      this.$el.html(this.template(this.model.attributes));
-      console.log(this.model.attributes.userId);
+      this.$el.html(this.template($.extend(
+        {}, 
+        this.model.attributes,
+        {PORT: window.PORT}
+      )));
+
+      // Check to see if a collection instance already exists.
+      if (typeof window.dataHolder.accountCollection == 'undefined') {
+        window.dataHolder.accountCollection = new Feed({
+          criteria:{
+            listing_creator:this.model.attributes.userId
+          },
+        });
+      }
+
       var feedView = new FeedView({
         parentDiv: $('#FeedViewMountPoint'),
-        feedCollection: new userFeed(this.model.attributes.userId)
+        collection: window.dataHolder.accountCollection,
+        currentUser: this.model.attributes.userId,
       });
+
       this.childViews.push(feedView);
       return this;
     },

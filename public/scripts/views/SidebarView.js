@@ -1,3 +1,9 @@
+/*
+Backbone view for sidebar
+Extends from DestroyableView
+Contains home, free, account, logout and add buttons
+*/
+
 define([
   'jquery', 
   'underscore', 
@@ -13,6 +19,7 @@ define([
 
     events: {
       'click .round-button': 'onClick',
+      'click .nav a': 'onNavClick',
     },
 
     initialize:function (info) {
@@ -42,10 +49,11 @@ define([
           Backbone.history.loadUrl('#account');
           break;
         case "freeButton":
-          Backbone.history.navigate('#home/free');
-          Backbone.history.loadUrl('#home/free');
+          Backbone.history.navigate('#free');
+          Backbone.history.loadUrl('#free');
           break;
         case "notificationsButton":
+          //TODO- either delete this button or make it do something
           console.log("notificationsButton");
           break;
         case "logoutButton":
@@ -60,17 +68,24 @@ define([
       }
     },
 
+    onNavClick: function onNavClick() {
+      $(".btn-navbar").click(); //bootstrap 2.x
+      $(".navbar-toggle").click(); //bootstrap 3.x by Richard
+    },
+
     // TODO: Should this feature be here? It doesn't seem like the SidebarView
     // should be controlling the toggle feature of the popover.
     togglePopoverAddListing: function(){
+
       if (this.popoverAddListing) {
-          this.hidePopoverAddListing();
+        this.hidePopoverAddListing();
       } else {
-          this.showPopoverAddListing();
+        this.showPopoverAddListing();
       }
     },
 
     showPopoverAddListing: function(){
+      document.getElementById("addButton").style.display="none";
       this.popoverAddListing = new PopoverAddListingView({
         parentDiv: $('#PopoverContainer')
       });
@@ -78,13 +93,14 @@ define([
       /*Purposely chose to use window.history here instead of 
       backbone.history because backbone.history seemed to be jumping 
       to the top of the page in certain weird cases.*/
-      window.history.pushState({}, '', 'http://127.0.0.1:3000/#addListing');  
+      window.history.pushState({}, '', 'http://'+window.PORT+':3000/#addListing');  
     },
 
     hidePopoverAddListing: function(){
       this.popoverAddListing.destroy();
       this.popoverAddListing = null;
       window.history.pushState({}, '', this.urlBeforePop);
+      document.getElementById("addButton").style.display="inline";
     },
   });
   return SidebarView;

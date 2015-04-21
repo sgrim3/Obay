@@ -1,3 +1,7 @@
+/*
+Validates form inputs when adding a listing
+*/
+
 var validateInput = {}
 
 var contains_non_whitespace = function(str){

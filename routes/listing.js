@@ -1,3 +1,9 @@
+/*
+Routes relating to one listing
+Queries Mongoose Databases
+Used to view, edit, buy and add a listing
+*/
+
 // Require my util scripts.
 var validate_listing = require('./validateInput.js').validate_listing;
 

@@ -1,3 +1,9 @@
+/*
+Backbone view for sidebar
+Extends from DestroyableView
+Contains home, free, account, logout and add buttons
+*/
+
 define([
   'jquery', 
   'underscore', 

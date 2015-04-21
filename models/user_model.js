@@ -1,3 +1,8 @@
+/*
+Mongoose model for a user
+Keeps track of all the users
+*/
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

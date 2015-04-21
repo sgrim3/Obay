@@ -1,3 +1,9 @@
+/*
+Backbone view for popup add listing
+Extends from AddListingView
+broadcasts listing over feed
+*/
+
 define([
   'jquery', 
   'underscore', 

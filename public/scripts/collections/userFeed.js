@@ -1,3 +1,8 @@
+/*
+Backbone user  collection 
+Is bound by sockets to mongoose model
+*/
+
 define([
   'backbone',
 

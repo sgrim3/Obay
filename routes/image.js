@@ -1,3 +1,7 @@
+/*
+Routes relating to uploading images used in adding a listing
+*/
+
 var request = require("request");
 var imgur = require('imgur');
 imgur.setClientId(process.env.IMGUR_CLIENT_ID);

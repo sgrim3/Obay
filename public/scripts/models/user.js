@@ -1,3 +1,9 @@
+/*
+Backbone user model
+Assigns defaults
+Initializes using urlRoot
+*/
+
 define([
   'backbone',
   'scripts/models/baseModel',

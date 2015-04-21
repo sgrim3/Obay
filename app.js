@@ -1,3 +1,7 @@
+/*
+Router and dependencies
+*/
+
 // Dependencies.
 var express = require('express.io');
 var path = require('path');

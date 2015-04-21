@@ -1,3 +1,9 @@
+/*
+Backbone router
+checks in each route if user is logged into OlinApps using ensureOlinAuthenticated 
+*/
+
+
 // Set global port. Change whether in dev or prod mode.
 window.PORT = "0.0.0.0";
 

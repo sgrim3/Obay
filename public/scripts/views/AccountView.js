@@ -1,3 +1,8 @@
+/*
+Backbone view for Account page
+Extends from DestroyableView
+*/
+
 define([
   'jquery', 
   'underscore', 

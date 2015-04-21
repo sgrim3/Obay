@@ -1,3 +1,7 @@
+/*
+Backbone free feed collection 
+*/
+
 define([
   'backbone',
 

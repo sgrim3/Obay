@@ -1,3 +1,9 @@
+/*
+Backbone feed  collection 
+Is bound by sockets to mongoose model
+*/
+
+
 define([
   'backbone',
   'scripts/models/listing',

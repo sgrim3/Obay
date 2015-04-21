@@ -1,3 +1,8 @@
+/*
+Backbone base model 
+All other models extend from this one
+*/
+
 define([
   'backbone',
 ], function (Backbone) {

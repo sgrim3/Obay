@@ -1,3 +1,9 @@
+/*
+Backbone view to edit an item
+Extends from DestroyableView
+Updates the listing
+*/
+
 define([
   'jquery', 
   'underscore', 

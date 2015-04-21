@@ -1,3 +1,9 @@
+/*
+Backbone Home view
+Extends from DestroyableView
+Has a mount point to place feed on
+*/
+
 define([
   'jquery', 
   'underscore', 

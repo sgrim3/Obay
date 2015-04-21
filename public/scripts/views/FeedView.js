@@ -1,3 +1,9 @@
+/*
+Backbone view for entire feed
+Renders collapsed listing views for each item in the feed
+Extends from DestroyableView
+*/
+
 define([
   'jquery', 
   'underscore', 

@@ -1,3 +1,9 @@
+/*
+Backbone view for single listing
+Extends from DestroyableView
+Contains edit and buy buttons + logic
+*/
+
 define([
   'jquery', 
   'underscore', 

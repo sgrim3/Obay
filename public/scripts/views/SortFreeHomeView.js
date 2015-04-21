@@ -1,3 +1,10 @@
+/*
+Backbone view for mounting free feed
+Extends from HomeView
+*/
+
+//QUESTION: Is this view still necessary?
+
 define([
   'jquery', 
   'underscore', 

@@ -1,3 +1,7 @@
+/*
+Routes relating to Venmo API
+*/
+
 var request = require("request");
 var Listing = require('../models/listing_model.js').listing;
 var User = require('../models/user_model.js').user;

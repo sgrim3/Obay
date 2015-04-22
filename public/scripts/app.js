@@ -149,7 +149,7 @@ require([
     },
 
     home: function home(){
-      this.feed('');
+      this.feed('listing_open=true');
     },
 
     free: function free(){

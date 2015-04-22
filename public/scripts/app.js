@@ -80,6 +80,7 @@ require([
       "editListing/:id": "editListing",
       "logout": "logout",
       "listing/:id" : "listing",
+      "user/:id" : "user",
       "temporaryPayRoute": "pay",
       // This route must go last to act as the catchall/404 page.
       '*notFound': 'notFound'
@@ -149,11 +150,15 @@ require([
     },
 
     home: function home(){
-      this.feed('');
+      this.feed('listing_open=true');
     },
 
     free: function free(){
       this.feed('listing_price=0');
+    },
+
+    user: function user(id){
+      this.feed('listing_creator='+id+'&listing_open=true');
     },
 
     feed: function feed(queryString){

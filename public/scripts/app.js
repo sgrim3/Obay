@@ -12,6 +12,9 @@ window.socket = io.connect('127.0.0.1');
 
 // Set global port. Change whether in dev or prod mode.
 window.PORT = "0.0.0.0";
+$.get( "/publicPort", function( port ) {
+  window.PORT = port;
+});
 
 window.dataHolder = {};
 

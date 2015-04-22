@@ -13,6 +13,11 @@ define([
   var Feed = Backbone.Collection.extend({
     url : '/feed',
     model: Listing,
+
+    comparator: function(model){
+      //causes backbone to automatically sort by time on the client side.
+      return model.get("listing_timeCreated");
+    },
     
     initialize: function(info){
       if (info.criteria){
@@ -20,12 +25,10 @@ define([
       } else {
         this.criteria = {};
       }
-      
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
       window.socket.on('listing:delete', this.deleteListing.bind(_this));
-
     },
 
     ListingFitsCriteria: function(listing){
@@ -55,11 +58,15 @@ define([
       chosenListing.trigger('destroy', chosenListing, chosenListing.collection);
     },
 
-    fetch: function(){
+    fetch: function(options){
       var _this = this;
       $.get(this.url, this.criteria)
         .success(function(data){
-          _this.reset(data);
+          if (options && options.reset){
+            _this.reset(data);
+          } else {
+            _this.set(data);
+          }
         })
         .error(function(data){
           console.log(data);

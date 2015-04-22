@@ -34,6 +34,9 @@ define([
           window.dataHolder.feedCollection = new Feed({
             criteria: this.criteria,
           });
+        } else {
+          window.dataHolder.feedCollection.criteria = this.criteria;
+          //the fetch to actually update happens when a new feedview is instantiated
         }
 
         var feedView = new FeedView({

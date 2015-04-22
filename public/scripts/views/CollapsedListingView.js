@@ -27,7 +27,6 @@ define([
       data.parentDiv.prepend(this.$el);
       this.template = _.template(CollapsedListingTemplate);
       this.model = data.model;
-
       this.currentUser = data.currentUser;
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'destroy', this.destroy);
@@ -80,9 +79,12 @@ define([
 
     deleteListing: function deleteListing(e) {
       e.preventDefault();
+      var _this = this;
       if (confirm("Are you sure?")) {
-        this.model.destroy();
-        alert("Item deleted!");
+        $.ajax({
+          url: '/listing/'+_this.model.id,
+          type: 'DELETE',
+        })
       } else {
       }
     }

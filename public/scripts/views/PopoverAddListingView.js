@@ -27,11 +27,17 @@ define([
         },
 
         postListing: function(event){
-          var self = this;
+          //disable button while we wait for a server response
+          $('#postButton').prop('disabled',true);
+          var _this = this;
           var onSuccess = function(response){
-            self.broadcastExitPopoverAddListing();
+            //renable button
+            $('#postButton').prop('disabled', false);
+            _this.broadcastExitPopoverAddListing();
           };
           var onErr = function(response){
+            //renable button
+            $('#postButton').prop('disabled', false);
             if (response.status === 401) {
                 window.location.replace('/');
             } else {

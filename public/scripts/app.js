@@ -88,6 +88,9 @@ require([
 
     initialize: function() {
       this.on('all', function(routeEvent) {
+        //TODO: explain to dennis what this is about. It doesn't seem very elegant
+        //and moves what seems like css styling to a random try catch statement.
+        //what's the reason for this?
         try {
           document.getElementById("addButton").style.display="inline";
         } catch (err) {}
@@ -150,21 +153,29 @@ require([
     },
 
     home: function home(){
-      this.feed('listing_open=true');
+      var criteria = {
+        listing_open: true,
+      };
+      this.feed(criteria);
     },
 
     free: function free(){
-      this.feed('listing_price=0');
+      var criteria = {
+        listing_price: 0,
+      };
+      this.feed(criteria);
     },
 
     user: function user(id){
-      this.feed('listing_creator='+id+'&listing_open=true');
+      var criteria = {
+        listing_creator: id,
+        listing_open: true,
+      };
+      this.feed(criteria);
     },
 
-    feed: function feed(queryString){
+    feed: function feed(criteria){
       var _this = this;
-      var criteria = this.parseQueryString(queryString);
-
       var onOlinAuth = function(){
         _this.createSidebar();
         if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
@@ -178,6 +189,12 @@ require([
         window.location.replace('/');
       }
       _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    feedQueryString: function feedQueryString(queryString){
+      //this feedQueryString function takes a query string to create and display a feed.
+      var criteria = this.parseQueryString(queryString);
+      this.feed(criteria);
     },
 
     account: function(){

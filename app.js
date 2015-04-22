@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var publicAddress = require('./getIP');
 
 //Import routes.
 var index = require('./routes/index');
@@ -43,6 +44,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// GET public port of local server.
+app.get('/publicPort', function publicPort(req, res) {
+  res.status(200).send(publicAddress);
+});
 
 //API Authentication Routes
 app.get('/venmoAuth', auth.venmoAuth);

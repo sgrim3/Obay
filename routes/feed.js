@@ -19,6 +19,7 @@ exports.getFeed = function(req, res) {
           res.status(500).send("Could not search Listings!");
       }
       else {
+          console.log(req.query);
           res.send(listings);	
       }
   });

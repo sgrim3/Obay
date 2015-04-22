@@ -19,12 +19,9 @@ define([
     // TODO: Change 'info' into something more descriptive.
     initialize:function (info) {
       info.parentDiv.append(this.$el);
-      
       this.currentUser = info.currentUser;
       this.collection = info.collection;
-
       this.collection.fetch({reset: true});
-
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.addListingView);
     },

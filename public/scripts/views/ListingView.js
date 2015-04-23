@@ -28,17 +28,21 @@ define([
 
     initialize:function (info) {
       this.model = info.model;
+      var _this = this;
 
       this.template = _.template(ListingTemplate);
       info.parentDiv.append(this.$el);
 
       this.model.fetch({reset: true});
-      this.listenTo(this.model, 'modelChanged', this.render);
+      this.listenTo(this.model, 'modelChanged', _this.render);
       this.listenTo(this.model, 'sync', this.render);
 
     },
 
     render: function (){
+      console.log('model changed breh');
+
+      console.log(this.model.attributes); //doesnt see changed model
       document.getElementById("addButton").style.display="none";
 
       var currentUser = this.model.attributes.currentUser;

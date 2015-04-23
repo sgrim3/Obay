@@ -34,7 +34,7 @@ define([
     updateListing: function(model){
       console.log('socketlisting:broadcast');
       console.log(model);
-      model.trigger('modelChanged', model);
+      this.trigger('modelChanged', model);
       // var updated_model = model._id;
       // updated_model.set(model);
     },

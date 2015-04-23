@@ -28,10 +28,12 @@ define([
 
     initialize:function (info) {
       this.model = info.model;
+
       this.template = _.template(ListingTemplate);
       info.parentDiv.append(this.$el);
 
       this.model.fetch({reset: true});
+      this.listenTo(this.model, 'modelChanged', this.render);
       this.listenTo(this.model, 'sync', this.render);
 
     },

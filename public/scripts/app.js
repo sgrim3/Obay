@@ -8,10 +8,13 @@ define('jquery', [], function() {
 });
 
 // Declare socket instance.
-window.socket = io.connect('127.0.0.1');
+window.socket = io.connect(window.PORT);
 
 // Set global port. Change whether in dev or prod mode.
 window.PORT = "0.0.0.0";
+$.get( "/publicPort", function( port ) {
+  window.PORT = port;
+});
 
 window.dataHolder = {};
 
@@ -80,6 +83,7 @@ require([
       "editListing/:id": "editListing",
       "logout": "logout",
       "listing/:id" : "listing",
+      "user/:id" : "user",
       "temporaryPayRoute": "pay",
       // This route must go last to act as the catchall/404 page.
       '*notFound': 'notFound'
@@ -87,6 +91,9 @@ require([
 
     initialize: function() {
       this.on('all', function(routeEvent) {
+        //TODO: explain to dennis what this is about. It doesn't seem very elegant
+        //and moves what seems like css styling to a random try catch statement.
+        //what's the reason for this?
         try {
           document.getElementById("addButton").style.display="inline";
         } catch (err) {}
@@ -149,17 +156,29 @@ require([
     },
 
     home: function home(){
-      this.feed('');
+      var criteria = {
+        listing_open: true,
+      };
+      this.feed(criteria);
     },
 
     free: function free(){
-      this.feed('listing_price=0');
+      var criteria = {
+        listing_price: 0,
+      };
+      this.feed(criteria);
     },
 
-    feed: function feed(queryString){
-      var _this = this;
-      var criteria = this.parseQueryString(queryString);
+    user: function user(id){
+      var criteria = {
+        listing_creator: id,
+        listing_open: true,
+      };
+      this.feed(criteria);
+    },
 
+    feed: function feed(criteria){
+      var _this = this;
       var onOlinAuth = function(){
         _this.createSidebar();
         if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
@@ -173,6 +192,12 @@ require([
         window.location.replace('/');
       }
       _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+    },
+
+    feedQueryString: function feedQueryString(queryString){
+      //this feedQueryString function takes a query string to create and display a feed.
+      var criteria = this.parseQueryString(queryString);
+      this.feed(criteria);
     },
 
     account: function(){

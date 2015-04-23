@@ -36,18 +36,20 @@ define([
         {PORT: window.PORT}
       )));
 
-      // Check to see if a collection instance already exists.
-      if (typeof window.dataHolder.accountCollection == 'undefined') {
-        window.dataHolder.accountCollection = new Feed({
+      if (typeof window.dataHolder.feedCollection == 'undefined') {
+        window.dataHolder.feedCollection = new Feed({
           criteria:{
             listing_creator:this.model.attributes.userId
           },
         });
+      } else {
+        window.dataHolder.feedCollection.criteria = {listing_creator: this.model.attributes.userId};
+        //the fetch to actually update happens when a new feedview is instantiated
       }
 
       var feedView = new FeedView({
         parentDiv: $('#FeedViewMountPoint'),
-        collection: window.dataHolder.accountCollection,
+        collection: window.dataHolder.feedCollection,
         currentUser: this.model.attributes.userId,
       });
 

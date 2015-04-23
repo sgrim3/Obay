@@ -69,7 +69,7 @@ define([
         success: function(listing){
           var payView = new PayView({
             model:_this.model, 
-            parentDiv: $('#buyButton')
+            parentDiv: _this.$el
           });
 
           _this.childViews.push(payView);

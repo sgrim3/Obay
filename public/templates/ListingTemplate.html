@@ -8,7 +8,11 @@
 
     <div id="textDisplay">
       <div id="name"><%= item.listing_name %></div>
-      <div id="creator"><%= item.listing_creator %></div>
+      <div id="creator">
+          <a href="/#user/<%=item.listing_creator%>">
+              <%= item.listing_creator %>
+          </a>
+      </div>
       <div id="price">$ <%= item.listing_price %></div>
       <div id="description"><%= item.listing_description %></div>
       <button id="buyButton">Buy</button>
@@ -16,7 +20,8 @@
     </div>
 
     <a href="/#home">
-      <button class="round-button" id="exitButton"><i class="fa fa-times"></i></button>
+      <button class="round-button" id="exitButton"><i class="fa fa-times"></i>
+      </button>
     </a>
 
     <script>

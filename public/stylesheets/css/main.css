@@ -459,7 +459,8 @@ button#buyButton, button#editButton {
   width: auto;
   display: inline;
   float: right;
-  margin-top: 20px; }
+  margin-top: 20px;
+  position: relative; }
 
 button#editButton {
   background-color: #1976D2; }

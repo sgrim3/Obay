@@ -28,6 +28,7 @@ define([
 
     initialize:function (info) {
       this.model = info.model;
+      console.log(this.model)
       var _this = this;
 
       this.template = _.template(ListingTemplate);
@@ -41,7 +42,7 @@ define([
 
     render: function (){
       console.log('model changed breh');
-
+      //console.log(this.model);
       console.log(this.model.attributes); //doesnt see changed model
       document.getElementById("addButton").style.display="none";
 

@@ -32,9 +32,10 @@ define([
     },
 
     updateListing: function(model){
+      this.listing_name=model.listing_name;
       console.log('socketlisting:broadcast');
       console.log(model);
-      this.trigger('modelChanged', model);
+      this.trigger('modelChanged');
       // var updated_model = model._id;
       // updated_model.set(model);
     },

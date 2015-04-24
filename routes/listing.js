@@ -170,7 +170,7 @@ var buyListing = function(req,res){
       console.log(err);
       res.status(500).send('Could not buy listing!');
     } else {
-
+      io.sockets.emit("listing:bought", listing);
       res.status(200).send(listing);
     }
     });

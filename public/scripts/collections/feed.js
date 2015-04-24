@@ -69,7 +69,14 @@ define([
       var _this = this;
       $.get(this.url, this.criteria)
         .success(function(data){
+
+          console.log(data);
           if (options && options.reset){
+            // data.forEach(function(model){
+            //   var _model=model;
+            //   _model.silent=true;
+            //   _this.create(_model);
+            // });
             _this.reset(data);
           } else {
             _this.set(data);

@@ -35,8 +35,9 @@ define([
       info.parentDiv.append(this.$el);
 
       this.model.fetch({reset: true});
-      //this.listenTo(this.model, 'modelChanged', _this.render);
       this.listenTo(this.model, 'sync', this.render);
+      /*this is what lets you update the model 
+      with new info and listen for it */
       this.listenTo(this.model, 'change', this.render);
 
 
@@ -45,7 +46,6 @@ define([
 
     render: function (){
       console.log('model changed breh');
-      //console.log(this.model);
 
       console.log(this.model.attributes); //doesnt see changed model
       document.getElementById("addButton").style.display="none";

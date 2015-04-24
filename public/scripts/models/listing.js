@@ -32,12 +32,10 @@ define([
     },
 
     updateListing: function(model){
+      //sets this instance of the model to have new info
       this.set(model);
       console.log('socketlisting:broadcast');
-      console.log(model);
-      //this.trigger('modelChanged');
-      // var updated_model = model._id;
-      // updated_model.set(model);
+      // console.log(model);
     },
   });
 

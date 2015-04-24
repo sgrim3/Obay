@@ -84,7 +84,11 @@ exports.getListing = function(req, res) {
       res.status(500).send("Could not search Listings!");
     }
     else {
-      res.send({"item":item, "currentUser":currentUser}); 
+      //so we can add currentUser
+      var _item = item.toJSON();
+      //currentUser is used by the template client side
+      _item.currentUser=currentUser;
+      res.status(200).send(_item); 
     }
   });
 }

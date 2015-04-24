@@ -39,7 +39,7 @@ define([
     render:function () {
       document.getElementById("addButton").style.display="none";
 
-      $(this.el).html(this.template(this.model.attributes.item));
+      $(this.el).html(this.template(this.model.attributes));
       
       var dropzone_options = {
         dictDefaultMessage: 'Drag file here or click to upload to Imgur! ' 

@@ -25,8 +25,18 @@ define([
     
     urlRoot : url,
 
-    intialize: function intialize() {
-    }
+    initialize: function initialize() {
+      console.log('initializing model');
+      var _this = this;
+      window.socket.on('listing:update', this.updateListing.bind(_this));
+    },
+
+    updateListing: function(model){
+      //sets this instance of the model to have new info
+      this.set(model);
+      console.log('socketlisting:broadcast');
+      // console.log(model);
+    },
   });
 
   return Listing;

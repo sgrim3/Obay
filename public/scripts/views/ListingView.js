@@ -28,19 +28,30 @@ define([
 
     initialize:function (info) {
       this.model = info.model;
+      console.log(this.model)
+      var _this = this;
+
       this.template = _.template(ListingTemplate);
       info.parentDiv.append(this.$el);
 
       this.model.fetch({reset: true});
       this.listenTo(this.model, 'sync', this.render);
+      /*this is what lets you update the model 
+      with new info and listen for it */
+      this.listenTo(this.model, 'change', this.render);
+
+
 
     },
 
     render: function (){
+      console.log('model changed breh');
+
+      console.log(this.model.attributes); //doesnt see changed model
       document.getElementById("addButton").style.display="none";
 
-      var currentUser = this.model.attributes.currentUser;
-      var itemCreator = this.model.attributes.model_creator;
+      // var currentUser = this.model.attributes.currentUser;
+      // var itemCreator = this.model.attributes.model_creator;
       this.$el.html(this.template(this.model.attributes));
       
       return this;

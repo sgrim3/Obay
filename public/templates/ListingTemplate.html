@@ -3,18 +3,18 @@
 <div class='add'>
   <div id="addContainer">
     <div id="imageDisplay">
-      <img src="<%= item.listing_image %>"></img>
+      <img src="<%= listing_image %>"></img>
     </div>
 
     <div id="textDisplay">
-      <div id="name"><%= item.listing_name %></div>
+      <div id="name"><%= listing_name %></div>
       <div id="creator">
-          <a href="/#user/<%=item.listing_creator%>">
-              <%= item.listing_creator %>
+          <a href="/#user/<%=listing_creator%>">
+              <%= listing_creator %>
           </a>
       </div>
-      <div id="price">$ <%= item.listing_price %></div>
-      <div id="description"><%= item.listing_description %></div>
+      <div id="price">$ <%= listing_price %></div>
+      <div id="description"><%= listing_description %></div>
       <button id="buyButton">Buy</button>
       <button id="editButton">Edit</button>
     </div>
@@ -29,7 +29,7 @@
       // NOTE: This seems a bit convoluted.
 
       var currentUser = "<%= currentUser %>";
-      var creator = "<%= item.listing_creator %>";
+      var creator = "<%= listing_creator %>";
       if (currentUser!==creator) {
         document.getElementById("editButton").style.display="none";
         document.getElementById("buyButton").style.display="inline";

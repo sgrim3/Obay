@@ -56,6 +56,7 @@ define([
       console.log('socket listing:broadcast');
       var updated_model = this.get(model._id);
       updated_model.set(model);
+      updated_model.trigger('change', updated_model, updated_model.collection);
     },
 
     deleteListing: function deleteListing(model) {

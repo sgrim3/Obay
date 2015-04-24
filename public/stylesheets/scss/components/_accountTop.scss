@@ -1,3 +1,70 @@
-#settingsContainer {
+#accountTop {
   margin-top: $contentMargin;
 }
+
+.headerTag {
+	@extend .sh1;
+	background: palette(Blue, $colorIntensity);
+	padding: 10px;
+	display: inline-block;
+	color: white;
+}
+
+#line {
+	height: 2px;
+	@extend .sh1;
+	width: relative;
+	background: palette(Blue, $colorIntensity);
+}
+
+#headerPaper {
+	background: #ffffff;
+	@extend .sh1;
+ 	padding: 15px;
+ 	// display: inline-block;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	width: 50%;
+}
+
+#accountHeader {
+	text-align: center;
+	// display: inline-block;
+}
+
+#currentUser {
+	// display: inline-block;
+	text-align: center;
+	margin-top: 10px;
+	#id {
+		color: palette(Blue, $colorIntensity);
+	}
+}
+
+#venmoHeader {
+	margin-top: 20px;
+}
+
+#feedHeader {
+  margin-top: 50px;
+}
+
+#AccountFeedViewMountPoint {
+	background: #ffffff;
+	@extend .sh1;
+ 	padding: 15px;
+}
+
+#venmoContent {
+  background: #ffffff;
+  @extend .sh1;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+#venmoMessage {
+	padding-right: 30px;
+}
+
+

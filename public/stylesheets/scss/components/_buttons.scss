@@ -145,3 +145,19 @@ button#venmoButton {
   display: inline;
   margin-left: 10px;
 }
+
+button#linkVenmoButton {
+  @extend %rectangular-button;
+  background-color: palette(Green, $colorIntensity);
+  width: auto;
+  padding-right: 17px;
+
+  display: inline;
+  float: right;
+  position: relative;
+}
+
+#removeVenmoButton {
+  @extend #linkVenmoButton;
+  background-color: palette(Red, $colorIntensity);
+}

@@ -48,7 +48,7 @@ define([
       }
 
       var feedView = new FeedView({
-        parentDiv: $('#FeedViewMountPoint'),
+        parentDiv: $('#AccountFeedViewMountPoint'),
         collection: window.dataHolder.feedCollection,
         currentUser: this.model.attributes.userId,
       });

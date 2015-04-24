@@ -1,22 +1,41 @@
 <!-- HTML template for account page -->
-<div id = "settingsContainer">
-	<h1> Venmo Payment Options </h1>
-	<p>To allow buyers to pay you by Venmo, hit the button below to link a Venmo account with your Obay account!</p>
 
-	<a href='https://api.venmo.com/v1/oauth/authorize?client_id=2492&scope=make_payments%20access_profile&redirect_uri=http://<%= PORT %>:3000/venmoAuth/addAccount'>Have buyers pay my Venmo account Money!</a>
+<div id = "accountTop">
+	<div id="headerPaper">
+		<h1 id="accountHeader">Account Settings</h1>
+		<h4 id="currentUser">Logged in as: <span id="id"><%= userId %> </span></h4>
+	</div>
+<br>
+	<h4 id = "venmoHeader" class ="headerTag"> Venmo Payment Options </h4>
+	<div id="line"></div>
 
-	<% if (venmoUserName) { %>
-	    <div>
-	    Current venmo account that your buyers can pay with venmo: <%= venmoUserName %>
-	    </div>
-	<% } %>
+	<div id = "venmoContent">
 
-	<p> Click the button below to unlink your Venmo and Obay accounts! Buyers of your items will have to pay you in cash. </p>
+		<% if (venmoUserName==="") { %>
 
-	<form method="POST" action="/venmoRemoveAccount">
-	    <input id = "removeVenmoButton" type="submit"></input>
-	</form>
+			<p id="venmoMessage">To allow buyers to pay you by Venmo, hit the link button below to connect a Venmo account to your Obay account. Otherwise, buyers can only pay you in cash.</p>
+
+
+			<button onclick="location.href = 'https://api.venmo.com/v1/oauth/authorize?client_id=2492&scope=make_payments%20access_profile&redirect_uri=http://<%= PORT %>:3000/venmoAuth/addAccount';" id="linkVenmoButton">Link</button>
+
+		<% } %>	
+
+
+		<% if (venmoUserName) { %>
+		    <div>
+		    	Current venmo account that your buyers can pay with venmo: <%= venmoUserName %>
+		    </div>
+
+		    <p id="venmoMessage">Click the unlink button to disconnect your Venmo and Obay accounts- if you do this, people who buy your items will have to pay you in cash.</p>
+
+		 	<form method="POST" action="/venmoRemoveAccount">
+		    	<input id = "removeVenmoButton" type="submit" value="Unlink"></input>
+			</form>
+		<% } %>
+
+	</div>
 </div>
 
-<h1>Your listings</div>
-<div id="FeedViewMountPoint"></div>
+<h4 id="feedHeader" class="headerTag">Your listings</h4>
+<div id = "line"></div>
+<div id="AccountFeedViewMountPoint"></div>

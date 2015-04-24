@@ -84,7 +84,11 @@ exports.getListing = function(req, res) {
       res.status(500).send("Could not search Listings!");
     }
     else {
-      res.send({"item":item, "currentUser":currentUser}); 
+      console.log(currentUser);
+
+      var _item = item.toJSON();
+      _item.currentUser=currentUser;
+      res.status(200).send(_item); 
     }
   });
 }

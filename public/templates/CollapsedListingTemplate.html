@@ -1,5 +1,6 @@
 <!-- HTML template for one listing on the feed -->
 
+<!-- TODO: Replace image with one that's legal -->
 
 <a class="listingHighlight" id="<%= _id %>" href="#listing/<%= _id %>">
   <div id="collapsedListingView">
@@ -14,7 +15,7 @@
     <div id="image_area">
       <img id="picture" src="<%= listing_thumbnail %>">
     </div>
-    
+
     <% if (listing_open ===false) { %>
         <div id= "soldStampDiv">
           <img id="soldStamp" src="/images/sold.png">

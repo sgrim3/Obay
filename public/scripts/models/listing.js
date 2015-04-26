@@ -28,9 +28,11 @@ define([
     initialize: function initialize() {
       console.log('initializing model');
       var _this = this;
-      window.socket.on('listing:update', this.updateListing.bind(_this));
-      window.socket.on('listing:bought', this.boughtListing.bind(_this));
-
+      // console.log(_this);
+      window.socket.on('listing:update' + this._id, 
+        this.updateListing.bind(_this));
+      window.socket.on('listing:bought' + this._id, 
+        this.boughtListing.bind(_this));
     },
 
     updateListing: function(model){

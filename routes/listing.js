@@ -133,6 +133,7 @@ var editListing = function(req,res){
           email.sendCarpeEmail(newListing);
         } 
         io.sockets.emit("listing:update", listing);
+        io.sockets.emit("listing:update" + listing._id, listing);
         res.status(200).json(listing);
       }
     });
@@ -171,6 +172,7 @@ var buyListing = function(req,res){
       res.status(500).send('Could not buy listing!');
     } else {
       io.sockets.emit("listing:bought", listing);
+      io.sockets.emit("listing:bought" + listing._id, listing);
       res.status(200).send(listing);
     }
     });

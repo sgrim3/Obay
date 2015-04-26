@@ -1,12 +1,30 @@
-h1 {
-  color: red;
+#email-body {
+	padding: 10px;
 }
 
-p {
-  margin-top: 20px;
-  margin-bottom: 20px;
+#card {
+	position: relative;
+	background-color: aliceblue;
+	max-width: 75%;
+}
+
+#card-title {
+	text-align: center;
+	background-color: #1976D2;
+	color: white;
+	padding: 10px;
+}
+
+#card-text {
+	padding: 20px;
+	text-align: center;
+}
+
+#signature {
+	padding-top: 20px;
+	text-align: left;
 }
 
 #logo {
-  max-width: 10%;
+	max-height: 100px;
 }

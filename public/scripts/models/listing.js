@@ -29,10 +29,14 @@ define([
       console.log('initializing model');
       var _this = this;
       // console.log(_this);
-      window.socket.on('listing:update' + this._id, 
+      // window.socket.on('listing:update' + _this.attributes._id, console.log("hi update"));
+      // window.socket.on('listing:bought' + _this.attributes._id, console.log("hi bought"));
+
+      window.socket.on('listing:update' + this.attributes._id, 
         this.updateListing.bind(_this));
-      window.socket.on('listing:bought' + this._id, 
+      window.socket.on('listing:bought' + this.attributes._id, 
         this.boughtListing.bind(_this));
+
     },
 
     updateListing: function(model){

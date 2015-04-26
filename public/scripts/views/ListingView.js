@@ -54,7 +54,7 @@ define([
         
       // }
 
-      console.log(this.model.attributes); //doesnt see changed model
+      console.log(this.model.attributes); 
       document.getElementById("addButton").style.display="none";
 
       // var currentUser = this.model.attributes.currentUser;

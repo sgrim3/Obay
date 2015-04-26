@@ -28,7 +28,7 @@ define([
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
-      //window.socket.on('listing:bought', this.deleteListing.bind(_this));
+      window.socket.on('listing:bought', this.deleteListing.bind(_this));
       window.socket.on('listing:delete', this.deleteListing.bind(_this));
     },
 
@@ -47,14 +47,14 @@ define([
     },
 
     createListing: function(model){
-      console.log('socket listing:create');
+      //console.log('socket listing:create');
       if (this.ListingFitsCriteria(model)){
         this.add(model);
       }
     },
 
     updateListing: function(model){
-      console.log('socket listing:broadcast');
+      //console.log('socket listing:broadcast');
       var updated_model = this.get(model._id);
       updated_model.set(model);
       updated_model.trigger('change', updated_model, updated_model.collection);

@@ -90,6 +90,7 @@ require([
     },
 
     initialize: function() {
+      this.userModel = new UserModel();
       this.on('all', function(routeEvent) {
         //TODO: explain to dennis what this is about. It doesn't seem very elegant
         //and moves what seems like css styling to a random try catch statement.
@@ -208,10 +209,10 @@ require([
 
         // QUESTION: Should a userModel be declared here?
         // Also, should this be checked to determine if the user already exists?
-        var userModel = new UserModel();
+        
         _this.Page = new AccountView({
           parentDiv: $('#PageContainer'),
-          model: userModel,
+          model: _this.userModel,
           PORT: window.PORT
         });
       }

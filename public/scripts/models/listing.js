@@ -29,12 +29,21 @@ define([
       console.log('initializing model');
       var _this = this;
       window.socket.on('listing:update', this.updateListing.bind(_this));
+      window.socket.on('listing:bought', this.boughtListing.bind(_this));
+
     },
 
     updateListing: function(model){
       //sets this instance of the model to have new info
       this.set(model);
       console.log('socketlisting:broadcast');
+      // console.log(model);
+    },
+
+    boughtListing: function(model){
+      //sets this instance of the model to listing_open:false
+      this.set(model);
+      console.log('socket:bought model changed');
       // console.log(model);
     },
   });

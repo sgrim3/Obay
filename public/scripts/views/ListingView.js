@@ -45,7 +45,7 @@ define([
     },
 
     render: function (){
-      console.log('model changed breh');
+
 
       console.log(this.model.attributes); //doesnt see changed model
       document.getElementById("addButton").style.display="none";
@@ -53,6 +53,7 @@ define([
       // var currentUser = this.model.attributes.currentUser;
       // var itemCreator = this.model.attributes.model_creator;
       this.$el.html(this.template(this.model.attributes));
+      console.log(this.model.attributes.listing_open);
       
       return this;
     },

@@ -45,14 +45,22 @@ define([
     },
 
     render: function (){
-      console.log('model changed breh');
 
-      console.log(this.model.attributes); //doesnt see changed model
+      // if(this.model.attributes.listing_open){
+          //TODO: decouple buy to check if bought in here
+          //and check whether logged in user has bought
+          //the item to display either payview
+          //or just "item has been bought"
+        
+      // }
+
+      console.log(this.model.attributes); 
       document.getElementById("addButton").style.display="none";
 
       // var currentUser = this.model.attributes.currentUser;
       // var itemCreator = this.model.attributes.model_creator;
       this.$el.html(this.template(this.model.attributes));
+      console.log(this.model.attributes.listing_open);
       
       return this;
     },

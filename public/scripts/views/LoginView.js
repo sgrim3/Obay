@@ -24,7 +24,7 @@ define([
 
       render:function (info) {
         this.$el.html(this.template({
-          PORT: window.PORT
+          PORT: window.location.host
         }));
           
         return this;

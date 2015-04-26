@@ -9,7 +9,7 @@ define([
   'backbone',
   'scripts/models/baseModel',
 ], function ($, Backbone, BaseModel) {
-  var url = "http://"+window.PORT+":3000/listing/";
+  var url = "http://"+window.location.host+"/listing/";
   var Listing = BaseModel.extend({
     idAttribute: '_id',
 
@@ -28,13 +28,28 @@ define([
     initialize: function initialize() {
       console.log('initializing model');
       var _this = this;
-      window.socket.on('listing:update', this.updateListing.bind(_this));
+      // console.log(_this);
+      // window.socket.on('listing:update' + _this.attributes._id, console.log("hi update"));
+      // window.socket.on('listing:bought' + _this.attributes._id, console.log("hi bought"));
+
+      window.socket.on('listing:update' + this.attributes._id, 
+        this.updateListing.bind(_this));
+      window.socket.on('listing:bought' + this.attributes._id, 
+        this.boughtListing.bind(_this));
+
     },
 
     updateListing: function(model){
       //sets this instance of the model to have new info
       this.set(model);
       console.log('socketlisting:broadcast');
+      // console.log(model);
+    },
+
+    boughtListing: function(model){
+      //sets this instance of the model to listing_open:false
+      this.set(model);
+      console.log('socket:bought model changed');
       // console.log(model);
     },
   });

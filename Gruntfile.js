@@ -4,7 +4,7 @@ module.exports = function (grunt){
   grunt.initConfig({
 
     concurrent: {
-      tasks: ['nodemon', 'watch:sass'],
+      tasks: ['nodemon', 'watch'],
       options: {
         logConcurrentOutput: true
       }
@@ -60,6 +60,14 @@ module.exports = function (grunt){
         files: '**/*.scss',
         tasks: ["sass"]
       },
+      client:{
+        files: 'public/**/*',
+        options:{
+          livereload:true,
+        },
+      },
+
+
       // viewFiles: {
       //   files: ['**/*.js', 'public/index.tpl.html'],
       //   tasks: ["includeSource"]  

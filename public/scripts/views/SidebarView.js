@@ -93,7 +93,7 @@ define([
       /*Purposely chose to use window.history here instead of 
       backbone.history because backbone.history seemed to be jumping 
       to the top of the page in certain weird cases.*/
-      window.history.pushState({}, '', 'http://'+window.PORT+':3000/#addListing');  
+      window.history.pushState({}, '', 'http://'+ window.location.host + '/#addListing');  
     },
 
     hidePopoverAddListing: function(){

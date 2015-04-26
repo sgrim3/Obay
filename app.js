@@ -45,11 +45,6 @@ app.use(cookieParser());
 app.use(session({secret: 'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// GET public port of local server.
-app.get('/publicPort', function publicPort(req, res) {
-  res.status(200).send(publicAddress);
-});
-
 //API Authentication Routes
 app.get('/venmoAuth', auth.venmoAuth);
 app.get('/venmoAuth/addAccount', [olinAuthMiddleware, auth.venmoLinkAccount]);
@@ -91,4 +86,5 @@ app.post('/image', [
   image.uploadImage
 ]);
 
+console.log("Please visit " + publicAddress + "!");
 app.listen(PORT, "0.0.0.0");

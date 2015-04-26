@@ -7,14 +7,7 @@ define('jquery', [], function() {
   return jQuery;
 });
 
-// Declare socket instance.
-window.socket = io.connect(window.PORT);
-
-// Set global port. Change whether in dev or prod mode.
-window.PORT = "0.0.0.0";
-$.get( "/publicPort", function( port ) {
-  window.PORT = port;
-});
+window.socket = io.connect(window.location.hostname);
 
 window.dataHolder = {};
 
@@ -213,7 +206,7 @@ require([
         _this.Page = new AccountView({
           parentDiv: $('#PageContainer'),
           model: _this.userModel,
-          PORT: window.PORT
+          PORT: window.location.host
         });
       }
 

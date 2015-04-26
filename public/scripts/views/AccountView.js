@@ -33,7 +33,7 @@ define([
       this.$el.html(this.template($.extend(
         {}, 
         this.model.attributes,
-        {PORT: window.PORT}
+        {PORT: window.location.host}
       )));
 
       if (typeof window.dataHolder.feedCollection == 'undefined') {

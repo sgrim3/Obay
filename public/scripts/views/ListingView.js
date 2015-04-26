@@ -46,6 +46,13 @@ define([
 
     render: function (){
 
+      // if(this.model.attributes.listing_open){
+          //TODO: decouple buy to check if bought in here
+          //and check whether logged in user has bought
+          //the item to display either payview
+          //or just "item has been bought"
+        
+      // }
 
       console.log(this.model.attributes); //doesnt see changed model
       document.getElementById("addButton").style.display="none";

@@ -28,6 +28,7 @@ define([
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
       window.socket.on('listing:update', this.updateListing.bind(_this));
+      //window.socket.on('listing:bought', this.deleteListing.bind(_this));
       window.socket.on('listing:delete', this.deleteListing.bind(_this));
     },
 

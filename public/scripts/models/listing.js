@@ -9,7 +9,7 @@ define([
   'backbone',
   'scripts/models/baseModel',
 ], function ($, Backbone, BaseModel) {
-  var url = "http://"+window.PORT+":3000/listing/";
+  var url = "http://"+window.location.host+"/listing/";
   var Listing = BaseModel.extend({
     idAttribute: '_id',
 

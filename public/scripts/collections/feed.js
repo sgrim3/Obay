@@ -35,9 +35,6 @@ define([
       /*Checks if a listing fits the specified criteria and returns true or 
       false. This is not nearly as complex or good as mongodb's query operators, 
       but it will do basic matching.*/
-      console.log(this.criteria);
-      console.log(listing);
-      console.log(_.where([listing],this.criteria));
       if (_.where([listing], this.criteria).length > 0){
         return true;
       } else {

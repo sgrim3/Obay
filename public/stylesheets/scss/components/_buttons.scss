@@ -83,7 +83,18 @@ button#deleteImageButton {
 }
 
 button#deleteButton {
-  @extend button#deleteImageButton;
+  background: palette(Red, $colorIntensity);
+  position: absolute;
+  z-index: 99999;
+  right: 0%;
+  top: 0%;
+  width: 47px;
+  height: 47px;
+  @include scale(0.7);
+
+  .fa-times {
+    cursor: pointer;
+  }
 }
 
 // Square buttons.

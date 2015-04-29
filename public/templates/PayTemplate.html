@@ -5,6 +5,9 @@
   <h1>Congrats!</h1>
   <h4>Pay with: </h4>
   <button id="cashButton">Cash</button>
-  <button id="venmoButton">Venmo</button>
+  <% if (venmoUserName==="") { %>
+  <% } else { %>
+    <button id="venmoButton">Venmo</button>
+  <% } %>
   <div id="venmoMessage"></div>
 </div>

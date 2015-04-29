@@ -22,11 +22,7 @@
 
 
 		<% if (venmoUserName) { %>
-		    <div>
-		    	Current venmo account that your buyers can pay with venmo: <%= venmoUserName %>
-		    </div>
-
-		    <p id="venmoMessage">Click the unlink button to disconnect your Venmo and Obay accounts- if you do this, people who buy your items will have to pay you in cash.</p>
+		    <p id="venmoMessage">Current venmo account that your buyers can pay with venmo: <b><%= venmoUserName %></b>. <br>Click the unlink button to disconnect your Venmo and Obay accounts- if you do this, people who buy your items will have to pay you in cash.</p>
 
 		 	<form method="POST" action="/venmoRemoveAccount">
 		    	<input id = "removeVenmoButton" type="submit" value="Unlink"></input>

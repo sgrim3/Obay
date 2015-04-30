@@ -11,10 +11,16 @@ var userData = function(req,res){
     res.json(req.session);
 }
 
+var currentUser = function(req,res){
+    /*Returns currentUserid associated with session*/
+    res.json({userId: req.session.user.userId});
+}
+
 var logout = function(req,res){
     req.session.destroy();
     res.end();
 }
 
 module.exports.userData = userData;
+module.exports.currentUser = currentUser;
 module.exports.logout = logout;

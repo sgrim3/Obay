@@ -16,7 +16,7 @@
       <img id="picture" src="<%= listing_thumbnail %>">
     </div>
 
-    <% if (listing_open ===false) { %>
+    <% if (!listing_open) { %>
         <div id= "soldStampDiv">
           <img id="soldStamp" src="/images/sold.png">
         </div>

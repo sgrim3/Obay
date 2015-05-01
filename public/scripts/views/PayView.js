@@ -28,7 +28,6 @@ define([
       this.model = info.model;
       info.parentDiv.after(this.$el);
       this.render();
-
     },
 
     render: function (info){
@@ -38,7 +37,7 @@ define([
       console.log(this.$el);
       console.log(this.$el.html());
       console.log(this.template());
-      this.$el.html(this.template());
+      this.$el.html(this.template(this.model.attributes));
       // console.log(this.el.html());
       return this;
     },

@@ -22,37 +22,35 @@ exports.postListing = function(req, res, next) {
     } else {
       var listing_image = '/images/default.jpg';
     }
-
-    var newListing = new Listing({
-      listing_name: req.body.listing_name,
-      listing_description: req.body.listing_description,
-      listing_image: listing_image,
-      listing_creator: req.session.user.userId,
-      listing_time_created: Date.now(),
-      listing_open: true,
-      listing_price: parseFloat(req.body.listing_price.replace(/,/g, ''))
-    });
-    
-    // TODO: Make this cleaner. Too many nested if statements.
-    newListing.save(function(err){
-      if(err){
-          console.error("SG|/routes/listing.js|postListing|save listing error");
-          console.log(err);
-        res.status(500).send("Could not save listing!");
+    /*we can trust that userId is not faked because olinAuth checks for that*/
+    User.findOne({userId: req.session.user.userId})
+      .exec(function(err, user){
+      if (err) {
+        console.error("SG|/routes/listing.js|postListing| User.findOne error");
+        res.status(500).send("Could not find User!");
       } else {
-        User.findOne({userId: req.session.user.userId})
-          .exec(function(err, user){
-          if (err) {
-            console.error("SG|/routes/listing.js|postListing| User.findOne error");
-            res.status(500).send("Could not find User!");
+        var venmoEnabled = user.venmoPayId ? true : false;
+        var newListing = new Listing({
+          listing_name: req.body.listing_name,
+          listing_description: req.body.listing_description,
+          listing_image: listing_image,
+          listing_creator: req.session.user.userId,
+          listing_time_created: Date.now(),
+          listing_open: true,
+          listing_price: parseFloat(req.body.listing_price.replace(/,/g, '')),
+          venmoEnabled: venmoEnabled,
+          venmoPaid: false,
+        });
+        newListing.save(function(err){
+          if(err){
+              console.error("SG|/routes/listing.js|postListing|save listing error");
+              console.log(err);
+            res.status(500).send("Could not save listing!");
           } else {
-            
             /*Add reference and NOT the document! We don't want to 
             make a copy, just store a reference.*/
             user.listings.push(newListing._id);
             user.save(function(err){
-              console.error(err);
-              
               if (err) {
                 console.error("SG|/routes/listing.js|postListing|save user error");
                 console.log(err);
@@ -60,7 +58,6 @@ exports.postListing = function(req, res, next) {
               } else {
                 res.json(newListing);
                 io.sockets.emit('listing:create', newListing);
-                
                 if (req.body.toCarpe === 'on'){ 
                   email.sendCarpeEmail(newListing);
                 } 
@@ -110,7 +107,7 @@ var editListing = function(req,res){
     if (listing_creator === req.session.user.userId){
     /*Purposely set each attribute instead of using upsert here because 
     we are only changing some of the attributes. Don't allow users to 
-    change the time something was created!*/
+    change the time something was created or whether it was paid for!*/
     listing.listing_name = listing_name;
     listing.listing_description = listing_description;
     listing.listing_image = listing_image;

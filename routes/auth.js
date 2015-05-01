@@ -95,12 +95,13 @@ var venmoLinkAccount = function (req, res) {
       var olinAuthId = req.session.user.userId;
       var venmoUserId = JSON.parse(venmo_response.body).data.user.id;
       var venmoUserName = JSON.parse(venmo_response.body).data.user.username;
-      User.findOne({userId:olinAuthId}, function(err, user){
+      User.findOne({userId:olinAuthId}).populate('listings').exec(function(err, user){
         if (err) {
           res.status(500).send('Obay server could not search user models!');
         } else {
           user.venmoPayId = venmoUserId;
           user.venmoUserName = venmoUserName;
+          //set all user listings to be venmoPayEnabled
           user.save(function (err) {
             if (err){
               res.status(500)
@@ -112,6 +113,19 @@ var venmoLinkAccount = function (req, res) {
               current user information.*/
               req.session.user = user;
               res.status(200).redirect('/#account');
+              user.listings.forEach(function(listing){
+                Listing.findOne({'_id':listing._id}).exec(function(err, listing){
+                  if (err) {
+                    console.log(err);
+                    console.log('Could not change user listings to enable venmoPay!');
+                  }
+                  listing.venmoEnabled = true;
+                  listing.save(function(err){
+                    console.log(err);
+                    console.log('Could not change user listings to enable venmoPay!');
+                  });
+                });
+              });
             }
           });
         }
@@ -122,7 +136,7 @@ var venmoLinkAccount = function (req, res) {
 
 var venmoRemoveAccount = function(req,res){
   var olinAuthId = req.session.user.userId;
-  User.findOne({userId:olinAuthId}, function(err, user){
+  User.findOne({userId:olinAuthId}).populate('listings').exec(function(err,user){
     if (err) {
       res.status(500).send('Obay server could not search user models!');
     } else {
@@ -138,11 +152,29 @@ var venmoRemoveAccount = function(req,res){
           current user information.*/
           req.session.user = user;
           res.status(200).redirect('/#account');
+          console.log(user.listings);
+          user.listings.forEach(function(listing){
+            Listing.findOne({'_id':listing._id}).exec(function(err, listing){
+              if (err) {
+                console.log(err);
+                console.log('Could not change user listings to disable venmoPay!');
+              }
+              listing.venmoEnabled = false;
+              listing.save(function(err){
+                //ITS WORKING YOU SCHMUT, YOU DIDNT PUT AN IF ERR STATEMENT
+                if (err) {
+                  console.log(err);
+                  console.log('Could not change user listings to disable venmoPay!');
+                }
+              });
+            });
+          });
         }
       });
     }
   });
 }
+
 var isOlinAuthenticated = function(req,res){
   //returns status of olinApps Auth
   var onOlinAuth = function(){

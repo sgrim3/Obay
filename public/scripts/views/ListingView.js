@@ -27,7 +27,6 @@ define([
     },
 
     initialize:function (info) {
-      console.log(this.model)
       var _this = this;
 
       this.template = _.template(ListingTemplate);
@@ -35,14 +34,24 @@ define([
 
       this.model.fetch({reset: true});
       this.listenTo(this.model, 'sync', this.render);
-      /*this is what lets you update the model 
-      with new info and listen for it */
+      /*This is what lets you update the model 
+      with new info and listen for it.*/
       this.listenTo(this.model, 'change', this.render);
     },
 
     render: function (){
+      var _this = this;
       document.getElementById("addButton").style.display="none";
       this.$el.html(this.template(this.model.attributes));
+
+      // Initialize the listing has been closed.
+      if (!this.model.attributes.listing_open) {
+        var payView = new PayView({
+          model: _this.model,
+          parentDiv: $('.pay-mount-point')
+        });
+      }
+
       return this;
     },
 
@@ -55,20 +64,17 @@ define([
 
     buyItem: function(){  
       // Sets the listing open to false in the backbone model.
-      console.log(this.model);
       this.model.set({    
         listing_open: false,
         listing_buyer: window.userModel.id   
       });
 
-      console.log(this.model);
-
       // Saves backbone model and does PUT request to server.
+      // TODO: Refactor this section.
       this.model.save(null, {
         success: function(listing){
           console.log("Successful!");
         },
-        
         error: function(){
           console.log('SG|/public/views/ListingView.js|buyItem| error buying item');
         }

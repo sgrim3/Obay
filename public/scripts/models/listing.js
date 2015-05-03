@@ -37,9 +37,8 @@ define([
 
     },
 
+    // TODO: Refactor this code to be DRY.
     updateListing: function(model){
-      //sets this instance of the model to have new info
-      // TODO: This may not be necessary.
       this.set(model);
     },
 

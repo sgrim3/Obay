@@ -43,6 +43,7 @@ require([
   , 'scripts/views/HomeView'
   , 'scripts/views/ListingView'
   , 'scripts/views/LoginView'
+  , 'scripts/views/MyFeedView'
   , 'scripts/views/NotFoundView'
   // , 'scripts/views/PayView'
   // , 'scripts/views/PopoverAddListingView'
@@ -59,6 +60,7 @@ require([
   , HomeView
   , ListingView
   , LoginView
+  , MyFeedView
   , NotFoundView
   // , PayView
   // , PopoverAddListingView
@@ -72,6 +74,7 @@ require([
       'free': 'free',
       'feed?*queryString' : 'feed',
       "account": "account",
+      "myFeed": "myFeed",
       "addListing": "addListing",
       "editListing/:id": "editListing",
       "logout": "logout",
@@ -154,6 +157,37 @@ require([
         listing_open: true,
       };
       this.feed(criteria);
+    },
+
+    myFeed: function myFeed(){
+      var _this = this;
+      var onOlinAuth = function(){
+        $.get('/currentUser')
+          .done(function(data){
+            var userId = data.userId;
+            var criteria = {
+              listing_creator: userId,
+            };
+            Backbone.history.navigate('#user/'+userId);
+            _this.createSidebar();
+            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+            _this.Page = new MyFeedView({
+              parentDiv: $('#PageContainer'),
+              userId: userId,
+              PORT: window.location.host
+            });
+          })
+          .error(function(){
+            console.log('Could not fetch current user id!');
+          });
+      };
+
+      var onOlinErr = function(){
+        console.log('error!!!');
+        //window.location.replace('/');
+      };
+
+      _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
     },
 
     free: function free(){

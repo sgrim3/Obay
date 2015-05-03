@@ -45,8 +45,6 @@ require([
   , 'scripts/views/LoginView'
   , 'scripts/views/MyFeedView'
   , 'scripts/views/NotFoundView'
-  // , 'scripts/views/PayView'
-  // , 'scripts/views/PopoverAddListingView'
   , 'scripts/views/SidebarView'
 ], function(
     $
@@ -62,8 +60,6 @@ require([
   , LoginView
   , MyFeedView
   , NotFoundView
-  // , PayView
-  // , PopoverAddListingView
   , SidebarView
   )
 {
@@ -156,7 +152,10 @@ require([
       var criteria = {
         listing_open: true,
       };
-      this.feed(criteria);
+
+      var feedType = "all";
+
+      this.feed(criteria, feedType);
     },
 
     myFeed: function myFeed(){
@@ -168,6 +167,8 @@ require([
             var criteria = {
               listing_creator: userId,
             };
+            var feedType = "userFeed";
+
             Backbone.history.navigate('#user/'+userId);
             _this.createSidebar();
             if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
@@ -184,7 +185,6 @@ require([
 
       var onOlinErr = function(){
         console.log('error!!!');
-        //window.location.replace('/');
       };
 
       _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
@@ -193,8 +193,13 @@ require([
     free: function free(){
       var criteria = {
         listing_price: 0,
+        listing_open: true,
       };
-      this.feed(criteria);
+
+
+      var feedType = "free";
+
+      this.feed(criteria, feedType);
     },
 
     user: function user(id){
@@ -202,10 +207,13 @@ require([
         listing_creator: id,
         listing_open: true,
       };
-      this.feed(criteria);
+
+      var feedType = "user";
+
+      this.feed(criteria, feedType);
     },
 
-    feed: function feed(criteria){
+    feed: function feed(criteria, feedType){
       var _this = this;
       var onOlinAuth = function(){
         _this.createSidebar();
@@ -213,6 +221,7 @@ require([
           _this.Page = new HomeView({
           parentDiv:$('#PageContainer'),
           criteria: criteria,
+          feedType: feedType,
         });
       }
       var onOlinErr = function(){

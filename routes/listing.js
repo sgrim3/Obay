@@ -152,7 +152,6 @@ var buyListing = function(req,res){
   not edit anything else. the update function here should ONLY change the 
   listing_open attribute.*/
   var listing_id=req.params.id;
-  console.log(listing_id);
   /*Check that listing_creator is not being faked! the only trustworthy 
   info is listing_id.*/
   Listing.findOne({_id:listing_id}).exec(function(err, listing){
@@ -172,7 +171,6 @@ var buyListing = function(req,res){
       res.status(500).send('Could not buy listing!');
     } else {
       io.sockets.emit("listing:bought", listing);
-      // console.log("listing:bought" + listing._id);
       io.sockets.emit("listing:bought" + listing._id, listing);
 
       res.status(200).send(listing);
@@ -194,7 +192,6 @@ exports.deleteListing = function deleteListing(req,res) {
   console.log("Deleting");
 
   var listing_id=req.params.id;
-  console.log(listing_id);
 
   Listing.findOneAndRemove({_id:listing_id}, function(err, listing) {
     if(err) throw err;

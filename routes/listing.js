@@ -98,8 +98,11 @@ var editListing = function(req,res){
   var listing_name= req.body.listing_name;
   var listing_description= req.body.listing_description;
   var listing_image= req.body.listing_image;
+
+  // FIXME: listing_price is throwing errors.
   var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
   var listing_open = req.body.listing_open;
+
   Listing.findOne({_id:listing_id}).exec(function(err, listing){
     var listing_creator = listing.listing_creator;
     /*We can trust that req.session.user.userId is accurate because our 
@@ -149,10 +152,13 @@ var buyListing = function(req,res){
   not edit anything else. the update function here should ONLY change the 
   listing_open attribute.*/
   var listing_id=req.params.id;
+  var listing_buyer = req.body.listing_buyer;
+
+
   console.log(listing_id);
   /*Check that listing_creator is not being faked! the only trustworthy 
   info is listing_id.*/
-  Listing.findOne({_id:listing_id}).exec(function(err, listing){
+  Listing.findOne({_id: listing_id}).exec(function(err, listing){
   var listing_creator = listing.listing_creator;
   /*We can trust that req.session.user.userId is accurate because 
   our middleware checks that the userId is not being faked.*/
@@ -161,7 +167,10 @@ var buyListing = function(req,res){
   } else {
     /*listing_open is set to false here to be extra sure in case code 
     gets changed in the future.*/
-    Listing.findByIdAndUpdate(listing_id, {$set:{ listing_open:false }}, 
+    Listing.findByIdAndUpdate(listing_id, {$set:{ 
+      listing_open: false,
+      listing_buyer: listing_buyer 
+    }}, 
     function (err, listing) {
     if (err){
       console.error("SG|/routes/listing.js|buyListing|error");
@@ -180,6 +189,7 @@ var buyListing = function(req,res){
 }
 
 exports.updateListing = function(req,res){
+  console.log("Updating a listing.");
   if(req.body.listing_open){
     editListing(req,res);
   } else {

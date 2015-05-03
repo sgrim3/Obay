@@ -39,13 +39,33 @@ define([
         //the fetch to actually update happens when a new feedview is instantiated
       }
 
+      if (typeof window.dataHolder.boughtFeedCollection == 'undefined') {
+        window.dataHolder.boughtFeedCollection = new Feed({
+          criteria:{
+            listing_buyer: this.userId,
+          },
+        });
+      } else {
+        window.dataHolder.boughtFeedCollection.criteria = {listing_buyer: this.userId};
+        //the fetch to actually update happens when a new feedview is instantiated
+      }
+
       var feedView = new FeedView({
         parentDiv: $('#MyFeedViewMountPoint'),
         collection: window.dataHolder.feedCollection,
         currentUser: this.userId,
       });
 
+      var boughtView = new FeedView({
+        parentDiv: $('#MyFeedBoughtItems'),
+        collection: window.dataHolder.boughtFeedCollection,
+        currentUser: this.userId,
+      });
+
+      console.log(boughtView);
+
       this.childViews.push(feedView);
+      this.childViews.push(boughtView);
       return this;
     },
   });

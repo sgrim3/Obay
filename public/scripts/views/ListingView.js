@@ -27,7 +27,6 @@ define([
     },
 
     initialize:function (info) {
-      this.model = info.model;
       console.log(this.model)
       var _this = this;
 
@@ -39,31 +38,11 @@ define([
       /*this is what lets you update the model 
       with new info and listen for it */
       this.listenTo(this.model, 'change', this.render);
-
-
-
     },
 
     render: function (){
-      console.log("Listing View is being rendered."); 
-
-
-      // if(this.model.attributes.listing_open){
-          //TODO: decouple buy to check if bought in here
-          //and check whether logged in user has bought
-          //the item to display either payview
-          //or just "item has been bought"
-        
-      // }
-
-      console.log(this.model.attributes); 
       document.getElementById("addButton").style.display="none";
-
-      // var currentUser = this.model.attributes.currentUser;
-      // var itemCreator = this.model.attributes.model_creator;
       this.$el.html(this.template(this.model.attributes));
-      console.log(this.model.attributes.listing_open);
-      
       return this;
     },
 
@@ -75,32 +54,25 @@ define([
     },
 
     buyItem: function(){  
-          
-      var _this = this;    
-      
       // Sets the listing open to false in the backbone model.
+      console.log(this.model);
       this.model.set({    
-        listing_open: false   
-      });   
-      
+        listing_open: false,
+        listing_buyer: window.userModel.id   
+      });
+
+      console.log(this.model);
+
       // Saves backbone model and does PUT request to server.
-      // TODO: Change this so that it follows event decoupled convention.
-      var _this = this;
       this.model.save(null, {
         success: function(listing){
-          var payView = new PayView({
-            model:_this.model, 
-            parentDiv: _this.$el
-          });
-
-          _this.childViews.push(payView);
+          console.log("Successful!");
         },
         
         error: function(){
           console.log('SG|/public/views/ListingView.js|buyItem| error buying item');
         }
-
-      });
+      });   
     }
   });
 

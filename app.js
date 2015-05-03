@@ -59,6 +59,7 @@ app.get('/userData', [olinAuthMiddleware, index.userData]);
 app.get('/currentUser', [olinAuthMiddleware, index.currentUser]);
 app.get('/feed', [olinAuthMiddleware, feed.getFeed]);
 app.get('/listing/:id', [olinAuthMiddleware, listing.getListing]);
+app.post('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 app.put('/listing/:id', [olinAuthMiddleware, listing.updateListing]);
 app.delete('/listing/:id', [olinAuthMiddleware, listing.deleteListing]);
 

@@ -86,7 +86,7 @@ require([
     },
 
     initialize: function() {
-      this.userModel = new UserModel();
+      window.userModel = new UserModel();
       this.on('all', function(routeEvent) {
         //TODO: explain to dennis what this is about. It doesn't seem very elegant
         //and moves what seems like css styling to a random try catch statement.
@@ -239,7 +239,7 @@ require([
         
         _this.Page = new AccountView({
           parentDiv: $('#PageContainer'),
-          model: _this.userModel,
+          model: window.userModel,
           PORT: window.location.host
         });
       }

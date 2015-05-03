@@ -19,6 +19,10 @@ define([
     // Use userId to uniquely identify user objects.
     idAttribute: 'userId',
 
+    initialize: function(){
+      this.fetch();
+    },
+
     // QUESTION: Why is this fetch overwritten?
     fetch: function(){
       var _this = this;

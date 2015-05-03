@@ -17,10 +17,7 @@
       <div id="description"><%= listing_description %></div>
 
       <!-- Buy and edit will toggle. -->
-      <% if (listing_open) { %>
-        <button id="buyButton">Buy</button>
-      <% } %>
-
+      <button id="buyButton">Buy</button>
       <button id="editButton">Edit</button>
     
     </div>
@@ -37,6 +34,9 @@
   var currentUser = "<%= currentUser %>";
   var creator = "<%= listing_creator %>";
   if (currentUser!==creator) {
+
+    // TODO: Fix bug with buy conditional being not found.
+
     document.getElementById("editButton").style.display="none";
     document.getElementById("buyButton").style.display="inline";
   } else {

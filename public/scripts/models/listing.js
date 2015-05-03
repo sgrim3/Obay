@@ -14,15 +14,16 @@ define([
     idAttribute: '_id',
 
     defaults: {
-        listing_name: '',
-        listing_description: '',
-        listing_image: '',
-        listing_creator: '',
-        listing_timeCreated: 0,
-        listing_open: true,
-        listing_price: 0,
-        venmoEnabled: true,
-        venmoPaid: false,
+      listing_name: '',
+      listing_description: '',
+      listing_image: '',
+      listing_creator: '',
+      listing_buyer: '',
+      listing_timeCreated: 0,
+      listing_open: true,
+      listing_price: 0,
+      venmoEnabled: true,
+      venmoPaid: false,
     },
     
     urlRoot : url,
@@ -33,20 +34,18 @@ define([
         this.updateListing.bind(_this));
       window.socket.on('listing:bought' + this.attributes._id, 
         this.boughtListing.bind(_this));
+
     },
 
     updateListing: function(model){
       //sets this instance of the model to have new info
+      // TODO: This may not be necessary.
       this.set(model);
-      console.log('socketlisting:broadcast');
     },
 
     boughtListing: function(model){
-      //sets this instance of the model to listing_open:false
       this.set(model);
-      console.log('socket:bought model changed');
-      // console.log(model);
-    },
+    }
   });
 
   return Listing;

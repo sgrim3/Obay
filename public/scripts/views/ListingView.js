@@ -45,6 +45,8 @@ define([
     },
 
     render: function (){
+      console.log("Listing View is being rendered."); 
+
 
       // if(this.model.attributes.listing_open){
           //TODO: decouple buy to check if bought in here

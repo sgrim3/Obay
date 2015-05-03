@@ -38,7 +38,7 @@ define([
       console.log(this.$el.html());
       console.log(this.model);
       console.log(this.model.attributes);
-      console.log(this.template());
+      // console.log(this.template());
       this.$el.html(this.template(this.model.attributes));
       // console.log(this.el.html());
       return this;

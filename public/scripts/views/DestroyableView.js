@@ -31,15 +31,6 @@ define([
             this.remove();
 
 
-            // Destroy any associated models and collections.
-            // if (this.collection) {
-            //     this.collection.reset();
-            //     this.collection.unbind();
-            //     delete this.collection;
-            //     console.log("about to destroy");
-            //     // this.collection.destroyAll();
-            // }
-
             Backbone.View.prototype.remove.call(this);
             return this;
         },

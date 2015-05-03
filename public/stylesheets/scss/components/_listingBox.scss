@@ -10,7 +10,6 @@
 
   display: block;
   box-sizing: border-box;
-  // float: left;
 
   @extend .sh1;
 
@@ -37,7 +36,6 @@
   #price {
     margin-bottom: 10px;
     font-size: 18pt;
-    // float: left;
     display: inline-block;
     color: white;
     background-color: palette(Red, $colorIntensity);

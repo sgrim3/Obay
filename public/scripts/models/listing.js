@@ -20,29 +20,25 @@ define([
         listing_creator: '',
         listing_timeCreated: 0,
         listing_open: true,
-        listing_price: 0
+        listing_price: 0,
+        venmoEnabled: true,
+        venmoPaid: false,
     },
     
     urlRoot : url,
 
     initialize: function initialize() {
       var _this = this;
-      // console.log(_this);
-      // window.socket.on('listing:update' + _this.attributes._id, console.log("hi update"));
-      // window.socket.on('listing:bought' + _this.attributes._id, console.log("hi bought"));
-
       window.socket.on('listing:update' + this.attributes._id, 
         this.updateListing.bind(_this));
       window.socket.on('listing:bought' + this.attributes._id, 
         this.boughtListing.bind(_this));
-
     },
 
     updateListing: function(model){
       //sets this instance of the model to have new info
       this.set(model);
       console.log('socketlisting:broadcast');
-      // console.log(model);
     },
 
     boughtListing: function(model){

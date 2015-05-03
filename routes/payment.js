@@ -45,7 +45,11 @@ var venmoPay = function(req,res){
                 res.status(400).send({success:false, message:error.message});
               }
             } else {
-              res.status(200).send({success:true, message:'Transaction made!'});
+              listing.venmoPaid = true;
+              listing.save(function(err){
+                if (err) { console.log('could not change listing status to paid!') };
+                res.status(200).send({success:true, message:'Transaction made!'});
+              });
             }
           });
         }

@@ -28,7 +28,6 @@ define([
       this.model = info.model;
       info.parentDiv.after(this.$el);
       this.render();
-
     },
 
     render: function (info){

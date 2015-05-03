@@ -91,6 +91,7 @@ exports.getListing = function(req, res) {
 }
 
 var editListing = function(req,res){
+  console.log('editing listing');
   /*We can't trust listing_creator info sent from serverside so we check 
   our database for the creator instead.*/
   var onValidListing = function(){
@@ -153,46 +154,35 @@ var buyListing = function(req,res){
   listing_open attribute.*/
   var listing_id=req.params.id;
   var listing_buyer = req.session.user.userId;
-
-  console.log(listing_id);
   /*Check that listing_creator is not being faked! the only trustworthy 
   info is listing_id.*/
   Listing.findOne({_id: listing_id}).exec(function(err, listing){
-  var listing_creator = listing.listing_creator;
-  /*We can trust that req.session.user.userId is accurate because 
-  our middleware checks that the userId is not being faked.*/
-  if (listing_creator === req.session.user.userId){
-    res.status(401).send("You can't buy your own listings!");
-  } else {
-    /*listing_open is set to false here to be extra sure in case code 
-    gets changed in the future.*/
-    Listing.findByIdAndUpdate(listing_id, {$set:{ 
-      listing_open: false,
-      listing_buyer: listing_buyer 
-    }},
-     
-    function (err, listing) {
-    if (err){
-      console.error("SG|/routes/listing.js|buyListing|error");
-      console.log(err);
-      res.status(500).send('Could not buy listing!');
+    var listing_creator = listing.listing_creator;
+    /*We can trust that req.session.user.userId is accurate because 
+    our middleware checks that the userId is not being faked.*/
+    if (listing_creator === req.session.user.userId){
+      res.status(401).send("You can't buy your own listings!");
     } else {
-
-      console.log(listing);
-
-      io.sockets.emit("listing:bought", listing);
-      // console.log("listing:bought" + listing._id);
-      io.sockets.emit("listing:bought" + listing._id, listing);
-
-      res.status(200).send(listing);
+      /*listing_open is set to false here to be extra sure in case code 
+      gets changed in the future.*/
+      listing.listing_open = false;
+      listing.listing_buyer = listing_buyer;
+      listing.save(function(err){
+        if (err){
+          console.error("SG|/routes/listing.js|buyListing|error");
+          console.log(err);
+          res.status(500).send('Could not buy listing!');
+        } else {
+          io.sockets.emit("listing:bought", listing);
+          io.sockets.emit("listing:bought" + listing._id, listing);
+          res.status(200).send(listing);
+        }
+      });
     }
-    });
-  }
   });
 }
 
 exports.updateListing = function(req,res){
-  console.log("Updating a listing.");
   if(req.body.listing_open){
     editListing(req,res);
   } else {
@@ -201,8 +191,6 @@ exports.updateListing = function(req,res){
 }
 
 exports.deleteListing = function deleteListing(req,res) {
-  console.log("Deleting");
-
   var listing_id=req.params.id;
   console.log(listing_id);
 

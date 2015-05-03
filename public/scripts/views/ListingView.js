@@ -49,9 +49,7 @@ define([
 
       // Initialize the listing has been closed.
       if (!this.model.attributes.listing_open) {
-
         console.log("New payview created!");
-
         var payView = new PayView({
           model: _this.model,
           parentDiv: $('.pay-mount-point')
@@ -69,41 +67,18 @@ define([
     },
 
     buyItem: function(){  
-      
-      // // TODO: Changes the view.
-      // var payView = new PayView({
-
-      // });
-
       // Sets the listing open to false in the backbone model.
-      // this.model.set({    
-      //   listing_open: false
-      // });
-
-      var setUrl = "/listing/" + this.model.id;
-      console.log(setUrl);
-      var successCallback = function successCallback(listing) {
-        console.log("Successfully bought.");
-        console.log(listing);
-      }
-
-      var errorCallback = function errorCallback(error) {
-        console.log("Done goofed.");
-        console.log(error);
-      }
-
-      var _this = this;
-      console.log(_this.model);
-
-      $.ajax({
-        type: 'PUT',
-        url: setUrl,
-        data: _this.model,
-        success: successCallback,
-        error: errorCallback
+      // Instead of using a jquery put we use backbone but make
+      // it all silent because we couldnt figure out how to make
+      // a manual put request with data :')
+      this.model.set({    
+        listing_open: false
+      },{
+        silent: true
       });
-      
-    }
+      this.model.save(null,{silent:true});
+    },
+
   });
 
   return ListingView;

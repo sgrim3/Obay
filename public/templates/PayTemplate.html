@@ -1,11 +1,13 @@
 <!-- HTML template for pay pop up after buy is clicked -->
 
-<div id="payView">
+<div id="pay-initial-text">
   <h1>Congrats!</h1>
-  <h4>Pay with: </h4>
-  <button id="cashButton">Cash</button>
-  <% if(!venmoPaid && venmoEnabled){ %>
-      <button id="venmoButton">Venmo</button>
-  <% } %>
-  <div id="venmoMessage"></div>
+  <h4>Pay with:</h4>
 </div>
+
+<button id="cashButton">Cash</button>
+<% if(!venmoPaid && venmoEnabled){ %>
+    <button id="venmoButton">Venmo</button>
+<% } %>
+
+<div id="venmoMessage"></div>

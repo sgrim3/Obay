@@ -25,7 +25,7 @@ define([
     initialize: function (info){
       this.template = _.template(PayTemplate);
       this.model = info.model;
-      info.parentDiv.after(this.$el);
+      info.parentDiv.append(this.$el);
 
       // TODO: Set conditional on what to render.
       console.log(this.model);

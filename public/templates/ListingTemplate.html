@@ -17,7 +17,10 @@
       <div id="description"><%= listing_description %></div>
 
       <!-- Buy and edit will toggle. -->
-      <button id="buyButton">Buy</button>
+      <% if (false) { %>
+        <button id="buyButton">Buy</button>
+      <% } %>
+      
       <button id="editButton">Edit</button>
     
     </div>
@@ -27,8 +30,8 @@
       </button>
     </a>
   </div>
+  <div class="pay-mount-point"></div>
 </div>
-<div class="pay-mount-point"></div>
 
 <script>
   // NOTE: This seems a bit convoluted.
@@ -37,11 +40,10 @@
   if (currentUser!==creator) {
 
     // TODO: Fix bug with buy conditional being not found.
-
-    document.getElementById("editButton").style.display="none";
-    document.getElementById("buyButton").style.display="inline";
+    $("#editButton").hide();
+    $("#buyButton").show();
   } else {
-    document.getElementById("editButton").style.display="inline";
-    document.getElementById("buyButton").style.display="none";
+    $("#editButton").show();
+    $("#buyButton").hide();
   }
 </script>

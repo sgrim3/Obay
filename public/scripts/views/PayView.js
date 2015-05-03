@@ -16,7 +16,6 @@ define([
   var PayView = DestroyableView.extend({
     tagname: "div",
     id: "PayView",
-    // el: $("#PayView"),
 
     events: {
       'click #cashButton': 'cashPay',
@@ -33,13 +32,7 @@ define([
 
     render: function (info){
       // Purposely mounts after parentDiv instead of into it.
-      console.log("post-render");
-      console.log(this)
-      console.log(this.$el);
-      console.log(this.$el.html());
-      console.log(this.template());
       this.$el.html(this.template());
-      // console.log(this.el.html());
       return this;
     },
 

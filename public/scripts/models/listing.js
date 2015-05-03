@@ -27,9 +27,6 @@ define([
 
     initialize: function initialize() {
       var _this = this;
-      // console.log(_this);
-      // window.socket.on('listing:update' + _this.attributes._id, console.log("hi update"));
-      // window.socket.on('listing:bought' + _this.attributes._id, console.log("hi bought"));
 
       window.socket.on('listing:update' + this.attributes._id, 
         this.updateListing.bind(_this));
@@ -41,15 +38,11 @@ define([
     updateListing: function(model){
       //sets this instance of the model to have new info
       this.set(model);
-      console.log('socketlisting:broadcast');
-      // console.log(model);
     },
 
     boughtListing: function(model){
       //sets this instance of the model to listing_open:false
       this.set(model);
-      console.log('socket:bought model changed');
-      // console.log(model);
     },
   });
 

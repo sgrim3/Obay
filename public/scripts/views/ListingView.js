@@ -33,19 +33,25 @@ define([
       info.parentDiv.append(this.$el);
 
       this.model.fetch({reset: true});
-      this.listenTo(this.model, 'sync', this.render);
+      // this.listenTo(this.model, 'sync', this.render);
       /*This is what lets you update the model 
       with new info and listen for it.*/
       this.listenTo(this.model, 'change', this.render);
     },
 
     render: function (){
+      console.log("Rendering listing.");
       var _this = this;
+
+      // TODO: Convert this into JQuery.
       document.getElementById("addButton").style.display="none";
-      this.$el.html(this.template(this.model.attributes));
+      _this.$el.html(this.template(this.model.attributes));
 
       // Initialize the listing has been closed.
       if (!this.model.attributes.listing_open) {
+
+        console.log("New payview created!");
+
         var payView = new PayView({
           model: _this.model,
           parentDiv: $('.pay-mount-point')
@@ -63,22 +69,40 @@ define([
     },
 
     buyItem: function(){  
-      // Sets the listing open to false in the backbone model.
-      this.model.set({    
-        listing_open: false,
-        listing_buyer: window.userModel.id   
-      });
+      
+      // // TODO: Changes the view.
+      // var payView = new PayView({
 
-      // Saves backbone model and does PUT request to server.
-      // TODO: Refactor this section.
-      this.model.save(null, {
-        success: function(listing){
-          console.log("Successful!");
-        },
-        error: function(){
-          console.log('SG|/public/views/ListingView.js|buyItem| error buying item');
-        }
-      });   
+      // });
+
+      // Sets the listing open to false in the backbone model.
+      // this.model.set({    
+      //   listing_open: false
+      // });
+
+      var setUrl = "/listing/" + this.model.id;
+      console.log(setUrl);
+      var successCallback = function successCallback(listing) {
+        console.log("Successfully bought.");
+        console.log(listing);
+      }
+
+      var errorCallback = function errorCallback(error) {
+        console.log("Done goofed.");
+        console.log(error);
+      }
+
+      var _this = this;
+      console.log(_this.model);
+
+      $.ajax({
+        type: 'PUT',
+        url: setUrl,
+        data: _this.model,
+        success: successCallback,
+        error: errorCallback
+      });
+      
     }
   });
 

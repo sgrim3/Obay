@@ -11,8 +11,11 @@ define([
 
   'scripts/views/DestroyableView',
 
-  'text!templates/PayTemplate.html'
-], function ($, _, Backbone, DestroyableView, PayTemplate) {
+  'text!templates/PayViewerTemplate.html',
+  'text!templates/PayBuyerTemplate.html',
+  'text!templates/PaySellerTemplate.html',
+], function ($, _, Backbone, DestroyableView, 
+  PayViewerTemplate, PayBuyerTemplate, PaySellerTemplate) {
   var PayView = DestroyableView.extend({
     tagname: "div",
     id: "PayView",
@@ -23,7 +26,10 @@ define([
     },
 
     initialize: function (info){
-      this.template = _.template(PayTemplate);
+      this.PayViewerTemplate = _.template(PayViewerTemplate);
+      this.PayBuyerTemplate = _.template(PayBuyerTemplate);
+      this.PaySellerTemplate = _.template(PaySellerTemplate);
+
       this.model = info.model;
       info.parentDiv.append(this.$el);
 
@@ -33,8 +39,27 @@ define([
     },
 
     render: function (info){
-      // Purposely mounts after parentDiv instead of into it.
-      this.$el.html(this.template(this.model.attributes));
+
+      switch (window.userModel.attributes.userId) {
+
+        // Seller.
+        case this.model.attributes.listing_creator:
+          console.log('1');
+          this.$el.html(this.PaySellerTemplate(this.model.attributes));
+          break;
+
+        // Buyer.
+        case this.model.attributes.listing_buyer:
+          console.log('2');
+          this.$el.html(this.PayBuyerTemplate(this.model.attributes));
+          break;
+
+        default:
+          console.log('3');
+          this.$el.html(this.PayViewerTemplate(this.model.attributes));
+          break;
+      }
+
       return this;
     },
 

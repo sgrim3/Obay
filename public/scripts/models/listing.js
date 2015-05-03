@@ -39,10 +39,12 @@ define([
 
     // TODO: Refactor this code to be DRY.
     updateListing: function(model){
+      console.log("Listing updated.");
       this.set(model);
     },
 
     boughtListing: function(model){
+      console.log("Listing bought.");
       this.set(model);
     }
   });

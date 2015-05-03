@@ -100,7 +100,7 @@ var editListing = function(req,res){
   var listing_image= req.body.listing_image;
 
   // FIXME: listing_price is throwing errors.
-  var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
+  // var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
   var listing_open = req.body.listing_open;
 
   Listing.findOne({_id:listing_id}).exec(function(err, listing){
@@ -152,8 +152,7 @@ var buyListing = function(req,res){
   not edit anything else. the update function here should ONLY change the 
   listing_open attribute.*/
   var listing_id=req.params.id;
-  var listing_buyer = req.body.listing_buyer;
-
+  var listing_buyer = req.session.user.userId;
 
   console.log(listing_id);
   /*Check that listing_creator is not being faked! the only trustworthy 
@@ -170,13 +169,17 @@ var buyListing = function(req,res){
     Listing.findByIdAndUpdate(listing_id, {$set:{ 
       listing_open: false,
       listing_buyer: listing_buyer 
-    }}, 
+    }},
+     
     function (err, listing) {
     if (err){
       console.error("SG|/routes/listing.js|buyListing|error");
       console.log(err);
       res.status(500).send('Could not buy listing!');
     } else {
+
+      console.log(listing);
+
       io.sockets.emit("listing:bought", listing);
       // console.log("listing:bought" + listing._id);
       io.sockets.emit("listing:bought" + listing._id, listing);

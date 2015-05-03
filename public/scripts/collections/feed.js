@@ -67,8 +67,6 @@ define([
       var _this = this;
       $.get(this.url, this.criteria)
         .success(function(data){
-
-          console.log(data);
           if (options && options.reset){
             // data.forEach(function(model){
             //   var _model=model;

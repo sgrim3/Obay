@@ -52,9 +52,9 @@ define([
           Backbone.history.navigate('#free');
           Backbone.history.loadUrl('#free');
           break;
-        case "notificationsButton":
-          //TODO- either delete this button or make it do something
-          console.log("notificationsButton");
+        case "userFeedButton":
+          //avoid changing the url until the myFeed route redirects to /users/currentUser
+          Backbone.history.loadUrl('#myFeed');
           break;
         case "logoutButton":
           Backbone.history.navigate('#logout');

@@ -26,7 +26,6 @@ define([
     urlRoot : url,
 
     initialize: function initialize() {
-      console.log('initializing model');
       var _this = this;
       // console.log(_this);
       // window.socket.on('listing:update' + _this.attributes._id, console.log("hi update"));

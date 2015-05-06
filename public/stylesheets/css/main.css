@@ -774,7 +774,7 @@ button#linkVenmoButton, #removeVenmoButton {
 #currentUser {
   text-align: center;
   margin-top: 10px; }
-  #currentUser #id {
+  #currentUser #currentUserLink {
     color: #1976D2; }
 
 #venmoHeader {

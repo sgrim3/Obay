@@ -38,6 +38,8 @@ define([
     },
 
     render: function (){
+      console.log(document.getElementById("addButton").style.display);
+      document.getElementById("addButton").style.display="inline";
       var _this = this;
       this.collection.models.forEach(function(listing){
         _this.renderOne(listing);

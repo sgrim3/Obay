@@ -1,0 +1,19 @@
+<!-- HTML template for pay pop up after buy is clicked -->
+
+<% if (listing_open) { %>
+    <div id="pay-initial-text">
+      <h1>Almost there!</h1> 
+      <h4>Choose a payment method to confirm that you would like to buy this item!</h4>
+    </div>
+
+    <button id="cashButton">Cash</button>
+    <% if(!venmoPaid && venmoEnabled){ %>
+        <button id="venmoButton">Venmo</button>
+    <% } %>
+
+    <div id="venmoMessage"></div>
+<% } else { %>
+    <div id="pay-initial-text">
+        Thanks for using Obay! Check your Olin email for an automatically generated receipt!
+    </div>
+<% } %>

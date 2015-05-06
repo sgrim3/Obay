@@ -148,7 +148,7 @@ var editListing = function(req,res){
   validate_listing(req,res,onValidListing);
 }
 
-var buyListing = function(req,res){
+var buyListingCash = function(req,res){
   /*Any user but the creator may close a listing by buying it, but they may 
   not edit anything else. the update function here should ONLY change the 
   listing_open attribute.*/
@@ -176,6 +176,7 @@ var buyListing = function(req,res){
           io.sockets.emit("listing:bought", listing);
           io.sockets.emit("listing:bought" + listing._id, listing);
           res.status(200).send(listing);
+          email.sendCashEmail(listing);
         }
       });
     }
@@ -186,7 +187,7 @@ exports.updateListing = function(req,res){
   if(req.body.listing_open){
     editListing(req,res);
   } else {
-    buyListing(req,res);
+    buyListingCash(req,res);
   }
 }
 

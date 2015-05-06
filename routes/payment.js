@@ -46,6 +46,8 @@ var venmoPay = function(req,res){
               }
             } else {
               listing.venmoPaid = true;
+              listing.listing_open = false;
+              listing.listing_buyer = req.session.user.userId;
               listing.save(function(err){
                 if (err) { console.log('could not change listing status to paid!') };
                 res.status(200).send({success:true, message:'Transaction made!'});

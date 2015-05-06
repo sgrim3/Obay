@@ -8,14 +8,10 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-
   'scripts/views/DestroyableView',
-
-  'text!templates/PayViewerTemplate.html',
-  'text!templates/PayBuyerTemplate.html',
-  'text!templates/PaySellerTemplate.html',
+  'text!templates/PayViewTemplate.html',
 ], function ($, _, Backbone, DestroyableView, 
-  PayViewerTemplate, PayBuyerTemplate, PaySellerTemplate) {
+  PayViewTemplate) {
   var PayView = DestroyableView.extend({
     tagname: "div",
     id: "PayView",
@@ -26,45 +22,24 @@ define([
     },
 
     initialize: function (info){
-      this.PayViewerTemplate = _.template(PayViewerTemplate);
-      this.PayBuyerTemplate = _.template(PayBuyerTemplate);
-      this.PaySellerTemplate = _.template(PaySellerTemplate);
-
+      this.template = _.template(PayViewTemplate);
       this.model = info.model;
       info.parentDiv.append(this.$el);
-
-      // TODO: Set conditional on what to render.
-      console.log(this.model);
       this.render();
     },
 
     render: function (info){
-
-      switch (window.userModel.attributes.userId) {
-
-        // Seller.
-        case this.model.attributes.listing_creator:
-          console.log('1');
-          this.$el.html(this.PaySellerTemplate(this.model.attributes));
-          break;
-
-        // Buyer.
-        case this.model.attributes.listing_buyer:
-          console.log('2');
-          this.$el.html(this.PayBuyerTemplate(this.model.attributes));
-          break;
-
-        default:
-          console.log('3');
-          this.$el.html(this.PayViewerTemplate(this.model.attributes));
-          break;
-      }
-
+      this.$el.html(this.template(this.model.attributes));
       return this;
     },
 
     cashPay: function (){
-      //TODO send email to buyer and seller
+      this.model.set({    
+        listing_open: false
+      },{
+        silent: true
+      });
+      this.model.save(null,{silent:true});
       console.log('cashpay called!');
     },
 

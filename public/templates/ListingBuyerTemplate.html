@@ -16,13 +16,6 @@
       <div id="price">$ <%= listing_price %></div>
       <div id="description"><%= listing_description %></div>
 
-      <!-- Buy and edit will toggle. -->
-      <% if (listing_open) { %>
-        <button id="buyButton">Buy</button>
-      <% } %>
-      
-      <button id="editButton">Edit</button>
-    
     </div>
 
     <a href="/#home">
@@ -32,18 +25,3 @@
   </div>
   <div class="pay-mount-point"></div>
 </div>
-
-<script>
-  // NOTE: This seems a bit convoluted.
-  var currentUser = "<%= currentUser %>";
-  var creator = "<%= listing_creator %>";
-  if (currentUser!==creator) {
-
-    // TODO: Fix bug with buy conditional being not found.
-    $("#editButton").hide();
-    $("#buyButton").show();
-  } else {
-    $("#editButton").show();
-    $("#buyButton").hide();
-  }
-</script>

@@ -8,30 +8,29 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-
   'scripts/models/listing',
-
   'scripts/views/DestroyableView',
   'scripts/views/PayView',
-
-  'text!templates/ListingTemplate.html',
+  'text!templates/ListingBuyerTemplate.html',
+  'text!templates/ListingSellerTemplate.html',
+  'text!templates/ListingViewerTemplate.html',
 ], function ($, _, Backbone, Listing, DestroyableView, PayView, 
-  ListingTemplate) {
+  ListingBuyerTemplate, ListingSellerTemplate, ListingViewerTemplate) {
     var ListingView = DestroyableView.extend({
       tagname: "div",
       id: "ListingView",
 
     events: {   
-      'click #buyButton': 'buyItem',  
+      'click #buyButton': 'showPayView',  
       'click #editButton': 'editItem',  
     },
 
     initialize:function (info) {
       var _this = this;
-
-      this.template = _.template(ListingTemplate);
+      this.ListingBuyerTemplate = _.template(ListingBuyerTemplate);
+      this.ListingSellerTemplate = _.template(ListingSellerTemplate);
+      this.ListingViewerTemplate = _.template(ListingViewerTemplate);
       info.parentDiv.append(this.$el);
-
       this.model.fetch({reset: true});
       // this.listenTo(this.model, 'sync', this.render);
       /*This is what lets you update the model 
@@ -42,41 +41,45 @@ define([
     render: function (){
       console.log("Rendering listing.");
       var _this = this;
-
       // TODO: Convert this into JQuery.
       document.getElementById("addButton").style.display="none";
-      _this.$el.html(this.template(this.model.attributes));
-
-      // Initialize the listing has been closed.
-      if (!this.model.attributes.listing_open) {
-        console.log("New payview created!");
-        var payView = new PayView({
-          model: _this.model,
-          parentDiv: $('.pay-mount-point')
-        });
+      switch (window.userModel.attributes.userId) {
+        // Seller.
+        case this.model.attributes.listing_creator:
+          console.log('1');
+          this.$el.html(this.ListingSellerTemplate(this.model.attributes));
+          break;
+        // Buyer.
+        case this.model.attributes.listing_buyer:
+          console.log('2');
+          this.$el.html(this.ListingBuyerTemplate(this.model.attributes));
+          var payView = new PayView({
+            model: _this.model,
+            parentDiv: $('.pay-mount-point')
+          });
+          break;
+        default:
+          console.log('3');
+          this.$el.html(this.ListingViewerTemplate(this.model.attributes));
+          break;
       }
-
       return this;
     },
 
     editItem: function () {
       var url = '#editListing/'+this.model.id;
-            
       Backbone.history.navigate(url);
       Backbone.history.loadUrl(url);
     },
 
-    buyItem: function(){  
-      // Sets the listing open to false in the backbone model.
-      // Instead of using a jquery put we use backbone but make
-      // it all silent because we couldnt figure out how to make
-      // a manual put request with data :')
-      this.model.set({    
-        listing_open: false
-      },{
-        silent: true
+    showPayView: function(){  
+      console.log('buyitem called!');
+      var _this = this;
+      var payView = new PayView({
+        model: _this.model,
+        parentDiv: $('.pay-mount-point')
       });
-      this.model.save(null,{silent:true});
+      this.childViews.push(payView);
     },
 
   });

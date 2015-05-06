@@ -40,6 +40,10 @@ define([
 
     onClick: function (ev){
       switch(ev.currentTarget.id) {
+        // case "logoButton":
+        //   Backbone.history.navigate('#home');
+        //   Backbone.history.loadUrl('#home');
+        //   break;
         case "homeButton":
           Backbone.history.navigate('#home');
           Backbone.history.loadUrl('#home');

@@ -193,7 +193,6 @@ exports.updateListing = function(req,res){
 
 exports.deleteListing = function deleteListing(req,res) {
   var listing_id=req.params.id;
-  console.log(listing_id);
 
   Listing.findOneAndRemove({_id:listing_id}, function(err, listing) {
     if(err) throw err;

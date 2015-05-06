@@ -24,6 +24,7 @@ define([
         this.criteria = info.criteria;
       } else {
         this.criteria = {};
+        this.feedType="";
       }
       var _this = this;
       window.socket.on('listing:create', this.createListing.bind(_this));
@@ -44,21 +45,18 @@ define([
     },
 
     createListing: function(model){
-      //console.log('socket listing:create');
       if (this.ListingFitsCriteria(model)){
         this.add(model);
       }
     },
 
     updateListing: function(model){
-      //console.log('socket listing:broadcast');
       var updated_model = this.get(model._id);
       updated_model.set(model);
       updated_model.trigger('change', updated_model, updated_model.collection);
     },
 
     deleteListing: function deleteListing(model) {
-      console.log('socket listing:delete');
       var chosenListing = this.get(model._id);
       chosenListing.trigger('destroy', chosenListing, chosenListing.collection);
     },
@@ -68,18 +66,12 @@ define([
       $.get(this.url, this.criteria)
         .success(function(data){
           if (options && options.reset){
-            // data.forEach(function(model){
-            //   var _model=model;
-            //   _model.silent=true;
-            //   _this.create(_model);
-            // });
             _this.reset(data);
           } else {
             _this.set(data);
           }
         })
         .error(function(data){
-          console.log(data);
           console.log('Error fetching collection from server!');
         });
     },

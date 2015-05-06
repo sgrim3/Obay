@@ -34,7 +34,6 @@ define([
         this.updateListing.bind(_this));
       window.socket.on('listing:bought' + this.attributes._id, 
         this.boughtListing.bind(_this));
-
     },
 
     // TODO: Refactor this code to be DRY.
@@ -46,7 +45,8 @@ define([
     boughtListing: function(model){
       console.log("Listing bought.");
       this.set(model);
-    }
+    },
+
   });
 
   return Listing;

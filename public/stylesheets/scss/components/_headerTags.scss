@@ -1,0 +1,35 @@
+.headerTag {
+	@extend .sh1;
+	padding: 10px;
+	display: inline-block;
+	color: white;
+	margin-top: 50px;
+}
+
+.line {
+	height: 2px;
+	@extend .sh1;
+	width: relative;
+	margin-bottom: 20px;
+}
+
+
+[color~=green] {
+		background: palette(Green, $colorIntensity);
+}
+
+[color~=orange] {
+		background: palette(Orange, $colorIntensity);
+}
+
+[color~=blue] {
+		background: palette(Blue, $colorIntensity);
+}
+
+[color~=purple] {
+		background: palette(Purple, $colorIntensity);
+}
+
+[color~=red] {
+		background: palette(Red, $colorIntensity);
+}

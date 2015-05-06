@@ -85,5 +85,5 @@ app.post('/image', [
   image.uploadImage
 ]);
 
-console.log("Please visit " + publicAddress + "!");
+console.log("Please visit " + publicAddress + ":3000!");
 app.listen(PORT, "0.0.0.0");

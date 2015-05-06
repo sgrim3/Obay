@@ -17,7 +17,6 @@ define([
   var CollapsedListingView = DestroyableView.extend({
     tagname: "div",
     id: "CollapsedListingView",
-    // model: Listing,
 
     events: {
       'click #deleteButton': 'deleteListing'

@@ -1,4 +1,21 @@
 <!-- HTML template for home page
 contains a mount point for the feed view -->
 
+<% if (feedType==="all") { %>
+	<h4 id="feedTag" class="headerTag" color="blue" >All Open Listings</h4>
+	<div class = "line" color="blue" ></div>
+<% } %>	
+
+<% if (feedType==="free") { %>
+	<h4 id="feedTag" class="headerTag" color="green" >Free Listings</h4>
+	<div class = "line" color="green" ></div>
+<% } %>	
+
+<% if (feedType==="user") { %>
+	<h4 id="feedTag" class="headerTag" color="red" >My listings</h4>
+	<div class = "line" color="red" ></div>
+<% } %>	
+
+
+
 <div id="FeedViewMountPoint"></div>

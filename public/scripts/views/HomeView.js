@@ -20,6 +20,7 @@ define([
       initialize:function(info){
         this.template = _.template(HomeTemplate);
         this.criteria = info.criteria;
+        this.feedType = info.feedType;
         /*Must instantiate template before rendering subviews, since they 
         mount onto the template! */         
         info.parentDiv.append(this.$el);
@@ -27,7 +28,8 @@ define([
       },
 
       render:function() {
-        this.$el.html(this.template());
+        this.$el.html(this.template(this));
+
 
         // Check to see if a feedCollection instance already exists.
         if (typeof window.dataHolder.feedCollection == 'undefined') {

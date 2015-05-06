@@ -26,6 +26,7 @@ define([
     },
 
     initialize:function (info) {
+      this.model = info.model;
       var _this = this;
       this.ListingBuyerTemplate = _.template(ListingBuyerTemplate);
       this.ListingSellerTemplate = _.template(ListingSellerTemplate);
@@ -39,7 +40,6 @@ define([
     },
 
     render: function (){
-      console.log("Rendering listing.");
       var _this = this;
       // TODO: Convert this into JQuery.
       document.getElementById("addButton").style.display="none";
@@ -53,10 +53,7 @@ define([
         case this.model.attributes.listing_buyer:
           console.log('2');
           this.$el.html(this.ListingBuyerTemplate(this.model.attributes));
-          var payView = new PayView({
-            model: _this.model,
-            parentDiv: $('.pay-mount-point')
-          });
+          this.showPayView();
           break;
         default:
           console.log('3');

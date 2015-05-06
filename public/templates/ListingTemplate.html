@@ -1,0 +1,52 @@
+<!-- HTML template for pop up expanded listing -->
+
+<div class='add'>
+
+  <% if(listing_open){ %>
+
+    <div id="addContainer">
+      <div id="imageDisplay">
+        <img src="<%= listing_image %>"></img>
+      </div>
+
+      <div id="textDisplay">
+        <div id="name"><%= listing_name %></div>
+        <div id="creator">
+            <a href="/#user/<%=listing_creator%>">
+                <%= listing_creator %>
+            </a>
+        </div>
+        <div id="price">$ <%= listing_price %></div>
+        <div id="description"><%= listing_description %></div>
+        <button id="buyButton">Buy</button>
+        <button id="editButton">Edit</button>
+      </div>
+
+      <a href="/#home">
+        <button class="round-button" id="exitButton"><i class="fa fa-times"></i>
+        </button>
+      </a>
+
+      <script>
+
+        // NOTE: This seems a bit convoluted.
+
+        var currentUser = "<%= currentUser %>";
+        var creator = "<%= listing_creator %>";
+        if (currentUser!==creator) {
+          document.getElementById("editButton").style.display="none";
+          document.getElementById("buyButton").style.display="inline";
+        } else {
+          document.getElementById("editButton").style.display="inline";
+          document.getElementById("buyButton").style.display="none";
+        }
+      </script>
+
+    <% } else { %>
+      <h2>This item is taken. Please continue <a href="#home">browsing.</a></h2>
+
+    <% } %>
+
+
+    </div>
+</div>

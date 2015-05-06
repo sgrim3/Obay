@@ -25,6 +25,7 @@ define([
       // FIXME: Can these two statements be combined?
       this.listenTo(this.model, 'add', this.render);
       this.listenTo(this.model, 'change', this.render);
+      this.render();
       this.model.fetch();
     },
 

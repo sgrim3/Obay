@@ -283,7 +283,7 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, input#removeVenmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, .pay-mount-point #PayView, .headerTag, #line, #headerPaper, #AccountFeedViewMountPoint, #venmoContent {
+.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, input#removeVenmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, .pay-mount-point #PayView, #headerPaper, #AccountFeedViewMountPoint, #venmoContent, .headerTag, .line {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, button#addButton {
@@ -511,9 +511,6 @@ input#removeVenmoButton {
 #topLogo {
   margin-top: -10%;
   margin-bottom: 10%; }
-
-#FeedViewMountPoint {
-  margin-top: 70px; }
 
 #FeedView {
   display: flex;
@@ -769,17 +766,6 @@ input#removeVenmoButton {
 #accountTop {
   margin-top: 70px; }
 
-.headerTag {
-  background: #1976D2;
-  padding: 10px;
-  display: inline-block;
-  color: white; }
-
-#line {
-  height: 2px;
-  width: relative;
-  background: #1976D2; }
-
 #headerPaper {
   background: #ffffff;
   padding: 15px;
@@ -799,9 +785,6 @@ input#removeVenmoButton {
 #venmoHeader {
   margin-top: 20px; }
 
-#feedHeader {
-  margin-top: 50px; }
-
 #AccountFeedViewMountPoint {
   background: #ffffff;
   padding: 15px; }
@@ -814,6 +797,32 @@ input#removeVenmoButton {
 
 #venmoMessage {
   padding-right: 30px; }
+
+.headerTag {
+  padding: 10px;
+  display: inline-block;
+  color: white;
+  margin-top: 50px; }
+
+.line {
+  height: 2px;
+  width: relative;
+  margin-bottom: 20px; }
+
+[color~=green] {
+  background: #388E3C; }
+
+[color~=orange] {
+  background: #F57C00; }
+
+[color~=blue] {
+  background: #1976D2; }
+
+[color~=purple] {
+  background: #7B1FA2; }
+
+[color~=red] {
+  background: #D32F2F; }
 
 #sidebar {
   position: fixed;

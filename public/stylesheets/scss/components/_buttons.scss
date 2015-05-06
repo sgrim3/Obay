@@ -168,6 +168,7 @@ button#linkVenmoButton {
 }
 
 #removeVenmoButton {
-  @extend #linkVenmoButton;
+  @extend button#linkVenmoButton;
   background-color: palette(Red, $colorIntensity);
 }
+

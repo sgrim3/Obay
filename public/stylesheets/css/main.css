@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, button#removeVenmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, #payView, #headerPaper, #AccountFeedViewMountPoint, #venmoContent, .headerTag, .line {
+.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, #removeVenmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, #payView, #headerPaper, #AccountFeedViewMountPoint, #venmoContent, .headerTag, .line {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, button#addButton {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, button#addButton:hover, button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, button#removeVenmoButton:hover, #toCarpeCheckbox:hover, #loginBox {
+.sh3, button#addButton:hover, button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, #removeVenmoButton:hover, #toCarpeCheckbox:hover, #loginBox {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -456,14 +456,14 @@ button#deleteButton {
   button#deleteButton .fa-times {
     cursor: pointer; }
 
-button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, button#removeVenmoButton, #toCarpeCheckbox {
+button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, #removeVenmoButton, #toCarpeCheckbox {
   border: 0px;
   border-radius: 3px;
   color: #ffffff;
   display: block;
   font-size: 14pt;
   padding: 12px; }
-  button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, button#removeVenmoButton:hover, #toCarpeCheckbox:hover {
+  button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, #removeVenmoButton:hover, #toCarpeCheckbox:hover {
     cursor: pointer; }
 
 button#loginButton {
@@ -498,7 +498,7 @@ button#venmoButton {
   display: inline;
   margin-left: 10px; }
 
-button#linkVenmoButton, button#removeVenmoButton {
+button#linkVenmoButton, #removeVenmoButton {
   background-color: #388E3C;
   width: auto;
   padding-right: 17px;
@@ -779,7 +779,7 @@ button#linkVenmoButton, button#removeVenmoButton {
 #currentUser {
   text-align: center;
   margin-top: 10px; }
-  #currentUser #id {
+  #currentUser #currentUserLink {
     color: #1976D2; }
 
 #venmoHeader {
@@ -797,6 +797,14 @@ button#linkVenmoButton, button#removeVenmoButton {
 
 #venmoMessage {
   padding-right: 30px; }
+
+#venmoUserLink {
+  color: #F57C00;
+  font-weight: bold; }
+
+#venmoUserLink:hover {
+  color: #c05f00;
+  font-weight: bold; }
 
 .headerTag {
   padding: 10px;

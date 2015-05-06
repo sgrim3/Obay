@@ -79,7 +79,7 @@ define([
     deleteListing: function deleteListing(e) {
       e.preventDefault();
       var _this = this;
-      if (confirm("Are you sure?")) {
+      if (confirm("Are you sure you want to remove this listing from your history?")) {
         $.ajax({
           url: '/listing/'+_this.model.id,
           type: 'DELETE',

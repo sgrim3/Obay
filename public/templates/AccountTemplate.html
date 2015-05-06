@@ -3,7 +3,7 @@
 <div id = "accountTop">
 	<div id="headerPaper">
 		<h1 id="accountHeader">Account Settings</h1>
-		<h4 id="currentUser">Logged in as: <span id="id"><%= userId %> </span></h4>
+		<h4 id="currentUser">Logged in as: <a id="currentUserLink" href="#user/<%= userId %>" target="_blank"><%= userId %></a></h4>
 	</div>
 <br>
 	<h4 id = "venmoHeader" color = "orange" class ="headerTag"> Venmo Payment Options </h4>
@@ -22,14 +22,10 @@
 
 
 		<% if (venmoUserName) { %>
-		    <div>
-		    	Current venmo account that your buyers can pay with venmo: <%= venmoUserName %>
-		    </div>
-
-		    <p id="venmoMessage">Click the unlink button to disconnect your Venmo and Obay accounts- if you do this, people who buy your items will have to pay you in cash.</p>
+		    <p id="venmoMessage"> The Venmo account associated with your Obay account is <a id="venmoUserLink" href="http://www.venmo.com/<%= venmoUserName %>" target="_blank"><%= venmoUserName %></a>. Click the unlink button to disconnect your Venmo and Obay accounts. If you do this, people who buy your items will have to pay you in cash.</p>
 
 		 	<form method="POST" action="/venmoRemoveAccount">
-		    	<input id = "removeVenmoButton" type="submit" value="Unlink"></input>
+		    	<input id="removeVenmoButton" type="submit" value="Unlink"></input>
 			</form>
 		<% } %>
 

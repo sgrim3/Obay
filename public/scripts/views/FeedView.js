@@ -38,6 +38,12 @@ define([
     },
 
     render: function (){
+      /*Gets changed to none when you exit some pages. Feed always needs to 
+      display add button so we should check here that the add button happens*/
+      if(document.getElementById("addButton").style.display==='none'){
+        document.getElementById("addButton").style.display="inline";
+      }
+      
       var _this = this;
       this.collection.models.forEach(function(listing){
         _this.renderOne(listing);

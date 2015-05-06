@@ -821,8 +821,12 @@ button#linkVenmoButton, button#removeVenmoButton {
 
 #sidebar {
   position: fixed;
-  left: 50px;
-  top: 50px; }
+  margin: 50px;
+  margin-left: -280px; }
+
+#topLogo {
+  position: relative;
+  max-width: 250px; }
 
 #sidebarNav {
   display: none; }

@@ -3,6 +3,18 @@
   height: 100%;
 }
 
+%max-content {
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;
+}
+
+%min-content {
+  width: -moz-min-content;
+  width: -webkit-min-content;
+  width: min-content;
+}
+
 %centerImageWrapper {
   overflow: hidden;
   position: relative;
@@ -22,4 +34,12 @@
   max-height: 100%;
   // max-width: 100%;
   display:table-cell;
+}
+
+.no-transition {
+  -webkit-transition: height 0.01s;
+  -moz-transition: height 0.01s;
+  -ms-transition: height 0.01s;
+  -o-transition: height 0.01s;
+  transition: height 0.01s;
 }

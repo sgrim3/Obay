@@ -6,7 +6,8 @@
 
 #topLogo {
   position: relative;
-  max-width: 250px;
+  max-width: 200px;
+  // @include scale(.8);
 }
 
 #sidebarNav {
@@ -18,8 +19,6 @@
     display: none;
   }
 }
-
-
 
 @include flexedContent {
   #sidebar {

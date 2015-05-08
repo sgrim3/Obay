@@ -2,12 +2,6 @@
   @extend %max;
 }
 
-// TODO: Move this to the appropriate place.
-#topLogo {
-  margin-top: -10%;
-  margin-bottom: 10%;
-}
-
 #FeedView {
   display: flex;
   flex-wrap: wrap;

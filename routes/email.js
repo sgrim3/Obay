@@ -51,6 +51,7 @@ var email = {
       if (err) {
         console.log(err);
       } else {
+        listing.listing_url = 'www.obay.herokuapps.com/#listing/'+listing._id;
         template('carpeEmail', listing, function(err, html, text){
           if (err) {
             console.log(err);
@@ -77,21 +78,20 @@ var email = {
     });
   },
 
-  sendCashEmail: function(listing,res,success_callback){
+  sendCashEmail: function(listing){
     emailTemplates(templatesDir, function(err, template){
       if (err) {
         console.log(err);
-        res.status(500).send('Could not create email template!');
       } else {
         template('cashEmail', listing, function(err, html, text){
           if (err) {
             console.log(err);
-            res.status(500).send('Could not create email template!');
           } else {
             var subject_line = listing.listing_name + ' has been purchased!';
+            var recievers = [listing.listing_creator+"@students.olin.edu", listing.listing_buyer+"@students.olin.edu"];
             var mailOptions = {
               from: 'Olin Obay<noreply@obay.herokuapp.com>', // Sender address.
-              to: OBAY_RECIEVER, // List of receivers.
+              to: recievers, // List of receivers.
               subject: subject_line, // Subject line.
               text: text, // Plaintext body.
               html: html,
@@ -99,9 +99,6 @@ var email = {
             transporter.sendMail(mailOptions, function(error, info){
               if(error){
                 console.log(error);
-                res.status(500).send('Email failed to send: ' + error);
-              }else{
-                success_callback();
               }
             });
           }
@@ -109,6 +106,7 @@ var email = {
       }
     });
   },
+
 };
 
 module.exports = email;

@@ -14,36 +14,39 @@ define([
     idAttribute: '_id',
 
     defaults: {
-        listing_name: '',
-        listing_description: '',
-        listing_image: '',
-        listing_creator: '',
-        listing_timeCreated: 0,
-        listing_open: true,
-        listing_price: 0
+      listing_name: '',
+      listing_description: '',
+      listing_image: '',
+      listing_creator: '',
+      listing_buyer: '',
+      listing_timeCreated: 0,
+      listing_open: true,
+      listing_price: 0,
+      venmoEnabled: true,
+      venmoPaid: false,
     },
     
     urlRoot : url,
 
     initialize: function initialize() {
       var _this = this;
-
       window.socket.on('listing:update' + this.attributes._id, 
         this.updateListing.bind(_this));
       window.socket.on('listing:bought' + this.attributes._id, 
         this.boughtListing.bind(_this));
-
     },
 
+    // TODO: Refactor this code to be DRY.
     updateListing: function(model){
-      //sets this instance of the model to have new info
+      console.log("Listing updated.");
       this.set(model);
     },
 
     boughtListing: function(model){
-      //sets this instance of the model to listing_open:false
+      console.log("Listing bought.");
       this.set(model);
     },
+
   });
 
   return Listing;

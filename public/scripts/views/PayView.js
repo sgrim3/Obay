@@ -8,11 +8,10 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-
   'scripts/views/DestroyableView',
-
-  'text!templates/PayTemplate.html'
-], function ($, _, Backbone, DestroyableView, PayTemplate) {
+  'text!templates/PayViewTemplate.html',
+], function ($, _, Backbone, DestroyableView, 
+  PayViewTemplate) {
   var PayView = DestroyableView.extend({
     tagname: "div",
     id: "PayView",
@@ -23,21 +22,24 @@ define([
     },
 
     initialize: function (info){
-      this.template = _.template(PayTemplate);
+      this.template = _.template(PayViewTemplate);
       this.model = info.model;
-      info.parentDiv.after(this.$el);
+      info.parentDiv.append(this.$el);
       this.render();
-
     },
 
     render: function (info){
-      // Purposely mounts after parentDiv instead of into it.
-      this.$el.html(this.template());
+      this.$el.html(this.template(this.model.attributes));
       return this;
     },
 
     cashPay: function (){
-      //TODO send email to buyer and seller
+      this.model.set({    
+        listing_open: false
+      },{
+        silent: true
+      });
+      this.model.save(null,{silent:true});
       console.log('cashpay called!');
     },
 

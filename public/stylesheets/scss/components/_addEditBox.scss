@@ -4,6 +4,9 @@
   margin-right: 40px;
   display: flex;
   align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @include flexedContent {

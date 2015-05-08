@@ -319,6 +319,13 @@
   max-height: 100%;
   display: table-cell; }
 
+.no-transition {
+  -webkit-transition: height 0.01s;
+  -moz-transition: height 0.01s;
+  -ms-transition: height 0.01s;
+  -o-transition: height 0.01s;
+  transition: height 0.01s; }
+
 * {
   font-family: 'Lato', sans-serif;
   transition: 0.1s ease-in-out; }
@@ -508,10 +515,6 @@ button#linkVenmoButton, #removeVenmoButton {
 
 #removeVenmoButton {
   background-color: #D32F2F; }
-
-#topLogo {
-  margin-top: -10%;
-  margin-bottom: 10%; }
 
 #FeedView {
   display: flex;
@@ -799,9 +802,12 @@ button#linkVenmoButton, #removeVenmoButton {
   padding: 15px;
   display: flex;
   align-items: center; }
+  #venmoContent > form {
+    min-width: max-content;
+    min-width: -webkit-max-content; }
 
 #venmoMessage {
-  padding-right: 30px; }
+  padding-right: 15px; }
 
 #venmoUserLink {
   color: #F57C00;
@@ -815,12 +821,11 @@ button#linkVenmoButton, #removeVenmoButton {
   padding: 10px;
   display: inline-block;
   color: white;
-  margin-top: 50px; }
+  margin-top: 70px; }
 
 .line {
   height: 2px;
-  width: relative;
-  margin-bottom: 20px; }
+  width: relative; }
 
 [color~=green] {
   background: #388E3C; }
@@ -844,7 +849,7 @@ button#linkVenmoButton, #removeVenmoButton {
 
 #topLogo {
   position: relative;
-  max-width: 250px; }
+  max-width: 200px; }
 
 #sidebarNav {
   display: none; }

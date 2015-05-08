@@ -19,7 +19,7 @@
 #currentUser {
 	text-align: center;
 	margin-top: 10px;
-	#id {
+	#currentUserLink {
 		color: palette(Blue, $colorIntensity);
 	}
 }
@@ -47,4 +47,12 @@
 	padding-right: 30px;
 }
 
+#venmoUserLink {
+	color: palette(Orange, $colorIntensity);
+	font-weight: bold;
+}
 
+#venmoUserLink:hover {
+	color: #c05f00;
+	font-weight: bold;
+}

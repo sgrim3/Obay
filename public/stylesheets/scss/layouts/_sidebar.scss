@@ -1,7 +1,12 @@
 #sidebar {
   position: fixed;
-  left: $sidebarSpacing;
-  top: $sidebarSpacing;
+  margin: $sidebarSpacing;
+  margin-left: -280px;
+}
+
+#topLogo {
+  position: relative;
+  max-width: 250px;
 }
 
 #sidebarNav {

@@ -283,13 +283,13 @@
   .dropzone.dz-started .dz-message {
     display: none; }
 
-.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, input#removeVenmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, .pay-mount-point #PayView, #headerPaper, #AccountFeedViewMountPoint, #venmoContent, .headerTag, .line {
+.sh1, .round-button, button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, #removeVenmoButton, #toCarpeCheckbox, #CollapsedListingView, #image_area, #text_area #title, #text_area #price, #addContainer, #imageDisplay, .pay-mount-point #PayView, #headerPaper, #AccountFeedViewMountPoint, #venmoContent, .headerTag, .line {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .sh2, .round-button:hover, button#addButton {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.sh3, button#addButton:hover, button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, input#removeVenmoButton:hover, #toCarpeCheckbox:hover, #loginBox {
+.sh3, button#addButton:hover, button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, #removeVenmoButton:hover, #toCarpeCheckbox:hover, #loginBox {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
 
 .sh4 {
@@ -456,19 +456,20 @@ button#deleteButton {
   button#deleteButton .fa-times {
     cursor: pointer; }
 
-button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, input#removeVenmoButton, #toCarpeCheckbox {
+button#loginButton, button#buyButton, button#editButton, button#cashButton, button#venmoButton, button#linkVenmoButton, #removeVenmoButton, #toCarpeCheckbox {
   border: 0px;
   border-radius: 3px;
   color: #ffffff;
   display: block;
   font-size: 14pt;
   padding: 12px; }
-  button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, input#removeVenmoButton:hover, #toCarpeCheckbox:hover {
+  button#loginButton:hover, button#buyButton:hover, button#editButton:hover, button#cashButton:hover, button#venmoButton:hover, button#linkVenmoButton:hover, #removeVenmoButton:hover, #toCarpeCheckbox:hover {
     cursor: pointer; }
 
 button#loginButton {
-  width: 100%;
-  background-color: #388E3C; }
+  width: 80%;
+  background-color: #388E3C;
+  margin: 2.5% 10% 10% 10%; }
 
 button#buyButton, button#editButton {
   background-color: #388E3C;
@@ -497,7 +498,7 @@ button#venmoButton {
   display: inline;
   margin-left: 10px; }
 
-button#linkVenmoButton, input#removeVenmoButton {
+button#linkVenmoButton, #removeVenmoButton {
   background-color: #388E3C;
   width: auto;
   padding-right: 17px;
@@ -505,7 +506,7 @@ button#linkVenmoButton, input#removeVenmoButton {
   float: right;
   position: relative; }
 
-input#removeVenmoButton {
+#removeVenmoButton {
   background-color: #D32F2F; }
 
 #topLogo {
@@ -629,6 +630,10 @@ input#removeVenmoButton {
   align-items: center;
   justify-content: center;
   z-index: 99999; }
+
+#logo {
+  width: 90%;
+  margin: 10% 5% 0 5%; }
 
 .add {
   height: 100%;
@@ -779,7 +784,7 @@ input#removeVenmoButton {
 #currentUser {
   text-align: center;
   margin-top: 10px; }
-  #currentUser #id {
+  #currentUser #currentUserLink {
     color: #1976D2; }
 
 #venmoHeader {
@@ -797,6 +802,14 @@ input#removeVenmoButton {
 
 #venmoMessage {
   padding-right: 30px; }
+
+#venmoUserLink {
+  color: #F57C00;
+  font-weight: bold; }
+
+#venmoUserLink:hover {
+  color: #c05f00;
+  font-weight: bold; }
 
 .headerTag {
   padding: 10px;
@@ -826,8 +839,12 @@ input#removeVenmoButton {
 
 #sidebar {
   position: fixed;
-  left: 50px;
-  top: 50px; }
+  margin: 50px;
+  margin-left: -280px; }
+
+#topLogo {
+  position: relative;
+  max-width: 250px; }
 
 #sidebarNav {
   display: none; }

@@ -61,7 +61,8 @@ var email = {
 
             var mailOptions = {
               from: 'Olin Obay<noreply@obay.herokuapp.com>', // Sender address.
-              to: OBAY_RECIEVER, // List of receivers.
+              // to: OBAY_RECIEVER, // List of receivers.
+              to: 'dennis.chen@students.olin.edu', // List of receivers.
               subject: subject_line, // Subject line.
               text: text, // Plaintext body.
               html: html,
@@ -79,6 +80,7 @@ var email = {
   },
 
   sendCashEmail: function(listing){
+    console.log("Sending Cash Email.");
     emailTemplates(templatesDir, function(err, template){
       if (err) {
         console.log(err);

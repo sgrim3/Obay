@@ -36,7 +36,6 @@ define([
         this.boughtListing.bind(_this));
     },
 
-    // TODO: Refactor this code to be DRY.
     updateListing: function(model){
       console.log("Listing updated.");
       this.set(model);

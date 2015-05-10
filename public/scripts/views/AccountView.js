@@ -22,7 +22,8 @@ define([
       options.parentDiv.append(this.$el);
       this.template = _.template(AccountTemplate);
       this.model = options.model;
-      // FIXME: Can these two statements be combined?
+
+      // QUESTION: Can these two statements be combined?
       this.listenTo(this.model, 'add', this.render);
       this.listenTo(this.model, 'change', this.render);
       this.render();
@@ -30,7 +31,6 @@ define([
     },
 
     render:function(){
-      // TODO: Refactor this so that the UserModel is handling this action.
       this.$el.html(this.template($.extend(
         {}, 
         this.model.attributes,

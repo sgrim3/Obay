@@ -99,9 +99,7 @@ var editListing = function(req,res){
   var listing_name= req.body.listing_name;
   var listing_description= req.body.listing_description;
   var listing_image= req.body.listing_image;
-
-  // FIXME: listing_price is throwing errors.
-  // var listing_price= parseFloat(req.body.listing_price.replace(/,/g, ''));
+  var listing_price= req.body.listing_price;
   var listing_open = req.body.listing_open;
 
   Listing.findOne({_id:listing_id}).exec(function(err, listing){

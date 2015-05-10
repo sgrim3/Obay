@@ -386,6 +386,10 @@ button::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="su
   padding: 0 !important;
   border: 0 none !important; }
 
+.collapsing {
+  -webkit-transition: none;
+  transition: none; }
+
 .round-button {
   display: block;
   width: 56px;

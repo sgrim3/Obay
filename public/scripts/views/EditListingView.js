@@ -15,7 +15,9 @@ define([
   'scripts/views/DestroyableView',
   'scripts/views/AddListingView',
 
-  'text!templates/AddListingTemplate.html'
+  'text!templates/AddListingTemplate.html',
+
+  'cropper'
 ], function ($, _, Backbone, Dropzone, Listing, 
   DestroyableView, AddListingView, AddListingTemplate) {
   var EditListingView = AddListingView.extend({
@@ -50,14 +52,22 @@ define([
             if (this.files[1]!=null){
               this.removeFile(this.files[0]);
             }
-            $('#image_upload').append("<button class='round-button' "
-              + "id='deleteImageButton'><i class='fa fa-times'></i>" 
-              + "</button>");
-            var this_dropzone = this;
-            $('#deleteImageButton').click(function(event) {
-              this_dropzone.removeAllFiles(true);
-              $('#deleteImageButton').remove();
-              $('#addListingImage').val('');
+            $('#image_upload').cropper({
+              aspectRatio: 1 / 1,
+              crop: function(data) {
+                console.log("Hello!");
+                console.log(data);
+
+                $('#image_upload').append("<button class='round-button' "
+                  + "id='deleteImageButton'><i class='fa fa-times'></i>" 
+                  + "</button>");
+                var this_dropzone = this;
+                $('#deleteImageButton').click(function(event) {
+                  this_dropzone.removeAllFiles(true);
+                  $('#deleteImageButton').remove();
+                  $('#addListingImage').val('');
+                });
+              }
             });
           });
           this.on("success", function(file, response) {

@@ -19,7 +19,8 @@ requirejs.config({
     underscore: "scripts/libs/underscore/underscore",
     backbone: "scripts/libs/backbone/backbone",
     text: "scripts/libs/text/text",
-    dropzone: "scripts/libs/dropzone"
+    dropzone: "scripts/libs/dropzone",
+    cropper: "scripts/libs/cropper"
   },
   shim: {
     'backbone': {
@@ -29,6 +30,7 @@ requirejs.config({
     'underscore': {
       exports: 'underscore'
     },
+    'cropper': ['jquery']
   }
 });
 
@@ -84,9 +86,7 @@ require([
     initialize: function() {
       window.userModel = new UserModel();
       this.on('all', function(routeEvent) {
-        //TODO: explain to dennis what this is about. It doesn't seem very elegant
-        //and moves what seems like css styling to a random try catch statement.
-        //what's the reason for this?
+        /*TODO: explain to dennis what this is about. It doesn't seem very elegant and moves what seems like css styling to a random try catch statement. what's the reason for this?*/
         try {
           document.getElementById("addButton").style.display="inline";
         } catch (err) {}

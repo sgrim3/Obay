@@ -1,0 +1,51 @@
+#nitya-pic {
+	width: 23%;
+	margin-top: $contentMargin;
+	display: inline-block;
+	margin-right:4%;
+}
+
+#notFoundPaper {
+	background: #ffffff;
+	@extend .sh1;
+ 	padding: 15px;
+ 	margin-top: $contentMargin;
+ 	width: 45%;
+ 	display: inline-block;
+ 	margin-right: 4%;
+}
+
+#notFoundHeader {
+	text-align: center;
+}
+
+#notFoundText {
+	text-align: center;
+	font-size: 16px;
+}
+
+#allison-pic{
+	width: 23%;
+	margin-top: $contentMargin;
+	display: inline-block;
+}
+
+#susie-pic {
+	width: 30%;
+	display: inline-block;
+	margin-top: $contentMargin;
+	margin-right: 4%;
+}
+
+#david-pic {
+	width: 30%;
+	display: inline-block;
+	margin-top: $contentMargin;
+	margin-right: 4%;
+}
+
+#dennis-pic {
+	width: 30%;
+	display: inline-block;
+	margin-top: $contentMargin;
+}

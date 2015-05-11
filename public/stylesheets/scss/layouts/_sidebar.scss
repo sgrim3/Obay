@@ -1,7 +1,13 @@
 #sidebar {
   position: fixed;
-  left: $sidebarSpacing;
-  top: $sidebarSpacing;
+  margin: $sidebarSpacing;
+  margin-left: -280px;
+}
+
+#topLogo {
+  position: relative;
+  max-width: 200px;
+  // @include scale(.8);
 }
 
 #sidebarNav {
@@ -13,8 +19,6 @@
     display: none;
   }
 }
-
-
 
 @include flexedContent {
   #sidebar {

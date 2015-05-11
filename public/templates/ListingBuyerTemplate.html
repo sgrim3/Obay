@@ -1,0 +1,27 @@
+<!-- HTML template for pop up expanded listing -->
+
+<div class='add'>
+  <div id="addContainer">
+    <div id="imageDisplay">
+      <img src="<%= listing_image %>"></img>
+    </div>
+
+    <div id="textDisplay">
+      <div id="name"><%= listing_name %></div>
+      <div id="creator">
+        <a href="/#user/<%=listing_creator%>">
+          <%= listing_creator %>
+        </a>
+      </div>
+      <div id="price">$ <%= listing_price %></div>
+      <div id="description"><%= listing_description %></div>
+
+    </div>
+
+    <a href="/#home">
+      <button class="round-button" id="exitButton"><i class="fa fa-times"></i>
+      </button>
+    </a>
+  </div>
+  <div class="pay-mount-point"></div>
+</div>

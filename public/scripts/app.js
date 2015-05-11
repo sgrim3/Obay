@@ -19,7 +19,8 @@ requirejs.config({
     underscore: "scripts/libs/underscore/underscore",
     backbone: "scripts/libs/backbone/backbone",
     text: "scripts/libs/text/text",
-    dropzone: "scripts/libs/dropzone"
+    dropzone: "scripts/libs/dropzone",
+    cropper: "scripts/libs/cropper"
   },
   shim: {
     'backbone': {
@@ -29,6 +30,7 @@ requirejs.config({
     'underscore': {
       exports: 'underscore'
     },
+    'cropper': ['jquery']
   }
 });
 
@@ -82,11 +84,9 @@ require([
     },
 
     initialize: function() {
-      this.userModel = new UserModel();
+      window.userModel = new UserModel();
       this.on('all', function(routeEvent) {
-        //TODO: explain to dennis what this is about. It doesn't seem very elegant
-        //and moves what seems like css styling to a random try catch statement.
-        //what's the reason for this?
+        /*TODO: explain to dennis what this is about. It doesn't seem very elegant and moves what seems like css styling to a random try catch statement. what's the reason for this?*/
         try {
           document.getElementById("addButton").style.display="inline";
         } catch (err) {}
@@ -160,34 +160,31 @@ require([
 
     myFeed: function myFeed(){
       var _this = this;
-      var onOlinAuth = function(){
-        $.get('/currentUser')
-          .done(function(data){
-            var userId = data.userId;
-            var criteria = {
-              listing_creator: userId,
-            };
-            var feedType = "userFeed";
+      window.userModel.fetchPromise.done(function(){
+        var userId = window.userModel.attributes.userId;
 
-            Backbone.history.navigate('#user/'+userId);
-            _this.createSidebar();
-            if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
-            _this.Page = new MyFeedView({
-              parentDiv: $('#PageContainer'),
-              userId: userId,
-              PORT: window.location.host
-            });
-          })
-          .error(function(){
-            console.log('Could not fetch current user id!');
+        var onOlinAuth = function(){
+          var criteria = {
+            listing_creator: userId,
+          };
+          var feedType = "userFeed";
+          Backbone.history.navigate('#user/'+userId);
+          _this.createSidebar();
+          if (_this.Page) { _this.Page.destroy(); _this.Page = null; };
+          _this.Page = new MyFeedView({
+            parentDiv: $('#PageContainer'),
+            userId: userId,
+            PORT: window.location.host
           });
-      };
+        };
 
-      var onOlinErr = function(){
-        console.log('error!!!');
-      };
+        var onOlinErr = function(){
+          // Redirect to login page.
+          window.location.replace('/');
+        };
 
-      _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+        _this.ensureOlinAuthenticated(onOlinAuth,onOlinErr);
+      });
     },
 
     free: function free(){
@@ -203,14 +200,21 @@ require([
     },
 
     user: function user(id){
-      var criteria = {
-        listing_creator: id,
-        listing_open: true,
-      };
+      var _this = this;
+      window.userModel.fetchPromise.done(function(){
+        if (id === window.userModel.attributes.userId){
+          _this.myFeed();
+        } else {
+          var criteria = {
+            listing_creator: id,
+            listing_open: true,
+          };
 
-      var feedType = "user";
+          var feedType = "user";
 
-      this.feed(criteria, feedType);
+          _this.feed(criteria, feedType);
+        }
+      });
     },
 
     feed: function feed(criteria, feedType){
@@ -248,7 +252,7 @@ require([
         
         _this.Page = new AccountView({
           parentDiv: $('#PageContainer'),
-          model: _this.userModel,
+          model: window.userModel,
           PORT: window.location.host
         });
       }

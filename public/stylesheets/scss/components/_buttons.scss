@@ -115,8 +115,9 @@ button#deleteButton {
 
 button#loginButton {
   @extend %rectangular-button;
-  width: 100%;
+  width: 80%;
   background-color: palette(Green, $colorIntensity);
+  margin: 2.5% 10% 10% 10%;
 }
 
 button#buyButton {

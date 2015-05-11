@@ -9,7 +9,7 @@ var User = require('../models/user_model.js').user;
 var venmoPay = function(req,res){
   /*Use mongoose to retrieve model from database. 
   We can't trust information sent by user besides the objectId.*/
-  Listing.findOne({_id:req.body.id}).exec(function (err, listing){
+  Listing.findOne({_id:req.body._id}).exec(function (err, listing){
     if (err) {
       console.error("SG|/routes/payment.js|venmoPay|find listing error");
       console.log(err);
@@ -17,6 +17,7 @@ var venmoPay = function(req,res){
     } else {
       /*Once you have listing data, look up the seller to find out 
       what their payId is.*/
+      console.log(listing);
       User.findOne({userId: listing.listing_creator}).exec(function (err, user){
         if (err) {
           console.error("SG|/routes/payment.js|venmoPay|find user error");
@@ -45,7 +46,15 @@ var venmoPay = function(req,res){
                 res.status(400).send({success:false, message:error.message});
               }
             } else {
-              res.status(200).send({success:true, message:'Transaction made!'});
+              listing.venmoPaid = true;
+              listing.listing_open = false;
+              listing.listing_buyer = req.session.user.userId;
+              listing.save(function(err){
+                if (err) { console.log('could not change listing status to paid!') };
+                io.sockets.emit("listing:bought", listing);
+                io.sockets.emit("listing:bought" + listing._id, listing);
+                res.status(200).send({success:true, message:'Transaction made!'});
+              });
             }
           });
         }

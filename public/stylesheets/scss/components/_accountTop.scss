@@ -41,10 +41,16 @@
   padding: 15px;
   display: flex;
   align-items: center;
+
+  & > form {
+    min-width: max-content;
+    min-width: -webkit-max-content;
+  }
+
 }
 
 #venmoMessage {
-	padding-right: 30px;
+	padding-right: 15px;
 }
 
 #venmoUserLink {

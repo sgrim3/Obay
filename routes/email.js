@@ -62,7 +62,7 @@ var email = {
             var mailOptions = {
               from: 'Olin Obay<noreply@obay.herokuapp.com>', // Sender address.
               // to: OBAY_RECIEVER, // List of receivers.
-              to: 'dennis.chen@students.olin.edu', // List of receivers.
+              to: 'carpediem@lists.olin.edu', // List of receivers.
               subject: subject_line, // Subject line.
               text: text, // Plaintext body.
               html: html,

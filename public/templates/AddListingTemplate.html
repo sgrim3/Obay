@@ -11,7 +11,7 @@
       <textarea id="addListingDescription" placeholder="Pickup Information and Description" name="Description" value='<%= listing_description %>'><%= listing_description %></textarea><br>
       
       <% if (listing_name=== "") { %>
-        <label id="toCarpeCheckbox"><input id="carpeButton" type="checkbox" name="toCarpe" checked>Send a copy to Carpe?</label>
+        <div id="toCarpeCheckbox"><input id="carpeButton" type="checkbox" name="toCarpe" checked> Send a Carpe?</div>
       <% } %>
   
       <button type="submit" class="round-button" id="postButton"><i class="fa fa-check"></i></button>
